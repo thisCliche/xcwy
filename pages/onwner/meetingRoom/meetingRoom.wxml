@@ -1,0 +1,86 @@
+<!--pages/onwner/meetingRoom/meetingRoom.wxml-->
+<view class="meeting">
+  <view class="toggle">
+    <van-radio-group class="icongroupStyle" value="{{ radio }}" direction="horizontal" bind:change="onradioChange">
+      <van-radio name="1" icon-size="16px" class="radioStyle" icon-class="iconStyle">个人</van-radio>
+      <van-radio name="2" icon-size="16px" icon-class="iconStyle">单位</van-radio>
+    </van-radio-group>
+  </view>
+  <view class="formWrap">
+    <view class="form1" wx:if="{{radio == '1'}}">
+      <view class="formUp card">
+        <van-cell-group>
+          <van-field required input-align="right" label="预约人" model:value="{{ form1.bookPer }}" placeholder="请输入预约人"
+            border="{{ false }}" />
+          <van-field required input-align="right" label="联系电话" model:value="{{ form1.phone }}" placeholder="请输入联系电话"
+            border="{{ false }}" />
+          <van-field required input-align="right" type="number" label="预计人数" model:value="{{ form1.perNumber }}"
+            placeholder="请输入预计人数" border="{{ false }}" />
+
+          <van-cell required title="选择日期区间" value="{{ form1.uesTime }}" bind:click="onDisplay" data-type="calendarShow"
+            border="{{ false }}">
+            <van-icon size="22px" color="#4790F4" slot="right-icon" name="calendar-o" class="custom-icon" />
+          </van-cell>
+
+          <van-cell required bind:click="onDisplay" data-type="hyShow" title="会议室" is-link value="{{form1.meetingRoom}}"
+            arrow-direction="down" border="{{ false }}" />
+        </van-cell-group>
+      </view>
+      <view class="fromDown card">
+        <van-cell-group>
+          <van-cell title="申请理由" border="{{ false }}" />
+          <van-field model:value="{{ form1.reason }}" type="textarea" placeholder="请输入申请理由" autosize border="{{ false }}" />
+        </van-cell-group>
+      </view>
+      <view class="warning">
+        <van-icon style="margin-right:6rpx;" name="warning-o" color="#ee0a24" />使用期间请保持公共物品好，如有损坏，需自行承担
+      </view>
+      <view class="btn">
+        <van-button type="info" block>提交</van-button>
+      </view>
+    </view>
+    <view class="form2" wx:else>
+      <view class="formUp card">
+        <van-cell-group>
+          <van-field required input-align="right" label="预约单位" model:value="{{ form2.bookUnit }}" placeholder="请输入预约单位"
+            border="{{ false }}" />
+          <van-field required input-align="right" label="预约人" model:value="{{ form2.bookPer }}" placeholder="请输入预约人"
+            border="{{ false }}" />
+          <van-field required input-align="right" label="联系电话" model:value="{{ form2.phone }}" placeholder="请输入联系电话"
+            border="{{ false }}" />
+          <van-field required input-align="right" type="number" label="预计人数" model:value="{{ form2.perNumber }}"
+            placeholder="请输入预计人数" border="{{ false }}" />
+
+          <van-cell required title="选择日期区间" value="{{ form2.uesTime }}" bind:click="onDisplay" data-type="calendarShow"
+            border="{{ false }}">
+            <van-icon size="22px" color="#4790F4" slot="right-icon" name="calendar-o" class="custom-icon" />
+          </van-cell>
+
+          <van-cell required bind:click="onDisplay" data-type="hyShow" title="会议室" is-link value="{{form2.meetingRoom}}"
+            arrow-direction="down" border="{{ false }}" />
+        </van-cell-group>
+      </view>
+      <view class="fromDown card">
+        <van-cell-group>
+          <van-cell title="申请理由" border="{{ false }}" />
+          <van-field model:value="{{ form2.reason }}" type="textarea" placeholder="请输入申请理由" autosize border="{{ false }}" />
+        </van-cell-group>
+      </view>
+      <view class="warning">
+        <van-icon style="margin-right:6rpx;" name="warning-o" color="#ee0a24" />使用期间请保持公共物品好，如有损坏，需自行承担
+      </view>
+      <view class="btn">
+        <van-button type="info" block>提交</van-button>
+      </view>
+    </view>
+  </view>
+
+  <van-calendar color="#4790F4" show="{{ calendarShow }}" type="range" bind:close="onClose" bind:confirm="onConfirm"
+    data-type="calendarShow" show-confirm="{{ false }}" />
+
+  <van-popup show="{{ hyShow }}" position="bottom" custom-style="height: 50%;" round data-type="hyShow"
+    bind:close="onClose">
+    <van-picker data-type="hyShow" show-toolbar bind:cancel="onClose" bind:confirm="onpickerConfirm"
+      columns="{{ columns }}" />
+  </van-popup>
+</view>

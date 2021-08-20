@@ -1,0 +1,32 @@
+/* pages/onwner/order/orderList/orderList.wxss */
+.orderList{
+  padding: 0rpx 20rpx;
+}
+.card{
+  margin: 30rpx 10rpx 10rpx;
+  padding: 30rpx;
+}
+.item{
+  padding: 26rpx 0;
+  border-bottom: 2rpx solid rgba(173, 170, 170, 0.3);
+}
+.item:last-child{
+  border: none;
+}
+.itemTop{
+  display: flex;
+  justify-content: space-between;
+}
+.itemR{
+  color: #ABABAB;
+  font-size: 30rpx;
+}
+.des{
+  margin-top: 20rpx;
+  display: flex;
+  justify-content: space-between;
+}
+.desR{
+  color: #8692AA;
+  font-size: 30rpx;
+}

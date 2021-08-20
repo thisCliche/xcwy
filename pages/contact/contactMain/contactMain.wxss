@@ -1,0 +1,54 @@
+/* pages/contact/contactMain/contactMain.wxss */
+.searchWrap{
+  background: #4790F4;
+  padding: 30rpx;
+}
+.search{
+  background: #BCD8FF;
+  width: 100%;
+  height: 78rpx;
+  text-align: center;
+  color: #fff;
+  line-height: 78rpx;
+  border-radius: 10rpx;
+}
+.contactWrap{
+  padding: 30rpx 20rpx;
+}
+.info{
+  padding: 20rpx 28rpx;
+}
+.crumbs{display: flex;}
+.breadA{
+  color: #4790F4;
+}
+.department{
+  display: flex;
+  padding: 8rpx 0;
+}
+.department .number{
+  color: #4790F4;
+}
+.item{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.itemL{
+  display: flex;
+  align-items: center;
+}
+.itemL image{
+  height: 70rpx;
+  width: 70rpx;
+}
+.itemL .itemName{
+  font-size: 30rpx;
+}
+.itemLR{
+  margin-left: 20rpx;
+}
+.itemL .itemDes{
+  font-size: 24rpx;
+  color: #4790F4;
+}

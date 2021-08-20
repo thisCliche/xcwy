@@ -1,0 +1,13 @@
+<!--component/newItem/newItem.wxml-->
+<view class="item" wx:for="{{newList}}" wx:key="index" bindtap="toDetail">
+  <view class="left">
+    <image src="{{item.img}}" alt="" />
+  </view>
+  <view class="right">
+    <view class="titleWrap">
+      <view class="title van-ellipsis">{{item.title}}</view>
+      <view class="time">{{item.time}}</view>
+    </view>
+    <view class="des van-multi-ellipsis--l2">{{item.des}}</view>
+  </view>
+</view>

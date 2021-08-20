@@ -1,0 +1,32 @@
+/* pages/onwner/payment/paymentList/paymentList.wxss */
+.paymentList{
+  padding: 28rpx 20rpx;
+}
+.item{
+  display: flex;
+  justify-content: space-between;
+}
+.title{
+  font-size: 36rpx;
+}
+.des{
+  font-size: 32rpx;
+  margin: 24rpx 0 0 54rpx;
+}
+.left{
+  padding: 34rpx 12rpx;
+}
+.right{
+  /* padding: 34rpx 0; */
+  display: flex;
+  align-items: center;
+  width: 140rpx;
+  box-sizing: border-box;
+  border-left: 1rpx solid rgba(150, 150, 150, 0.3);
+}
+.btn{
+  color: #444444;
+  font-size: 30rpx;
+  padding: 0 30rpx;
+  
+}

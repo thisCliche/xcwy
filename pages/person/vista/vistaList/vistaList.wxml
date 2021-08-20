@@ -1,0 +1,20 @@
+<!--pages/person/vista/vistaList/vistaList.wxml-->
+<view class="vistaList">
+  <van-tabs active="{{ active }}" color="#FFA477" bind:click="onClick">
+    <van-tab title="未到访" title-style="{{current == 0?'font-weight:700;':''}}">
+      <view class="card item" wx:for="{{list}}" wx:key="index" bindtap="toDetail">
+        <view class="title">{{item.title}}</view>
+        <view class="des">{{item.estimateTime}}</view>
+        <view class="desWrap">
+          <view class="desL">
+            到访人数：1人
+          </view>
+          <view class="desR">
+            2021-06-01
+          </view>
+        </view>
+      </view>
+    </van-tab>
+    <van-tab title="已到访" title-style="{{current == 1?'font-weight:700;':''}}">内容 2</van-tab>
+  </van-tabs>
+</view>

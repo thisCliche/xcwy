@@ -1,0 +1,18 @@
+/* pages/person/modifyPhone/modifyPhone.wxss */
+.modifyPhone{
+  padding: 40rpx 20rpx;
+}
+.codeStyle{
+  width: 240rpx !important;
+  background: #FFAB48 !important;
+  color: #fff !important;
+}
+.btn{
+  margin-top: 188rpx;
+}
+.btnStyle{
+  width: 90% !important;
+}
+.phone{
+  text-align: center;
+}

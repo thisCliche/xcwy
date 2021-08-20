@@ -1,0 +1,22 @@
+<!--pages/onwner/parking/vehicle/vehicle.wxml-->
+<view class="vehicle">
+  <view class="item card">
+    <view class="left">
+      <view class="favicon">
+      <image src="/static/images/car.png"></image>
+    </view>
+      <view>
+        <view class="title">物业费</view>
+        <view class="des warning">暂未查询到欠费</view>
+      </view>
+    </view>
+    <view class="right" bindtap="toDetail">
+      <view class="btn">
+        缴 费 记 录
+      </view>
+    </view>
+  </view>
+  <view class="btns" bindtap="addCar">
+    添加车辆
+  </view>
+</view>

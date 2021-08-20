@@ -1,0 +1,57 @@
+/* pages/person/person.wxss */
+.top{
+  background: url(https://img.xiaojiayun.top/xcwymeBg.png);
+  background-size: 100% 100%;
+  height: 322rpx;
+}
+.topWrap{
+  padding: 152rpx 48rpx 42rpx 48rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.topL{
+  display: flex;
+  align-items: center;
+}
+.topL .name{
+  font-size: 40rpx;
+  color: #FFFFFF;
+  margin-left: 48rpx;
+}
+.topL image{
+  width: 110rpx;
+  height: 110rpx;
+  border: 4rpx solid #D3D9F2;
+  border-radius: 50%;
+}
+.topR image{
+  width: 66rpx;
+  height: 66rpx;
+}
+.menuWrap{
+  padding: 20rpx;
+}
+.menu1{
+  display: flex;
+  justify-content: space-around;
+
+}
+.menu1 .item{
+  padding: 24rpx;
+  text-align: center;
+}
+.menu1 .name{
+  font-size: 28rpx;
+}
+.menu1 image{
+  width: 55rpx;
+  height: 52rpx;
+}
+.menu2 .listImg{
+  width: 45rpx;
+  height: 45rpx;
+}
+.titleStyle{
+  margin-left: 20rpx !important;
+}

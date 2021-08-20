@@ -1,0 +1,15 @@
+/* pages/onwner/vistResig/vistResigInfo/vistResigInfo.wxss */
+.vistResigInfo{
+  padding: 30rpx 20rpx;
+}
+.info{
+  padding: 28rpx;
+}
+.btn{
+  justify-content: space-between;
+  display: flex;
+  margin-top: 184rpx;
+}
+.van-button{
+  width: 330rpx !important;
+}

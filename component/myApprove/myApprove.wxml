@@ -1,0 +1,37 @@
+<!--component/myApprove/myApprove.wxml-->
+<view class="menuWrap mt30">
+  <view class="menu mt30">
+    <view class="title">
+      <image src="/static/images/staff/bg.png"></image> 审批
+    </view>
+    <view class="itemWrap">
+      <van-row>
+        <van-col custom-class="mt40" span="6" wx:for="{{approveMenuMy1}}" wx:key="index" data-page="{{item.page}}"
+          bindtap="toDetail">
+          <view class="item">
+            <image src="{{item.icon}}"></image>
+            <view class="menuFont">{{item.name}}</view>
+            <view class="info">{{item.info}}</view>
+          </view>
+        </van-col>
+      </van-row>
+    </view>
+  </view>
+  <view class="menu mt30" >
+    <view class="title">
+      <image src="/static/images/staff/bg.png"></image> 申请
+    </view>
+    <view class="itemWrap">
+      <van-row>
+        <van-col custom-class="mt40" span="6" wx:for="{{approveMenuMy2}}" wx:key="index" data-page="{{item.page}}"
+          bindtap="toDetail">
+          <view class="item">
+            <image src="{{item.icon}}"></image>
+            <view class="menuFont">{{item.name}}</view>
+            <view class="info">{{item.info}}</view>
+          </view>
+        </van-col>
+      </van-row>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,24 @@
+<!--pages/person/renovation/renovationPay/renovationPay.wxml-->
+<view class="renovationPay">
+  <view class="toggle">
+    <van-radio-group class="icongroupStyle" model:value="{{ radio }}" direction="horizontal">
+      <van-radio name="1" icon-size="16px" class="radioStyle" icon-class="iconStyle">线上缴费</van-radio>
+      <van-radio name="2" icon-size="16px" icon-class="iconStyle">线下缴费</van-radio>
+    </van-radio-group>
+  </view>
+  <view class="card">
+    <view>装修保证金</view>
+    <view class="money">
+      ￥600.00
+    </view>
+  </view>
+  <view class="desWrap">
+    <view>
+      <image src="/static/images/warning.png"></image>
+    </view>
+    <view class="des">保证金用于担保您在装修期间未损坏公共设施，装修完以后，可申请退还保证金，物业审核通过后，即可退还保证金</view>
+  </view>
+  <view class="btn">
+    <van-button type="info" block>维修支付</van-button>
+  </view>
+</view>

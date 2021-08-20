@@ -1,0 +1,5 @@
+/* pages/staff/approve/approveWrap/approveWrap.wxss */
+.approveWrap{
+  padding: 0 20rpx;
+  overflow: hidden;
+}

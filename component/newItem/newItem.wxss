@@ -1,0 +1,34 @@
+/* component/newItem/newItem.wxss */
+@import "/app.wxss";
+.item{
+  display: flex;
+  justify-content: space-between;
+  margin: 24rpx 0;
+}
+.item .left{
+  margin-right: 12rpx;
+}
+.item .left image{
+  height: 122rpx;
+  width: 168rpx;
+  border-radius: 6rpx;
+}
+.titleWrap{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.titleWrap .title{
+  font-size: 30rpx;
+  width: 76%;
+}
+.titleWrap .time{
+  font-size: 26rpx;
+  color: #959595;
+}
+.right .des{
+  color: #959595;
+  font-size: 28rpx;
+  margin-top: 6rpx;
+  width: 90%;
+}

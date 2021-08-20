@@ -1,0 +1,46 @@
+<!--pages/contact/contactSearch/contactSearch.wxml-->
+<view class="search">
+  <view class="searchWrap">
+    <van-search field-class="fieldStyle" cancel-class="cancelStyle" value="{{ value }}" background="#4790F4" placeholder="请输入搜索关键词" show-action
+  bind:search="onSearch"
+  bind:cancel="onCancel"/>
+  </view>
+  <scroll-view class="scrollCol">
+    <view class="card info mt20">
+      <view class="item">
+        <view class="itemL">
+          <van-checkbox icon-size="18px" custom-class="checkboxStyle" value="{{ checked }}" bind:change="onChange"></van-checkbox>
+          <view>
+            <image src="/static/images/defaultAvatar.png"></image>
+          </view>
+          <view class="itemLR">
+            <view class="itemName">王珂</view>
+            <view class="itemDes">总经理</view>
+          </view>
+        </view>
+        <view class="itemR">
+          13635685475
+        </view>
+      </view>
+      <view class="item mt20">
+        <view class="itemL">
+          <van-checkbox icon-size="18px" custom-class="checkboxStyle" value="{{ checked }}" bind:change="onChange"></van-checkbox>
+          <view>
+            <image src="/static/images/defaultAvatar.png"></image>
+          </view>
+          <view class="itemLR">
+            <view class="itemName">王珂</view>
+            <view class="itemDes">总经理</view>
+          </view>
+        </view>
+        <view class="itemR">
+          13635685475
+        </view>
+      </view>
+    </view>
+  </scroll-view>
+  <view class="confirm card">
+    <view class="confirmL">已选择：2人</view>
+    <van-button type="info">确认</van-button>
+  </view>
+</view>

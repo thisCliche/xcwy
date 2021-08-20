@@ -1,0 +1,31 @@
+/* pages/person/meetBook/meetBook.wxss */
+.meetBookList{
+  padding: 30rpx 20rpx;
+}
+.item{
+  padding: 30rpx;
+  position: relative;
+  overflow: hidden;
+}
+.float{
+  width: 143rpx; 
+  height: 134rpx;
+  position: absolute;
+  right: -16rpx;
+  top: -26rpx;
+}
+.title{
+  display: flex;
+  justify-content: space-between;
+}
+.title .tL{
+  font-size: 34rpx;
+}
+.title .tR{
+  color: #ABABAB;
+  font-size: 28rpx;
+}
+.des{
+  font-size: 32rpx;
+  margin: 10rpx 0;
+}

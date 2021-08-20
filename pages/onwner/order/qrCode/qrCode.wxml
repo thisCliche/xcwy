@@ -1,0 +1,25 @@
+<!--pages/onwner/order/qrCode/qrCode.wxml-->
+<view class="qrCode">
+  <view class="card">
+    <view class="title">
+      文化馆——老城保护中心
+    </view>
+    <view class="info">
+      <view class="infoTitle">尊敬的  李佳奥  先生/女士</view>
+      <view class="infoDes">联系电话：136******78</view>
+      <view class="infoDes">身份证号：3***********8</view>
+    </view>
+    <view class="qrTitle">
+      <view class="tips">当您来访  请出示此通行证给工作人员</view>
+      <view class="plate">皖A12345</view>
+      <view class="img">
+        <image src="/static/images/qr.png"></image>
+        <image class="cover" src="/static/images/ysx.png"></image>
+      </view>
+      <view class="book">预约时间：2021-06-05</view>
+    </view>
+  </view>
+  <view class="btn">
+    <van-button type="info" block>保存到相册</van-button>
+  </view>
+</view>

@@ -1,0 +1,12 @@
+/* pages/onwner/news/newsDetail/newsDetail.wxss */
+.newsDetail{
+  padding: 30rpx 20rpx;
+}
+.title{
+  font-size: 36rpx;
+}
+.time{
+  color: #ABABAB;
+  font-size: 26rpx;
+  margin: 26rpx 0 42rpx;
+}

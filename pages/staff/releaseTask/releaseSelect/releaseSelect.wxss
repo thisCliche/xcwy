@@ -1,0 +1,7 @@
+/* pages/staff/releaseTask/releaseSelect/releaseSelect.wxss */
+.select{
+  padding: 30rpx 20rpx;
+}
+.info{
+  padding: 28rpx;
+}

@@ -1,0 +1,48 @@
+<!--pages/person/complaint/complaintDetail/complaintDetail.wxml-->
+<view class="complaintDetail">
+  <view class="title">
+    <image src="/static/images/bg.png" class="titleBg"></image> 申请信息
+  </view>
+  <view class="card mt20">
+    <view class="cardT">
+      投诉主题
+    </view>
+    <view class="cardD">
+      文化馆工作人员态度差
+    </view>
+  </view>
+  <view class="mt20 card">
+    <view class="cardT">
+      投诉内容
+    </view>
+    <view class="cardD minHeight">
+      文化馆工作人员态度差
+    </view>
+  </view>
+  <view class="card mt20">
+    <view class="cardT">
+      投诉图片
+    </view>
+    <view class="img">
+      <image src="{{siteHttp}}180x180"></image>
+      <image src="{{siteHttp}}180x180"></image>
+      <image src="{{siteHttp}}180x180"></image>
+      <image src="{{siteHttp}}180x180"></image>
+    </view>
+  </view>
+  <view class="title mt30">
+    <image src="/static/images/bg.png" class="titleBg"></image> 物业回复
+  </view>
+  <view class="card mt20">
+    <view>您好，业主
+      针对您反馈的问题，我们核查后，确有此事，已
+      对此进行处理</view>
+      <view class="img">
+    <image src="{{siteHttp}}180x180"></image>
+    <image src="{{siteHttp}}180x180"></image>
+    <image src="{{siteHttp}}180x180"></image>
+    <image src="{{siteHttp}}180x180"></image>
+  </view>
+  </view>
+  
+</view>

@@ -1,0 +1,24 @@
+<!--pages/onwner/complaint/complaint.wxml-->
+<view class="complaint">
+  <view class="card">
+    <van-cell-group>
+      <van-cell title="投诉主题" required border="{{ false }}" />
+      <van-field model:value="{{ title }}" placeholder="请输入主题" border="{{ false }}" />
+    </van-cell-group>
+  </view>
+  <view class="card mt20">
+    <van-cell-group>
+      <van-cell title="投诉内容" required border="{{ false }}" />
+      <van-field model:value="{{ content }}" type="textarea" autosize="{{height}}" placeholder="请输入内容" border="{{ false }}" />
+    </van-cell-group>
+  </view>
+  <view class="title mt20"><image src="/static/images/bg.png" class="titleBg"></image> 投诉图片</view>
+  <view class="card mt20 image">
+    <van-cell-group border="{{ false }}">
+      <van-uploader deletable file-list="{{ fileList }}" bind:after-read="afterRead" />
+    </van-cell-group>
+  </view>
+  <view class="btn">
+    <van-button type="info" block>投诉</van-button>
+  </view>
+</view>

@@ -1,0 +1,16 @@
+/* component/titleMore/titleMore.wxss */
+.title{
+  font-size: 34rpx;
+  color: #404040;
+  font-weight: 700;
+}
+.more{
+  color: #409AF6;
+  font-size: 24rpx;
+}
+.titleMroe{
+  margin-top: 40rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}

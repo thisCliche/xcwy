@@ -1,0 +1,10 @@
+/* pages/staff/set/set.wxss */
+.set{
+  padding: 30rpx 20rpx;
+}
+.btn{
+  margin-top: 98rpx;
+}
+.van-button{
+  width: 90% !important;
+}

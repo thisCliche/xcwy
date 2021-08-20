@@ -1,0 +1,30 @@
+<!--pages/staff/task/taskList/taskList.wxml-->
+<!--pages/person/vista/vistaList/vistaList.wxml-->
+<view class="vistaList">
+  <van-tabs active="{{ active }}" color="#FFA477" bind:click="onClick">
+    <van-tab title="我的任务" title-style="{{current == 0?'font-weight:700;':''}}">
+      <view class="card item task" wx:for="{{list}}" wx:key="index" bindtap="toWrite">
+        <view class="title">
+          <view class="titleL">
+            <view class="dot" style="background:{{item.color}};"></view> {{item.title}}
+          </view>
+          <view class="titleR">{{item.estimateTime}}</view>
+        </view>
+        <view class="des">{{item.des}}</view>
+        <view class="btn">立即汇报 > </view>
+      </view>
+    </van-tab>
+    <van-tab title="我汇报的" title-style="{{current == 1?'font-weight:700;':''}}">
+      <view class="card item task" wx:for="{{list2}}" wx:key="index" bindtap="toDetail">
+        <view class="title">
+          <view class="titleL">
+            <view class="dot" style="background:{{item.color}};"></view> {{item.title}}
+          </view>
+          <view class="titleR">{{item.estimateTime}}</view>
+        </view>
+        <view class="des">{{item.des}}</view>
+        <view class="content">{{item.content}}</view>
+      </view>
+    </van-tab>
+  </van-tabs>
+</view>

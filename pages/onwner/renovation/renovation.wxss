@@ -1,0 +1,13 @@
+/* pages/onwner/renovation/renovation.wxss */
+.renovation{
+  padding: 28rpx 20rpx;
+}
+.info{
+  padding: 28rpx;
+}
+.btn{
+  margin-top: 60rpx;
+}
+.van-button{
+  width: 80% !important;
+}

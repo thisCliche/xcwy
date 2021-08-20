@@ -1,0 +1,52 @@
+/* pages/staff/releaseTask/releaseTask/releaseTask.wxss */
+.releaseTask{
+  padding: 30rpx 20rpx;
+}
+.info .cardT{
+  padding: 28rpx 0 0 28rpx;
+}
+.title{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.title .titleL{
+  font-weight: 700;
+}
+.titleBg{
+  width: 42rpx;
+  height: 24rpx;
+}
+.pepople{
+  margin-top: 40rpx;
+}
+.pepople image{
+  width: 62rpx;
+  height: 62rpx;
+}
+.colStyle{
+  margin-top: 10rpx;
+  position: relative;
+}
+.img{
+  width: 120rpx;
+  height: 120rpx;
+  text-align: center;
+  padding-top: 10rpx;
+  margin: 0 auto;
+  
+}
+.iconStyle{
+  position: absolute;
+  top: -20rpx;
+  right: -20rpx;
+}
+.img .name{
+  font-size: 28rpx;
+}
+.btn{
+  margin-top: 60rpx;
+}
+.van-button{
+  width: 90% !important;
+}

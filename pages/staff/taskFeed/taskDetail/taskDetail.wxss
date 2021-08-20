@@ -1,0 +1,76 @@
+/* pages/staff/task/taskDetail/taskDetail.wxss */
+.title{
+  font-weight: 700;
+}
+.titleBg{
+  width: 42rpx;
+  height: 24rpx;
+}
+.taskDetail{
+  padding: 30rpx 20rpx;
+}
+.info{
+  padding: 28rpx;
+}
+.cardT{
+  display: flex;
+  justify-content: space-between;
+}
+.cardT .cardTR{
+  color: #ABABAB;
+  font-size: 28rpx;
+}
+.cardD{
+color: #5f5f5f;
+font-size: 30rpx;
+margin-top: 10rpx;
+}
+.pepople{
+  margin-top: 20rpx;
+}
+.colStyle{
+  margin-top: 10rpx;
+  position: relative;
+}
+.img{
+  width: 120rpx;
+  height: 120rpx;
+  text-align: center;
+  padding-top: 10rpx;
+  margin: 0 auto;
+  
+}
+.iconStyle{
+  position: absolute;
+  top: -20rpx;
+  right: -20rpx;
+}
+.img .name{
+  font-size: 28rpx;
+}
+.title{
+  font-weight: 700;
+}
+
+.pepople image{
+  width: 62rpx;
+  height: 62rpx;
+}
+.report .itemL{
+  display: flex;
+}
+.report .itemL image{
+  width: 70rpx;
+  height: 70rpx;
+}
+.report .itemL .itemImg{
+  margin-right: 20rpx;
+}
+.report .itemL .name{
+  font-size: 28rpx;
+  margin-bottom: 8rpx;
+}
+.report .itemL .time{
+  font-size: 24rpx;
+  color: #ABABAB;
+}

@@ -1,0 +1,9 @@
+<!--pages/person/modifyNick/modifyNick.wxml-->
+<view class="modifyNick">
+  <view class="card" >
+    <van-field model:value="{{ nick }}" placeholder="请输入昵称" border="{{ false }}" />
+  </view>
+  <view class="btn">
+    <van-button custom-class="btnStyle" block type="info">修改</van-button>
+  </view>
+</view>

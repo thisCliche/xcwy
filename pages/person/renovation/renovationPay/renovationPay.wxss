@@ -1,0 +1,47 @@
+/* pages/person/renovation/renovationPay/renovationPay.wxss */
+.renovationPay{
+  padding: 0 20rpx 0;
+}
+.iconStyle{
+  color: transparent;
+  border: 4rpx solid #fff;
+  border-radius: 20rpx;
+  line-height: 12px !important;
+}
+.toggle{
+  padding: 42rpx 28rpx;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+}
+.radioStyle{
+  margin-right: 100rpx;
+}
+.card{
+  padding: 84rpx 104rpx;
+  text-align: center;
+}
+.card .money{
+  color: #F54235;
+  font-size: 54rpx;
+  margin-top: 64rpx;
+}
+.desWrap{
+  font-size: 24rpx;
+  width: 576rpx;
+  margin: 52rpx auto 0;
+  display: flex;
+}
+.desWrap image{
+  width: 32rpx;
+  height: 28rpx;
+}
+.des{
+  margin-left: 10rpx;
+}
+.btn{
+  margin-top: 114rpx;
+}
+.van-button{
+  width: 90% !important;
+}

@@ -1,0 +1,44 @@
+<!--pages/staff/attendance/attendanceWrap/attendanceWrap.wxml-->
+<view class="attendanceWrap">
+  <view class="card info" bindtap="toDetail">
+    <view class="infoL">
+      <image src="/static/images/defaultAvatar.png"></image>
+      <view>王佳佳</view>
+    </view>
+    <view class="infoR">
+      <view class="des">查看考勤</view>
+      <van-icon name="arrow" color="#ABABAB" />
+    </view>
+  </view>
+  <view class="card mt20 attendance">
+    <view class="attendanceList">
+      <view class="attendanceItem mt20">
+        <view>上班时间 09:00</view>
+        <view class="status mt10">09:06 已打卡 <van-tag plain round color="#FFA477">迟到</van-tag>
+        </view>
+      </view>
+      <view class="attendanceItem mt20">
+        <view>上班时间 09:00</view>
+        <view class="status mt10">09:06 已打卡 <van-tag plain round color="#FFA477">迟到</van-tag>
+        </view>
+      </view>
+      <view class="attendanceItem mt20">
+        <view>上班时间 09:00</view>
+        <view class="status mt10">09:06 已打卡 <van-tag plain round color="#FFA477">迟到</van-tag>
+        </view>
+      </view>
+      <view class="attendanceItem mt20">
+        <view>上班时间 09:00</view>
+        <view class="status mt10">09:06 已打卡 <van-tag plain round color="#FFA477">迟到</van-tag>
+        </view>
+      </view>
+    </view>
+    <view class="btnWrap">
+      <view class="attendanceBtn">
+        <view class="afterWork">下班打卡</view>
+        <view class="afterTime mt10">12:36:26</view>
+      </view>
+      <view class="attendanceBtnDes mt30">已进入考勤范围</view>
+    </view>
+  </view>
+</view>

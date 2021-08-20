@@ -1,0 +1,47 @@
+<!--pages/staff/task/taskDetail/taskDetail.wxml-->
+<view class="taskDetail">
+  <view class="card info">
+    <view class="cardT">
+      巡查类型
+    </view>
+    <view class="cardD">
+      日常巡查
+    </view>
+  </view>
+  <view class="card info mt20">
+    <view class="cardT">
+      巡查项目
+    </view>
+    <view class="cardD">
+      文化馆：老城保护中心、老城保护中心
+      城隍庙小区：南区、北区、南区、北区南区
+    </view>
+  </view>
+  <view class="card info mt20">
+    <view class="cardT">
+      任务标题
+    </view>
+    <view class="cardD">
+      1.详细内容xxxx；
+      2详细内容xxxxxxxxxxxxxxxxxx；
+      3.巡查内容，。。。xxxxxxxxxxxxxxxxxx
+      xxxx…mmmmm
+    </view>
+  </view>
+  <view class="title mt30">
+    <image src="/static/images/bg.png" class="titleBg"></image> 负责巡查人员
+  </view>
+  <view class="pepople">
+    <van-row>
+      <van-col custom-class="colStyle" span="6" wx:for="{{list}}" wx:key="index">
+        <view class="card img">
+          <image src="/static/images/defaultAvatar.png"></image>
+          <view class="name">张扬</view>
+        </view>
+      </van-col>
+    </van-row>
+  </view>
+  <view class="btn">
+    <van-button type="info" block>立即汇报</van-button>
+  </view>
+</view>

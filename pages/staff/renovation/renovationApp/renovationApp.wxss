@@ -1,0 +1,49 @@
+/* pages/person/vista/vistaList/vistaList.wxss */
+.vistaList{
+  padding: 10rpx;
+}
+.item{
+  padding: 28rpx;
+  margin:20rpx 10rpx;
+}
+.task .dot{
+  width: 26rpx;
+  height: 26rpx;
+  border-radius: 50%;
+  margin-right: 10rpx;
+}
+.task .title{
+  display: flex;
+  justify-content: space-between;
+}
+.task .titleL{
+  display: flex;
+  align-items: center;
+}
+.task .titleR{
+  font-size: 28rpx;
+  color: #ABABAB;
+}
+.task .des{
+  font-size: 28rpx;
+  margin-top: 20rpx;
+}
+.task .btn{
+  display: flex;
+  justify-content: space-between;
+}
+.btn .btnR{
+  color: #4790F4;
+}
+.btn .btnL{
+  display: flex;
+  font-size: 28rpx;
+}
+.btn .btnL .numbered{
+  color: #E34343;
+}
+.task .content{
+  color: rgb(87, 87, 87);
+  font-size: 28rpx;
+  margin: 10rpx 0;
+}

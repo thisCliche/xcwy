@@ -1,0 +1,148 @@
+<!--pages/staff/task/cheackDetail/cheackDetail.wxml-->
+<view class="cheackDetail">
+  <view class="card info item">
+    <view class="itemL">
+      <view class="img">
+        <image src="/static/images/defaultAvatar.png"></image>
+      </view>
+      <view>
+        <view class="name">王珂的日志</view>
+        <view class="time">05-16 18:16</view>
+      </view>
+    </view>
+    <view class="itemR" bindtap="openBox">
+      <van-icon name="ellipsis" size="24px" />
+    </view>
+  </view>
+  <block>
+    <view class="reportTime">
+      2021-06-05
+    </view>
+    <view class="card info">
+      <view class="cardT">
+        今日工作内容
+      </view>
+      <view class="cardD">
+        1.巡查详情老城保护中心巡查详情老城保护中
+        心巡查详情老城保护中心巡查
+        2.巡查详情老城保护中心巡查详情老城保护中心
+        3.巡查详情老城保护中心巡查详情
+      </view>
+    </view>
+  </block>
+  <block>
+    <view class="reportTime">
+      2021-06-05
+    </view>
+    <view class="card info">
+      <view class="cardT">
+        今日工作内容
+      </view>
+      <view class="cardD">
+        1.巡查详情老城保护中心巡查详情老城保护中
+        心巡查详情老城保护中心巡查
+        2.巡查详情老城保护中心巡查详情老城保护中心
+        3.巡查详情老城保护中心巡查详情
+      </view>
+      <view class="workImg">
+        <van-row>
+          <van-col span="6">
+            <image src="{{siteHttp}}/140x140"></image>
+          </van-col>
+          <van-col span="6">
+            <image src="{{siteHttp}}/140x140"></image>
+          </van-col>
+        </van-row>
+      </view>
+    </view>
+  </block>
+  <view class="card mt20 info">
+    <view class="cardT">
+      工作内容
+    </view>
+    <view class="cardD">
+      1.巡查详情老城保护中心巡查详情老城保护中
+      心巡查详情老城保护中心巡查
+      2.巡查详情老城保护中心巡查详情老城保护中心
+      3.巡查详情老城保护中心巡查详情
+    </view>
+  </view>
+  <view class="card mt20 info">
+    <view class="cardT">
+      工作总结
+    </view>
+    <view class="cardD">
+      1.巡查详情老城保护中心巡查详情老城保护中
+      心巡查详情老城保护中心巡查
+      2.巡查详情老城保护中心巡查详情老城保护中心
+      3.巡查详情老城保护中心巡查详情
+    </view>
+  </view>
+  <view class="card mt20 info">
+    <view class="cardT">
+      下月工作计划
+    </view>
+    <view class="cardD">
+      1.巡查详情老城保护中心巡查详情老城保护中
+      心巡查详情老城保护中心巡查
+      2.巡查详情老城保护中心巡查详情老城保护中心
+      3.巡查详情老城保护中心巡查详情
+    </view>
+  </view>
+  <view class="title mt30">
+    <image src="/static/images/bg.png" class="titleBg"></image> 图片
+  </view>
+  <view class="card workImg photo mt20">
+    <van-row>
+      <van-col custom-class="photoCol" span="6">
+        <image src="{{siteHttp}}/140x140"></image>
+      </van-col>
+      <van-col custom-class="photoCol" span="6">
+        <image src="{{siteHttp}}/140x140"></image>
+      </van-col>
+    </van-row>
+  </view>
+  <view class="card mt20 info">
+    <view class="cardT">
+      备注
+    </view>
+    <view class="cardD">
+      备注内容
+    </view>
+  </view>
+  <view class="mt20">已读：3人</view>
+  <view class="pepople">
+    <van-row>
+      <van-col custom-class="colStyle" span="6" wx:for="{{list}}" wx:key="index">
+        <view class="card img1">
+          <image src="/static/images/defaultAvatar.png"></image>
+          <view class="name">张扬</view>
+        </view>
+      </van-col>
+    </van-row>
+  </view>
+  <view class="mt20 unread">
+    <view>未读：3人</view>
+    <view class="unreadBtn">提醒阅读</view>
+  </view>
+  <view class="title mt30">
+    <image src="/static/images/bg.png" class="titleBg"></image> 审批意见
+  </view>
+  <view class="card mt20 info">
+    <view class="opinionT">
+      <image src="/static/images/defaultAvatar.png"></image>
+      <view class="name">张扬</view>
+      <van-rate readonly value="{{ value }}" color="#ffba00" bind:change="onChange" />
+      <view class="opinoinTime">
+        05-16 18:16
+      </view>
+    </view>
+    <view class="cardD">审批意见意见内容审批意见意见内容审批意见
+      意见内容审批意见意见内容</view>
+  </view>
+  <view class="btn">
+    <van-button bind:click="toApprove" block type="info">月报审批</van-button>
+  </view>
+  <van-action-sheet round="{{false}}" bind:select="onSelect" show="{{ show }}" actions="{{ actions }}"
+    bind:cancel="onCancel" cancel-text="取消" />
+</view>

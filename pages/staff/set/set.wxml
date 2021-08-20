@@ -1,0 +1,13 @@
+<!--pages/staff/set/set.wxml-->
+<view class="set">
+  <view class="card">
+    <van-cell-group>
+      <van-cell title="隐私协议" border="{{ false }}" is-link/>
+      <van-cell title="注册协议" border="{{ false }}" is-link/>
+      <van-cell title="关于我们" border="{{ false }}" is-link/>
+    </van-cell-group>
+  </view>
+  <view class="btn">
+    <van-button type="info" block>退出登录</van-button>
+  </view>
+</view>

@@ -1,0 +1,20 @@
+<!--pages/person/meetBook/meetBook.wxml-->
+<view class="meetBookList">
+  <view wx:for="{{list}}" wx:key="index" class="card mt20 item" bindtap="toDetail">
+    <view class="title">
+      <view class="tL">
+        个人预约
+      </view>
+      <view class="tR">
+        2021-01-06 18:36
+      </view>
+    </view>
+    <view class="des">预约人：蒋海宁</view>
+    <view class="des">会议室：北楼305大会议室</view>
+    <view class="des">预约时间：2021.10.10 上午</view>
+    <view class="float">
+      <image wx:if="{{item.pass}}" class="pass" src="https://img.xiaojiayun.top/xcwypass.png"></image>
+      <image wx:else class="fail" src="https://img.xiaojiayun.top/xcwybh.png"></image>
+    </view>
+  </view>
+</view>

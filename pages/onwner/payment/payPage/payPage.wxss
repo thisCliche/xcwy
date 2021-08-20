@@ -1,0 +1,23 @@
+/* pages/onwner/payment/payPage/payPage.wxss */
+.payPage{
+  padding: 26rpx 20rpx;
+}
+.info{
+  padding: 30rpx;
+}
+.des{
+  margin-top: 38rpx;
+}
+.money{
+  color: #F54235;
+  font-size: 60rpx;
+  text-align: center;
+  padding: 40rpx 0 69rpx;
+}
+.btn{
+  margin-top: 80rpx;
+}
+.van-button{
+  width: 100% !important;
+  background: #feecea !important;
+}

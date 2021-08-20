@@ -1,0 +1,30 @@
+{
+  "setting": {},
+  "condition": {
+    "plugin": {
+      "list": []
+    },
+    "game": {
+      "list": []
+    },
+    "gamePlugin": {
+      "list": []
+    },
+    "miniprogram": {
+      "list": [
+        {
+          "name": "pages/staff/releaseTask/releaseSafe/releaseSafe",
+          "pathName": "pages/staff/approve/approveList/approveList",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/index/index",
+          "pathName": "pages/onwner/order/orderDetail/orderDetail",
+          "query": "",
+          "scene": null
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,23 @@
+<!--pages/person/modifyPhone/modifyPhone.wxml-->
+<view class="modifyPhone">
+  <view class="card" wx:if="{{isShow}}">
+    <van-field model:value="{{ phone }}" placeholder="请输入新手机号" border="{{ false }}" />
+  </view>
+  <view class="phone" wx:else>当前手机号:13658642541</view>
+  <view class="mt20">
+    <van-row>
+      <van-col span="15">
+        <view class="card">
+          <van-field model:value="{{ code }}" placeholder="请输入验证码" border="{{ false }}">
+        </van-field>
+        </view>
+      </van-col>
+      <van-col span="8" offset="1">
+        <van-button custom-class="codeStyle">获取验证码</van-button>
+      </van-col>
+    </van-row>
+  </view>
+  <view class="btn">
+    <van-button custom-class="btnStyle" block type="info">提交</van-button>
+  </view>
+</view>

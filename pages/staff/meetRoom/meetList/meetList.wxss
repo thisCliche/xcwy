@@ -1,0 +1,20 @@
+/* pages/person/vista/vistaList/vistaList.wxss */
+.vistaList{
+  padding: 10rpx;
+}
+.item{
+  padding: 28rpx;
+  margin:20rpx 10rpx;
+}
+.title{
+  display: flex;
+  justify-content: space-between;
+}
+.titleR{
+  font-size: 28rpx;
+  color: #ABABAB;
+}
+.des{
+  font-size: 30rpx;
+  margin: 16rpx 0;
+}

@@ -1,0 +1,5 @@
+<!--component/titleMore/titleMore.wxml-->
+<view class="titleMroe">
+  <view class="title">通知公告</view>
+  <view class="more">更多</view>
+</view>

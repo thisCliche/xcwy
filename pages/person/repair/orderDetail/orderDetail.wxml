@@ -1,0 +1,163 @@
+<!--pages/person/repair/orderDetail/orderDetail.wxml-->
+<view class="orderDetail">
+  <view class="card">
+    <view class="cell">
+      <view class="cellL">
+        状态
+      </view>
+      <view class="cellR">
+        待维修
+      </view>
+    </view>
+    <view class="cell">
+      <view class="cellL">
+        预警提醒
+      </view>
+      <view class="warning">超3小时未接单 <image src="/static/images/warning.png"></image>
+      </view>
+    </view>
+  </view>
+  <view class="card info mt20">
+    <view class="cardT">报修项目</view>
+    <view class="cardD">
+      文化馆——老城保护中心
+    </view>
+  </view>
+  <view class="card info mt20">
+    <view class="cardT">详细地址</view>
+    <view class="cardD">
+      城隍庙甲子殿2楼
+    </view>
+  </view>
+  <view class="card mt20">
+    <view class="cell">
+      <view class="cellL">
+        报修人
+      </view>
+      <view class="cellR">
+        杨正
+      </view>
+    </view>
+    <view class="cell">
+      <view class="cellL">
+        报修电话
+      </view>
+      <view class="cellR">
+        13654236843
+      </view>
+    </view>
+  </view>
+  <view class="title mt30">
+    <image src="/static/images/bg.png" class="titleBg"></image> 报修内容
+  </view>
+  <view class="card mt20 info repairContent">
+    物品损坏物品损坏物品损坏物品损坏
+  </view>
+  <view class="title mt30">
+    <image src="/static/images/bg.png" class="titleBg"></image> 报修图片
+  </view>
+  <view class="card mt20">
+    <view class="img">
+      <image src="{{siteHttp}}180x180"></image>
+      <image src="{{siteHttp}}180x180"></image>
+      <image src="{{siteHttp}}180x180"></image>
+    </view>
+  </view>
+  <view class="steps">
+    <view class="item">
+      <view class="avatar">
+        <image src="/static/images/defaultAvatar.png"></image>
+      </view>
+      <view class="itemR">
+        <view class="itemRT">
+          <view class="itemRTL">
+            <view class="itemRTL1">
+              审核员
+            </view>
+            <view class="itemRTL2">
+              报修人
+            </view>
+          </view>
+          <view class="itemRT3">03-15 14:36</view>
+        </view>
+        <item class="itemRB">
+          已提交
+        </item>
+      </view>
+    </view>
+    <view class="item">
+      <view class="avatar last">
+        <image src="/static/images/defaultAvatar.png"></image>
+      </view>
+      <view class="itemR">
+        <view class="itemRT">
+          <view class="itemRTL">
+            <view class="itemRTL1">
+              审核员
+            </view>
+            <view class="itemRTL2">
+              工作人员
+            </view>
+          </view>
+          <view class="itemRT3">03-15 14:36</view>
+        </view>
+        <item class="itemRB">
+          已维修
+        </item>
+      </view>
+    </view>
+  </view>
+  <view class="card info mt20">
+  <view class="cardT">维修结论</view>
+  <view class="cardD">设备损坏，已维修完成</view>
+    <view class="img">
+      <image src="{{siteHttp}}180x180"></image>
+      <image src="{{siteHttp}}180x180"></image>
+      <image src="{{siteHttp}}180x180"></image>
+    </view>
+  </view>
+  <view class="steps">
+    <view class="item">
+      <view class="avatar">
+        <image src="/static/images/defaultAvatar.png"></image>
+      </view>
+      <view class="itemR">
+        <view class="itemRT">
+          <view class="itemRTL">
+            <view class="itemRTL1">
+              审核员
+            </view>
+            <view class="itemRTL2">
+              报修人
+            </view>
+          </view>
+          <view class="itemRT3">03-15 14:36</view>
+        </view>
+        <item class="itemRB">
+          已提交
+        </item>
+      </view>
+    </view>
+    <view class="item">
+      <view class="avatar last">
+        <image src="/static/images/defaultAvatar.png"></image>
+      </view>
+      <view class="itemR">
+        <view class="itemRT">
+          <view class="itemRTL">
+            <view class="itemRTL1">
+              审核员
+            </view>
+            <view class="itemRTL2">
+              工作人员
+            </view>
+          </view>
+          <view class="itemRT3">03-15 14:36</view>
+        </view>
+        <item class="itemRB">
+          已维修
+        </item>
+      </view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,41 @@
+/* component/myMenu/myMenu.wxss */
+.menu{
+  padding: 40rpx 42rpx;
+  box-shadow: 2rpx 2rpx 10rpx 2rpx rgb(214, 214, 214);
+  border-radius: 10rpx;
+}
+.itemWrap{
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.item{
+  text-align: center;
+}
+.item image{
+  width: 74rpx;
+  height: 74rpx;
+}
+.item .menuFont{
+  font-size: 28rpx;
+  color: #404040;
+  line-height: 36rpx;
+}
+.mt30{
+  margin-top: 30rpx;
+}
+.card{
+  box-shadow: 2rpx 2rpx 10rpx 2rpx rgb(214, 214, 214);
+  border-radius: 10rpx;
+  display: flex;
+  padding: 20rpx 20rpx;
+  align-items: center;
+}
+.cardName{
+  font-size: 34rpx;
+  padding: 0 10rpx;
+}
+.card image{
+  width: 144rpx;
+  height: 96rpx;
+}

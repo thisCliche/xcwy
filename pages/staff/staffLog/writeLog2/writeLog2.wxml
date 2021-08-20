@@ -1,0 +1,58 @@
+<!--pages/staff/staffLog/writeLog/writeLog.wxml-->
+<view class="writeLog">
+  <view class="card info question">
+    <view>是否用周报生成月报?</view>
+    <van-checkbox icon-size="18px" value="{{ checked }}" bind:change="onChange"></van-checkbox>
+  </view>
+  <view class="card input mt20">
+    <view class="cardT">本月工作内容</view>
+    <van-field type="textarea" autosize="{{minHeight}}" value="{{ username }}" placeholder="请输入" />
+  </view>
+  <view class="card input mt20">
+    <view class="cardT">本月工作总结</view>
+    <van-field type="textarea" autosize="{{minHeight}}" value="{{ username }}" placeholder="请输入" />
+  </view>
+  <view class="card input mt20">
+    <view class="cardT">下月工作计划</view>
+    <van-field type="textarea" autosize="{{minHeight}}" value="{{ username }}" placeholder="请输入" />
+  </view>
+  <view class="title mt30">
+    <image src="/static/images/bg.png" class="titleBg"></image> 图片
+  </view>
+  <view class="card workImg photo mt20">
+    <van-row>
+      <van-col custom-class="photoCol" span="6">
+        <image src="{{siteHttp}}/140x140"></image>
+      </van-col>
+      <van-col custom-class="photoCol" span="6">
+        <image src="{{siteHttp}}/140x140"></image>
+      </van-col>
+    </van-row>
+  </view>
+  <view class="card input mt20">
+    <view class="cardT">备注</view>
+    <van-field type="textarea" autosize="{{minHeight}}" value="{{ username }}" placeholder="请输入" />
+  </view>
+  <view class="title title1 mt30">
+    <view class="titleL">
+      <image src="/static/images/bg.png" class="titleBg"></image> 抄送
+    </view>
+    <view>
+      <van-icon name="add" size="26px" color="#4790F4"/>
+    </view>
+  </view>
+  <view class="pepople">
+    <van-row>
+      <van-col custom-class="colStyle" span="6" wx:for="{{list}}" wx:key="index">
+        <view class="card img">
+          <image src="/static/images/defaultAvatar.png"></image>
+          <view class="name">张扬</view>
+        </view>
+        <van-icon name="clear" custom-style="position: absolute;top: -10rpx; right: 16rpx;" color="#8c8c8c" />
+      </van-col>
+    </van-row>
+  </view>
+  <view class="btn">
+    <van-button block type="info">提交</van-button>
+  </view>
+</view>

@@ -1,0 +1,89 @@
+<!--pages/person/renovation/renovationDetail/renovationDetail.wxml-->
+<view class="renovationDetail">
+<view class="status card info">
+  <view>任芳提交的外出</view>
+  <view class="statusColor">审批通过</view>
+</view>
+  <view class="title mt20">
+    <image src="/static/images/bg.png" class="titleBg"></image> 外出信息
+  </view>
+  <view class="card info mt20">
+    <view>外出3.5小时</view>
+    <view class="time">开始时间:2021-10-15 10:16</view>
+    <view class="time">开始时间:2021-10-15 10:16</view>
+  </view>
+  <view class="card info mt20">
+    <view>外出事由</view>
+    <view class="time">科技部大门钥匙后勤部正门钥匙</view>
+  </view>
+  <view class="title mt30">
+    <image src="/static/images/bg.png" class="titleBg"></image> 图片
+  </view>
+  <view class="card mt20 workImg info">
+    <van-row>
+      <van-col custom-class="colStyle" span="6">
+        <image src="{{siteHttp}}/140x140"></image>
+      </van-col>
+      <van-col custom-class="colStyle" span="6">
+        <image src="{{siteHttp}}/140x140"></image>
+      </van-col>
+      <van-col custom-class="colStyle" span="6">
+        <image src="{{siteHttp}}/140x140"></image>
+      </van-col>
+      <van-col custom-class="colStyle" span="6">
+        <image src="{{siteHttp}}/140x140"></image>
+      </van-col>
+      <van-col custom-class="colStyle" span="6">
+        <image src="{{siteHttp}}/140x140"></image>
+      </van-col>
+    </van-row>
+  </view>
+  <view class="steps">
+    <view class="item">
+      <view class="avatar">
+        <image src="/static/images/defaultAvatar.png"></image>
+      </view>
+      <view class="itemR">
+        <view class="itemRT">
+          <view class="itemRTL">
+            <view class="itemRTL1">
+              审核员
+            </view>
+            <view class="itemRTL2">
+              已拒绝
+            </view>
+          </view>
+          <view class="itemRT3">03-15 14:36</view>
+        </view>
+        <item class="itemRB">
+          中高考期间，装修影响考生休息，请择期装修
+        </item>
+      </view>
+    </view>
+    <view class="item">
+      <view class="avatar last">
+        <image src="/static/images/defaultAvatar.png"></image>
+      </view>
+      <view class="itemR">
+        <view class="itemRT">
+          <view class="itemRTL">
+            <view class="itemRTL1">
+              审核员
+            </view>
+            <view class="itemRTL2">
+              已拒绝
+            </view>
+          </view>
+          <view class="itemRT3">03-15 14:36</view>
+        </view>
+        <item class="itemRB">
+          中高考期间，装修影响考生休息，请择期装修
+        </item>
+      </view>
+    </view>
+  </view>
+  <view class="btn1">
+    <van-button bind:click="reject" custom-class="btnStyle" plain color="#F54235" >驳回</van-button>
+    <van-button bind:click="resolve" type="info">同意</van-button>
+  </view>
+</view>

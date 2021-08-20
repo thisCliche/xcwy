@@ -1,0 +1,14 @@
+<!--pages/onwner/payment/paymentList/paymentList.wxml-->
+<view class="paymentList">
+  <view class="item card">
+    <view class="left">
+      <view class="title"><van-icon size="24" name="bill" color="#4790F4"/> 物业费</view>
+      <view class="des">暂未查询到欠费</view>
+    </view>
+    <view class="right" bindtap="toDetail">
+      <view class="btn">
+        缴 费 记 录
+      </view>
+    </view>
+  </view>
+</view>

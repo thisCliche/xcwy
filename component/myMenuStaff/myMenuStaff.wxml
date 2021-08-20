@@ -1,0 +1,56 @@
+<!--component/myMenu/myMenu.wxml-->
+<view class="menuWrap mt30">
+  <view class="menu mt30" wx:if="staffMenuMy1">
+    <view class="title">
+      <image src="/static/images/staff/bg.png"></image> 我的
+    </view>
+    <view class="itemWrap">
+      <van-row>
+        <van-col custom-class="mt40" span="6" wx:for="{{staffMenuMy1}}" wx:key="index" data-page="{{item.page}}"
+          bindtap="toDetail">
+          <view class="item">
+            <image src="{{item.icon}}"></image>
+            <view class="menuFont">{{item.name}}</view>
+            <view class="info">{{item.info}}</view>
+          </view>
+        </van-col>
+      </van-row>
+    </view>
+  </view>
+
+  <view class="menu mt30" wx:if="staffMenutask1">
+    <view class="title">
+      <image src="/static/images/staff/bg.png"></image> 任务管理
+    </view>
+    <view class="itemWrap">
+      <van-row>
+        <van-col custom-class="mt40" span="6" wx:for="{{staffMenutask1}}" wx:key="index" data-page="{{item.page}}"
+          bindtap="toDetail">
+          <view class="item item2">
+            <image src="{{item.icon}}"></image>
+            <view class="menuFont">{{item.name}}</view>
+          </view>
+        </van-col>
+      </van-row>
+    </view>
+  </view>
+
+  <view class="menu mt30" wx:if="staffMenuwork1">
+    <view class="title">
+      <image src="/static/images/staff/bg.png"></image> 工作汇报
+    </view>
+    <view class="itemWrap">
+      <van-row>
+        <van-col custom-class="mt40" span="6" wx:for="{{staffMenuwork1}}" wx:key="index" data-page="{{item.page}}"
+          bindtap="toDetail">
+          <view class="item item3">
+            <image src="{{item.icon}}"></image>
+            <view class="menuFont">{{item.name}}</view>
+            <view class="info">{{item.info}}</view>
+          </view>
+        </van-col>
+      </van-row>
+
+    </view>
+  </view>
+</view>

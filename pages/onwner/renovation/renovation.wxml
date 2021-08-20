@@ -1,0 +1,27 @@
+<!--pages/onwner/renovation/renovation.wxml-->
+<view class="renovation">
+  <view class="card info">
+    <view>城隍庙文化馆-老城保护中心-信息楼-1011栋-105室</view>
+    <view class="mt20">王佳佳 187****5264</view>
+  </view>
+  <view class="card mt20">
+    <van-cell-group>
+      <van-cell required title="装修时间" value="{{ form1.uesTime }}" bind:click="onDisplay" data-type="calendarShow"
+        border="{{ false }}">
+        <van-icon size="22px" color="#4790F4" slot="right-icon" name="calendar-o" class="custom-icon" />
+      </van-cell>
+      <van-calendar color="#4790F4" show="{{ calendarShow }}" type="range" bind:close="onClose" bind:confirm="onConfirm"
+        data-type="calendarShow" show-confirm="{{ false }}" />
+    </van-cell-group>
+  </view>
+  <view class="card mt20">
+    <van-cell-group>
+      <van-cell required title="装修内容" border="{{ false }}" />
+      <van-field model:value="{{ form1.reason }}" type="textarea" placeholder="请输入装修内容" autosize="{{textarea}}"
+        border="{{ false }}" />
+    </van-cell-group>
+  </view>
+  <view class="btn">
+    <van-button type="info" block>提交</van-button>
+  </view>
+</view>

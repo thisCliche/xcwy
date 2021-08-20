@@ -1,0 +1,98 @@
+<!--pages/onwner/vistResig/vistResig.wxml-->
+<view class="vistResig">
+  <view class="card info">
+    <view>城隍庙文化馆-老城保护中心-信息楼-1011栋-105室</view>
+    <view class="mt20">王佳佳 187****5264</view>
+  </view>
+  <view class="card mt20">
+    <van-cell-group>
+      <van-cell required title="开始时间" value="{{ time }}" bind:click="onDisplay" data-type="calendarShow"
+        border="{{ false }}" is-link>
+      </van-cell>
+      <van-calendar color="#4790F4" show="{{ calendarShow }}" bind:close="onClose" bind:confirm="onConfirm"
+        data-type="calendarShow" show-confirm="{{ false }}" />
+    </van-cell-group>
+  </view>
+  <view class="title mt30">
+    <view class="titleL">
+      <image src="/static/images/bg.png" class="titleBg"></image> 来访人员
+    </view>
+    <view class="titleR" bindtap="addInfo">
+      <van-icon name="plus" color="#FF942C" />
+    </view>
+  </view>
+  <block wx:for="{{pepople}}">
+    <view class="card mt20" wx:key="index">
+      <van-cell-group>
+        <van-field border="{{ false }}" required value="{{ pepople.yyr }}" label="预约人" placeholder="请输入"
+          input-align="right" />
+        <van-field border="{{ false }}" required value="{{ pepople.lxdh }}" type="number" label="联系电话" placeholder="请输入"
+          input-align="right" />
+        <van-field border="{{ false }}" required value="{{ pepople.sfzh }}" type="number" label="身份证" placeholder="请输入"
+          input-align="right" />
+      </van-cell-group>
+    </view>
+  </block>
+  <view class="mt20">
+    <van-cell border="{{ false }}" title="是否驾车" required>
+      <van-switch slot="right-icon" size="18px" checked="{{ checked }}" active-color="#FFA477" inactive-color="#fff"
+        bind:change="onChange" />
+    </van-cell>
+  </view>
+  <view class="plate">
+    <view class="carNumber-items">
+      <view class="carNumber-items-box" bindtap='openKeyboard'>
+        <view class="carNumber-items-province carNumber-items-box-list">{{carnum[0] || ''}}</view>
+        <view class="carNumber-items-En carNumber-items-box-list">{{carnum[1] || ''}}</view>
+      </view>
+      <!-- 常规 -->
+      <view class="carNumber-item" bindtap='openKeyboard'>{{carnum[2] || ''}}</view>
+      <view class="carNumber-item" bindtap='openKeyboard'>{{carnum[3] || ''}}</view>
+      <view class="carNumber-item" bindtap='openKeyboard'>{{carnum[4] || ''}}</view>
+      <view class="carNumber-item" bindtap='openKeyboard'>{{carnum[5] || ''}}</view>
+      <view class="carNumber-item" bindtap='openKeyboard'>{{carnum[6] || ''}}</view>
+      <!-- 新能源 -->
+      <view class="carNumber-item {{showNewPower ? '': 'carNumber-item-newpower'}}">
+        <view wx:if="{{!showNewPower}}" bindtap='showPowerBtn'>
+          <view class="carNumber-newpower-add">+</view>
+          <view>新能源</view>
+        </view>
+        <view wx:if="{{showNewPower}}" bindtap='openKeyboard'>
+          {{carnum[7]}}
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="card mt30">
+    <van-cell-group>
+      <van-cell border="{{ false }}" title="来访备注"/>
+        <van-field model:value="{{ bz }}" placeholder="请输入" border="{{ false }}" />
+    </van-cell-group>
+  </view>
+  <view class="keyboard" hidden='{{!KeyboardState}}'>
+    <view class="keyboardClose">
+      <view class="keyboardClose_btn" bindtap='closeKeyboard'>关闭</view>
+    </view>
+    <!-- 省份简写键盘 -->
+    <view class="keyboard-item" hidden="{{carnum[0]}}">
+      <view class="keyboard-line" wx:for="{{provinces}}" wx:key="index">
+        <view class="keyboard-btn" wx:for="{{item}}" wx:key="index" data-val="{{itemlist}}" wx:for-item="itemlist" bindtap='bindChoose'>{{itemlist}}</view>
+      </view>
+      <view class="keyboard-del" bindtap='bindDelChoose'>
+        <van-icon name="delete-o" size="24"/>
+      </view>
+    </view>
+    <!-- 车牌号码选择键盘 -->
+    <view class="keyboard-item iscarnumber" hidden="{{!carnum[0]}}">
+      <view class="keyboard-line" wx:for="{{numbers}}" wx:key="index">
+        <view class="keyboard-btn" wx:for="{{item}}" wx:key="index" data-val="{{itemlist}}" wx:for-item="itemlist" bindtap='bindChoose'>{{itemlist}}</view>
+      </view>
+      <view class="keyboard-del" bindtap='bindDelChoose'>
+        <van-icon name="delete-o" size="24"/>
+      </view>
+    </view>
+  </view>
+  <view class="btn">
+    <van-button type="info" block bindtap="toNext">预约</van-button>
+  </view>
+</view>

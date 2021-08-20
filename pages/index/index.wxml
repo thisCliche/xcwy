@@ -1,0 +1,25 @@
+<view class="home">
+  <view class="swiperWrap">
+    <swiper indicator-dots autoplay interval="5000" duration="500" indicator-active-color="rgba(255, 255, 255, 1)">
+      <block wx:for="{{banner}}" wx:key="*this">
+        <swiper-item>
+          <image src="{{siteHttp}}710x376" alt="" />
+        </swiper-item>
+      </block>
+    </swiper>
+  </view>
+  <block wx:if="{{isStaff}}">
+    <my-menu menu1="{{menu1}}" menu2="{{menu2}}" menu3="{{menu3}}"></my-menu>
+    <title-More></title-More>
+    <new-item newList="{{newList}}"></new-item>
+  </block>
+  <block wx:else>
+    <view class="card gg mt20">
+      <image src="/static/images/staff/gg.png"></image>
+      <view class="name">公告</view>
+      <view class="cloumn">|</view>
+      <view class="van-ellipsis">公告标题公告标题公告标题公题公题公告标题公题</view>
+    </view>
+    <my-menu-staff staffMenuMy1="{{staffMenuMy1}}" staffMenuMy2="{{staffMenuMy2}}" staffMenuMy3="{{staffMenuMy3}}" staffMenutask1="{{staffMenutask1}}" staffMenutask2="{{staffMenutask2}}" staffMenuwork1="{{staffMenuwork1}}"></my-menu-staff>
+  </block>
+</view>

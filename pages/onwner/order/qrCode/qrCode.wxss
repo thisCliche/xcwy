@@ -1,0 +1,56 @@
+/* pages/onwner/order/qrCode/qrCode.wxss */
+.qrCode{
+  padding: 36rpx 30rpx;
+}
+.card{
+  overflow: hidden;
+}
+.title{
+  background: #FFA477;
+  color: #fff;
+  text-align: center;
+  padding: 20rpx 0;
+}
+.info{
+  text-align: center;
+  padding-bottom: 20rpx;
+  border-bottom: 2rpx solid rgba(173, 170, 170, 0.3);
+}
+.infoTitle{
+  line-height: 100rpx;
+}
+.infoDes{
+  color: #ABABAB;
+  line-height: 50rpx;
+}
+.tips{
+  margin: 10rpx 0;
+}
+.plate{
+  margin: 16rpx 0;
+}
+.qrTitle{
+  text-align: center;
+}
+.qrTitle image{
+  width: 254rpx;
+  height: 254rpx;
+}
+.img{
+  position: relative;
+}
+.cover{
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.book{
+  color: #ABABAB;
+  padding: 18rpx 0 28rpx;
+}
+.btn{
+  margin-top: 40rpx;
+}
+.van-button{
+  width: 90%!important;
+}

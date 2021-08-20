@@ -1,0 +1,40 @@
+/* pages/onwner/payment/payPage/payPage.wxss */
+.payPage{
+  padding: 26rpx 20rpx;
+}
+.info{
+  padding: 30rpx;
+}
+.des{
+  margin-top: 38rpx;
+}
+.title{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.title image{
+  padding: 0 20rpx;
+  width: 66rpx;
+  height: 56rpx;
+}
+.money{
+  color: #F54235;
+  font-size: 60rpx;
+  text-align: center;
+  padding: 40rpx 0 69rpx;
+}
+.btn{
+  margin-top: 80rpx;
+  display: flex;
+  justify-content: space-between;
+}
+.pay{
+  background: #feecea !important;
+}
+.btnStyle{
+  background: #feecea !important;
+}
+.van-button{
+  width: 330rpx !important;
+}

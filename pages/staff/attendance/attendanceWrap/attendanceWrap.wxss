@@ -1,0 +1,89 @@
+/* pages/staff/attendance/attendanceWrap/attendanceWrap.wxss */
+.attendanceWrap{
+  padding: 20rpx;
+}
+.info{
+  padding: 10rpx 20rpx;
+
+}
+.info{
+  display: flex;
+  justify-content: space-between;
+  
+}
+.info .infoL{
+  display: flex;
+  align-items: center;
+}
+.info .infoL image{
+  width: 92rpx;
+  height: 92rpx;
+  margin-right: 20rpx;
+}
+.info .infoR .des{
+  color: #ABABAB;
+  font-size: 30rpx;
+}
+.info .infoR{
+  display: flex;
+  align-items: center;
+}
+.attendance{
+  padding: 0rpx 20rpx 20rpx 20rpx;
+}
+.attendanceList{
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.attendanceItem{
+  width: 46%;
+  background: #F7F7F7;
+  padding: 8rpx;
+  border-radius: 10rpx;
+}
+.attendanceItem .status{
+  color: #4790F4;
+  font-size: 28rpx;
+}
+.btnWrap{
+  padding: 84rpx 0 90rpx;
+  text-align: center;
+}
+.attendanceBtn{
+  width: 256rpx;
+  height: 256rpx;
+  background: #4790F4;
+  border: 8rpx solid #a3c7f9;
+  border-radius: 50%;
+  text-align: center;
+  margin: 0 auto;
+  color: #fff;
+  animation: bs linear 2s 0s infinite;
+}
+.afterWork{
+  font-size: 46rpx;
+  margin-top: 82rpx;
+}
+.afterTime{
+  font-size: 28rpx;
+}
+.attendanceBtnDes{
+  font-size: 30rpx;
+  color: #8692AA;
+}
+@keyframes bs {
+  0% {
+    box-shadow: 2rpx 2rpx 20rpx 2rpx #79aef8;
+  }
+
+  50% {
+    box-shadow: 2rpx 2rpx 10rpx 2rpx #a3c7f9;
+  }
+
+  100% {
+    box-shadow: 2rpx 2rpx 20rpx 2rpx #79aef8;
+  }
+}
+
+

@@ -1,0 +1,11 @@
+<!--pages/staff/renovation/reject/reject.wxml-->
+<view class="reject">
+  <view class="card">
+    <van-cell-group>
+      <van-field type="textarea" autosize="{{minHeight}}" value="{{ value }}" placeholder="请输入驳回原因" border="{{ false }}" />
+    </van-cell-group>
+  </view>
+  <view class="btn">
+    <van-button type="info" block>确认驳回</van-button>
+  </view>
+</view>

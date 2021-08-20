@@ -1,0 +1,78 @@
+/* pages/staff/task/cheackDetail/cheackDetail.wxss */
+.cheackDetail{
+  padding: 30rpx 20rpx;
+}
+.info{
+  padding: 28rpx;
+}
+.item{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.itemL{
+  display: flex;
+}
+.itemL .img{
+  margin-right: 20rpx;
+}
+.itemL .name{
+  font-size: 28rpx;
+  margin-bottom: 8rpx;
+}
+.itemL .time{
+  font-size: 24rpx;
+  color: #ABABAB;
+}
+.itemL image{
+  width: 70rpx;
+  height: 70rpx;
+}
+
+.result{
+  display: flex;
+  justify-content: space-between;
+}
+.resultR{
+  color: #4790F4;
+}
+.cardD{
+  font-size: 30rpx;
+  color: #5f5f5f;
+  margin-top: 10rpx;
+  line-height: 48rpx;
+}
+
+.colStyle{
+  margin-top: 30rpx;
+}
+.img1{
+  width: 120rpx;
+  height: 120rpx;
+  text-align: center;
+  padding-top: 10rpx;
+  margin: 0 auto;
+}
+.img1 .name{
+  font-size: 28rpx;
+}
+.title{
+  font-weight: 700;
+}
+
+.pepople image{
+  width: 62rpx;
+  height: 62rpx;
+}
+.unread{
+  color: #4790F4;
+  display: flex;
+}
+.unreadBtn{
+  background: #4790F4;
+  margin-left: 10rpx;
+  font-size: 26rpx;
+  color: #fff;
+  padding: 4rpx 20rpx 6rpx;
+  border-radius: 50rpx;
+}

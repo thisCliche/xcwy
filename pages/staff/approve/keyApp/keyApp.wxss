@@ -1,0 +1,59 @@
+/* pages/staff/approve/leaveApp/leaveApp.wxss */
+.leaveApp{
+  padding: 20rpx;
+}
+.miniTitle{
+  color: #ABABAB;
+  font-size: 30rpx;
+}
+.image{
+  padding: 28rpx;
+}
+.title{
+  font-weight: 700;
+}
+.titleBg{
+  width: 42rpx;
+  height: 24rpx;
+}
+.btn{
+  margin-top: 102rpx;
+}
+.van-button{
+  width: 90% !important;
+}
+
+.stepItem{
+  display: flex;
+  align-items: center;
+  padding: 40rpx 0;
+}
+.stepItem .point{
+  width: 40rpx;
+  height: 40rpx;
+  background: #4790F4;
+  border-radius: 50%;
+  margin-right: 10rpx;
+  position: relative;
+}
+.stepItem .point::before{
+  content: '';
+    display: block;
+    width: 2rpx;
+    height: 116rpx;
+    background: rgb(202, 202, 202);
+    position: absolute;
+    bottom: -58px;
+    left: 47%;
+}
+.stepItem .last::before{
+  height: 0;
+}
+.stepItem image{
+  width: 78rpx;
+  height: 78rpx;
+  margin: 0 10rpx;
+}
+.stepItem .name{
+  font-size: 28rpx;
+}

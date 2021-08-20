@@ -1,0 +1,49 @@
+/* pages/person/vista/vistaList/vistaList.wxss */
+.vistaList{
+  padding: 10rpx;
+}
+.color1{
+  color: #4790F4;
+}
+.color2{
+  color: #28BC8D;
+}
+.color3{
+  color: #FF6A4B;
+}
+.color4{
+  color: #ABABAB;
+}
+.item{
+  padding: 28rpx;
+  margin:20rpx 10rpx;
+}
+.type1 .title{
+  display: flex;
+  justify-content: space-between;
+}
+.type1 .title .titleR{
+  font-size: 28rpx;
+  color: #ABABAB;
+}
+.type1 .status{
+  text-align: right;
+  font-size: 30rpx;
+}
+.des{
+  font-size: 30rpx;
+  color: #8692AA;
+  margin: 20rpx 0;
+}
+.desWrap{
+  display: flex;
+  justify-content: space-between;
+}
+.desWrap .desL{ 
+  font-size: 30rpx;
+  color: #8692AA;
+}
+.desWrap .desR{ 
+  font-size: 30rpx;
+  color: #8692AA;
+}

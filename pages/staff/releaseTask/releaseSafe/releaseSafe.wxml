@@ -1,0 +1,64 @@
+<!--pages/staff/releaseTask/releaseDaily/releaseDaily.wxml-->
+<view class="releaseDaily">
+  <view class="card">
+    <view class="cardD">督查任务</view>
+    <van-cell-group border="{{ false }}">
+      <van-field value="{{ value }}" placeholder="督查任务标题" border="{{ false }}" />
+    </van-cell-group>
+  </view>
+  <view class="card mt20">
+    <view class="cardD">电梯维保</view>
+    <van-cell-group border="{{ false }}">
+      <van-field value="{{ value }}" placeholder="请输入" border="{{ false }}" />
+    </van-cell-group>
+  </view>
+  <view class="card mt20">
+    <view class="cardD">消防维护</view>
+    <van-cell-group border="{{ false }}">
+      <van-field value="{{ value }}" placeholder="请输入" border="{{ false }}" />
+    </van-cell-group>
+  </view>
+  <view class="card mt20">
+    <view class="cardD">安保</view>
+    <van-cell-group border="{{ false }}">
+      <van-field value="{{ value }}" placeholder="请输入" border="{{ false }}" />
+    </van-cell-group>
+  </view>
+  <view class="card mt20">
+    <view class="cardD">保洁卫生</view>
+    <van-cell-group border="{{ false }}">
+      <van-field value="{{ value }}" placeholder="请输入" border="{{ false }}" />
+    </van-cell-group>
+  </view>
+  <view class="title mt30">
+    <view class="titleL">
+      <image src="/static/images/bg.png" class="titleBg"></image> 图片
+    </view>
+    <view>
+      <van-icon name="add" size="26px" color="#4790F4"/>
+    </view>
+  </view>
+  <view class="card info mt20">
+    <van-row>
+      <van-col custom-class="img" span="6">
+        <image src="{{siteHttp}}/140x140.png"></image>
+        <van-icon name="clear" custom-style="position: absolute;top: -10rpx; right: 0rpx;" color="#8c8c8c" />
+      </van-col>
+      <van-col custom-class="img" span="6">
+        <image src="{{siteHttp}}/140x140.png"></image>
+      </van-col>
+      <van-col custom-class="img" span="6">
+        <image src="{{siteHttp}}/140x140.png"></image>
+      </van-col>
+      <van-col custom-class="img" span="6">
+        <image src="{{siteHttp}}/140x140.png"></image>
+      </van-col>
+      <van-col custom-class="img" span="6">
+        <image src="{{siteHttp}}/140x140.png"></image>
+      </van-col>
+    </van-row>
+  </view>
+  <view class="btn">
+    <van-button block type="info">提交</van-button>
+  </view>
+</view>

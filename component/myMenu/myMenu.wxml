@@ -1,0 +1,23 @@
+<!--component/myMenu/myMenu.wxml-->
+<view class="menuWrap mt30">
+  <view class="itemWrap">
+    <view class="card" wx:for="{{menu3}}" wx:key="index" data-page="{{item.page}}" bindtap="toDetail">
+      <image src="{{item.icon}}"></image>
+      <view class="cardName">{{item.name}}</view>
+    </view>
+  </view>
+  <view class="menu mt30">
+    <view class="itemWrap">
+      <view class="item" wx:for="{{menu1}}" wx:key="index" data-page="{{item.page}}" bindtap="toDetail">
+        <image src="{{item.icon}}"></image>
+        <view class="menuFont">{{item.name}}</view>
+      </view>
+    </view>
+    <view class="itemWrap mt30">
+      <view class="item" wx:for="{{menu2}}" wx:key="index" data-page="{{item.page}}" bindtap="toDetail">
+        <image src="{{item.icon}}"></image>
+        <view class="menuFont">{{item.name}}</view>
+      </view>
+    </view>
+  </view>
+</view>

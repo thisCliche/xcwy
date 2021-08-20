@@ -1,0 +1,11 @@
+<!--pages/onwner/vistResig/vistResigInfo/vistResigInfo.wxml-->
+<view class="vistResigInfo">
+  <view class="card info">
+    <view>城隍庙文化馆-老城保护中心-信息楼-1011栋-105室</view>
+    <view class="mt20">王佳佳 187****5264</view>
+  </view>
+  <view class="btn">
+    <van-button type="info">复制邀请链接</van-button>
+    <van-button type="info">生成邀请二维码</van-button>
+  </view>
+</view>

@@ -1,0 +1,4 @@
+<!--pages/onwner/news/newsList.wxml-->
+<view class="newsList">
+  <new-item newList="{{newList}}"></new-item>
+</view>

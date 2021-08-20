@@ -1,0 +1,37 @@
+/* pages/staff/releaseTask/releaseDaily/releaseDaily.wxss */
+.releaseDaily{
+  padding: 30rpx 20rpx;
+}
+.cardD{
+  padding: 28rpx 0 0 28rpx;
+}
+.title{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.title .titleL{
+  font-weight: 700;
+}
+.titleBg{
+  width: 42rpx;
+  height: 24rpx;
+}
+.info{
+  padding: 38rpx 28rpx 10rpx 28rpx;
+}
+.img{
+  margin-bottom: 20rpx !important;
+  position: relative;
+  text-align: center;
+}
+.img image{
+  width: 140rpx;
+  height: 140rpx;
+}
+.btn{
+  margin-top: 74rpx;
+}
+.van-button{
+  width: 90% !important;
+}

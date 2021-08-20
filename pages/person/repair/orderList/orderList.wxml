@@ -1,0 +1,30 @@
+<!--pages/onwner/order/orderList/orderList.wxml-->
+<view class="orderList">
+  <van-tabs active="{{ active }}" color="#FFA477">
+    <van-tab title="待维修">
+      <view class="card">
+        <view class="item" wx:for="{{list}}" wx:key="index" bindtap="toDetail">
+          <view class="itemTop">
+            <view class="itemL">
+              {{item.title}}
+            </view>
+            <view class="itemR">
+              {{item.time}}
+            </view>
+          </view>
+          <view class="des">
+            <view class="desL">
+              {{item.des}}
+            </view>
+            <view class="desR">
+              {{item.charge}}
+            </view>
+          </view>
+        </view>
+      </view>
+    </van-tab>
+    <van-tab title="已接单">内容 2</van-tab>
+    <van-tab title="已维修">内容 3</van-tab>
+    <van-tab title="已完成">内容 4</van-tab>
+  </van-tabs>
+</view>

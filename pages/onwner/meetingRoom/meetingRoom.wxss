@@ -1,0 +1,34 @@
+/* pages/onwner/meetingRoom/meetingRoom.wxss */
+.meeting{
+  padding: 0 20rpx 0;
+}
+.iconStyle{
+  color: transparent;
+  border: 4rpx solid #fff;
+  border-radius: 20rpx;
+  line-height: 12px !important;
+}
+.toggle{
+  padding: 42rpx 28rpx;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+}
+.radioStyle{
+  margin-right: 100rpx;
+}
+.fromDown{
+  margin-top: 20rpx;
+}
+.warning{
+  text-align: center;
+  font-size: 24rpx;
+  margin-top: 31rpx;
+}
+.btn{
+  width: 100%;
+  margin-top: 94rpx;
+}
+.van-button{
+  width: 80% !important;
+}

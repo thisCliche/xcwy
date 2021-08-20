@@ -1,0 +1,44 @@
+/* pages/staff/task/cheackDetail/cheackDetail.wxss */
+.cheackDetail{
+  padding: 30rpx 20rpx;
+}
+.info{
+  padding: 28rpx;
+}
+.item{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.itemL{
+  display: flex;
+}
+.itemL .img{
+  margin-right: 20rpx;
+}
+.itemL .name{
+  font-size: 28rpx;
+  margin-bottom: 8rpx;
+}
+.itemL .time{
+  font-size: 24rpx;
+  color: #ABABAB;
+}
+.itemL image{
+  width: 70rpx;
+  height: 70rpx;
+}
+
+.result{
+  display: flex;
+  justify-content: space-between;
+}
+.resultR{
+  color: #4790F4;
+}
+.cardD{
+  font-size: 30rpx;
+  color: #5f5f5f;
+  margin-top: 10rpx;
+  line-height: 48rpx;
+}

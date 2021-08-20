@@ -1,0 +1,18 @@
+<!--pages/staff/repair/repairReply/repairReply.wxml-->
+<view class="repairReply">
+  <view class="card mt20">
+    <van-cell-group>
+      <van-cell title="维修结论" required border="{{ false }}" />
+      <van-field model:value="{{ bxnr }}" type="textarea" autosize="{{height}}" placeholder="请输入内容" border="{{ false }}" />
+    </van-cell-group>
+  </view>
+  <view class="title mt30"><image src="/static/images/bg.png" class="titleBg"></image> 图片</view>
+  <view class="card mt20 image">
+    <van-cell-group border="{{ false }}">
+      <van-uploader deletable file-list="{{ fileList }}" bind:after-read="afterRead" />
+    </van-cell-group>
+  </view>
+  <view class="btn">
+    <van-button type="info" block>提交</van-button>
+  </view>
+</view>

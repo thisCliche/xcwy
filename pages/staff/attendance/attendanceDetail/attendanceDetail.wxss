@@ -1,0 +1,37 @@
+/* pages/staff/attendance/attendanceDetail/attendanceDetail.wxss */
+.attendanceDetail{
+  padding: 20rpx;
+}
+.summary{
+  padding: 28rpx;
+}
+.summaryT{
+  display: flex;
+  justify-content: space-between;
+}
+.summaryB{
+  display: flex;
+  justify-content: space-around;
+
+}
+.summaryNum{
+  font-size: 42rpx;
+}
+.summaryBItem{
+  text-align: center;
+}
+.summaryUnit{
+  font-size: 28rpx;
+  color: #4790F4;
+}
+.rowStyle{
+  border-bottom: 2rpx solid #ababab44;
+  padding: 20rpx;
+}
+.laterColor{
+  color: #FFA477;
+}
+.colStyle{
+  text-align: center;
+  font-size: 28rpx;
+}

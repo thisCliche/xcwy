@@ -1,0 +1,9 @@
+<!--pages/staff/releaseTask/releaseSelect/releaseSelect.wxml-->
+<view class="select">
+  <view class="card mt20 info">
+    领导发布了日常巡查任务（标题）
+  </view>
+  <view class="card mt20 info">
+    领导发布了日常巡查任务（标题）
+  </view>
+</view>

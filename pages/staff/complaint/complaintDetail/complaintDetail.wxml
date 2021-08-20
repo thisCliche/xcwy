@@ -1,0 +1,49 @@
+<!--pages/onwner/complaint/complaint.wxml-->
+<view class="complaint">
+  <view class="title mt20">
+    <image src="/static/images/bg.png" class="titleBg"></image> 投诉信息
+  </view>
+  <view class="card info mt20">
+    <view class="cardT">投诉主题</view>
+    <view class="cardD mt20">文化馆工作人员态度差</view>
+  </view>
+  <view class="card info mt20 content">
+    <view class="cardT">投诉内容</view>
+    <view class="cardD mt20">文化馆工作人员态度差</view>
+  </view>
+  <view class="card mt20">
+    <view class="card">
+    </view>
+  </view>
+  <view class="card info mt20">
+    <view>投诉图片</view>
+    <van-row>
+      <van-col custom-class="complaintImg" span="8">
+        <image src="{{siteHttp}}/180x180"></image>
+      </van-col>
+      <van-col custom-class="complaintImg" span="8">
+        <image src="{{siteHttp}}/180x180"></image>
+      </van-col>
+      <van-col custom-class="complaintImg" span="8">
+        <image src="{{siteHttp}}/180x180"></image>
+      </van-col>
+      <van-col custom-class="complaintImg" span="8">
+        <image src="{{siteHttp}}/180x180"></image>
+      </van-col>
+    </van-row>
+  </view>
+  <view class="title mt30">
+    <image src="/static/images/bg.png" class="titleBg"></image> 物业回复
+  </view>
+  <view class="card mt20 image">
+    <van-cell-group border="{{ false }}">
+      <van-field value="{{ value }}" type="textarea" autosize="{{height}}" placeholder="回复处理结果" border="{{ false }}" />
+    </van-cell-group>
+    <view class="uploaderWrap">
+      <van-uploader deletable file-list="{{ fileList }}" bind:after-read="afterRead" />
+    </view>
+  </view>
+  <view class="btn">
+    <van-button type="info" block>提交</van-button>
+  </view>
+</view>

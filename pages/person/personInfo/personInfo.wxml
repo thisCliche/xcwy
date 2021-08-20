@@ -1,0 +1,16 @@
+<!--pages/person/personInfo/personInfo.wxml-->
+<view class="personInfo">
+  <view class="avatar">
+    <image class="avatarImg" src="/static/images/avtar.png"></image>
+    <image class="avatarCan" src="/static/images/canmer.png"></image>
+  </view>
+  <view class="card">
+    <van-cell-group inset>
+      <van-cell data-page="/pages/person/modifyNick/modifyNick" bind:click="toDetial" border="{{false}}" title="昵称" value="下雪撒旦法" is-link/>
+      <van-cell border="{{false}}" title="姓名" value="杨正" is-link/>
+      <van-cell data-page="/pages/person/modifyPhone/modifyPhone" bind:click="toDetial" border="{{false}}" title="手机号" value="18733124324" is-link/>
+      <van-cell border="{{false}}" title="身份证号" value="4123312332412343523" is-link/>
+      <van-cell border="{{false}}" title="身份" value="租客" is-link/>
+    </van-cell-group>
+  </view>
+</view>

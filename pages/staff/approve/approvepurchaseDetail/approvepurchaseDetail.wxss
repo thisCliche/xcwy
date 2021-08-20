@@ -1,0 +1,130 @@
+/* pages/person/renovation/renovationDetail/renovationDetail.wxss */
+.renovationDetail{
+  padding: 30rpx 20rpx;
+}
+.title{
+  font-weight: 700;
+}
+.titleBg{
+  width: 42rpx;
+  height: 24rpx;
+}
+.info{
+  padding: 28rpx 20rpx;
+}
+.card .time{
+  font-size: 32rpx;
+  color: #ABABAB;
+  margin-top: 30rpx;
+}
+.titleStyle{
+  font-size: 32rpx !important;
+}
+
+.item{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10rpx 0;
+  margin: 28rpx 0;
+}
+.itemR{
+  flex: 1;
+  margin-left: 20rpx;
+}
+.itemRT{
+  display: flex;
+  justify-content: space-between;
+}
+.itemRTL{
+  display: flex;
+  align-items: flex-end;
+}
+.itemRTL1{
+  font-size: 32rpx;
+}
+.itemRTL2{
+  font-size: 28rpx;
+  margin-left: 20rpx;
+}
+.itemRT3{
+  font-size: 24rpx;
+  color: #ABABAB;
+}
+.itemRB{
+  font-size: 26rpx;
+}
+.stepStatus{
+  color: #4790F4;
+}
+.avatar{
+  position: relative;
+}
+.avatar::before{
+  content: '';
+    display: block;
+    width: 2rpx;
+    height: 68rpx;
+    background: rgb(202, 202, 202);
+    position: absolute;
+    bottom: -30px;
+    left: 48%;
+}
+.last::before{
+  height: 0;
+}
+.avatar image{
+  width: 78rpx;
+  height: 78rpx;
+  padding-top: 10rpx;
+}
+.btn{
+  margin-top: 96rpx;
+}
+.btnStyle{
+  padding: 30rpx 40rpx;
+  color: #28BC8D;
+  text-align: center;
+}
+.btn1{
+  margin-top: 80rpx;
+  display: flex;
+  justify-content: space-between;
+}
+.btn1 .btnStyle{
+  background: #feecea !important;
+}
+.btn1 .van-button{
+  width: 330rpx !important;
+}
+.btn2{
+  margin-top: 60rpx;
+}
+.btn2 .van-button{
+  width: 90% !important;
+}
+.workImg{
+  margin-top: 10rpx;
+}
+.workImg image{
+  width: 140rpx;
+  height: 140rpx;
+  border-radius: 10rpx;
+}
+.colStyle{
+  margin-top: 10rpx;
+  position: relative;
+}
+.status{
+  display: flex;
+  justify-content: space-between;
+}
+.statusColor{
+  color: #28BC8D;
+}
+.fileList{
+  margin-top: 10rpx;
+}
+.fileList .fileItem{
+  font-size: 30rpx;
+}

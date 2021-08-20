@@ -1,0 +1,23 @@
+/* pages/person/personInfo/personInfo.wxss */
+.personInfo{
+  padding: 20rpx;
+}
+.avatar{
+  padding: 70rpx 0 64rpx;
+  position: relative;
+  text-align: center;
+  width: 100%;
+}
+.avatarImg{
+  width: 124rpx;
+  height: 124rpx;
+  border: 4rpx solid #D3D9F2;
+  border-radius: 50%;
+}
+.avatarCan{
+  position: absolute;
+  width: 32rpx;
+  height: 28rpx;
+  bottom: 90rpx;
+  left: 55%;
+}

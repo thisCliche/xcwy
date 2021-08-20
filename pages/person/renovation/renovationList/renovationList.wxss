@@ -1,0 +1,37 @@
+/* pages/person/renovation/renovationList/renovationList.wxss */
+.renovationList{
+  padding: 20rpx;
+}
+.item{
+  padding: 30rpx 20rpx;
+}
+.cardTitle{
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 18rpx;
+}
+.pass{
+  color: #28BC8D;
+}
+.fail{
+  color: #FF6060;
+}
+.wait{
+  color: #4790F4;
+}
+.cardTitle .tR{
+  color: #ABABAB;
+  font-size: 28rpx;
+}
+.item .des{
+  margin: 10rpx 0;
+  font-size: 28rpx;
+  display: flex;
+}
+.btn{
+  text-align: right;
+  margin-top: 20rpx;
+}
+.btnStyle{
+  width: 200rpx !important;
+}

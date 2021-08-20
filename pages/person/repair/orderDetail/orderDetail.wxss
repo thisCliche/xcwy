@@ -1,0 +1,112 @@
+/* pages/person/repair/orderDetail/orderDetail.wxss */
+.orderDetail{
+  padding: 30rpx 20rpx;
+}
+.card{
+  padding: 8rpx 28rpx;
+}
+.cell{
+  padding: 20rpx 0;
+  display: flex;
+  justify-content: space-between;
+}
+.cellR{
+  color: #777777;
+}
+.warning{
+  color: #FF6060;
+  font-size: 30rpx;
+}
+.warning image{
+  width: 32rpx;
+  height: 28rpx;
+}
+.info{
+  padding: 28rpx;
+}
+.cardD{
+  color: #8692AA;
+  font-size: 30rpx;
+  margin-top: 20rpx;
+}
+.title{
+  font-weight: 700;
+}
+.titleBg{
+  width: 42rpx;
+  height: 24rpx;
+}
+.repairContent{
+  color: #777777;
+  min-height: 100rpx;
+}
+.img{
+  margin-top: 30rpx;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.img image{
+  width: 180rpx;
+  height: 180rpx;
+  border-radius: 10rpx;
+  margin-bottom: 20rpx;
+}
+
+.item{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10rpx 0;
+  margin: 28rpx 0;
+}
+.itemR{
+  flex: 1;
+  margin-left: 20rpx;
+}
+.itemRT{
+  display: flex;
+  justify-content: space-between;
+}
+.itemRTL{
+  display: flex;
+  align-items: flex-end;
+}
+.itemRTL1{
+  font-size: 32rpx;
+}
+.itemRTL2{
+  font-size: 28rpx;
+  margin-left: 20rpx;
+}
+.itemRT3{
+  font-size: 24rpx;
+  color: #ABABAB;
+}
+.itemRB{
+  font-size: 26rpx;
+}
+.stepStatus{
+  color: #4790F4;
+}
+.avatar{
+  position: relative;
+}
+.avatar::before{
+  content: '';
+    display: block;
+    width: 2rpx;
+    height: 68rpx;
+    background: rgb(202, 202, 202);
+    position: absolute;
+    bottom: -30px;
+    left: 48%;
+}
+.last::before{
+  height: 0;
+}
+.avatar image{
+  width: 78rpx;
+  height: 78rpx;
+  padding-top: 10rpx;
+}

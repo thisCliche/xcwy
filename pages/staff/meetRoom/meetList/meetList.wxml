@@ -1,0 +1,21 @@
+<!--pages/person/vista/vistaList/vistaList.wxml-->
+<view class="vistaList">
+  <van-tabs active="{{ active }}" color="#FFA477" bind:click="onClick">
+    <van-tab title="未处理" title-style="{{current == 0?'font-weight:700;':''}}">
+      <view class="card item" wx:for="{{list}}" wx:key="index" bindtap="toDetail">
+        <view class="title">
+          <view class="titleL">
+            {{item.title}}
+          </view>
+          <view class="titleR">
+            {{item.time}}
+          </view>
+        </view>
+        <view class="des">{{item.des}}</view>
+        <view class="des">{{item.location}}</view>
+        <view class="des">{{item.estimateTime}}</view>
+      </view>
+    </van-tab>
+    <van-tab title="已处理" title-style="{{current == 1?'font-weight:700;':''}}">内容 2</van-tab>
+  </van-tabs>
+</view>

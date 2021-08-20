@@ -1,0 +1,42 @@
+/* pages/person/meetBook/meetBookDetail/meetBookDetail.wxss */
+.meetBookDetail{
+  padding: 30rpx 20rpx;
+}
+.card{
+  padding: 20rpx;
+}
+.cardTitle{
+  display: flex;
+  justify-content: space-between;
+}
+.cardTitle .tR{
+  color: #FF6060;
+  /* font-size: #28BC8D; */
+}
+.card .des{
+  color: #ABABAB;
+  font-size: 28rpx;
+  margin-top: 20rpx;
+}
+.title{
+  font-weight: 700;
+}
+.titleBg{
+  width: 42rpx;
+  height: 24rpx;
+}
+
+.btn{
+  margin-top: 80rpx;
+  display: flex;
+  justify-content: space-between;
+}
+.pay{
+  background: #feecea !important;
+}
+.btnStyle{
+  background: #feecea !important;
+}
+.van-button{
+  width: 330rpx !important;
+}

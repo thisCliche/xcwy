@@ -1,0 +1,10 @@
+<!--pages/person/complaint/complaintList/complaintList.wxml-->
+<view class="complaintList">
+  <view class="card item mt20" bindtap="toDetail">
+    <view class="title">文化馆工作人员服务态度差</view>
+    <view class="time">2021-01-06</view>
+    <view class="float">
+      <image src="/static/images/yhf.png"></image>
+    </view>
+  </view>
+</view>

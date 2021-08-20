@@ -1,0 +1,42 @@
+/* pages/contact/contactSearch/contactSearch.wxss */
+.search{
+  height: 100%;
+}
+.fieldStyle{
+  /* background: #BCD8FF !important; */
+}
+.cancelStyle{
+  color: #fff !important;
+}
+.scrollCol{
+  height: 90%;
+  padding: 0 20rpx;
+  box-sizing: border-box;
+  overflow: auto;
+}
+.info{
+  padding: 28rpx;
+}
+.item{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.itemL{
+  display: flex;
+  align-items: center;
+}
+.itemL image{
+  height: 70rpx;
+  width: 70rpx;
+}
+.itemL .itemName{
+  font-size: 30rpx;
+}
+.itemLR{
+  margin-left: 20rpx;
+}
+.itemL .itemDes{
+  font-size: 24rpx;
+  color: #4790F4;
+}

@@ -1,0 +1,29 @@
+/* pages/person/vista/vistaDetail/vistaDetail.wxss */
+.vistaDetail{
+  padding: 30rpx 20rpx;
+}
+.info{
+  padding: 28rpx;
+}
+.title{
+  font-weight: 700;
+}
+.titleBg{
+  width: 42rpx;
+  height: 24rpx;
+}
+.cardD{
+  font-size: 30rpx;
+  margin-top: 20rpx;
+  color: #ABABAB;
+}
+.palet{
+  display: flex;
+  padding: 0 16rpx 20rpx;
+}
+.paletItem{
+  width: 32rpx;
+  text-align: center;
+  margin: 0 20rpx;
+  border-bottom: 4rpx solid #C4C4C4;
+}

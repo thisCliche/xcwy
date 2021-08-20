@@ -1,0 +1,33 @@
+<!--pages/staff/task/cheackDetail/cheackDetail.wxml-->
+<view class="cheackDetail">
+  <view class="card info item">
+    <view class="itemL">
+      <view class="img">
+        <image src="/static/images/defaultAvatar.png"></image>
+      </view>
+      <view>
+        <view class="name">王珂</view>
+        <view class="time">05-16 18:16</view>
+      </view>
+    </view>
+    <view class="itemR" bindtap="openBox">
+      <van-icon name="ellipsis" size="24px" />
+    </view>
+  </view>
+  <view class="card mt20 info result">
+    <view class="resultL">图书馆安全日常巡查</view>
+    <view class="resultR">详细> </view>
+  </view>
+  <view class="card mt20 info">
+    <view class="cardT">
+      巡查情况
+    </view>
+    <view class="cardD">
+      1.巡查详情老城保护中心巡查详情老城保护中
+      心巡查详情老城保护中心巡查
+      2.巡查详情老城保护中心巡查详情老城保护中心
+      3.巡查详情老城保护中心巡查详情
+    </view>
+  </view>
+  <van-action-sheet round="{{false}}" bind:select="onSelect" show="{{ show }}" actions="{{ actions }}" bind:cancel="onCancel" cancel-text="取消" />
+</view>

@@ -1,0 +1,5 @@
+<!--pages/staff/approve/approveWrap/approveWrap.wxml-->
+<view class="approveWrap">
+  <my-approve approveMenuMy1="{{approveMenuMy1}}" approveMenuMy2="{{approveMenuMy2}}">
+  </my-approve>
+</view>

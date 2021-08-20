@@ -1,0 +1,4 @@
+/* pages/onwner/news/newsList.wxss */
+.newsList{
+  padding: 0rpx 20rpx;
+}

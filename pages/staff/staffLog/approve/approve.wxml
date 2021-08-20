@@ -1,0 +1,34 @@
+<!--pages/staff/staffLog/approve/approve.wxml-->
+<view class="approve">
+  <view class="card info rate">
+    <view style="margin-right: 20rpx;">工作评分</view>
+    <van-rate value="{{ value }}" color="#ffba00" bind:change="onChange" />
+  </view>
+  <view class="card mt20">
+    <van-cell-group>
+    <van-field value="{{ value1 }}" placeholder="请输入审批意见" border="{{ false }}" type="textarea" autosize="{{minHeight}}" />
+  </van-cell-group>
+  </view>
+  <view class="title mt30">
+    <view class="titleL">
+      <image src="/static/images/bg.png" class="titleBg"></image> 巡查人员
+    </view>
+    <view>
+      <van-icon name="add" size="26px" color="#4790F4"/>
+    </view>
+  </view>
+  <view class="pepople">
+    <van-row>
+      <van-col custom-class="colStyle" span="6" wx:for="{{list}}" wx:key="index">
+        <view class="card img">
+          <image src="/static/images/defaultAvatar.png"></image>
+          <view class="name">张扬</view>
+        </view>
+        <van-icon name="clear" custom-style="position: absolute;top: -10rpx; right: 16rpx;" color="#8c8c8c" />
+      </van-col>
+    </van-row>
+  </view>
+  <view class="btn">
+    <van-button block type="info">提交审批</van-button>
+  </view>
+</view>

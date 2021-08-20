@@ -1,0 +1,34 @@
+.home{
+  padding: 14rpx 20rpx 100rpx;
+  scroll-behavior:smooth;
+}
+.swiperWrap{
+  width: 100%;
+  border-radius:10rpx;
+  overflow: hidden;
+}
+swiper{
+  height: 376rpx;  
+  width: 100%;
+}
+
+.gg{
+  padding: 28rpx;
+  display: flex;
+  align-items: center;
+  font-size: 30rpx;
+}
+.gg .name{
+  min-width: 68rpx;
+  
+}
+.gg image{
+  min-width: 43rpx;
+  width: 43rpx;
+  height: 35rpx;
+  margin-right: 10rpx;
+}
+.gg .cloumn{
+  color: #007AD5;
+  margin: 0 20rpx;
+}

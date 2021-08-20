@@ -1,0 +1,26 @@
+/* pages/person/vista/vistaList/vistaList.wxss */
+.vistaList{
+  padding: 10rpx;
+}
+.item{
+  padding: 28rpx;
+  margin:20rpx 10rpx;
+}
+.des{
+  font-size: 30rpx;
+  color: #8692AA;
+  margin: 20rpx 0;
+}
+.desWrap{
+  display: flex;
+  justify-content: space-between;
+  margin-top: 30rpx;
+}
+.desWrap .desL{ 
+  font-size: 30rpx;
+  color: #8692AA;
+}
+.desWrap .desR{ 
+  font-size: 30rpx;
+  color: #8692AA;
+}
