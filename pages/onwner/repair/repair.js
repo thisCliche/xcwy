@@ -1,22 +1,31 @@
 // pages/onwner/repair/repair.js
-Page({
-
+const filter = require('../../../utils/router.js');
+let app = getApp()
+import {
+  project,
+  add
+} from '../../../api/repair'
+import {
+  validPhone
+} from '../../../utils/util'
+Page(filter.loginCheck({
   /**
    * 页面的初始数据
    */
   data: {
+    rootHttp:app.globalData.rootHttp,
     location: '',
     bxr: '',
     bxdh: '',
-    xm:'请选择报修项目',
+    xm: '请选择报修项目',
+    project_id: '',
     bxnr: '',
-    height:{minHeight: 50},
-    hyShow:false,
-    columns: ['会议室1', '会议室2', '会议室3'],
-    fileList: [{
-      url: 'https://img.yzcdn.cn/vant/leaf.jpg',
-      name: '图片1',
-    }],
+    height: {
+      minHeight: 50
+    },
+    hyShow: false,
+    columns: [],
+    fileList: [],
   },
   onDisplay(e) {
     let type = e.currentTarget.dataset.type
@@ -31,35 +40,112 @@ Page({
     });
   },
   onpickerConfirm(event) {
-    const { picker, value, index } = event.detail;
-    this.setData({hyShow: false,xm:value})
+    const {
+      picker,
+      value,
+      index
+    } = event.detail;
+    this.setData({
+      hyShow: false,
+      xm: value.text,
+      project_id: value.project_id
+    })
+  },
+  deleteImg(event) {
+    let fileList = this.data.fileList
+    fileList.splice(event.detail.index, 1)
+    this.setData({
+      fileList
+    })
   },
   afterRead(event) {
     const {
       file
     } = event.detail;
-    // 当设置 mutiple 为 true 时, file 为数组格式，否则为对象格式
+    let that = this
     wx.uploadFile({
-      url: 'https://example.weixin.qq.com/upload', // 仅为示例，非真实的接口地址
+      url: that.data.rootHttp + '/api.php/app/upload',
       filePath: file.url,
       name: 'file',
-      formData: {
-        user: 'test'
+      header: {
+        "Authorization": "Basic enhrajp6eGtqNjY4OA=="
       },
       success(res) {
+        let img = JSON.parse(res.data)
         // 上传完成需要更新 fileList
         const {
           fileList = []
-        } = this.data;
+        } = that.data;
         fileList.push({
-          ...file,
-          url: res.data
+          // ...file,
+          url: app.globalData.rootHttp + img.data
         });
-        this.setData({
+        that.setData({
           fileList
         });
       },
     });
+  },
+  async getProject() {
+    let res = await project({
+      token: wx.getStorageSync('token')
+    })
+    let columns = []
+    for (let i in res.data) {
+      let item = {
+        project_id: i,
+        text: res.data[i]
+      }
+      columns.push(item)
+    }
+    this.setData({
+      columns
+    })
+  },
+  async sumbmit() {
+    if (!validPhone(this.data.bxdh)) {
+      wx.showToast({
+        title: '手机号不正确',
+        icon: 'error'
+      })
+    }
+    let form = {
+      project_id: this.data.project_id,
+      token: wx.getStorageSync('token'),
+      address: this.data.location,
+      name: this.data.bxr,
+      mobile: this.data.bxdh,
+      content: this.data.bxnr,
+      attachment: JSON.stringify(this.data.fileList)
+    }
+    for (let i in form) {
+      if (form[i] == '') {
+        if (i == 'attachment') {
+          
+        } else {
+          return wx.showToast({
+            title: '请填写完整',
+            icon: 'error'
+          })
+        }
+      }
+    }
+    let res = await add(form)
+    if(res.code == 200) {
+      wx.showToast({
+        title: '报修成功',
+      })
+      setTimeout(_=>{
+        wx.navigateBack({
+          delta: 1,
+        })
+      },500)
+    }else{
+      wx.showToast({
+        title: res.msg,
+        icon:'error'
+      })
+    }
   },
   /**
    * 生命周期函数--监听页面加载
@@ -79,7 +165,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.getProject()
   },
 
   /**
@@ -116,4 +202,4 @@ Page({
   onShareAppMessage: function () {
 
   }
-})
+}))

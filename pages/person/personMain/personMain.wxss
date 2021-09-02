@@ -1,6 +1,6 @@
 /* pages/person/person.wxss */
 .top{
-  background: url(https://img.xiaojiayun.top/xcwymeBg.png);
+  background: url(https://h5.ahzxkj.net:9002/mini/images/xcwymeBg.png);
   background-size: 100% 100%;
   height: 322rpx;
 }

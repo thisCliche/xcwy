@@ -1,40 +1,31 @@
 <!--pages/contact/contactSearch/contactSearch.wxml-->
 <view class="search">
   <view class="searchWrap">
-    <van-search field-class="fieldStyle" cancel-class="cancelStyle" value="{{ value }}" background="#4790F4" placeholder="请输入搜索关键词" show-action
+    <van-search field-class="fieldStyle" cancel-class="cancelStyle" model:value="{{ value }}" background="#4790F4" placeholder="请输入用户名或手机号" show-action
   bind:search="onSearch"
   bind:cancel="onCancel"/>
   </view>
-  <scroll-view class="scrollCol">
+  <scroll-view class="scrollCol" >
+  <block wx:if="{{list.length != 0}}">
     <view class="card info mt20">
-      <view class="item">
+      <view class="item mt20" wx:for="{{list}}" wx:key="index">
         <view class="itemL">
           <view>
-            <image src="/static/images/defaultAvatar.png"></image>
+            <image src="{{item.avatar}}"> </image>
           </view>
           <view class="itemLR">
-            <view class="itemName">王珂</view>
+            <view class="itemName">{{item.name}}</view>
             <view class="itemDes">总经理</view>
           </view>
         </view>
         <view class="itemR">
-          13635685475
+          {{item.mobile}}
         </view>
       </view>
-      <view class="item mt20">
-        <view class="itemL">
-          <view>
-            <image src="/static/images/defaultAvatar.png"></image>
-          </view>
-          <view class="itemLR">
-            <view class="itemName">王珂</view>
-            <view class="itemDes">总经理</view>
-          </view>
-        </view>
-        <view class="itemR">
-          13635685475
-        </view>
-      </view>
+    </view>
+  </block>
+    <view class="card" wx:else>
+      <van-empty image="search" description="暂无内容" />
     </view>
   </scroll-view>
 </view>

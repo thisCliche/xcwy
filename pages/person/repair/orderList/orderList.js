@@ -1,17 +1,40 @@
 // pages/onwner/order/orderList/orderList.js
+import {repairList} from '../../../../api/repair'
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    isLoad: false,
     active: 0,
-    list:[{title:'文化馆',time:'2021-06-01',des:'老城保护中心',charge:'负责人：王嘉尔'},{title:'文化馆',time:'2021-06-01',des:'老城保护中心',charge:'负责人：王嘉尔'}],
-    list:[{title:'文化馆',time:'2021-06-01',des:'老城保护中心',charge:'负责人：王嘉尔'},{title:'文化馆',time:'2021-06-01',des:'老城保护中心',charge:'负责人：王嘉尔'}]
+    current:0,
+    queryInfo:{
+      page:1,
+      limit:10
+    },
+    list:[]
   },
-  toDetail(){
+  onClick(e) {
+    this.setData({
+      current: e.detail.name
+    })
+    this.getrepairList()
+  },
+  toDetail(e){
     wx.navigateTo({
-      url: '/pages/person/repair/orderDetail/orderDetail',
+      url: `/pages/person/repair/orderDetail/orderDetail?id=${e.currentTarget.dataset.id}`,
+    })
+  },
+  async getrepairList(e){
+    this.setData({
+      isLoad: true
+    })
+    let status = this.data.current
+    let res = await repairList({...this.data.queryInfo,status:++status,token:wx.getStorageSync('token')})
+    this.setData({
+      list: res.data.list,
+      isLoad: false,
     })
   },
   /**
@@ -32,7 +55,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.getrepairList()
   },
 
   /**

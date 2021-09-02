@@ -27,7 +27,10 @@
 .van-button{
   width: 90% !important;
 }
-
+.car_no{
+  letter-spacing: 30rpx;
+  font-size: 40rpx;
+}
 .inputContainer {
   position: relative;
   width: 660rpx;

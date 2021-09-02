@@ -27,6 +27,7 @@
 .itemL image{
   width: 70rpx;
   height: 70rpx;
+  border-radius: 50%;
 }
 
 .result{
@@ -67,6 +68,7 @@
 .pepople image{
   width: 62rpx;
   height: 62rpx;
+  border-radius: 50%;
 }
 .unread{
   color: #4790F4;
@@ -111,7 +113,8 @@
 .opinionT .name{
   margin:  0 20rpx;
 }
-.opinionT .opinoinTime{
+/* .opinionT  */
+.opinoinTime{
   flex: 1;
   font-size: 26rpx;
   color: #ABABAB;

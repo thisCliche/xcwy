@@ -6,35 +6,33 @@
   </view>
   <view class="card mt20">
     <van-cell-group border="{{ false }}">
-      <van-cell title="到访时间" value="2021-07-06" border="{{ false }}" />
+      <van-cell title="到访时间" value="{{info.date}}" border="{{ false }}" />
     </van-cell-group>
   </view>
   <view class="title mt30">
     <image src="/static/images/bg.png" class="titleBg"></image> 来访人员
   </view>
-  <view class="card mt20">
+  <view class="card mt20" wx:for="{{info.booking_detail}}" wx:key="index">
     <van-cell-group border="{{ false }}">
-      <van-cell title="预约人" value="王佳琪" border="{{ false }}" />
-      <van-cell title="联系电话" value="18236545789" border="{{ false }}" />
-      <van-cell title="身份证号" value="3458***********" border="{{ false }}" />
+      <van-cell title="预约人" value="{{item.name}}" border="{{ false }}" />
+      <van-cell title="联系电话" value="{{item.mobile}}" border="{{ false }}" />
+      <van-cell title="身份证号" value="{{item.id_card}}" border="{{ false }}" />
     </van-cell-group>
   </view>
-  <view class="card mt20">
-    <van-cell border="{{ false }}" title="是否驾车">
-      <van-switch slot="right-icon" size="18px" checked="{{ checked }}" active-color="#FFA477"
-        inactive-color="#fff" bind:change="onChange" />
-    </van-cell>
-    <view class="palet">
-      <view class="paletItem">皖</view>
-      <view class="paletItem">A</view>
-      <view class="paletItem">S</view>
-      <view class="paletItem">3</view>
-      <view class="paletItem">W</view>
-      <view class="paletItem">2</view>
+  <block  wx:if="{{info.is_drive != '否'}}">
+    <view class="card mt20">
+      <van-cell border="{{ false }}" title="是否驾车">
+        <van-switch slot="right-icon" size="18px" checked="{{ checked }}" active-color="#FFA477" inactive-color="#fff"
+          bind:change="onChange" />
+      </van-cell>
+      <view class="car_no">
+        {{info.car_no}}
+      </view>
     </view>
-  </view>
+
+  </block>
   <view class="card info mt20">
     <view class="cardT">来访备注</view>
-    <view class="cardD">备注内容备注内容备注内容备注内容备注内容</view>
+    <view class="cardD">{{info.remark}}</view>
   </view>
 </view>

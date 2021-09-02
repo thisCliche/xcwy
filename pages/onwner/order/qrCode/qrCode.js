@@ -1,18 +1,32 @@
 // pages/onwner/order/qrCode/qrCode.js
+import {appointmentDetail} from '../../../../api/booking'
+const app = getApp()
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    deFualtHttp:app.globalData.rootHttp,
+    info:{}
   },
-
+  async getDetail(id){
+    let res = await appointmentDetail({id,token:wx.getStorageSync('token')})
+    this.setData({
+      info:res.data
+    })
+  },
+  save(){
+    wx.showToast({
+      title: '暂未实现',
+      icon:"error"
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.getDetail(options.id)
   },
 
   /**

@@ -7,7 +7,26 @@ Page({
   data: {
 
   },
-
+  toDetial(e){
+    console.log(e)
+    console.log(e.currentTarget.dataset.page)
+    wx.navigateTo({
+      url: e.currentTarget.dataset.page,
+    })
+  },
+  loginOut() {
+    wx.clearStorageSync('userInfo')
+    wx.clearStorageSync('token')
+    wx.clearStorageSync('refresh_token')
+    wx.showToast({
+      title: '退出成功',
+    })
+    setTimeout(_ => {
+      wx.switchTab({
+        url: '/pages/index/index',
+      })
+    }, 500)
+  },
   /**
    * 生命周期函数--监听页面加载
    */

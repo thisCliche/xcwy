@@ -1,17 +1,17 @@
 <!--pages/staff/attendance/attendanceDetail/attendanceDetail.wxml-->
 <view class="attendanceDetail">
   <view class="card summary">
-    <view class="summaryT">
-      <view>2021年10月汇总</view>
-      <van-icon name="arrow" color="#ABABAB"/>
+    <view class="summaryT" bindtap="openBox">
+      <view>{{year}}年{{month}}月汇总</view>
+      <van-icon name="arrow" color="#ABABAB" />
     </view>
     <view class="summaryB">
       <view class="summaryBItem mt20">
-        <view class="summaryNum">10</view>
+        <view class="summaryNum">{{info.lateCount}}</view>
         <view class="summaryUnit">迟到（次）</view>
       </view>
       <view class="summaryBItem mt20">
-        <view class="summaryNum">10</view>
+        <view class="summaryNum">{{info.earlyCount}}</view>
         <view class="summaryUnit">早退（次）</view>
       </view>
     </view>
@@ -22,10 +22,13 @@
       <van-col custom-class="colStyle" span="8">上班打卡</van-col>
       <van-col custom-class="colStyle" span="8">下班打卡</van-col>
     </van-row>
-    <van-row custom-class="rowStyle">
-      <van-col custom-class="colStyle laterColor" span="8">06.01</van-col>
-      <van-col custom-class="colStyle" span="8">09:00</van-col>
-      <van-col custom-class="colStyle" span="8">12:00</van-col>
+    <van-row custom-class="rowStyle" wx:for="{{info.list}}" wx:key="index">
+      <van-col custom-class="colStyle laterColor" span="8">{{item.date}}</van-col>
+      <van-col custom-class="colStyle" span="8">{{item.firstStart}}</van-col>
+      <van-col custom-class="colStyle" span="8">{{item.firstEnd}}</van-col>
     </van-row>
   </view>
+  <van-popup show="{{ hyShow }}" position="bottom" custom-style="height: 50%;" round >
+    <van-datetime-picker type="year-month" value="{{ currentDate }}" bind:confirm="onInput" bind:cancel="cancel" max-date="{{ maxDate }}"/>
+  </van-popup>
 </view>

@@ -1,40 +1,30 @@
 <!--pages/person/renovation/renovationList/renovationList.wxml-->
 <view class="renovationList">
-  <view class="card item mt20" catchtap="toDetail">
+  <block wx:if="{{list.length != 0}}">
+    <view class="card item mt20" wx:for="{{list}}" wx:key="index" data-id="{{item.id}}" catchtap="toDetail">
     <view class="cardTitle">
       <view class="tL">
-        姜一宁提交的装修申请
+        装修申请
       </view>
       <view class="tR">
-        2021-01-06 18:36
+        {{item.add_time}}
       </view>
     </view>
     <view class="des">
-      装修时间：2021.06.06至2021.07.07
+      装修时间：{{item.begin_time}}至{{item.end_time}}
     </view>
     <view class="des">
       <view class="desL">申请状态：</view>
-      <view class="desL fail">审核被拒</view>
+      <view class="desL fail">{{item.status_text}}</view>
     </view>
-  </view>
-  <view class="card item mt20" catchtap="toDetail">
-    <view class="cardTitle">
-      <view class="tL">
-        姜一宁提交的装修申请
-      </view>
-      <view class="tR">
-        2021-01-06 18:36
-      </view>
-    </view>
-    <view class="des">
-      装修时间：2021.06.06至2021.07.07
-    </view>
-    <view class="des">
-      <view class="desL">申请状态：</view>
-      <view class="desL fail">审核被拒</view>
-    </view>
-    <view class="btn">
+    <view class="btn" wx:if="{{item.status == 2}}">
       <van-button catchtap="toPay" size="small" type="info" custom-class="btnStyle">缴纳保证金</van-button>
     </view>
   </view>
+
+  </block>
+
+  <view class="card" wx:else>
+        <van-empty description="暂无内容" />
+      </view>
 </view>

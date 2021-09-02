@@ -1,19 +1,60 @@
+import {approve} from '../../../../api/report'
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    value:'3',
+    score:3,
     minHeight:{minHeight:200},
+    comment:'',
+    id: '',
     list:[1,2,3,4,5,6],
   },
-
+  async submit(e){
+    let form = {
+      token:wx.getStorageSync('token'),
+      id : this.data.id,
+      score: this.data.score,
+      comment: this.data.comment
+    }
+    for(let i in form){
+      if(form[i] == ''){
+        return wx.showToast({
+          title: '填写完整',
+          icon: 'error'
+        })
+      }
+    }
+    let res = await approve(form)
+    if(res.code == 200) {
+      wx.showToast({
+        title: '提交成功',
+      })
+      setTimeout(_=>{
+        wx.navigateBack({
+          delta: 1,
+        })
+      },500)
+    }else{
+      wx.showToast({
+        title: res.msg,
+        icon:'error'
+      })
+    }
+  },
+  onChange(e){
+    this.setData({
+      score:e.detail
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
+    this.setData({
+      id:options.id
+    })
   },
 
   /**

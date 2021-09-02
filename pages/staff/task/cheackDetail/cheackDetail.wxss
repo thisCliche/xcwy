@@ -27,6 +27,7 @@
 .itemL image{
   width: 70rpx;
   height: 70rpx;
+  border-radius: 50%;
 }
 
 .result{
@@ -41,4 +42,11 @@
   color: #5f5f5f;
   margin-top: 10rpx;
   line-height: 48rpx;
+}
+.photoCol{
+  margin-top: 20rpx !important;
+}
+.photoCol image{
+  width: 140rpx;
+  height: 140rpx;
 }

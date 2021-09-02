@@ -1,32 +1,56 @@
 // pages/person/renovation/renovationDetail/renovationDetail.js
+import {detail,done} from '../../../../api/build'
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    info:{},
+    id:'',
+  },
+  async toDone(){
+    let res = await done({token:wx.getStorageSync('token'),id:this.data.id})
+    if(res.code == 200){
+      wx.showToast({
+        title: '操作成功',
+      })
+      setTimeout(_=>{
+        wx.navigateBack({
+          delta: 1,
+        })
+      },500)
+    }
+  },
+  async getDetail(id){
+    let res =await detail({id,token:wx.getStorageSync('token')})
+    this.setData({
+      info:res.data
+    })
   },
   toPay(){
     wx.navigateTo({
-      url: '/pages/person/renovation/renovationPay/renovationPay',
+      url: '/pages/staff/renovation/pay/pay',
     })
   },
   reject(){
     wx.navigateTo({
-      url: '/pages/staff/renovation/reject/reject',
+      url: `/pages/staff/renovation/reject/reject?id=${this.data.id}`,
     })
   },
   resolve(){
     wx.navigateTo({
-      url: '/pages/staff/renovation/pay/pay',
+      url: '/pages/onwner/payment/payPage/payPage',
     })
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.setData({
+      id:options.id
+    })
+    this.getDetail(options.id)
   },
 
   /**

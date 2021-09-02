@@ -1,23 +1,43 @@
 // pages/staff/approve/leaveApp/leaveApp.js
+import {approve_keyAdd,approve_keyKey} from '../../../../api/approve'
+let app = getApp()
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    rootHttp:app.globalData.rootHttp,
     time1:'请选择',
     time2:'请选择',
-    interval:'',
+    duration:null,
+    reason:'',
+    minDate: new Date().getTime(),
     minheight:{minHeight:80},
-    type:'请选择',
+    typeName:'请选择',
+    key_id:'',
+    type: null,
     hyShow:false,
-    columns: ['病假', '事假', '婚假'],
-    fileList: [{
-      url: 'https://img.yzcdn.cn/vant/leaf.jpg',
-      name: '图片1',
-    }],
+    columns: [],
+    fileList: [],
     calendarShow1:false,
     calendarShow2:false,
+    datetime1:new Date().getTime(),
+    datetime2:new Date().getTime(),
+  },
+  async getKey(){
+    let res = await approve_keyKey({token:wx.getStorageSync('token')})
+    let columns = []
+    for (let i in res.data) {
+      let item = {
+        key_id: i,
+        text: res.data[i]
+      }
+      columns.push(item)
+    }
+    this.setData({
+      columns
+    })
   },
   onDisplay(e) {
     let type = e.currentTarget.dataset.type
@@ -33,12 +53,14 @@ Page({
   },
   formatDate(date) {
     date = new Date(date);
-    return `${date.getMonth() + 1}/${date.getDate()}`;
+    const m = (date.getMonth() + 1 + '').padStart(2, '0')
+    return `${date.getFullYear()}-${m}-${date.getDate()}`;
   },
   onConfirm(event) {
     this.setData({
       calendarShow1: false,
       time1: this.formatDate(event.detail),
+      minDate:event.detail
     });
   },
   onConfirm2(event) {
@@ -50,36 +72,80 @@ Page({
   onpickerConfirm(event) {
     const { picker, value, index } = event.detail;
       this.setData({
-        type : value,
-        hyShow: false
+        hyShow: false,
+        typeName: value.text,
+        key_id: value.key_id,
       })
+  },
+  deleteImg(event) {
+    let fileList = this.data.fileList
+    fileList.splice(event.detail.index, 1)
+    this.setData({
+      fileList
+    })
   },
   afterRead(event) {
     const {
       file
     } = event.detail;
-    // 当设置 mutiple 为 true 时, file 为数组格式，否则为对象格式
+    let that = this
     wx.uploadFile({
-      url: 'https://example.weixin.qq.com/upload', // 仅为示例，非真实的接口地址
+      url: that.data.rootHttp + '/api.php/app/upload',
       filePath: file.url,
       name: 'file',
-      formData: {
-        user: 'test'
+      header: {
+        "Authorization": "Basic enhrajp6eGtqNjY4OA=="
       },
       success(res) {
+        let img = JSON.parse(res.data)
         // 上传完成需要更新 fileList
         const {
           fileList = []
-        } = this.data;
+        } = that.data;
         fileList.push({
-          ...file,
-          url: res.data
+          // ...file,
+          url: app.globalData.rootHttp + img.data
         });
-        this.setData({
+        that.setData({
           fileList
         });
       },
     });
+  },
+  async submit() {
+    
+    let form = {
+      key_id: this.data.key_id,
+      token: wx.getStorageSync('token'),
+      begin_time: this.data.time1,
+      end_time: this.data.time2,
+      reason: this.data.reason,
+      images: JSON.stringify(this.data.fileList)
+    }
+    for (let i in form) {
+      if (form[i] == '') {
+        return wx.showToast({
+          title: '请填写完整',
+          icon: 'error'
+        })
+      }
+    }
+    let res = await approve_keyAdd(form)
+    if(res.code == 200) {
+      wx.showToast({
+        title: '提交成功',
+      })
+      setTimeout(_=>{
+        wx.navigateBack({
+          delta: 1,
+        })
+      },500)
+    }else{
+      wx.showToast({
+        title: res.msg,
+        icon:'error'
+      })
+    }
   },
   /**
    * 生命周期函数--监听页面加载
@@ -99,7 +165,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+this.getKey()
   },
 
   /**

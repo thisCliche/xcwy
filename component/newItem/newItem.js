@@ -20,9 +20,9 @@ Component({
    * 组件的方法列表
    */
   methods: {
-    toDetail(){
+    toDetail(e){
       wx.navigateTo({
-        url: '/pages/onwner/news/newsDetail/newsDetail',
+        url: `/pages/onwner/news/newsDetail/newsDetail?id=${e.currentTarget.dataset.id}`,
       })
         },
   }

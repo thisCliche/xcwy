@@ -22,6 +22,7 @@
   width: 140rpx;
   height: 140rpx;
   border-radius: 10rpx;
+  border-radius: 50%;
 }
 .cardD{
   font-size: 30rpx;
@@ -53,7 +54,7 @@
   border-radius: 10rpx;
 }
 .photo{
-  padding: 8rpx 28rpx 28rpx;
+  padding: 28rpx 28rpx 8rpx ;
 }
 .photoCol{
   margin-top: 20rpx !important;
@@ -65,6 +66,7 @@
 .pepople image{
   width: 62rpx;
   height: 62rpx;
+  border-radius: 50%;
 }
 .colStyle{
   margin-top: 10rpx;

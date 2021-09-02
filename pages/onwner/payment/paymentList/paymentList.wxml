@@ -1,14 +1,55 @@
 <!--pages/onwner/payment/paymentList/paymentList.wxml-->
 <view class="paymentList">
-  <view class="item card">
-    <view class="left">
-      <view class="title"><van-icon size="24" name="bill" color="#4790F4"/> 物业费</view>
-      <view class="des">暂未查询到欠费</view>
-    </view>
-    <view class="right" bindtap="toDetail">
-      <view class="btn">
-        缴 费 记 录
+    <view class="item card">
+      <view class="left">
+        <view class="title">
+          <van-icon size="24" name="bill" color="#4790F4" /> 物业费
+        </view>
+        <view class="des {{list.property_paid?'':'red'}}">暂未查询到欠费</view>
+      </view>
+      <view class="right" data-type="property" bindtap="toDetail">
+        <view class="btn">
+          缴 费 记 录
+        </view>
       </view>
     </view>
-  </view>
+    <view class="item card mt20">
+      <view class="left">
+        <view class="title">
+          <van-icon size="24" name="bill" color="#4790F4" /> 电费
+        </view>
+        <view class="des {{list.electric_paid?'':'red'}}">暂未查询到欠费</view>
+      </view>
+      <view class="right" data-type="electric" bindtap="toDetail">
+        <view class="btn">
+          缴 费 记 录
+        </view>
+      </view>
+    </view>
+    <view class="item card mt20">
+      <view class="left">
+        <view class="title">
+          <van-icon size="24" name="bill" color="#4790F4" /> 水费
+        </view>
+        <view class="des {{list.water_paid?'':'red'}}">暂未查询到欠费</view>
+      </view>
+      <view class="right" data-type="water" bindtap="toDetail">
+        <view class="btn">
+          缴 费 记 录
+        </view>
+      </view>
+    </view>
+    <view class="item card mt20">
+      <view class="left">
+        <view class="title">
+          <van-icon size="24" name="bill" color="#4790F4" /> 物业租赁费
+        </view>
+        <view class="des {{list.rent_paid?'':'red'}}">暂未查询到欠费</view>
+      </view>
+      <view class="right" data-type="rent" bindtap="toDetail">
+        <view class="btn">
+          缴 费 记 录
+        </view>
+      </view>
+    </view>
 </view>

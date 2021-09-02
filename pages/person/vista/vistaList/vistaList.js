@@ -1,4 +1,5 @@
 // pages/person/vista/vistaList/vistaList.js
+import {visitorList} from '../../../../api/booking'
 Page({
 
   /**
@@ -7,6 +8,11 @@ Page({
   data: {
     current:0,
     active:0,
+    queryInfo:{
+      status:2,
+      page:1,
+      limit:100
+    },
     list:[{title:`城隍庙文化馆-老城保护中心-信息楼-
     1011栋-105室（到访地址）`,estimateTime:'到访时间：2021-06-07',des:'到访人数：1人',time:'2021-06-01'},{title:`城隍庙文化馆-老城保护中心-信息楼-
     1011栋-105室（到访地址）`,estimateTime:'到访时间：2021-06-07',des:'到访人数：1人',time:'2021-06-01'}]
@@ -16,9 +22,20 @@ Page({
       current:e.detail.name
     })
   },
-  toDetail(){
+  async getvisitorList(){
+    let res = await visitorList({token:wx.getStorageSync('token'),...this.data.queryInfo})
+    this.setData({
+      list: res.data.list
+    })
+  },
+  changed(e){
+    let queryInfo = this.data.queryInfo
+    queryInfo.status = e.detail.index+2
+    this.getvisitorList()
+  },
+  toDetail(e){
     wx.navigateTo({
-      url: '/pages/person/vista/vistaDetail/vistaDetail',
+      url: `/pages/person/vista/vistaDetail/vistaDetail?id=${e.currentTarget.dataset.id}`,
     })
   },
   /**
@@ -39,7 +56,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.getvisitorList()
   },
 
   /**

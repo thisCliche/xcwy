@@ -1,15 +1,23 @@
 // pages/person/personInfo/personInfo.js
-Page({
+const filter = require('../../../utils/router.js');
+import {myProfile} from '../../../api/login.js'
+Page(filter.loginCheck({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    userInfo:{}
   },
   toDetial(e){
     wx.navigateTo({
       url: e.currentTarget.dataset.page,
+    })
+  },
+  async getUserInfo(){
+    let res = await myProfile({token:wx.getStorageSync('token')})
+    this.setData({
+      userInfo: res.data
     })
   },
   /**
@@ -30,7 +38,8 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.getUserInfo()
+    
   },
 
   /**
@@ -67,4 +76,4 @@ Page({
   onShareAppMessage: function () {
 
   }
-})
+}))

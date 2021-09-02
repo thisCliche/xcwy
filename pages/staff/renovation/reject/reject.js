@@ -1,18 +1,41 @@
 // pages/staff/renovation/reject/reject.js
+import {reject} from '../../../../api/build'
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    reject_reason:'',
+    id:'',
     minHeight:{minHeight: 180}
   },
-
+  async toReject(){
+    if(this.data.reject_reason == ''){
+      return wx.showToast({
+        title: '不能为空',
+        icon: 'error'
+      })
+    }
+    let res = await reject({reject_reason:this.data.reject_reason,id:this.data.id,token:wx.getStorageSync('token')})
+    if(res.code == 200){
+      wx.showToast({
+        title: '操作成功',
+      })
+      setTimeout(_=>{
+        wx.navigateBack({
+          delta: 1,
+        })
+      },500)
+    }
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.setData({
+      id:options.id
+    })
   },
 
   /**
@@ -26,7 +49,6 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
   },
 
   /**

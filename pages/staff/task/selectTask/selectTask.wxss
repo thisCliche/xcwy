@@ -1,0 +1,7 @@
+/* pages/staff/task/selectTask/selectTask.wxss */
+.selectTask{
+  padding: 30rpx 20rpx 0;
+}
+.info{
+  padding: 28rpx;
+}

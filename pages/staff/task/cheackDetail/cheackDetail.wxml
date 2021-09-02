@@ -1,13 +1,15 @@
 <!--pages/staff/task/cheackDetail/cheackDetail.wxml-->
+<wxs src="../../../../utils/filter.wxs" module="filter" />
+<view class="text"></view>
 <view class="cheackDetail">
   <view class="card info item">
     <view class="itemL">
       <view class="img">
-        <image src="/static/images/defaultAvatar.png"></image>
+        <image src="{{info.avatar}}"></image>
       </view>
       <view>
-        <view class="name">王珂</view>
-        <view class="time">05-16 18:16</view>
+        <view class="name">{{info.name}}</view>
+        <view class="time">{{info.update_time}}</view>
       </view>
     </view>
     <view class="itemR" bindtap="openBox">
@@ -15,19 +17,24 @@
     </view>
   </view>
   <view class="card mt20 info result">
-    <view class="resultL">图书馆安全日常巡查</view>
-    <view class="resultR">详细> </view>
+    <view class="resultL">{{title}}</view>
+    <view class="resultR" bindtap="toDetail">详细> </view>
   </view>
-  <view class="card mt20 info">
-    <view class="cardT">
-      巡查情况
+  <block wx:for="{{info.content}}" wx:key="index">
+    <view class="card mt20 info" wx:if="{{item != ''}}">
+      <view class="cardT" >
+        {{filter.taskType(index)}}
+      </view>
+      <view class="cardD">
+        {{item}}
+      </view>
     </view>
-    <view class="cardD">
-      1.巡查详情老城保护中心巡查详情老城保护中
-      心巡查详情老城保护中心巡查
-      2.巡查详情老城保护中心巡查详情老城保护中心
-      3.巡查详情老城保护中心巡查详情
-    </view>
-  </view>
-  <van-action-sheet round="{{false}}" bind:select="onSelect" show="{{ show }}" actions="{{ actions }}" bind:cancel="onCancel" cancel-text="取消" />
+  </block>
+  <van-row>
+      <van-col custom-class="photoCol" span="6" wx:for="{{images}}" wx:key="index">
+        <image src="{{item.url}}"></image>
+      </van-col>
+    </van-row>
+  <van-action-sheet round="{{false}}" bind:select="onSelect" show="{{ show }}" actions="{{ actions }}"
+    bind:cancel="onCancel" cancel-text="取消" />
 </view>

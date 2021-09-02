@@ -6,10 +6,17 @@
   padding: 28rpx;
 }
 .btn{
-  justify-content: space-between;
-  display: flex;
-  margin-top: 184rpx;
+  /* justify-content: space-between;
+  display: flex;*/
+  margin-top: 184rpx; 
 }
 .van-button{
-  width: 330rpx !important;
+  /* width: 330rpx !important; */
+}
+.img{
+  text-align: center;
+}
+.img image{
+  width: 300rpx;
+  height: 300rpx;
 }

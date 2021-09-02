@@ -1,15 +1,24 @@
 // pages/onwner/payment/paymentList/paymentList.js
-Page({
+import {propertyRecord,index} from '../../../../api/fee'
+const filter = require('../../../../utils/router.js');
+Page(filter.loginCheck({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    list: []
   },
-  toDetail(){
+  toDetail(e){
     wx.navigateTo({
-      url: '/pages/onwner/payment/payRecord/payRecord',
+      url: `/pages/onwner/payment/payRecord/payRecord?type=${e.currentTarget.dataset.type}&house_id=${this.data.list.house_id}`,
+    })
+  },
+  async getList(){
+    let res = await index({token:wx.getStorageSync('token')})
+    // let res = await propertyRecord({token:wx.getStorageSync('token'),page:1,limit:100})
+    this.setData({
+      list:res.data
     })
   },
   /**
@@ -30,7 +39,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.getList()
   },
 
   /**
@@ -67,4 +76,4 @@ Page({
   onShareAppMessage: function () {
 
   }
-})
+}))

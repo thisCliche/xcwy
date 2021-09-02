@@ -1,15 +1,22 @@
 // pages/person/complaint/complaintList/complaintList.js
+import {my} from '../../../../api/Feedback'
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    list:[]
   },
-  toDetail(){
+  toDetail(e){
     wx.navigateTo({
-      url: '/pages/person/complaint/complaintDetail/complaintDetail',
+      url: `/pages/person/complaint/complaintDetail/complaintDetail?id=${e.currentTarget.dataset.id}`,
+    })
+  },
+  async getDetail(){
+    let res = await my({token:wx.getStorageSync('token'),page:1,num:50})
+    this.setData({
+      list:res.data
     })
   },
   /**
@@ -30,7 +37,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.getDetail()
   },
 
   /**

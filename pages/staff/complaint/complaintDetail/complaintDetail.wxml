@@ -5,11 +5,11 @@
   </view>
   <view class="card info mt20">
     <view class="cardT">投诉主题</view>
-    <view class="cardD mt20">文化馆工作人员态度差</view>
+    <view class="cardD mt20">{{info.title}}</view>
   </view>
   <view class="card info mt20 content">
     <view class="cardT">投诉内容</view>
-    <view class="cardD mt20">文化馆工作人员态度差</view>
+    <view class="cardD mt20">文化馆工{{info.content}}作人员态度差</view>
   </view>
   <view class="card mt20">
     <view class="card">
@@ -35,15 +35,21 @@
   <view class="title mt30">
     <image src="/static/images/bg.png" class="titleBg"></image> 物业回复
   </view>
-  <view class="card mt20 image">
+  <view class="card mt20 image" wx:if="{{info.reply == ''}}">
     <van-cell-group border="{{ false }}">
-      <van-field value="{{ value }}" type="textarea" autosize="{{height}}" placeholder="回复处理结果" border="{{ false }}" />
+      <van-field model:value="{{ reply }}" type="textarea" autosize="{{height}}" placeholder="回复处理结果" border="{{ false }}" />
     </van-cell-group>
     <view class="uploaderWrap">
-      <van-uploader deletable file-list="{{ fileList }}" bind:after-read="afterRead" />
+      <van-uploader bind:delete="deleteImg" deletable="{{ true }}" file-list="{{ fileList }}" bind:after-read="afterRead" />
     </view>
   </view>
-  <view class="btn">
-    <van-button type="info" block>提交</van-button>
+  <view class="card mt20 image" wx:else>
+    <view class="replyC">{{info.reply}}</view>
+    <view class="uploaderWrap">
+      <van-uploader bind:delete="deleteImg" deletable="{{ true }}" file-list="{{ fileList }}" bind:after-read="afterRead" />
+    </view>
+  </view>
+  <view class="btn" wx:if="{{info.reply == ''}}">
+    <van-button type="info" block bind:click="submit">提交</van-button>
   </view>
 </view>

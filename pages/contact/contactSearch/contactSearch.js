@@ -1,4 +1,5 @@
 // pages/contact/contactSearch/contactSearch.js
+import {search} from '../../../api/contact'
 Page({
 
   /**
@@ -6,12 +7,24 @@ Page({
    */
   data: {
     value:'',
+    list:[]
   },
-  onSearch(){
-
+  async onSearch(){
+    if(this.data.value == ''){
+      return wx.showToast({
+        title: '不能为空',
+        icon: 'error'
+      })
+    }
+    let res = await search({keyword:this.data.value,token:wx.getStorageSync('token')})
+    this.setData({
+      list: res.data
+    })
   },
   onCancel(){
-
+    wx.navigateBack({
+      delta: 1,
+    })
   },
   /**
    * 生命周期函数--监听页面加载

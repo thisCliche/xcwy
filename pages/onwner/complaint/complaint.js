@@ -1,31 +1,87 @@
 // pages/onwner/complaint/complaint.js
-Page({
+import {add} from '../../../api/Feedback'
+const filter = require('../../../utils/router.js');
+let app = getApp()
+Page(filter.loginCheck({
 
   /**
    * 页面的初始数据
    */
   data: {
+    rootHttp:app.globalData.rootHttp,
     title:'',
     height:{minHeight: 100},
     content: '',
-    fileList: [ {
-      url: 'https://img.yzcdn.cn/vant/leaf.jpg',
-      name: '图片1',
-    }],
+    fileList: [],
+  },
+  async submit(){
+    let form = {
+      title: this.data.title,
+      token: wx.getStorageSync('token'),
+      content: this.data.content,
+      images: JSON.stringify(this.data.fileList)
+    }
+    for (let i in form) {
+      if (form[i] == '') {
+        if (i == 'images') {
+          
+        } else {
+          return wx.showToast({
+            title: '请填写完整',
+            icon: 'error'
+          })
+        }
+      }
+    }
+    let res = await add(form)
+    if(res.code == 200) {
+      wx.showToast({
+        title: '投诉成功',
+      })
+      setTimeout(_=>{
+        wx.navigateBack({
+          delta: 1,
+        })
+      },500)
+    }else{
+      wx.showToast({
+        title: res.msg,
+        icon:'error'
+      })
+    }
+  },
+  deleteImg(event) {
+    let fileList = this.data.fileList
+    fileList.splice(event.detail.index, 1)
+    this.setData({
+      fileList
+    })
   },
   afterRead(event) {
-    const { file } = event.detail;
-    // 当设置 mutiple 为 true 时, file 为数组格式，否则为对象格式
+    const {
+      file
+    } = event.detail;
+    let that = this
     wx.uploadFile({
-      url: 'https://example.weixin.qq.com/upload', // 仅为示例，非真实的接口地址
+      url: that.data.rootHttp + '/api.php/app/upload',
       filePath: file.url,
       name: 'file',
-      formData: { user: 'test' },
+      header: {
+        "Authorization": "Basic enhrajp6eGtqNjY4OA=="
+      },
       success(res) {
+        let img = JSON.parse(res.data)
         // 上传完成需要更新 fileList
-        const { fileList = [] } = this.data;
-        fileList.push({ ...file, url: res.data });
-        this.setData({ fileList });
+        const {
+          fileList = []
+        } = that.data;
+        fileList.push({
+          // ...file,
+          url: app.globalData.rootHttp + img.data
+        });
+        that.setData({
+          fileList
+        });
       },
     });
   },
@@ -84,4 +140,4 @@ Page({
   onShareAppMessage: function () {
 
   }
-})
+}))

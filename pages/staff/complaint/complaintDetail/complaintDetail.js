@@ -1,4 +1,5 @@
 // pages/onwner/complaint/complaint.js
+import {detail,reply} from '../../../../api/Feedback'
 let App = getApp()
 Page({
 
@@ -7,13 +8,14 @@ Page({
    */
   data: {
     title:'',
+    rootHttp:App.globalData.rootHttp,
     siteHttp:App.globalData.siteHttp,
     height:{minHeight: 80},
     content: '',
-    fileList: [ {
-      url: 'https://img.yzcdn.cn/vant/leaf.jpg',
-      name: '图片1',
-    }],
+    fileList: [],
+    reply:"",
+    info:{},
+    id:'',
   },
   afterRead(event) {
     const { file } = event.detail;
@@ -31,11 +33,88 @@ Page({
       },
     });
   },
+  async getDetail(id){
+    let res = await detail({id,token:wx.getStorageSync('token')})
+    this.setData({
+      info:res.data
+    })
+  },
+  deleteImg(event) {
+    let fileList = this.data.fileList
+    fileList.splice(event.detail.index, 1)
+    this.setData({
+      fileList
+    })
+  },
+  afterRead(event) {
+    const {
+      file
+    } = event.detail;
+    let that = this
+    wx.uploadFile({
+      url: that.data.rootHttp + '/api.php/app/upload',
+      filePath: file.url,
+      name: 'file',
+      header: {
+        "Authorization": "Basic enhrajp6eGtqNjY4OA=="
+      },
+      success(res) {
+        let img = JSON.parse(res.data)
+        // 上传完成需要更新 fileList
+        const {
+          fileList = []
+        } = that.data;
+        fileList.push({
+          // ...file,
+          url: App.globalData.rootHttp + img.data
+        });
+        that.setData({
+          fileList
+        });
+      },
+    });
+  },
+  async submit() {
+    
+    let form = {
+      token: wx.getStorageSync('token'),
+      id: this.data.id,
+      reply: this.data.reply,
+      reply_images: JSON.stringify(this.data.fileList)
+    }
+    for (let i in form) {
+      if (form[i] == '') {
+          return wx.showToast({
+            title: '请填写完整',
+            icon: 'error'
+          })
+      }
+    }
+    let res = await reply(form)
+    if(res.code == 200) {
+      wx.showToast({
+        title: '提交成功',
+      })
+      setTimeout(_=>{
+        wx.navigateBack({
+          delta: 1,
+        })
+      },500)
+    }else{
+      wx.showToast({
+        title: res.msg,
+        icon:'error'
+      })
+    }
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.setData({
+      id: options.id
+    })
+    this.getDetail(options.id)
   },
 
   /**
@@ -49,7 +128,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    
   },
 
   /**

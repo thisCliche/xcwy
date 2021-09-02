@@ -1,4 +1,5 @@
 // pages/person/meetBook/meetBook.js
+import {record} from '../../../../api/meeting'
 Page({
 
   /**
@@ -6,10 +7,17 @@ Page({
    */
   data: {
     list:[{name:'',pass:true},{name:'',pass:false}]
+    // list:[]
   },
-  toDetail(){
+  toDetail(e){
     wx.navigateTo({
-      url: '/pages/person/meetBook/meetBookDetail/meetBookDetail',
+      url: `/pages/person/meetBook/meetBookDetail/meetBookDetail?id=${e.currentTarget.dataset.id}`,
+    })
+  },
+  async getRecord(){
+    let res = await record({token:wx.getStorageSync('token'),page:1,limit:100})
+    this.setData({
+      list: res.data.list
     })
   },
   /**
@@ -30,7 +38,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.getRecord()
   },
 
   /**

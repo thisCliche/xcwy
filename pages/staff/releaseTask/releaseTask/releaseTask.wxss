@@ -23,6 +23,7 @@
 .pepople image{
   width: 62rpx;
   height: 62rpx;
+  border-radius: 50%;
 }
 .colStyle{
   margin-top: 10rpx;

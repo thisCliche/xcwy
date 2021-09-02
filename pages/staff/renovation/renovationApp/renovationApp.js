@@ -1,46 +1,39 @@
 // pages/person/vista/vistaList/vistaList.js
+import {list} from '../../../../api/build'
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    isLoad: false,
     current: 0,
     active: 0,
-    list: [{
-      title: `王佳佳提交的装修申请`,
-      time:'05-16 18:36',
-      estimateTime: '装修时间：2021.06.06 至 2021.07.07',
-      des: `城隍庙文化馆-老城保护中心-信息楼-1011栋-105室`,
-      status:'待审核'
-    }, {
-      title: `王佳佳提交的装修申请`,
-      time:'05-16 18:36',
-      estimateTime: '装修时间：2021.06.06 至 2021.07.07',
-      des: `城隍庙文化馆-老城保护中心-信息楼-1011栋-105室`,
-      status:'待审核'
-    }],
-    list2: [{
-      title: `日常巡查`,
-      estimateTime: '昨天 星期三',
-      des: '小区安全日常巡查',
-      content:'1.详情内容 1.详情内容 1.详情内容',
-      color:'#CECECE'
-    }, {
-      title: `日常巡查`,
-      estimateTime: '昨天 星期三',
-      des: '小区安全日常巡查',
-      color:'#32CC85'
-    },]
+    queryInfo:{
+      page:1,
+      limit:10
+    },
+    list: [],
+  },
+  async getList(){
+    this.setData({
+      isLoad: true
+    })
+    let res = await list({...this.data.queryInfo,token:wx.getStorageSync('token'),status:++this.data.current})
+    this.setData({
+      list: res.data.list,
+      isLoad: false
+    })
   },
   onClick(e) {
     this.setData({
       current: e.detail.name
     })
+    this.getList()
   },
-  toDetail() {
+  toDetail(e) {
     wx.navigateTo({
-      url: '/pages/staff/renovation/renovationHandle/renovationHandle',
+      url: `/pages/staff/renovation/renovationHandle/renovationHandle?id=${e.currentTarget.dataset.id}`,
     })
   },
   /**
@@ -61,7 +54,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.getList()
   },
 
   /**

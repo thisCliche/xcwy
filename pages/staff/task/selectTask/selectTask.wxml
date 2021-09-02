@@ -1,0 +1,6 @@
+<!--pages/staff/task/selectTask/selectTask.wxml-->
+<view class="selectTask">
+  <view class="card mt20 info" wx:for="{{list}}" wx:key="index">
+    <van-checkbox value="{{ checked }}" bind:change="onChange">{{item.title}}</van-checkbox>
+  </view>
+</view>

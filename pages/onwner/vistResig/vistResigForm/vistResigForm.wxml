@@ -1,9 +1,9 @@
 <!--pages/onwner/vistResig/vistResig.wxml-->
 <view class="vistResig">
-  <view class="card info">
-    <view>城隍庙文化馆-老城保护中心-信息楼-1011栋-105室</view>
-    <view class="mt20">王佳佳 187****5264</view>
-  </view>
+  <!-- <view class="card info">
+    <view>{{info.project_name}}{{info.area_name}}{{info.block_name}}{{info.house_name}}</view>
+    <view class="mt20">{{info.name}} {{info.mobile}}</view>
+  </view> -->
   <view class="card mt20">
     <van-cell-group>
       <van-cell required title="开始时间" value="{{ time }}" bind:click="onDisplay" data-type="calendarShow"
@@ -21,14 +21,14 @@
       <van-icon name="plus" color="#FF942C" />
     </view>
   </view>
-  <block wx:for="{{pepople}}">
-    <view class="card mt20" wx:key="index">
+  <block wx:for="{{pepople}}" wx:key="index">
+    <view class="card mt20">
       <van-cell-group>
-        <van-field border="{{ false }}" required value="{{ pepople.yyr }}" label="预约人" placeholder="请输入"
+        <van-field border="{{ false }}" data-index="{{index}}" data-name="name" bind:input="bindInput" value="{{ pepople[index].name }}" required label="预约人" placeholder="请输入"
           input-align="right" />
-        <van-field border="{{ false }}" required value="{{ pepople.lxdh }}" type="number" label="联系电话" placeholder="请输入"
+        <van-field border="{{ false }}" required data-index="{{index}}" data-name="mobile" bind:input="bindInput" value="{{ pepople[index].mobile }}" type="number" label="联系电话" placeholder="请输入"
           input-align="right" />
-        <van-field border="{{ false }}" required value="{{ pepople.sfzh }}" type="number" label="身份证" placeholder="请输入"
+        <van-field border="{{ false }}" required data-index="{{index}}" data-name="id_card" bind:input="bindInput" value="{{ pepople[index].id_card }}" type="number" label="身份证" placeholder="请输入"
           input-align="right" />
       </van-cell-group>
     </view>
@@ -93,6 +93,6 @@
     </view>
   </view>
   <view class="btn">
-    <van-button type="info" block bindtap="toNext">预约</van-button>
+    <van-button type="info" block bindtap="submit">预约</van-button>
   </view>
 </view>

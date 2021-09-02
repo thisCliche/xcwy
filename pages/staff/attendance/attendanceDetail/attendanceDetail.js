@@ -1,13 +1,62 @@
 // pages/staff/attendance/attendanceDetail/attendanceDetail.js
+import {
+  statistics
+} from '../../../../api/attendance'
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    hyShow: false,
+    currentDate: new Date().getTime(),
+    maxDate: new Date().getTime(),
+    year: '',
+    month: '',
+    info:{}
   },
-
+  cancel() {
+    this.setData({
+      hyShow: false
+    })
+  },
+  async getDetail(month) {
+    if (this.data.year == '') {
+      let data = new Date()
+      let month = (data.getMonth() + 1 + '').padStart(2, '0')
+      let year = data.getFullYear()
+      this.setData({
+        month,
+        year
+      })
+      let res = await statistics({token:wx.getStorageSync('token'),month:`${year}-${month}`})
+      this.setData({
+        info:res.data
+      })
+    }else{
+      let res = await statistics({token:wx.getStorageSync('token'),month})
+      this.setData({
+        info:res.data
+      })
+    }
+  },
+  onInput(event) {
+    let data = new Date(event.detail)
+    let month = (data.getMonth() + 1 + '').padStart(2, '0')
+    let year = data.getFullYear()
+    this.getDetail(`${year}-${month}`)
+    this.setData({
+      month,
+      year,
+      currentDate: event.detail,
+      hyShow: false
+    });
+  },
+  openBox() {
+    this.setData({
+      hyShow: true
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -26,7 +75,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.getDetail()
   },
 
   /**

@@ -1,0 +1,11 @@
+/* pages/staff/renovation/reject/reject.wxss */
+.reject{
+  padding: 30rpx 20rpx;
+}
+.btn{
+  margin-top: 82rpx;
+
+}
+.van-button{
+  width: 90% !important;
+}

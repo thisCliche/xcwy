@@ -1,62 +1,87 @@
 // pages/person/person.js
-Page({
+const filter = require('../../../utils/router.js');
+const app = getApp()
+import {myProfile} from '../../../api/login.js'
+Page(filter.loginCheck({
 
   /**
    * 页面的初始数据
    */
   data: {
     type: true,
+    isStaff: '访客',
+    // isStaff: '业主',
+    // isStaff: '员工',
+    userInfo:{},
+    deFualtHttp:app.globalData.rootHttp,
     menu1:[{
       name:'个人资料',
-      icon:'/static/images/menu11.png',
+      icon:app.globalData.rootHttp+'/mini/images/menu11.png',
       page:'/pages/person/personInfo/personInfo'
     },{
       name:'我的访客',
-      icon:'/static/images/menu12.png',
+      icon:app.globalData.rootHttp+'/mini/images/menu12.png',
       page:'/pages/person/vista/vistaList/vistaList'
     },{
       name:'我是业主',
-      icon:'/static/images/menu13.png',
+      icon:app.globalData.rootHttp+'/mini/images/menu13.png',
       page:'/pages/person/attestation/attestation'
     },{
       name:'设置',
-      icon:'/static/images/menu14.png',
+      icon:app.globalData.rootHttp+'/mini/images/menu14.png',
       page:'/pages/staff/set/set'
     }],
     menu2:[{
       name:'报修记录',
-      icon:'/static/images/menu15.png',
+      icon:app.globalData.rootHttp+'/mini/images/menu15.png',
       page:'/pages/person/repair/orderList/orderList'
     },{
       name:'投诉记录',
-      icon:'/static/images/menu16.png',
+      icon:app.globalData.rootHttp+'/mini/images/menu16.png',
       page:'/pages/person/complaint/complaintList/complaintList'
     },{
       name:'装修申请记录',
-      icon:'/static/images/menu17.png',
+      icon:app.globalData.rootHttp+'/mini/images/menu17.png',
       page:'/pages/person/renovation/renovationList/renovationList'
     },{
       name:'会议室预约记录',
-      icon:'/static/images/menu18.png',
+      icon:app.globalData.rootHttp+'/mini/images/menu18.png',
       page:'/pages/person/meetBook/meetBookList/meetBookList',
     },],
     menu3:[{
       name:'个人资料',
-      icon:'/static/images/menu19.png',
+      icon:app.globalData.rootHttp+'/mini/images/menu19.png',
       page:'/pages/person/personInfo/personInfo'
     },{
       name:'报修记录',
-      icon:'/static/images/menu20.png',
+      icon:app.globalData.rootHttp+'/mini/images/menu20.png',
       page:'/pages/person/repair/orderList/orderList'
     },{
       name:'设置',
-      icon:'/static/images/menu21.png',
+      icon:app.globalData.rootHttp+'/mini/images/menu21.png',
       page:'/pages/staff/set/set'
     },]
   },
+  toTz(){
+    wx.navigateTo({
+      url: '/pages/person/complaint/message/message',
+    })
+  },
   toDetail(e){
+    if(e.currentTarget.dataset.page == '/pages/person/attestation/attestation'){
+      wx.navigateTo({
+        url: `/pages/person/attestation/attestation?id=${this.data.userInfo.identity}`,
+      })
+    }
     wx.navigateTo({
       url: e.currentTarget.dataset.page,
+    })
+  },
+  async getUserInfo(){
+    let res = await myProfile({token:wx.getStorageSync('token')})
+    this.setData({
+      userInfo: res.data,
+      isStaff:res.data.identity
     })
   },
   /**
@@ -78,6 +103,15 @@ Page({
    */
   onShow: function () {
     this.getTabBar().init();
+    if(!wx.getStorageSync('token')){
+      wx.navigateTo({
+        url: '/pages/login/login',
+      })
+    }
+    this.getUserInfo()
+    // this.setData({
+    //   userInfo:JSON.parse(wx.getStorageSync('userInfo'))
+    // })
   },
 
   /**
@@ -114,4 +148,4 @@ Page({
   onShareAppMessage: function () {
 
   }
-})
+}))

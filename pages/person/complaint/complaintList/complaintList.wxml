@@ -1,9 +1,9 @@
 <!--pages/person/complaint/complaintList/complaintList.wxml-->
 <view class="complaintList">
-  <view class="card item mt20" bindtap="toDetail">
-    <view class="title">文化馆工作人员服务态度差</view>
-    <view class="time">2021-01-06</view>
-    <view class="float">
+  <view class="card item mt20" data-id="{{item.id}}" wx:for="{{list}}" wx:key="index" bindtap="toDetail">
+    <view class="title">{{item.title}}</view>
+    <view class="time">{{item.add_time}}</view>
+    <view class="float" wx:if="{{item.reply != ''}}">
       <image src="/static/images/yhf.png"></image>
     </view>
   </view>

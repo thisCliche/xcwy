@@ -1,9 +1,14 @@
 <!--pages/staff/attendance/attendanceWrap/attendanceWrap.wxml-->
 <view class="attendanceWrap">
+  <van-overlay show="{{ show }}">
+    <view class="loading">
+      <van-loading />
+    </view>
+  </van-overlay>
   <view class="card info" bindtap="toDetail">
     <view class="infoL">
-      <image src="/static/images/defaultAvatar.png"></image>
-      <view>王佳佳</view>
+      <image src="{{info.avatar}}"></image>
+      <view>{{info.name}}</view>
     </view>
     <view class="infoR">
       <view class="des">查看考勤</view>
@@ -13,32 +18,41 @@
   <view class="card mt20 attendance">
     <view class="attendanceList">
       <view class="attendanceItem mt20">
-        <view>上班时间 09:00</view>
-        <view class="status mt10">09:06 已打卡 <van-tag plain round color="#FFA477">迟到</van-tag>
-        </view>
+        <view>上班时间 {{info.begin_time2}}</view>
+          <view class="status mt10">{{attendaceInfo.firstStart}} 
+          <!-- <van-tag plain round color="#FFA477">迟到</van-tag> -->
+          </view>
       </view>
       <view class="attendanceItem mt20">
-        <view>上班时间 09:00</view>
-        <view class="status mt10">09:06 已打卡 <van-tag plain round color="#FFA477">迟到</van-tag>
-        </view>
+        <view>上班时间 {{info.end_time2}}</view>
+          <view class="status mt10">{{attendaceInfo.firstEnd}} 
+          <!-- <van-tag plain round color="#FFA477">迟到</van-tag> -->
+          </view>
       </view>
-      <view class="attendanceItem mt20">
-        <view>上班时间 09:00</view>
-        <view class="status mt10">09:06 已打卡 <van-tag plain round color="#FFA477">迟到</van-tag>
+      <block wx:if="{{info.begin_time2 != ''}}">
+        <view class="attendanceItem mt20">
+          <view>上班时间 {{info.begin_time2}}</view>
+          <view class="status mt10">{{attendaceInfo.secondStart}} 
+          <!-- <van-tag plain round color="#FFA477">迟到</van-tag> -->
+          </view>
         </view>
-      </view>
-      <view class="attendanceItem mt20">
-        <view>上班时间 09:00</view>
-        <view class="status mt10">09:06 已打卡 <van-tag plain round color="#FFA477">迟到</van-tag>
+        <view class="attendanceItem mt20">
+          <view>上班时间 {{info.end_time2}}</view>
+          <view class="status mt10">{{attendaceInfo.secondEnd}} 
+          <!-- <van-tag plain round color="#FFA477">迟到</van-tag> -->
+          </view>
         </view>
-      </view>
+      </block>
     </view>
-    <view class="btnWrap">
-      <view class="attendanceBtn">
-        <view class="afterWork">下班打卡</view>
-        <view class="afterTime mt10">12:36:26</view>
+    <view class="btnWrap" bindtap="cheackIn">
+      <view class="attendanceBtn {{isRange?'attendanceBtnEn':'attendanceBtnDe'}}">
+        <view class="afterWork" wx:if="{{!isRange}}">外勤打卡</view>
+        <view class="afterWork" wx:else>打卡</view>
+        <view class="afterTime mt10">{{time}}</view>
       </view>
-      <view class="attendanceBtnDes mt30">已进入考勤范围</view>
+      <view class="attendanceBtnDes mt30" wx:if="{{isRange}}">已进入考勤范围</view>
+      <view class="attendanceBtnUp mt30" bindtap="getLocation">更新位置</view>
     </view>
+    <view>{{location}}</view>
   </view>
 </view>

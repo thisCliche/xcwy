@@ -6,10 +6,10 @@
         状态
       </view>
       <view class="cellR">
-        待维修
+        {{info.status_text}}
       </view>
     </view>
-    <view class="cell">
+    <view class="cell" wx:if="{{info.time_out == 1}}">
       <view class="cellL">
         预警提醒
       </view>
@@ -20,13 +20,13 @@
   <view class="card info mt20">
     <view class="cardT">报修项目</view>
     <view class="cardD">
-      文化馆——老城保护中心
+      {{info.project_name}}
     </view>
   </view>
   <view class="card info mt20">
     <view class="cardT">详细地址</view>
     <view class="cardD">
-      城隍庙甲子殿2楼
+      {{info.address}}
     </view>
   </view>
   <view class="card mt20">
@@ -35,7 +35,7 @@
         报修人
       </view>
       <view class="cellR">
-        杨正
+        {{info.name}}
       </view>
     </view>
     <view class="cell">
@@ -43,7 +43,7 @@
         报修电话
       </view>
       <view class="cellR">
-        13654236843
+        {{info.mobile}}
       </view>
     </view>
   </view>
@@ -51,7 +51,7 @@
     <image src="/static/images/bg.png" class="titleBg"></image> 报修内容
   </view>
   <view class="card mt20 info repairContent">
-    物品损坏物品损坏物品损坏物品损坏
+    {{info.content}}
   </view>
   <view class="title mt30">
     <image src="/static/images/bg.png" class="titleBg"></image> 报修图片
@@ -159,5 +159,14 @@
         </item>
       </view>
     </view>
+  </view>
+  <view class="btn">
+    <van-button type="info" block bind:click="agree">接单</van-button>
+  </view>
+  <view class="btn mt20">
+    <van-button type="info" block bind:click="toDone">维修结论</van-button>
+  </view>
+  <view class="btn mt20">
+    <van-button type="info" block bind:click="confirme">确认完成</van-button>
   </view>
 </view>

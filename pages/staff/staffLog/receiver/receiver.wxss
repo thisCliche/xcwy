@@ -13,7 +13,7 @@
   border-radius: 10rpx;
 }
 .contactWrap{
-  padding: 30rpx 20rpx;
+  padding: 30rpx 20rpx 240rpx;
 }
 .info{
   padding: 20rpx 28rpx;
@@ -64,6 +64,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 28rpx;
+  background: #fff;
 }
 .confirm .van-button{
   width: 200rpx !important;

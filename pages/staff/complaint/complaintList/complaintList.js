@@ -1,4 +1,5 @@
 // pages/person/vista/vistaList/vistaList.js
+import {handleList} from '../../../../api/Feedback'
 Page({
 
   /**
@@ -7,16 +8,27 @@ Page({
   data: {
     current:0,
     active:0,
-    list:[{title:`投诉标题`,estimateTime:'到访时间：2021-06-07',des:'到访人数：1人',time:'2021-06-01'},{title:`投诉标题`,estimateTime:'到访时间：2021-06-07',des:'到访人数：1人',time:'2021-06-01'}]
+    queryInfo:{
+      page: 1,
+      num: 10,
+    },
+    list:[]
+  },
+  async getList(){
+    let res = await handleList({token:wx.getStorageSync('token'),status:this.data.current,...this.data.queryInfo})
+    this.setData({
+      list: res.data
+    })
   },
   onClick(e){
     this.setData({
       current:e.detail.name
     })
+    this.getList()
   },
-  toDetail(){
+  toDetail(e){
     wx.navigateTo({
-      url: '/pages/staff/complaint/complaintDetail/complaintDetail',
+      url: `/pages/staff/complaint/complaintDetail/complaintDetail?id=${e.currentTarget.dataset.id}`,
     })
   },
   /**
@@ -37,7 +49,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.getList()
   },
 
   /**

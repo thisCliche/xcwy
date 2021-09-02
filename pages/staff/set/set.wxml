@@ -2,12 +2,12 @@
 <view class="set">
   <view class="card">
     <van-cell-group>
-      <van-cell title="隐私协议" border="{{ false }}" is-link/>
-      <van-cell title="注册协议" border="{{ false }}" is-link/>
-      <van-cell title="关于我们" border="{{ false }}" is-link/>
+      <van-cell data-page="/pages/onwner/agreement/agreement?field=4" bind:click="toDetial" title="隐私协议" border="{{ false }}" is-link/>
+      <van-cell data-page="/pages/onwner/agreement/agreement?field=3" bind:click="toDetial" title="注册协议" border="{{ false }}" is-link/>
+      <!-- <van-cell data-page="/pages/person/modifyNick/modifyNick?field=" bind:click="toDetial" title="关于我们" border="{{ false }}" is-link/> -->
     </van-cell-group>
   </view>
   <view class="btn">
-    <van-button type="info" block>退出登录</van-button>
+    <van-button type="info" bind:click="loginOut" block>退出登录</van-button>
   </view>
 </view>

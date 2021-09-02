@@ -1,22 +1,49 @@
 // pages/contact/contactMain/contactMain.js
+import {
+  contact,
+  branch
+} from '../../../api/contact'
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    list: [],
+    branchName: '',
+    staffList: [],
   },
-  toDetail(){
+  toDetail() {
     wx.navigateTo({
       url: '/pages/contact/contactSearch/contactSearch',
+    })
+  },
+  async getList() {
+    let res = await branch({
+      token: wx.getStorageSync('token')
+    })
+    this.setData({
+      list: res.data
+    })
+  },
+  async staffList(e) {
+    this.setData({
+      branchName: e.currentTarget.dataset.name
+    })
+    let res = await contact({
+      token: wx.getStorageSync('token'),
+      branch_id: e.currentTarget.dataset.branch_id
+    })
+    this.setData({
+      staffList: res.data
     })
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.getList()
+    // this.staffList()
   },
 
   /**

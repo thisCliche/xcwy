@@ -1,10 +1,12 @@
 // pages/onwner/vistResig/vistResig.js
+import {appointmentDetail} from '../../../../api/booking'
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    id:'',
     time:'2021-7-06',
     renyuan:'3',
     calendarShow:false,
@@ -32,10 +34,11 @@ Page({
     carnum: [],
     showNewPower: false,
     KeyboardState: false,
+    info:{}
   },
   toDetail(){
     wx.navigateTo({
-      url: '/pages/onwner/order/qrCode/qrCode',
+      url: `/pages/onwner/order/qrCode/qrCode?id=${this.data.id}`,
     })
   },
   onChange({ detail }) {
@@ -65,7 +68,8 @@ Page({
   },
   formatDate(date) {
     date = new Date(date);
-    return `${date.getMonth() + 1}/${date.getDate()}`;
+    const m = (date.getMonth() + 1 + '').padStart(2, '0')
+    return `${date.getFullYear()}-${m}-${date.getDate()}`;
   },
   onConfirm(event) {
     this.setData({
@@ -114,11 +118,20 @@ submitNumber() {
     // 跳转到tabbar页面
   }
 },
+async getDetail(id){
+  let res = await appointmentDetail({id,token:wx.getStorageSync('token')})
+  this.setData({
+    info:res.data
+  })
+},
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.getDetail(options.id)
+    this.setData({
+      id:options.id
+    })
   },
 
   /**

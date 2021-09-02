@@ -1,18 +1,32 @@
 // pages/onwner/payment/payPage/payPage.js
+import {fee_carRecord,fee_carDetail} from '../../../../api/info'
+const app = getApp()
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    car_no:'',
+    deFualtHttp:app.globalData.rootHttp,
   },
-
+  async getList(no){
+    let res = await fee_carRecord({car_no:no,token:wx.getStorageSync('token')})
+    console.log(res)
+  },
+  async getDetail(no){
+    let res = await fee_carDetail({car_no:no,token:wx.getStorageSync('token')}) 
+    console.log(res)
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.setData({
+      car_no:options.no
+    })
+    this.getList(options.no)
+    this.getDetail(options.no)
   },
 
   /**

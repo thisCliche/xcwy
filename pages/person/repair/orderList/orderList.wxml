@@ -1,20 +1,25 @@
 <!--pages/onwner/order/orderList/orderList.wxml-->
 <view class="orderList">
-  <van-tabs active="{{ active }}" color="#FFA477">
-    <van-tab title="待维修">
-      <view class="card">
-        <view class="item" wx:for="{{list}}" wx:key="index" bindtap="toDetail">
+  <van-overlay show="{{ isLoad }}" z-index="99">
+    <view class="loading">
+      <van-loading />
+    </view>
+  </van-overlay>
+  <van-tabs active="{{ active }}" color="#FFA477" bind:click="onClick">
+    <van-tab title="待维修" title-style="{{current == 0?'font-weight:700;':''}}">
+      <view class="card" wx:if="{{!list.length == 0}}">
+        <view class="item" wx:for="{{list}}" wx:key="index" data-id="{{item.id}}" bindtap="toDetail">
           <view class="itemTop">
             <view class="itemL">
-              {{item.title}}
+              {{item.name}}
             </view>
             <view class="itemR">
-              {{item.time}}
+              {{item.add_time}}
             </view>
           </view>
           <view class="des">
             <view class="desL">
-              {{item.des}}
+              {{item.address}}
             </view>
             <view class="desR">
               {{item.charge}}
@@ -22,9 +27,84 @@
           </view>
         </view>
       </view>
+      <view class="card" wx:else>
+        <van-empty description="暂无内容" />
+      </view>
     </van-tab>
-    <van-tab title="已接单">内容 2</van-tab>
-    <van-tab title="已维修">内容 3</van-tab>
-    <van-tab title="已完成">内容 4</van-tab>
+    <van-tab title="已接单" title-style="{{current == 1?'font-weight:700;':''}}">
+      <view class="card" wx:if="{{!list.length == 0}}">
+        <view class="item" wx:for="{{list}}" wx:key="index" data-id="{{item.id}}" bindtap="toDetail">
+          <view class="itemTop">
+            <view class="itemL">
+              {{item.name}}
+            </view>
+            <view class="itemR">
+              {{item.add_time}}
+            </view>
+          </view>
+          <view class="des">
+            <view class="desL">
+              {{item.address}}
+            </view>
+            <view class="desR">
+              {{item.charge}}
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="card" wx:else>
+        <van-empty description="暂无内容" />
+      </view>
+    </van-tab>
+    <van-tab title="已维修" title-style="{{current == 2?'font-weight:700;':''}}">
+      <view class="card" wx:if="{{!list.length == 0}}">
+        <view class="item" wx:for="{{list}}" wx:key="index" data-id="{{item.id}}" bindtap="toDetail">
+          <view class="itemTop">
+            <view class="itemL">
+              {{item.name}}
+            </view>
+            <view class="itemR">
+              {{item.add_time}}
+            </view>
+          </view>
+          <view class="des">
+            <view class="desL">
+              {{item.address}}
+            </view>
+            <view class="desR">
+              {{item.charge}}
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="card" wx:else>
+        <van-empty description="暂无内容" />
+      </view>
+    </van-tab>
+    <van-tab title="已完成" title-style="{{current == 3?'font-weight:700;':''}}">
+      <view class="card" wx:if="{{!list.length == 0}}">
+        <view class="item" wx:for="{{list}}" wx:key="index" data-id="{{item.id}}" bindtap="toDetail">
+          <view class="itemTop">
+            <view class="itemL">
+              {{item.name}}
+            </view>
+            <view class="itemR">
+              {{item.add_time}}
+            </view>
+          </view>
+          <view class="des">
+            <view class="desL">
+              {{item.address}}
+            </view>
+            <view class="desR">
+              {{item.charge}}
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="card" wx:else>
+        <van-empty description="暂无内容" />
+      </view>
+    </van-tab>
   </van-tabs>
 </view>

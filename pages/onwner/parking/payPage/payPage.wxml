@@ -1,7 +1,7 @@
 <!--pages/onwner/payment/payPage/payPage.wxml-->
 <view class="payPage">
   <view class="card info">
-    <view class="title"><image src="/static/images/car.png"></image> 皖AK4532</view>
+    <view class="title"><image src="{{deFualtHttp}}/mini/images/car.png"></image> {{car_no}}</view>
     <view class="des">
       城隍庙文化馆-老城保护中心-信息楼-10***105室
     </view>

@@ -1,43 +1,81 @@
 // pages/onwner/repair/repair.js
+import {done} from '../../../../api/repair'
+let app = getApp()
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    location: '',
-    bxr: '',
-    bxdh: '',
+    siteHttp: app.globalData.siteHttp,
+    rootHttp: app.globalData.rootHttp,
     height:{minHeight: 80},
-    xm:'请选择报修项目',
-    bxnr: '',
-    fileList: [{
-      url: 'https://img.yzcdn.cn/vant/leaf.jpg',
-      name: '图片1',
-    }],
+    note: '',
+    fileList: [],
+    id:''
+  },
+  async submit() {
+    let form = {
+      token: wx.getStorageSync('token'),
+      id: this.data.id,
+      note: this.data.note,
+      images: JSON.stringify(this.data.fileList),
+    }
+    for (let i in form) {
+      if (form[i] == '') {
+        return wx.showToast({
+          title: '请填写完整',
+          icon: 'error'
+        })
+      }
+    }
+    let res = await done(form)
+    if (res.code == 200) {
+      wx.showToast({
+        title: '提交成功',
+      })
+      setTimeout(_ => {
+        wx.navigateBack({
+          delta: 2,
+        })
+      }, 500)
+    } else {
+      wx.showToast({
+        title: res.msg,
+        icon: 'error'
+      })
+    }
+  },
+  deleteImg(event) {
+    let fileList = this.data.fileList
+    fileList.splice(event.detail.index, 1)
+    this.setData({
+      fileList
+    })
   },
   afterRead(event) {
     const {
       file
     } = event.detail;
-    // 当设置 mutiple 为 true 时, file 为数组格式，否则为对象格式
+    let that = this
     wx.uploadFile({
-      url: 'https://example.weixin.qq.com/upload', // 仅为示例，非真实的接口地址
+      url: that.data.rootHttp + '/api.php/app/upload',
       filePath: file.url,
       name: 'file',
-      formData: {
-        user: 'test'
+      header: {
+        "Authorization": "Basic enhrajp6eGtqNjY4OA=="
       },
       success(res) {
+        let img = JSON.parse(res.data)
         // 上传完成需要更新 fileList
         const {
           fileList = []
-        } = this.data;
+        } = that.data;
         fileList.push({
-          ...file,
-          url: res.data
+          // ...file,
+          url: app.globalData.rootHttp + img.data
         });
-        this.setData({
+        that.setData({
           fileList
         });
       },
@@ -47,7 +85,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.setData({
+      id: options.id
+    })
   },
 
   /**

@@ -4,7 +4,7 @@
   <view class="card mt20 info">
     <van-cell-group>
       <van-cell required title="申请采购" border="{{ false }}"></van-cell>
-      <van-field value="{{ interval }}" placeholder="请输入采购内容" border="{{ false }}" type="textarea"
+      <van-field model:value="{{ reason }}" placeholder="请输入采购内容" border="{{ false }}" type="textarea"
         autosize="{{minheight}}" />
     </van-cell-group>
   </view>
@@ -13,16 +13,19 @@
   </view>
   <view class="card mt20 image">
     <van-cell-group border="{{ false }}">
-      <van-uploader deletable file-list="{{ fileList }}" bind:after-read="afterRead" />
+      <van-uploader bind:delete="deleteImg" deletable="{{ true }}" file-list="{{ fileList }}" bind:after-read="afterRead" />
     </van-cell-group>
   </view>
   <view class="title mt30">
     <image src="/static/images/bg.png" class="titleBg"></image> 附件
   </view>
   <view class="card mt20 upfaile">
-    <van-uploader>
-      <van-button size="small" icon="photo" type="primary">上传文件</van-button>
+    <van-uploader accept="file" bind:after-read="afterUpFile">
+      <van-button size="small" icon="photo" type="info">上传文件</van-button>
     </van-uploader>
+    <view class="fileList2">
+      <view class="fileItem" wx:for="{{fileList2}}" wx:key="index">{{item.name}} <text class="fileItemFormat">{{item.format}}</text></view>
+    </view>
   </view>
   <view class="title mt30">
     <image src="/static/images/bg.png" class="titleBg"></image> 审批
@@ -48,7 +51,7 @@
     </view>
   </view>
   <view class="btn">
-    <van-button type="info" block bindtap="toNext">提交</van-button>
+    <van-button type="info" block bind:click="submit">提交</van-button>
   </view>
   <van-popup show="{{ hyShow }}" position="bottom" custom-style="height: 50%;" round data-type="hyShow"
     bind:close="onClose">

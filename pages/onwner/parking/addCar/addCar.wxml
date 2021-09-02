@@ -25,7 +25,7 @@
     </view>
   <view class="des"><text class="red">*</text>停车缴费仅支持已在物业前台登记的车辆如您未登记，请先前往物业前台办理</view>
   <view class="btn">
-    <van-button type="info" block>确定</van-button>
+    <van-button bind:click="submitNumber" type="info" block>确定</van-button>
   </view>
   <view class="keyboard" hidden='{{!KeyboardState}}'>
     <view class="keyboardClose">

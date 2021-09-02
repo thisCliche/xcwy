@@ -1,18 +1,24 @@
 // pages/onwner/news/newsDetail/newsDetail.js
+import {detail} from '../../../../api/info'
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    info: {},
   },
-
+  async getDetail(id){
+    let res= await detail({id})
+    this.setData({
+      info: res.data
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.getDetail(options.id)
   },
 
   /**

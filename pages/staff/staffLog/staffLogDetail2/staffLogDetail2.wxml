@@ -6,17 +6,17 @@
         <image src="/static/images/defaultAvatar.png"></image>
       </view>
       <view>
-        <view class="name">王珂的日志</view>
-        <view class="time">05-16 18:16</view>
+        <view class="name">{{info.name}}的日志</view>
+        <view class="time">{{info.add_time}}</view>
       </view>
     </view>
     <view class="itemR" bindtap="openBox">
       <van-icon name="ellipsis" size="24px" />
     </view>
   </view>
-  <block>
+  <!-- <block>
     <view class="reportTime">
-      2021-06-05
+      {{info.add_time}}
     </view>
     <view class="card info">
       <view class="cardT">
@@ -29,42 +29,13 @@
         3.巡查详情老城保护中心巡查详情
       </view>
     </view>
-  </block>
-  <block>
-    <view class="reportTime">
-      2021-06-05
-    </view>
-    <view class="card info">
-      <view class="cardT">
-        今日工作内容
-      </view>
-      <view class="cardD">
-        1.巡查详情老城保护中心巡查详情老城保护中
-        心巡查详情老城保护中心巡查
-        2.巡查详情老城保护中心巡查详情老城保护中心
-        3.巡查详情老城保护中心巡查详情
-      </view>
-      <view class="workImg">
-        <van-row>
-          <van-col span="6">
-            <image src="{{siteHttp}}/140x140"></image>
-          </van-col>
-          <van-col span="6">
-            <image src="{{siteHttp}}/140x140"></image>
-          </van-col>
-        </van-row>
-      </view>
-    </view>
-  </block>
+  </block> -->
   <view class="card mt20 info">
     <view class="cardT">
       工作内容
     </view>
     <view class="cardD">
-      1.巡查详情老城保护中心巡查详情老城保护中
-      心巡查详情老城保护中心巡查
-      2.巡查详情老城保护中心巡查详情老城保护中心
-      3.巡查详情老城保护中心巡查详情
+      {{info.content.tasks}}
     </view>
   </view>
   <view class="card mt20 info">
@@ -72,10 +43,7 @@
       工作总结
     </view>
     <view class="cardD">
-      1.巡查详情老城保护中心巡查详情老城保护中
-      心巡查详情老城保护中心巡查
-      2.巡查详情老城保护中心巡查详情老城保护中心
-      3.巡查详情老城保护中心巡查详情
+      {{info.content.summary}}
     </view>
   </view>
   <view class="card mt20 info">
@@ -83,13 +51,11 @@
       下月工作计划
     </view>
     <view class="cardD">
-      1.巡查详情老城保护中心巡查详情老城保护中
-      心巡查详情老城保护中心巡查
-      2.巡查详情老城保护中心巡查详情老城保护中心
-      3.巡查详情老城保护中心巡查详情
+      {{info.content.plan}}
     </view>
   </view>
-  <view class="title mt30">
+  <block wx:if="{{info.images.length != 0}}">
+    <view class="title mt30">
     <image src="/static/images/bg.png" class="titleBg"></image> 图片
   </view>
   <view class="card workImg photo mt20">
@@ -102,43 +68,44 @@
       </van-col>
     </van-row>
   </view>
-  <view class="card mt20 info">
+  </block>
+  <view class="card mt20 info" wx:if="{{info.remark != ''}}">
     <view class="cardT">
       备注
     </view>
     <view class="cardD">
-      备注内容
+      {{info.remark}}
     </view>
   </view>
-  <view class="mt20">已读：3人</view>
+  <view class="mt20">已读：{{info.read}}人</view>
   <view class="pepople">
     <van-row>
-      <van-col custom-class="colStyle" span="6" wx:for="{{list}}" wx:key="index">
+      <van-col custom-class="colStyle" span="6" wx:for="{{info.report_receiver}}" wx:key="index">
         <view class="card img1">
-          <image src="/static/images/defaultAvatar.png"></image>
-          <view class="name">张扬</view>
+          <image src="{{item.avatar}}"></image>
+          <view class="name van-ellipsis">{{item.name}}</view>
         </view>
       </van-col>
     </van-row>
   </view>
   <view class="mt20 unread">
     <view>未读：3人</view>
-    <view class="unreadBtn">提醒阅读</view>
+    <!-- <view class="unreadBtn">提醒阅读</view> -->
   </view>
   <view class="title mt30">
     <image src="/static/images/bg.png" class="titleBg"></image> 审批意见
   </view>
-  <view class="card mt20 info">
-    <view class="opinionT">
-      <image src="/static/images/defaultAvatar.png"></image>
-      <view class="name">张扬</view>
-      <van-rate readonly value="{{ value }}" color="#ffba00" bind:change="onChange" />
-      <view class="opinoinTime">
-        05-16 18:16
+  <view class="card mt20 info" wx:for="{{info.report_receiver}}" wx:key="index">
+    <view class="opinoinTime">
+        {{item.update_time}}
       </view>
+    <view class="opinionT">
+      <image src="{{item.avatart}}"></image>
+      <view class="name">{{item.name}}</view>
+      <van-rate readonly value="{{item.score}}" color="#ffba00" bind:change="onChange" />
+      
     </view>
-    <view class="cardD">审批意见意见内容审批意见意见内容审批意见
-      意见内容审批意见意见内容</view>
+    <view class="cardD">{{item.comment}}</view>
   </view>
   <view class="btn">
     <van-button bind:click="toApprove" block type="info">月报审批</van-button>

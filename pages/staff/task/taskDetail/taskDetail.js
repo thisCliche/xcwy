@@ -1,18 +1,61 @@
 // pages/staff/task/taskDetail/taskDetail.js
+import {detail} from '../../../../api/task'
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    list:[1,2,3,4,5,6]
+    id:'',
+    list:[1,2,3,4,5,6],
+    info:{}
   },
-
+  async getDetail(id){
+    let res = await detail({token:wx.getStorageSync('token'),id})
+    this.setData({
+      info: res.data
+    })
+  },
+  toReport(){
+    let id = this.data.info.id
+    let type = this.data.info.type
+    let title = this.data.info.title
+    switch (type) {
+      case 1:
+        wx.navigateTo({
+          url: `/pages/staff/releaseTask/releaseDaily/releaseDaily?id=${id}&title=${title}`,
+        })
+        break;
+      case 2:
+        wx.navigateTo({
+          url: `/pages/staff/releaseTask/releaseSafe/releaseSafe?id=${id}&title=${title}&type=2`,
+        })
+        break;
+      case 3:
+        wx.navigateTo({
+          url: `/pages/staff/releaseTask/releaseSafe/releaseSafe?id=${id}&title=${title}&type=3`,
+        })
+        break;
+      case 4:
+        wx.navigateTo({
+          url: `/pages/staff/releaseTask/releaseSafe/releaseSafe?id=${id}&title=${title}&type=4`,
+        })
+        break;
+      default:
+        wx.navigateTo({
+          url: `/pages/staff/releaseTask/releaseSafe/releaseSafe?id=${id}&title=${title}&type=5`,
+        })
+    }    
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    console.log(options)
+    this.setData({
+      getDetail: options.id
+    })
+    this.getDetail(options.id)
   },
 
   /**

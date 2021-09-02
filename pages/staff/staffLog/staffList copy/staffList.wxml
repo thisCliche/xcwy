@@ -1,0 +1,33 @@
+<!--pages/person/vista/vistaList/vistaList.wxml-->
+<view class="vistaList">
+  <van-tabs sticky active="{{ active }}" color="#FFA477" bind:click="onClick">
+    <view slot="nav-right" style="display: flex;align-items: center;width: 142rpx;">
+      <view style="font-size: 32rpx;color: #B7B7B7;margin-right: 6rpx;">|</view>
+      <van-checkbox label-class="staffCheckbox" icon-size="16px" value="{{ checked }}" style="margin-top: 6rpx;">
+        未读
+      </van-checkbox>
+    </view>
+    <van-tab title="全部" title-style="{{current == 0?'font-weight:700;':''}}">
+      <block wx:for="{{list}}" wx:key="index" bindtap="toDetail">
+        <view class="reportTime">昨天 星期二</view>
+        <view class="card report item" bindtap="toDetail">
+          <view class="itemL">
+            <view class="itemImg">
+              <image src="/static/images/defaultAvatar.png"></image>
+            </view>
+            <view>
+              <view class="name">王珂</view>
+              <view class="time">05-16 18:16</view>
+            </view>
+          </view>
+          <view class="des">
+            1.3月16日主要工作内容是完成jinri工作内容是完成jinri工作内容是完成jinri1.3月16日主要工作内容是完成jinri工作内容是完成jinri工作内容是完成jinri1.3月16日主要工</view>
+          <view class="unread">未读</view>
+        </view>
+      </block>
+    </van-tab>
+    <van-tab title="我发出的" title-style="{{current == 1?'font-weight:700;':''}}">内容 2</van-tab>
+    <van-tab title="日报" title-style="{{current == 2?'font-weight:700;':''}}">内容 3</van-tab>
+    <van-tab title="月报" title-style="{{current == 3?'font-weight:700;':''}}">内容 4</van-tab>
+  </van-tabs>
+</view>

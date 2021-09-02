@@ -28,11 +28,11 @@
   <view class="title mt30"><image src="/static/images/bg.png" class="titleBg"></image> 报修图片</view>
   <view class="card mt20 image">
     <van-cell-group border="{{ false }}">
-      <van-uploader deletable file-list="{{ fileList }}" bind:after-read="afterRead" />
+      <van-uploader bind:delete="deleteImg" deletable="{{ true }}" file-list="{{ fileList }}" bind:after-read="afterRead" />
     </van-cell-group>
   </view>
   <view class="btn">
-    <van-button type="info" block>提交</van-button>
+    <van-button bind:click="sumbmit" type="info" block>提交</van-button>
   </view>
   <van-popup show="{{ hyShow }}" position="bottom" custom-style="height: 50%;" round data-type="hyShow"
     bind:close="onClose">

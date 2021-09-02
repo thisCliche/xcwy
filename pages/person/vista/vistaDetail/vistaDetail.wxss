@@ -21,6 +21,11 @@
   display: flex;
   padding: 0 16rpx 20rpx;
 }
+.car_no{
+  letter-spacing: 30rpx;
+  font-size: 40rpx;
+  padding: 0 0 32rpx 32rpx;
+}
 .paletItem{
   width: 32rpx;
   text-align: center;

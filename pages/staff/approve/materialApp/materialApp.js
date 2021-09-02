@@ -1,21 +1,22 @@
 // pages/staff/approve/leaveApp/leaveApp.js
+import {approve_buyAdd} from '../../../../api/approve'
+let app = getApp()
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    rootHttp:app.globalData.rootHttp,
     time1:'请选择',
     time2:'请选择',
-    interval:'',
+    reason:'',
     minheight:{minHeight:80},
     type:'请选择',
     hyShow:false,
     columns: ['病假', '事假', '婚假'],
-    fileList: [{
-      url: 'https://img.yzcdn.cn/vant/leaf.jpg',
-      name: '图片1',
-    }],
+    fileList: [],
+    fileList2: [],
     calendarShow1:false,
     calendarShow2:false,
   },
@@ -33,7 +34,8 @@ Page({
   },
   formatDate(date) {
     date = new Date(date);
-    return `${date.getMonth() + 1}/${date.getDate()}`;
+    const m = (date.getMonth() + 1 + '').padStart(2, '0')
+    return `${date.getFullYear()}-${m}-${date.getDate()}`;
   },
   onConfirm(event) {
     this.setData({
@@ -54,32 +56,102 @@ Page({
         hyShow: false
       })
   },
+  deleteImg(event) {
+    let fileList = this.data.fileList
+    fileList.splice(event.detail.index, 1)
+    this.setData({
+      fileList
+    })
+  },
+  afterUpFile(event){
+    const {
+      file
+    } = event.detail;
+    let that = this
+    wx.uploadFile({
+      url: that.data.rootHttp + '/api.php/app/upload',
+      filePath: file.url,
+      name: 'file',
+      header: {
+        "Authorization": "Basic enhrajp6eGtqNjY4OA=="
+      },
+      success(res) {
+        let img = JSON.parse(res.data)
+        // 上传完成需要更新 fileList
+        const {
+          fileList2 = []
+        } = that.data;
+        fileList2.push({
+          // ...file,
+          name:file.name.split('.')[0],
+          format: '.'+file.name.split('.')[1],
+          url: app.globalData.rootHttp + img.data
+        });
+        that.setData({
+          fileList2
+        });
+      },
+    });
+  },
   afterRead(event) {
     const {
       file
     } = event.detail;
-    // 当设置 mutiple 为 true 时, file 为数组格式，否则为对象格式
+    let that = this
     wx.uploadFile({
-      url: 'https://example.weixin.qq.com/upload', // 仅为示例，非真实的接口地址
+      url: that.data.rootHttp + '/api.php/app/upload',
       filePath: file.url,
       name: 'file',
-      formData: {
-        user: 'test'
+      header: {
+        "Authorization": "Basic enhrajp6eGtqNjY4OA=="
       },
       success(res) {
+        let img = JSON.parse(res.data)
         // 上传完成需要更新 fileList
         const {
           fileList = []
-        } = this.data;
+        } = that.data;
         fileList.push({
-          ...file,
-          url: res.data
+          // ...file,
+          url: app.globalData.rootHttp + img.data
         });
-        this.setData({
+        that.setData({
           fileList
         });
       },
     });
+  },
+  async submit() {
+    let form = {
+      reason: this.data.reason,
+      token: wx.getStorageSync('token'),
+      images: JSON.stringify(this.data.fileList),
+      attachment: JSON.stringify(this.data.fileList2),
+    }
+    for (let i in form) {
+      if (form[i] == '') {
+          return wx.showToast({
+            title: '请填写完整',
+            icon: 'error'
+          })
+      }
+    }
+    let res = await approve_buyAdd(form)
+    if(res.code == 200) {
+      wx.showToast({
+        title: '提交成功',
+      })
+      setTimeout(_=>{
+        wx.navigateBack({
+          delta: 1,
+        })
+      },500)
+    }else{
+      wx.showToast({
+        title: res.msg,
+        icon:'error'
+      })
+    }
   },
   /**
    * 生命周期函数--监听页面加载

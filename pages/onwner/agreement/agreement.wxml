@@ -1,0 +1,4 @@
+<!--pages/onwner/agreement/agreement.wxml-->
+<view class="agreement">
+  {{info}}
+</view>

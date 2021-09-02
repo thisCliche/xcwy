@@ -2,7 +2,7 @@
 <view class="menuWrap mt30">
   <view class="menu mt30" wx:if="staffMenuMy1">
     <view class="title">
-      <image src="/static/images/staff/bg.png"></image> 我的
+      <image src="{{deFualtHttp}}/mini/images/staff/bg.png"></image> 我的
     </view>
     <view class="itemWrap">
       <van-row>
@@ -20,7 +20,7 @@
 
   <view class="menu mt30" wx:if="staffMenutask1">
     <view class="title">
-      <image src="/static/images/staff/bg.png"></image> 任务管理
+      <image src="{{deFualtHttp}}/mini/images/staff/bg.png"></image> 任务管理
     </view>
     <view class="itemWrap">
       <van-row>
@@ -37,7 +37,7 @@
 
   <view class="menu mt30" wx:if="staffMenuwork1">
     <view class="title">
-      <image src="/static/images/staff/bg.png"></image> 工作汇报
+      <image src="{{deFualtHttp}}/mini/images/staff/bg.png"></image> 工作汇报
     </view>
     <view class="itemWrap">
       <van-row>

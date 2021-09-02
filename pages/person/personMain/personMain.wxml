@@ -1,18 +1,45 @@
 <!--pages/person/person.wxml-->
 <view class="personMain">
   <view class="top">
-    <view class="topWrap">
+    <view class="topWrap" wx:if="{{!userInfo.avatar}}">
       <view class="topL">
-        <image class="avatar" src="/static/images/avtar.png"></image>
-        <view class="name">姜霞霞</view>
+        <image class="avatar" src="{{deFualtHttp}}/mini/images/avtar.png"></image>
+        <view class="name">点击登录</view>
       </view>
       <view class="topR" wx:if="{{type}}">
-        <image class="tz" src="/static/images/tz.png"></image>
+        <image class="tz" src="{{deFualtHttp}}/mini/images/tz.png"></image>
+      </view>
+    </view>
+    <view class="topWrap" wx:else>
+      <view class="topL">
+        <image class="avatar" src="{{userInfo.avatar}}"></image>
+        <view class="name">{{userInfo.name}}</view>
+      </view>
+      <view class="topR" wx:if="{{isStaff=='业主'}}" bindtap="toTz">
+        <image class="tz" src="{{deFualtHttp}}/mini/images/tz.png"></image>
       </view>
     </view>
   </view>
   <view class="menuWrap">
-    <view class="type1" wx:if="{{type}}">
+    <view class="type1" wx:if="{{isStaff=='访客'}}">
+      <view class="menu1 card">
+        <view class="item" data-page="{{menu1[2].page}}" bindtap="toDetail">
+          <image src="{{menu1[2].icon}}"></image>
+          <view class="name">{{menu1[2].name}}</view>
+        </view>
+        <view class="item" data-page="{{menu1[3].page}}" bindtap="toDetail">
+          <image src="{{menu1[3].icon}}"></image>
+          <view class="name">{{menu1[3].name}}</view>
+        </view>
+      </view>
+      <!-- <view class="card mt20 menu2" wx:for="{{menu2}}" wx:key="index">
+        <van-cell bind:click="toDetail" data-page="{{item.page}}" title="{{item.name}}" title-class="titleStyle"
+          is-link>
+          <image class="listImg" slot="icon" src="{{item.icon}}" />
+        </van-cell>
+      </view> -->
+    </view>
+    <view class="type1" wx:elif="{{isStaff=='业主'}}">
       <view class="menu1 card">
         <view class="item" wx:for="{{menu1}}" wx:key="index" data-page="{{item.page}}" bindtap="toDetail">
           <image src="{{item.icon}}"></image>

@@ -1,4 +1,5 @@
 // pages/person/vista/vistaDetail/vistaDetail.js
+import {inviteDetail} from '../../../../api/booking'
 Page({
 
   /**
@@ -6,13 +7,20 @@ Page({
    */
   data: {
     checked:true,
+    info:{},
   },
-
+  async getDetail(id){
+    let res = await inviteDetail({id,token:wx.getStorageSync('token')})
+    this.setData({
+      info: res.data
+    })
+    console.log(res)
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.getDetail(options.id)
   },
 
   /**

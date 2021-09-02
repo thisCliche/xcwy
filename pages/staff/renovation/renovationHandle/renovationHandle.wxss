@@ -76,7 +76,7 @@
 .avatar image{
   width: 78rpx;
   height: 78rpx;
-  padding-top: 10rpx;
+  border-radius: 50%;
 }
 .btn{
   margin-top: 96rpx;

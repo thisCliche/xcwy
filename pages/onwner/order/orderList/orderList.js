@@ -1,17 +1,42 @@
 // pages/onwner/order/orderList/orderList.js
-Page({
+const filter = require('../../../../utils/router.js');
+import {appointmentList} from '../../../../api/booking'
+Page(filter.loginCheck({
 
   /**
    * 页面的初始数据
    */
   data: {
+    isLoad: false,
     active: 0,
+    current:0,
+    queryInfo:{
+      page:1,
+      limit:100
+    },
     list:[{title:'文化馆',time:'2021-06-01',des:'老城保护中心'},{title:'文化馆',time:'2021-06-01',des:'老城保护中心'}]
   },
-  toDetail(){
+  toDetail(e){
     wx.navigateTo({
-      url: '/pages/onwner/order/orderDetail/orderDetail',
+      url: `/pages/onwner/order/orderDetail/orderDetail?id=${e.currentTarget.dataset.id}`,
     })
+  },
+  async getList(){
+    this.setData({
+      isLoad: true
+    })
+    let status = this.data.current
+    let res = await appointmentList({token:wx.getStorageSync('token'),...this.data.queryInfo,status:++status})
+    this.setData({
+      list: res.data,
+      isLoad: false,
+    })
+  },
+  onClick(e) {
+    this.setData({
+      current: e.detail.name
+    })
+    this.getList()
   },
   /**
    * 生命周期函数--监听页面加载
@@ -31,7 +56,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.getList()
   },
 
   /**
@@ -68,4 +93,4 @@ Page({
   onShareAppMessage: function () {
 
   }
-})
+}))

@@ -6,11 +6,11 @@
         审核状态
       </view>
       <view class="tR">
-        拒绝
+        {{info.status_text}}
       </view>
     </view>
-    <view class="des">
-      设备损坏，正在维修中，请选择其他会议室，再重新提交申请。
+    <view class="des" wx:if="{{info.reject_reason != ''}}">
+      {{info.reject_reason}}
     </view>
   </view>
   <view class="title mt30">
@@ -18,17 +18,17 @@
   </view>
   <view class="card mt20">
     <van-cell-group border="{{ false }}">
-      <van-cell title="预约单位" value="XX文化局" border="{{ false }}" />
-      <van-cell title="预约人" value="任芳" border="{{ false }}" />
-      <van-cell title="联系电话" value="18726898265" border="{{ false }}" />
-      <van-cell title="预计人数" value="59人" border="{{ false }}" />
-      <van-cell title="使用时间" value="2021.06.06上午-2021.06.07全天" border="{{ false }}" />
-      <van-cell title="会议室" value="306室" border="{{ false }}" />
+      <van-cell wx:if="{{info.type_text == '单位'}}" title="预约单位" value="{{info.unit}}" border="{{ false }}" />
+      <van-cell title="预约人" value="{{info.name}}" border="{{ false }}" />
+      <van-cell title="联系电话" value="{{info.mobile}}" border="{{ false }}" />
+      <van-cell title="预计人数" value="{{info.count}}人" border="{{ false }}" />
+      <van-cell title="使用时间" value="{{info.begin_time}}{{info.begin_type}}-{{info.end_time}}{{info.end_type}}" border="{{ false }}" />
+      <van-cell title="会议室" value="{{info.room.name}}" border="{{ false }}" />
     </van-cell-group>
   </view>
-  <view class="card mt20">
+  <view class="card mt20" wx:if="{{info.content != ''}}">
     <van-cell-group border="{{ false }}">
-      <van-cell title="申请理由" label="第26次党支部会议" border="{{ false }}" />
+      <van-cell title="申请理由" label="{{info.content}}" border="{{ false }}" />
     </van-cell-group>
   </view>
 </view>

@@ -1,20 +1,26 @@
 <!--pages/onwner/parking/vehicle/vehicle.wxml-->
 <view class="vehicle">
-  <view class="item card">
-    <view class="left">
-      <view class="favicon">
-      <image src="/static/images/car.png"></image>
-    </view>
-      <view>
-        <view class="title">物业费</view>
-        <view class="des warning">暂未查询到欠费</view>
+  <view wx:if="{{list.length != 0}}">
+    <view class="item card mt20" wx:for="{{list}}" wx:key="index">
+      <view class="left">
+        <view class="favicon">
+          <image src="{{deFualtHttp}}/mini/images/car.png"></image>
+        </view>
+        <view>
+          <view class="title">物业费</view>
+          <view class="des" wx:if="{{item.bill == null}}">暂未查询到欠费</view>
+          <view class="des warning" wx:else>{{item.bill}}</view>
+        </view>
+      </view>
+      <view class="right" data-no="{{item.no}}" bindtap="toDetail">
+        <view class="btn">
+          缴 费 记 录
+        </view>
       </view>
     </view>
-    <view class="right" bindtap="toDetail">
-      <view class="btn">
-        缴 费 记 录
-      </view>
-    </view>
+  </view>
+  <view class="card" wx:else>
+    <van-empty description="暂无车辆" />
   </view>
   <view class="btns" bindtap="addCar">
     添加车辆

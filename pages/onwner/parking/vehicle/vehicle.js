@@ -1,21 +1,32 @@
 // pages/onwner/parking/vehicle/vehicle.js
-Page({
+import {fee_carList} from '../../../../api/info'
+const filter = require('../../../../utils/router.js');
+const app = getApp()
+Page(filter.loginCheck({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    list:[],
+    deFualtHttp:app.globalData.rootHttp,
   },
-  toDetail(){
+  toDetail(e){
     wx.navigateTo({
-      url: '/pages/onwner/parking/payPage/payPage',
+      url: `/pages/onwner/parking/payPage/payPage?no=${e.currentTarget.dataset.no}`,
     })
   },
   addCar(){
     wx.navigateTo({
       url: '/pages/onwner/parking/addCar/addCar',
     })
+  },
+  async getfee_carList(){
+    let res = await fee_carList({token:wx.getStorageSync('token')})
+    this.setData({
+      list:res.data
+    })
+    console.log(res)
   },
   /**
    * 生命周期函数--监听页面加载
@@ -35,7 +46,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.getfee_carList()
   },
 
   /**
@@ -72,4 +83,4 @@ Page({
   onShareAppMessage: function () {
 
   }
-})
+}))

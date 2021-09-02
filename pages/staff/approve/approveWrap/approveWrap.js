@@ -1,4 +1,5 @@
 // pages/staff/approve/approveWrap/approveWrap.js
+let App = getApp()
 Page({
 
   /**
@@ -6,16 +7,16 @@ Page({
    */
   data: {
     approveMenuMy1:[
-      {name:"待处理",icon:'/static/images/staff/menu19.png',page:'/pages/staff/approve/approveListed/approveListed?type=0',info:''},
-      {name:"已处理",icon:'/static/images/staff/menu20.png',page:'/pages/staff/approve/approveListed/approveListed?type=1',info:''},
-      {name:"我发起的",icon:'/static/images/staff/menu21.png',page:'/pages/staff/approve/approveList/approveList',info:''},
+      {name:"待处理",icon:App.globalData.rootHttp+'/mini/images/staff/menu19.png',page:'/pages/staff/approve/approveListed/approveListed?type=0',info:''},
+      {name:"已处理",icon:App.globalData.rootHttp+'/mini/images/staff/menu20.png',page:'/pages/staff/approve/approveListed/approveListed?type=1',info:''},
+      {name:"我发起的",icon:App.globalData.rootHttp+'/mini/images/staff/menu21.png',page:'/pages/staff/approve/approveList/approveList',info:''},
     ],
     approveMenuMy2:[
-      {name:"请假",icon:'/static/images/staff/menu22.png',page:'/pages/staff/approve/leaveApp/leaveApp',info:''},
-      {name:"外出",icon:'/static/images/staff/menu23.png',page:'/pages/staff/approve/outApp/outApp',info:''},
-      {name:"物资",icon:'/static/images/staff/menu24.png',page:'/pages/staff/approve/purchaseApp/purchaseApp',info:''},
-      {name:"采购",icon:'/static/images/staff/menu25.png',page:'/pages/staff/approve/materialApp/materialApp',info:''},
-      {name:"钥匙",icon:'/static/images/staff/menu26.png',page:'/pages/staff/approve/keyApp/keyApp',info:''},
+      {name:"请假",icon:App.globalData.rootHttp+'/mini/images/staff/menu22.png',page:'/pages/staff/approve/leaveApp/leaveApp',info:''},
+      {name:"外出",icon:App.globalData.rootHttp+'/mini/images/staff/menu23.png',page:'/pages/staff/approve/outApp/outApp',info:''},
+      {name:"物资",icon:App.globalData.rootHttp+'/mini/images/staff/menu24.png',page:'/pages/staff/approve/purchaseApp/purchaseApp',info:''},
+      {name:"采购",icon:App.globalData.rootHttp+'/mini/images/staff/menu25.png',page:'/pages/staff/approve/materialApp/materialApp',info:''},
+      {name:"钥匙",icon:App.globalData.rootHttp+'/mini/images/staff/menu26.png',page:'/pages/staff/approve/keyApp/keyApp',info:''},
       
     ],
   },

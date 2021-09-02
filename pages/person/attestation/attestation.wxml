@@ -1,65 +1,49 @@
 <!--pages/person/attestation/attestation.wxml-->
 <view class="attestation">
-  <view class="type" wx:if="{{false}}">
+  <view class="type" wx:if="{{isShow}}">
     <view class="card info">
-      <view>城隍庙文化馆-老城保护中心-信息楼-1011栋-105室</view>
-      <view class="mt20">王佳佳 187****5264</view>
+      <view>{{info.project_name}}{{info.area_name}}{{info.block_name}}{{info.house_name}}</view>
+      <view class="mt20">{{info.name}} {{info.mobile}}</view>
     </view>
     <view class="btn">
-      <van-button block type="info">注销</van-button>
+      <van-button bind:click="logoutBtn" block type="info">注销</van-button>
     </view>
   </view>
-  <view class="type1">
+  <view class="type1" wx:else>
     <view class="card info" wx:if="{{active==0}}">
-      <view>选择资产</view>
-      <view class="houseDes">文化馆旧城保护中心</view>
+      <view>选择项目</view>
+      <!-- <view class="houseDes">文化馆旧城保护中心</view> -->
       <view class="radioWrap">
-        <van-radio-group class="icongroupStyle" value="{{ radio1 }}" bind:change="onradioChange" data-type="radio1">
-          <van-radio checked-color="#FFA477" name="1" icon-size="16px" custom-class="radioStyle" icon-class="iconStyle"
-            label-class="labelStyle">个人</van-radio>
-          <van-radio checked-color="#FFA477" name="2" icon-size="16px" custom-class="radioStyle" icon-class="iconStyle"
-            label-class="labelStyle">单位</van-radio>
+        <van-radio-group class="icongroupStyle" model:value="{{ radio1 }}" bind:change="onradioChange" data-type="radio1">
+          <van-radio checked-color="#FFA477" wx:for="{{projectList}}" name="{{item.project_id}}" icon-size="16px" custom-class="radioStyle" icon-class="iconStyle"
+            label-class="labelStyle">{{item.name}}</van-radio>
         </van-radio-group>
       </view>
     </view>
     <view class="card info" wx:elif="{{active==1}}">
-      <view>选择项目</view>
+      <view>选择房屋</view>
       <view class="radioWrap">
-        <van-radio-group class="icongroupStyle" value="{{ radio2 }}" bind:change="onradioChange" data-type="radio2">
-          <van-radio checked-color="#FFA477" name="1" icon-size="16px" custom-class="radioStyle" icon-class="iconStyle"
-            label-class="labelStyle">图书馆</van-radio>
-          <van-radio checked-color="#FFA477" name="2" icon-size="16px" custom-class="radioStyle" icon-class="iconStyle"
-            label-class="labelStyle">文化馆</van-radio>
-        </van-radio-group>
-      </view>
-    </view>
-    <view class="card info" wx:elif="{{active==2}}">
-      <view>选择项目</view>
-      <view class="houseDes">选择资产</view>
-      <view class="radioWrap">
-        <van-radio-group class="icongroupStyle" value="{{ radio3 }}" bind:change="onradioChange" data-type="radio3">
-          <van-radio checked-color="#FFA477" name="1" icon-size="16px" custom-class="radioStyle" icon-class="iconStyle"
-            label-class="labelStyle">刘家祠堂</van-radio>
-          <van-radio checked-color="#FFA477" name="2" icon-size="16px" custom-class="radioStyle" icon-class="iconStyle"
-            label-class="labelStyle">汇光阁</van-radio>
+        <van-radio-group class="icongroupStyle" model:value="{{ radio2 }}" bind:change="onradioChange" data-type="radio2">
+          <van-radio checked-color="#FFA477" wx:for="{{projectList}}" name="{{item.project_id}}" icon-size="16px" custom-class="radioStyle" icon-class="iconStyle"
+            label-class="labelStyle">{{item.name}}</van-radio>
         </van-radio-group>
       </view>
     </view>
     <view class="last" wx:else>
       <view class="card info">
-        <view class="cardT">请输入联系方式</view>
+        <view class="cardT">联系地址</view>
         <van-cell-group border="{{false}}" >
-          <van-field border="{{false}}" value="{{ location }}" placeholder="请输入" />
+          <van-cell title="{{ location }}" border="{{false}}"></van-cell>
         </van-cell-group>
       </view>
       <view class="card info mt20">
         <van-cell-group border="{{false}}" >
-          <van-field border="{{false}}" value="{{ name }}" label="真实姓名" placeholder="请输入" input-align="right" />
-          <van-field border="{{false}}" value="{{ phone }}" label="手机号" placeholder="请输入" input-align="right" />
+          <van-field border="{{false}}" model:value="{{ name }}" label="真实姓名" placeholder="请输入" input-align="right" />
+          <van-field border="{{false}}" model:value="{{ mobile }}" label="手机号" placeholder="请输入" input-align="right" />
         </van-cell-group>
       </view>
       <view class="btn">
-        <van-button block type="info">提交</van-button>
+        <van-button bind:click="submit" block type="info">提交</van-button>
       </view>
     </view>
   </view>

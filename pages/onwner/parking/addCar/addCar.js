@@ -1,4 +1,5 @@
 // pages/onwner/parking/addCar/addCar.js
+import {fee_carAdd} from '../../../../api/info'
 Page({
 
   /**
@@ -59,10 +60,25 @@ openKeyboard() {
   })
 },
 // 提交车牌号码
-submitNumber() {
-  if (this.data.carnum[6]) {
-    // 跳转到tabbar页面
+async submitNumber() {
+  let no = this.data.carnum.join('')
+  let res = await fee_carAdd({no,token:wx.getStorageSync('token')})
+  if(res.code != 200){
+    wx.showToast({
+      title: res.msg,
+      icon:'error'
+    })
+  }else{
+    wx.showToast({
+      title: '添加成功',
+    })
+    setTimeout(_=>{
+      wx.navigateBack({
+        delta: 1,
+      })
+    },500)
   }
+  console.log(res)
 },
   /**
    * 生命周期函数--监听页面加载

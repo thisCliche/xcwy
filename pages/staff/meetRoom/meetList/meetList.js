@@ -1,22 +1,39 @@
 // pages/person/vista/vistaList/vistaList.js
+import {list} from '../../../../api/meeting'
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    isLoad: false,
     current:0,
     active:0,
-    list:[{title:`个人预约`,estimateTime:'预约时间：2021.10.10 上午',des:'预约人：蒋海宁',time:'2021-01-06 18:36',location:'会议室：北楼305大会议室'},{title:`个人预约`,estimateTime:'预约时间：2021.10.10 上午',des:'预约人：蒋海宁',time:'2021-01-06 18:36',location:'会议室：北楼305大会议室'}]
+    queryInfo:{
+      page:1,
+      limit:10
+    },
+    list:[]
+  },
+  async getList(){
+    this.setData({
+      isLoad: true
+    })
+    let res = await list({...this.data.queryInfo,token:wx.getStorageSync('token'),status:this.data.current})
+    this.setData({
+      list: res.data.list,
+      isLoad: false
+    })
   },
   onClick(e){
     this.setData({
       current:e.detail.name
     })
+    this.getList()
   },
-  toDetail(){
+  toDetail(e){
     wx.navigateTo({
-      url: '/pages/staff/meetRoom/meetDetail/meetDetail',
+      url: `/pages/staff/meetRoom/meetDetail/meetDetail?id=${e.currentTarget.dataset.id}`,
     })
   },
   /**
@@ -37,7 +54,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.getList()
   },
 
   /**

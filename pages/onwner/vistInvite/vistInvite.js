@@ -1,24 +1,30 @@
 // pages/onwner/vistResig/vistResig.js
-Page({
-
+const filter = require('../../../utils/router.js');
+// import {
+//   project,
+// } from '../../../api/repair'
+import {add,project} from '../../../api/booking'
+import {
+  validPhone,validIdenty
+} from '../../../utils/util'
+Page(filter.loginCheck({
   /**
    * 页面的初始数据
    */
   data: {
-    time:'2021-7-06',
-    renyuan:'',
-    calendarShow:false,
+    time: '请选择',
+    renyuan: '',
+    calendarShow: false,
     checked: true,
-    xm:'请选择',
-    bz:'',
-    hyShow:false,
-    columns: ['会议室1', '会议室2', '会议室3'],
-    pepople:[{
-      yyr:'',
-      lxdh:'',
-      sfzh:''
-    }],
-    bz:'',
+    xm: '请选择',
+    project_id: '',
+    bz: '',
+    hyShow: false,
+    columns: [],
+    yyr: '',
+    lxdh: '',
+    sfzh: '',
+    bz: '',
     // 省份简写
     provinces: [
       ['京', '沪', '粤', '津', '冀', '晋', '蒙', '辽', '吉', '黑'],
@@ -37,15 +43,33 @@ Page({
     showNewPower: false,
     KeyboardState: false,
   },
-  onChange({ detail }) {
-    // 需要手动对 checked 状态进行更新
-    this.setData({ checked: detail });
+  getlogin:function(e){
+    this.setData({
+      xm:e.name,
+      project_id:e.id
+    })
+    console.log(e)
   },
-  addInfo(){
+  toSelect(){
+    wx.navigateTo({
+      url: '/pages/contact/pickProject/pickProject',
+    })
+  },
+  onChange({
+    detail
+  }) {
+    // 需要手动对 checked 状态进行更新
+    this.setData({
+      checked: detail
+    });
+  },
+  addInfo() {
     let pepople = this.data.pepople
-    pepople.push({yyr:'',
-    lxdh:'',
-    sfzh:''})
+    pepople.push({
+      yyr: '',
+      lxdh: '',
+      sfzh: ''
+    })
     this.setData({
       pepople,
     })
@@ -64,7 +88,9 @@ Page({
   },
   formatDate(date) {
     date = new Date(date);
-    return `${date.getMonth() + 1}/${date.getDate()}`;
+    const m = (date.getMonth() + 1 + '').padStart(2, '0')
+    const d = (date.getDate() + '').padStart(2, '0')
+    return `${date.getFullYear()}-${m}-${d}`;
   },
   onConfirm(event) {
     this.setData({
@@ -73,51 +99,135 @@ Page({
     });
   },
   onpickerConfirm(event) {
-    const { picker, value, index } = event.detail;
-    this.setData({hyShow: false,xm:value})
+    const {
+      picker,
+      value,
+      index
+    } = event.detail;
+    this.setData({
+      hyShow: false,
+      xm: value.text,
+      project_id: value.project_id
+    })
   },
 
   // 选中点击设置
-bindChoose(e) {
-  if (!this.data.carnum[6] || this.data.showNewPower) {
-    var arr = [];
-    arr[0] = e.target.dataset.val;
-    this.data.carnum = this.data.carnum.concat(arr)
+  bindChoose(e) {
+    if (!this.data.carnum[6] || this.data.showNewPower) {
+      var arr = [];
+      arr[0] = e.target.dataset.val;
+      this.data.carnum = this.data.carnum.concat(arr)
+      this.setData({
+        carnum: this.data.carnum
+      })
+    }
+  },
+  bindDelChoose() {
+    if (this.data.carnum.length != 0) {
+      this.data.carnum.splice(this.data.carnum.length - 1, 1);
+      this.setData({
+        carnum: this.data.carnum
+      })
+    }
+  },
+  showPowerBtn() {
+    if(!this.data.checked) return
     this.setData({
-      carnum: this.data.carnum
+      showNewPower: true,
+      KeyboardState: true
     })
-  }
-},
-bindDelChoose() {
-  if (this.data.carnum.length != 0) {
-    this.data.carnum.splice(this.data.carnum.length - 1, 1);
+  },
+  closeKeyboard() {
     this.setData({
-      carnum: this.data.carnum
+      KeyboardState: false
     })
-  }
-},
-showPowerBtn() {
-  this.setData({
-    showNewPower: true,
-    KeyboardState: true
-  })
-},
-closeKeyboard() {
-  this.setData({
-    KeyboardState: false
-  })
-},
-openKeyboard() {
-  this.setData({
-    KeyboardState: true
-  })
-},
-// 提交车牌号码
-submitNumber() {
-  if (this.data.carnum[6]) {
-    // 跳转到tabbar页面
-  }
-},
+  },
+  openKeyboard() {
+    if(!this.data.checked) return
+    this.setData({
+      KeyboardState: true
+    })
+  },
+  // 提交车牌号码
+  submitNumber() {
+    if (this.data.carnum[6]) {
+      // 跳转到tabbar页面
+    }
+  },
+  async getProject() {
+    let res = await project({
+      token: wx.getStorageSync('token'),
+    })
+    let columns = []
+    for (let i of res.data) {
+      let item = {
+        project_id: i.id,
+        text: i.name
+      }
+      columns.push(item)
+    }
+    this.setData({
+      columns
+    })
+  },
+  async submit(){
+    if (!validPhone(this.data.lxdh)) {
+      return wx.showToast({
+        title: '手机号不正确',
+        icon: 'error'
+      })
+    }
+    if (!validIdenty(this.data.sfzh)) {
+      return wx.showToast({
+        title: '身份证号不正确',
+        icon: 'error'
+      })
+    }
+    let form = {
+      project_id: this.data.project_id,
+      token: wx.getStorageSync('token'),
+      people_count: this.data.renyuan,
+      date: this.data.time,
+      mobile: this.data.lxdh,
+      name: this.data.yyr,
+      is_drive: this.data.checked,
+      car_no: this.data.carnum.join(''),
+      id_card: this.data.sfzh,
+      remark: this.data.bz,
+    }
+    if(!form.is_drive){
+      form.car_no = '皖ASDFE2'
+    }
+    for (let i in form) {
+      if (form[i] === '') {
+        if (i == 'remark') {
+          
+        } else {
+          return wx.showToast({
+            title: '请填写完整',
+            icon: 'error'
+          })
+        }
+      }
+    }
+    form.is_drive = form.is_drive.toString()
+    let res = await add(form)
+    if(res.code == 200) {
+      wx.showToast({
+        title: '预约成功',
+      })
+      setTimeout(_=>{
+        wx.navigateBack({
+          delta: 1,
+        })
+      },500)
+    }else{
+      wx.showToast({
+        title: res.msg,
+        icon:'error'
+      })
+    }
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -136,7 +246,7 @@ submitNumber() {
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.getProject()
   },
 
   /**
@@ -173,4 +283,4 @@ submitNumber() {
   onShareAppMessage: function () {
 
   }
-})
+}))

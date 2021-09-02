@@ -2,7 +2,7 @@
 <view class="menuWrap mt30">
   <view class="menu mt30">
     <view class="title">
-      <image src="/static/images/staff/bg.png"></image> 审批
+      <image src="{{deFualtHttp}}/mini/images/staff/bg.png"></image> 审批
     </view>
     <view class="itemWrap">
       <van-row>
@@ -19,7 +19,7 @@
   </view>
   <view class="menu mt30" >
     <view class="title">
-      <image src="/static/images/staff/bg.png"></image> 申请
+      <image src="{{deFualtHttp}}/mini/images/staff/bg.png"></image> 申请
     </view>
     <view class="itemWrap">
       <van-row>

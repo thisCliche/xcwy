@@ -1,4 +1,7 @@
 /* pages/contact/contactMain/contactMain.wxss */
+.contactMain{
+  padding-bottom: 100rpx;
+}
 .searchWrap{
   background: #4790F4;
   padding: 30rpx;
@@ -33,6 +36,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin: 40rpx 0;
 }
 .itemL{
   display: flex;

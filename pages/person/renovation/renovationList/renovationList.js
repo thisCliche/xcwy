@@ -1,20 +1,27 @@
 // pages/person/renovation/renovationList/renovationList.js
+import {record} from '../../../../api/build'
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    list:[]
   },
-  toDetail(){
+  toDetail(e){
     wx.navigateTo({
-      url: '/pages/person/renovation/renovationDetail/renovationDetail',
+      url: `/pages/person/renovation/renovationDetail/renovationDetail?id=${e.currentTarget.dataset.id}`,
     })
   },
   toPay(){
     wx.navigateTo({
       url: '/pages/person/renovation/renovationPay/renovationPay',
+    })
+  },
+  async getList(){
+    let res = await record({token:wx.getStorageSync('token')})
+    this.setData({
+      list: res.data.list
     })
   },
   /**
@@ -35,7 +42,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.getList()
   },
 
   /**

@@ -13,11 +13,12 @@
         </view>
       </van-col>
       <van-col span="8" offset="1">
-        <van-button custom-class="codeStyle">获取验证码</van-button>
+        <van-button bind:click="getCode" disabled="{{codeDis}}" wx:if="{{!codeDis}}" custom-class="codeStyle">{{codeInfo}}</van-button>
+        <van-button bind:click="getCode" disabled="{{codeDis}}" wx:else custom-class="codeStyle">{{codeInfo}}s后重试</van-button>
       </van-col>
     </van-row>
   </view>
   <view class="btn">
-    <van-button custom-class="btnStyle" block type="info">提交</van-button>
+    <van-button bind:click="submit" custom-class="btnStyle" block type="info">提交</van-button>
   </view>
 </view>

@@ -1,0 +1,34 @@
+/* pages/login/login.wxss */
+.login-main {
+  overflow: hidden;
+}
+.login-main-title {
+  font-size: 36rpx;
+  color: #000000;
+  text-align: center;
+  
+}
+
+.btn {
+  line-height: 80rpx;
+  width: 500rpx;
+  height: 80rpx;
+  background: #4790F4;
+  background-blend-mode: normal,
+    normal;
+  font-size: 36rpx;
+  font-weight: normal;
+  color: #fff;
+  margin-top: 140rpx;
+  margin-bottom: 18rpx;
+}
+
+.btn-qx {
+  width: 500rpx;
+  height: 80rpx;
+  border-width: 2rpx;
+  margin: 0 auto;
+  font-size: 36rpx;
+  font-weight: normal;
+  color: #444;
+}

@@ -15,10 +15,10 @@
   <view class="title mt20"><image src="/static/images/bg.png" class="titleBg"></image> 投诉图片</view>
   <view class="card mt20 image">
     <van-cell-group border="{{ false }}">
-      <van-uploader deletable file-list="{{ fileList }}" bind:after-read="afterRead" />
+      <van-uploader bind:delete="deleteImg" deletable="{{ true }}"  file-list="{{ fileList }}" bind:after-read="afterRead" />
     </van-cell-group>
   </view>
   <view class="btn">
-    <van-button type="info" block>投诉</van-button>
+    <van-button bind:click="submit" type="info" block>投诉</van-button>
   </view>
 </view>

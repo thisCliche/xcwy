@@ -2,8 +2,10 @@
 <view class="vistResig">
   <view class="card">
     <van-cell-group border="{{ false }}">
-      <van-cell title="预约项目" bind:click="onDisplay" data-type="hyShow" label="{{xm}}" required border="{{ false }}"
+      <van-cell title="预约项目" bind:click="toSelect" data-type="hyShow" label="{{xm}}" required border="{{ false }}"
         is-link />
+      <!-- <van-cell title="预约项目" bind:click="onDisplay" data-type="hyShow" label="{{xm}}" required border="{{ false }}"
+        is-link /> -->
     </van-cell-group>
   </view>
   <view class="card mt20">
@@ -26,9 +28,9 @@
 
     </van-cell-group>
     <van-cell-group inset>
-      <van-field required label="联系人" model:value="{{ pepople.yyr }}" placeholder="请输入" border="{{ false }}" input-align="right"/>
-      <van-field required label="联系号码" model:value="{{ pepople.lxdh }}" placeholder="请输入" border="{{ false }}" input-align="right"/>
-      <van-field required label="身份证号" model:value="{{ pepople.sfzh }}" placeholder="请输入" border="{{ false }}" input-align="right"/>
+      <van-field required label="联系人" model:value="{{ yyr }}" placeholder="请输入" border="{{ false }}" input-align="right"/>
+      <van-field required label="联系号码" model:value="{{ lxdh }}" placeholder="请输入" border="{{ false }}" input-align="right"/>
+      <van-field required label="身份证号" model:value="{{ sfzh }}" placeholder="请输入" border="{{ false }}" input-align="right"/>
     </van-cell-group>
   </view>
 
@@ -94,7 +96,7 @@
     </view>
   </view>
   <view class="btn">
-    <van-button type="info" block>预约</van-button>
+    <van-button type="info" bind:click="submit" block>预约</van-button>
   </view>
   <van-popup show="{{ hyShow }}" position="bottom" custom-style="height: 50%;" round data-type="hyShow"
     bind:close="onClose">

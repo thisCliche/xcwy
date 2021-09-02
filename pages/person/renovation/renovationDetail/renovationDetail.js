@@ -1,22 +1,38 @@
 // pages/person/renovation/renovationDetail/renovationDetail.js
+import {detail} from '../../../../api/build'
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    info:{},
+    infoP:{}
   },
   toPay(){
     wx.navigateTo({
       url: '/pages/person/renovation/renovationPay/renovationPay',
     })
   },
+  async getDetail(id){
+    let res = await detail({token:wx.getStorageSync('token'),id})
+    this.setData({
+      info: res.data
+    })
+  },
+  // async getOwnerDetail() {
+  //   let res = await getOwner({
+  //     token: wx.getStorageSync('token')
+  //   })
+  //   this.setData({
+  //     infoP: res.data
+  //   })
+  // },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.getDetail(options.id)
   },
 
   /**
@@ -30,7 +46,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    // this.getOwnerDetail()
   },
 
   /**

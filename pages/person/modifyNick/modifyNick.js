@@ -1,18 +1,42 @@
 // pages/person/modifyNick/modifyNick.js
+import {changeProfile} from '../../../api/login'
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    nick:"",
+    value:"",
+    field:'',
   },
-
+  changed(){
+    if(this.data.value == ''){
+      wx.showToast({
+        title: '不能为空',
+        icon: error
+      })
+    }
+    changeProfile({token:wx.getStorageSync('token'),field:this.data.field,value:this.data.value}).then(res=>{
+      if(res.code == 200){
+        wx.showToast({
+          title: '修改成功',
+        })
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    if(options.field != 'nick'){
+      wx.setNavigationBarTitle({
+        title: '修改名字',
+      })
+      this.setData({
+        field:'name'
+      })
+    }
+    
   },
 
   /**

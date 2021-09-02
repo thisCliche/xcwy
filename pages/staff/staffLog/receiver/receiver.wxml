@@ -7,49 +7,34 @@
   </view>
   <view class="contactWrap">
     <view class="crumbs">
-      <view class="bread">通讯录 </view> > <view class="breadA"> 组织1</view>
+      <view class="bread">通讯录 </view>
+      <view wx:if="{{branchName !== ''}}" style="display: flex;"> > <view class="breadA"> {{branchName}}</view></view>
     </view>
     <view class="card info mt20">
-      <view class="department"><van-checkbox icon-size="18px" custom-class="checkboxStyle" value="{{ checked }}" bind:change="onChange"></van-checkbox> 部门1 <view class="number">（3）</view>
-      </view>
-      <view class="department"><van-checkbox icon-size="18px" custom-class="checkboxStyle" value="{{ checked }}" bind:change="onChange"></van-checkbox> 部门1 <view class="number">（3）</view>
+      <view class="department" bindtap="staffList" wx:for="{{list}}" wx:key="index" data-branch_id="{{item.id}}" data-name="{{item.name}}">
+      {{item.name}} <view class="number">（{{item.user_count}}）</view>
       </view>
     </view>
-    <view class="card info mt20">
-      <view class="item">
+    <view class="card info mt20" wx:if="{{branchName !== ''}}">
+      <view class="item mt20" wx:for="{{staffList}}" wx:key="index">
         <view class="itemL">
-          <van-checkbox icon-size="18px" custom-class="checkboxStyle" value="{{ checked }}" bind:change="onChange"></van-checkbox>
+          <van-checkbox icon-size="18px" custom-class="checkboxStyle" value="{{ item.select }}" bind:change="onChange" data-index="{{index}}"></van-checkbox>
           <view>
             <image src="/static/images/defaultAvatar.png"></image>
           </view>
           <view class="itemLR">
-            <view class="itemName">王珂</view>
+            <view class="itemName">{{item.name}}</view>
             <view class="itemDes">总经理</view>
           </view>
         </view>
         <view class="itemR">
-          13635685475
-        </view>
-      </view>
-      <view class="item mt20">
-        <view class="itemL">
-          <van-checkbox icon-size="18px" custom-class="checkboxStyle" value="{{ checked }}" bind:change="onChange"></van-checkbox>
-          <view>
-            <image src="/static/images/defaultAvatar.png"></image>
-          </view>
-          <view class="itemLR">
-            <view class="itemName">王珂</view>
-            <view class="itemDes">总经理</view>
-          </view>
-        </view>
-        <view class="itemR">
-          13635685475
+          {{item.mobile}}
         </view>
       </view>
     </view>
   </view>
   <view class="confirm card">
-    <view class="confirmL">已选择：2人</view>
-    <van-button type="info">确认</van-button>
+    <view class="confirmL">已选择：{{selectList.length}}人</view>
+    <van-button type="info" bind:click="confirm">确认</van-button>
   </view>
 </view>

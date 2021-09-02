@@ -1,11 +1,10 @@
 <!--pages/onwner/news/newsDetail/newsDetail.wxml-->
 <view class="newsDetail">
-  <view class="title">疫情防控不减压。关于如何做好工作场所疫情防控的措施</view>
+  <view class="title">{{info.title}}</view>
   <view class="time">
-    发布时间：06-05 15:36
+    发布时间：{{info.add_time}}
   </view>
   <view class="content">
-    文字内容文字内容文字内容文字内容文字内容文字
-    内容文字内容文字内容文字内容
+    {{info.content}}
   </view>
 </view>

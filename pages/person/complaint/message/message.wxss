@@ -1,0 +1,20 @@
+/* pages/person/complaint/complaintList/complaintList.wxss */
+.complaintList{
+  padding: 20rpx 20rpx;
+}
+.item{
+  padding: 28rpx;
+  overflow: hidden;
+  position: relative;
+}
+.time{
+  color: #ABABAB;
+  margin-top: 20rpx;
+}
+.float{
+  width: 143rpx; 
+  height: 134rpx;
+  position: absolute;
+  right: -11rpx;
+    top: -28rpx;
+}

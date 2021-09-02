@@ -1,4 +1,5 @@
 // pages/contact/contactSearch/contactSearch.js
+import {search} from '../../../../api/contact'
 Page({
 
   /**
@@ -6,12 +7,57 @@ Page({
    */
   data: {
     value:'',
+    list:[],
+    selectList:[]
   },
-  onSearch(){
-
+  async onSearch(){
+    if(this.data.value == ''){
+      return wx.showToast({
+        title: '不能为空',
+        icon: 'error'
+      })
+    }
+    let res = await search({keyword:this.data.value,token:wx.getStorageSync('token')})
+    res.data.forEach(item=>{
+      item.select = false
+    })
+    this.setData({
+      list: res.data
+    })
   },
   onCancel(){
-
+    wx.navigateBack({
+      delta: 1,
+    })
+  },
+  onChange(e){
+    let key = `list[${e.currentTarget.dataset.index}].select`
+    this.setData({
+      [key]: e.detail
+    })
+    let selectList = []
+    this.data.list.forEach(item=>{
+      if(item.select){
+        selectList.push(item)
+      }
+    })
+    this.setData({
+      selectList
+    })
+  },
+  confirm(){
+    let pages = getCurrentPages()
+    console.log(pages)
+    let prevPage = pages[pages.length-3]
+    let that = this
+    wx.navigateBack({
+      delta: 2,
+      complete: function(){
+        setTimeout(function(){
+          prevPage.getselect({selectList:that.data.selectList})
+        },500)
+      }
+    })
   },
   /**
    * 生命周期函数--监听页面加载

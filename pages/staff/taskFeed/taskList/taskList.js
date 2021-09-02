@@ -1,46 +1,40 @@
 // pages/person/vista/vistaList/vistaList.js
+import {list} from '../../../../api/task'
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    isLoad: false,
     current: 0,
     active: 0,
-    list: [{
-      title: `任芳发布了日常巡查任务`,
-      time:'05-16 18:36',
-      estimateTime: '执行日期：2021.10.15-2021.16.16',
-      des: '10',
-      number:'2'
-    }, {
-      title: `任芳发布了日常巡查任务`,
-      time:'05-16 18:36',
-      estimateTime: '执行日期：2021.10.15-2021.16.16',
-      des: '10',
-      number:'2'
-    }],
-    list2: [{
-      title: `日常巡查`,
-      estimateTime: '昨天 星期三',
-      des: '小区安全日常巡查',
-      content:'1.详情内容 1.详情内容 1.详情内容',
-      color:'#CECECE'
-    }, {
-      title: `日常巡查`,
-      estimateTime: '昨天 星期三',
-      des: '小区安全日常巡查',
-      color:'#32CC85'
-    },]
+    queryInfo:{
+      page:1,
+      limit:10,
+    },
+    list: [],
   },
   onClick(e) {
     this.setData({
       current: e.detail.name
     })
+    this.getList()
   },
   toDetail() {
     wx.navigateTo({
       url: '/pages/staff/taskFeed/taskDetail/taskDetail',
+    })
+    
+  },
+  async getList(){
+    this.setData({
+      isLoad: true
+    })
+    let res = await list({...this.data.queryInfo,status:this.data.current,token:wx.getStorageSync('token')})
+    this.setData({
+      list: res.data.list,
+      isLoad: false
     })
   },
   /**
@@ -61,7 +55,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.getList()
   },
 
   /**

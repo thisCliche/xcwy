@@ -1,52 +1,77 @@
 <!--pages/staff/approve/leaveApp/leaveApp.wxml-->
 <view class="leaveApp">
-  <view class="miniTitle">请填写申请时间</view>
-  <view class="card mt10">
+  <view class="miniTitle">请选择申请时间</view>
+  <!--  <view class="card mt10 info">
+    <van-cell-group>
+      <van-cell required bind:click="onDisplay" data-type="hyShow" title="请假类型" is-link value="{{typeName}}"
+        border="{{ false }}" />
+    </van-cell-group>
+  </view> -->
+  <view class="card mt20">
     <van-cell-group>
       <van-cell required title="开始时间" value="{{ time1 }}" bind:click="onDisplay" data-type="calendarShow1"
         border="{{ false }}" is-link>
       </van-cell>
-      <van-calendar color="#4790F4" show="{{ calendarShow1 }}" bind:close="onClose" bind:confirm="onConfirm"
-        data-type="calendarShow1" show-confirm="{{ false }}" />
+      <van-popup show="{{ calendarShow1 }}" position="bottom" custom-style="height: 50%;" round>
+        <van-datetime-picker type="datetime" data-type="calendarShow1" value="{{ datetime1 }}" bind:cancel="onClose" bind:confirm="onConfirm" />
+      </van-popup>
+
+      <!-- <van-calendar color="#4790F4" show="{{ calendarShow1 }}" bind:close="onClose" bind:confirm="onConfirm"
+        data-type="calendarShow1" show-confirm="{{ false }}" /> -->
       <van-cell required title="结束时间" value="{{ time2 }}" bind:click="onDisplay" data-type="calendarShow2"
         border="{{ false }}" is-link>
       </van-cell>
-      <van-calendar color="#4790F4" show="{{ calendarShow2 }}" bind:close="onClose" bind:confirm="onConfirm2"
-        data-type="calendarShow2" show-confirm="{{ false }}" />
-        <van-field required value="{{ username3 }}" label="时长（小时）" placeholder="请输入" input-align="right" border="{{ false }}" />
+      <van-popup show="{{ calendarShow2 }}" position="bottom" custom-style="height: 50%;" round >
+        <van-datetime-picker type="datetime" data-type="calendarShow2" value="{{ datetime2 }}" bind:cancel="onClose" bind:confirm="onConfirm2" min-date="{{ minDate }}"/>
+      </van-popup>
+
+      <!-- <van-calendar color="#4790F4" show="{{ calendarShow2 }}" bind:close="onClose" bind:confirm="onConfirm2"
+        data-type="calendarShow2" show-confirm="{{ false }}" /> -->
+
+      <van-field required type="number" model:value="{{ duration }}" placeholder="请输入" border="{{ false }}" input-align="right"
+        label="时长（小时）" />
     </van-cell-group>
   </view>
-
   <view class="card mt20 info">
     <van-cell-group>
-    <van-cell required title="外出事由" border="{{ false }}"></van-cell>
-      <van-field value="{{ interval }}" placeholder="请输入外出事由" border="{{ false }}" type="textarea" autosize="{{minheight}}"
-         />
+      <van-cell required title="外出事由" border="{{ false }}"></van-cell>
+      <van-field model:value="{{ reason }}" placeholder="请输入外出事由" border="{{ false }}" type="textarea"
+        autosize="{{minheight}}" />
     </van-cell-group>
   </view>
-  <view class="title mt30"><image src="/static/images/bg.png" class="titleBg"></image> 图片</view>
+  <view class="title mt30">
+    <image src="/static/images/bg.png" class="titleBg"></image> 图片
+  </view>
   <view class="card mt20 image">
     <van-cell-group border="{{ false }}">
-      <van-uploader deletable file-list="{{ fileList }}" bind:after-read="afterRead" />
+      <van-uploader bind:delete="deleteImg" deletable="{{ true }}" file-list="{{ fileList }}" bind:after-read="afterRead" />
     </van-cell-group>
   </view>
-  <view class="title mt30"><image src="/static/images/bg.png" class="titleBg"></image> 审批</view>
+  <view class="title mt30">
+    <image src="/static/images/bg.png" class="titleBg"></image> 审批
+  </view>
   <view class="steps mt30">
     <view class="stepItem">
       <view class="point"></view>
       <view class="role">审批人</view>
       <image src="/static/images/defaultAvatar.png"></image>
-      <view class="name"><view>杨正</view><view>办公室主任</view></view>
+      <view class="name">
+        <view>杨正</view>
+        <view>办公室主任</view>
+      </view>
     </view>
     <view class="stepItem">
       <view class="point last"></view>
       <view class="role">审批人</view>
       <image src="/static/images/defaultAvatar.png"></image>
-      <view class="name"><view>杨正</view><view>办公室主任</view></view>
+      <view class="name">
+        <view>杨正</view>
+        <view>办公室主任</view>
+      </view>
     </view>
   </view>
   <view class="btn">
-    <van-button type="info" block bindtap="toNext">提交</van-button>
+    <van-button type="info" block bindtap="submit">提交</van-button>
   </view>
   <van-popup show="{{ hyShow }}" position="bottom" custom-style="height: 50%;" round data-type="hyShow"
     bind:close="onClose">

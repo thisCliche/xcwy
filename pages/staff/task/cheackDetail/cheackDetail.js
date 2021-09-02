@@ -1,4 +1,5 @@
 // pages/staff/task/cheackDetail/cheackDetail.js
+import {reportDetail,del} from '../../../../api/task'
 Page({
 
   /**
@@ -9,25 +10,63 @@ Page({
     actions: [
       { name: '删除', color: '#ee0a24' },
     ],
+    title:'',
+    info: {},
+    images: [],
+    id: ''
+  },
+  toDetail(){
+    wx.navigateTo({
+      url: `/pages/staff/task/taskDetail/taskDetail?id=${this.data.id}`,
+    })
   },
   openBox(){
     this.setData({
       show:true
     })
   },
-  onSelect(event) {
-    console.log(event.detail);
+  async onSelect(event) {
+    this.setData({
+      show:false
+    })
+    let res = await del({token:wx.getStorageSync('token'),id:this.data.id})
+    if(res.code != 200){
+      wx.showToast({
+        title: res.msg,
+        icon: 'error'
+      })
+    }else{
+      wx.showToast({
+        title: '提交成功',
+      })
+      setTimeout(_ => {
+        wx.navigateBack({
+          delta: 1,
+        })
+      }, 500)
+    }
   },
   onCancel(){
     this.setData({
       show:false
     })
   },
+  async getDetial(id){
+    let res = await reportDetail({token:wx.getStorageSync('token'),id})
+    this.setData({
+      info: res.data,
+      images: JSON.parse(res.data.images)
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.setData({
+      title: options.title,
+      id: options.id
+    })
+    this.getDetial(options.id)
   },
 
   /**

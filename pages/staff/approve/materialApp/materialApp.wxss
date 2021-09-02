@@ -60,3 +60,9 @@
 .stepItem .name{
   font-size: 28rpx;
 }
+.fileItem{
+  line-height: 80rpx;
+}
+.fileItemFormat{
+  color: #4790F4;
+}

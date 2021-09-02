@@ -1,15 +1,57 @@
 // pages/onwner/renovation/renovation.js
-Page({
+const filter = require('../../../utils/router.js');
+import {
+  add
+} from '../../../api/build'
+import {
+  getOwner
+} from '../../../api/login'
+Page(filter.loginCheck({
 
   /**
    * 页面的初始数据
    */
   data: {
-    calendarShow:false,
-    textarea:  {  minHeight: 80 },
-    form1:{
-      uesTime:'',
-      reason:''
+    calendarShow: false,
+    textarea: {
+      minHeight: 80
+    },
+    info: {},
+    uesTime: '',
+    begin_time:'',
+    end_time:'',
+    reason: ''
+  },
+  async submit(){
+    let form = {
+      begin_time: this.data.begin_time,
+      token: wx.getStorageSync('token'),
+      end_time: this.data.end_time,
+      content: this.data.reason,
+    }
+    for (let i in form) {
+      if (form[i] == '') {
+        return wx.showToast({
+          title: '请填写完整',
+          icon: 'error'
+        })
+      }
+    }
+    let res = await add(form)
+    if(res.code == 200) {
+      wx.showToast({
+        title: '提交成功',
+      })
+      setTimeout(_=>{
+        wx.navigateBack({
+          delta: 1,
+        })
+      },500)
+    }else{
+      wx.showToast({
+        title: res.msg,
+        icon:'error'
+      })
     }
   },
   onDisplay(e) {
@@ -26,14 +68,25 @@ Page({
   },
   formatDate(date) {
     date = new Date(date);
-    return `${date.getMonth() + 1}/${date.getDate()}`;
+    const m = (date.getMonth() + 1 + '').padStart(2, '0')
+    return `${date.getFullYear()}-${m}-${date.getDate()}`;
   },
   onConfirm(event) {
     const [start, end] = event.detail;
     this.setData({
       calendarShow: false,
-      ["form1.uesTime"]: `${this.formatDate(start)} - ${this.formatDate(end)}`,
+      begin_time:this.formatDate(start),
+      end_time:this.formatDate(end),
+      uesTime: `${this.formatDate(start)} - ${this.formatDate(end)}`,
     });
+  },
+  async getOwnerDetail() {
+    let res = await getOwner({
+      token: wx.getStorageSync('token')
+    })
+    this.setData({
+      info: res.data
+    })
   },
   /**
    * 生命周期函数--监听页面加载
@@ -53,7 +106,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.getOwnerDetail()
   },
 
   /**
@@ -90,4 +143,4 @@ Page({
   onShareAppMessage: function () {
 
   }
-})
+}))
