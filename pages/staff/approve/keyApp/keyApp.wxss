@@ -53,6 +53,7 @@
   width: 78rpx;
   height: 78rpx;
   margin: 0 10rpx;
+  border-radius: 50%;
 }
 .stepItem .name{
   font-size: 28rpx;

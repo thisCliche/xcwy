@@ -7,10 +7,24 @@ export function sendLogin(data) {
     data
   })
 }
+export function getUser(data) {
+  return request({
+    url: 'member/getUser',
+    method: 'get',
+    data
+  })
+}
 export function myProfile(data) {
   return request({
     url: 'member/myProfile',
     method: 'get',
+    data
+  })
+}
+export function getMobile(data) {
+  return request({
+    url: 'third/getMobile',
+    method: 'post',
     data
   })
 }

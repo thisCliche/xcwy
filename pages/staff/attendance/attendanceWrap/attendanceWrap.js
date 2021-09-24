@@ -1,7 +1,8 @@
 // pages/staff/attendance/attendanceWrap/attendanceWrap.js
 import {
   clockIn,
-  check,statistics
+  check,
+  statistics
 } from '../../../../api/attendance'
 Page({
 
@@ -15,31 +16,34 @@ Page({
     time: '',
     show: false,
     info: {},
-    locationInfo:{},
-    attendaceInfo:{}
+    locationInfo: {},
+    attendaceInfo: {}
   },
   toDetail() {
     wx.navigateTo({
       url: '/pages/staff/attendance/attendanceDetail/attendanceDetail',
     })
   },
-  async getDetail() {
-      let data = new Date()
-      let that = this
-      let month = (data.getMonth() + 1 + '').padStart(2, '0')
-      let day = (data.getDate() + '').padStart(2, '0')
-      let year = data.getFullYear()
-      let res = await statistics({token:wx.getStorageSync('token'),month:`${year}-${month}`})
-      console.log(res)
-      for(let i in res.data.list){
-        console.log(i)
-        if(i == day){
-          that.setData({
-            attendaceInfo:res.data.list[i]
-          })
-        }
-      }
-  },
+  // async getDetail() {
+  //   let data = new Date()
+  //   let that = this
+  //   let month = (data.getMonth() + 1 + '').padStart(2, '0')
+  //   let day = (data.getDate() + '').padStart(2, '0')
+  //   let year = data.getFullYear()
+  //   let res = await statistics({
+  //     token: wx.getStorageSync('token'),
+  //     month: `${year}-${month}`
+  //   })
+  //   console.log(res)
+  //   for (let i in res.data.list) {
+  //     console.log(i)
+  //     if (i == day) {
+  //       that.setData({
+  //         attendaceInfo: res.data.list[i]
+  //       })
+  //     }
+  //   }
+  // },
   getTime() {
     let that = this
     setInterval(() => {
@@ -48,48 +52,71 @@ Page({
       const mm = (date.getMinutes() + '').padStart(2, '0')
       const ss = (date.getSeconds() + '').padStart(2, '0')
       that.setData({
-        time:`${hh}:${mm}:${ss}`
+        time: `${hh}:${mm}:${ss}`
       })
     }, 1000);
   },
   async cheackIn() {
-    if(!this.data.isJurisdiction) return
-    let res = await clockIn({token: wx.getStorageSync('token'),lng:'117.219',lat:'31.8443',})
-    // let res = await clockIn({token: wx.getStorageSync('token'),lng:this.data.locationInfo.longitude,lat:this.data.locationInfo.latitude,})
-    if(res.msg == '您不在考勤范围内,是否需要申请外出?'){
+    if (!this.data.isJurisdiction) return
+    // let res = await clockIn({token: wx.getStorageSync('token'),lng:'117.219',lat:'31.8443',})
+    let res = await clockIn({
+      token: wx.getStorageSync('token'),
+      lng: this.data.locationInfo.longitude,
+      lat: this.data.locationInfo.latitude,
+      // lng: '117.168658',
+      // lat: '31.87393'
+    })
+    if (res.msg == '您不在考勤范围内,是否需要申请外出?') {
       wx.showModal({
-        title:'提示',
+        title: '提示',
         content: '您不在考勤范围内,是否需要申请外出?',
-        success(res){
-          wx.navigateTo({
-            url: '/pages/staff/approve/outApp/outApp',
-          })
+        success(res) {
+          if (res.confirm) {
+            wx.navigateTo({
+              url: '/pages/staff/approve/outApp/outApp',
+            })
+          }
         }
       })
-    }else{
-      this.getDetail()
+    } else {
+      this.getPunckDetail()
       wx.showToast({
         title: '打卡成功',
         icon: 'success'
       })
     }
   },
+  async getPunckDetail() {
+    let that = this
+    check({
+      token: wx.getStorageSync('token'),
+      lng: '117.168658',
+      lat: '31.87393'
+    }).then(res => {
+      that.setData({
+        ['info.begin_record1']: res.data.begin_record1,
+        ['info.begin_record2']: res.data.begin_record2,
+        ['info.end_record1']: res.data.end_record1,
+        ['info.end_record2']: res.data.end_record2,
+      })
+    })
+  },
   getLocation() {
     let sInfo = wx.getSystemInfoSync();
-    // if(!sInfo.locationEnabled){
-    //   return wx.showModal({
-    //     title: '提示',
-    //     showCancel:false,
-    //     content:'请确认系统GPS开关是否打开'
-    //   })
-    // }
-    // if(!sInfo.locationAuthorized){
-    //   return wx.showModal({
-    //     title: '提示',
-    //     showCancel:false,
-    //     content:'请确认系统GPS开关是否打开'
-    //   })
-    // }
+    if (!sInfo.locationEnabled) {
+      return wx.showModal({
+        title: '提示',
+        showCancel: false,
+        content: '请确认系统GPS开关是否打开'
+      })
+    }
+    if (!sInfo.locationAuthorized) {
+      return wx.showModal({
+        title: '提示',
+        showCancel: false,
+        content: '请确认系统GPS开关是否打开'
+      })
+    }
 
     let that = this;
     this.setData({
@@ -103,57 +130,61 @@ Page({
         })
         check({
           token: wx.getStorageSync('token'),
-          lng: '117.219',
-          lat: '31.8443'
-          // lng: info.longitude,
-          // lat: info.latitude
+          // lng: '117.168658',
+          // lat: '31.87393'
+          lng: info.longitude,
+          lat: info.latitude
         }).then(res => {
-          if(res.msg == '考勤信息不存在'){
+          if (res.msg == '考勤信息不存在') {
             wx.showToast({
               title: '非考勤人员',
               icon: 'error'
             })
-            setTimeout(_=>{
+            setTimeout(_ => {
               wx.switchTab({
                 url: '/pages/index/index',
               })
-            },500)
-          }
-          else if(res.data.status == 2){
+            }, 500)
+          } else if (res.data.status == 2) {
             that.setData({
               show: false,
               info: res.data,
               locationInfo: info,
-              isRange:false
+              isRange: false
             })
-          }else{
+          } else {
             that.setData({
               show: false,
               locationInfo: info,
               info: res.data,
-              isRange:true
+              isRange: true
             })
           }
-          
+
         })
       },
       fail(err) {
         that.setData({
           show: false,
         })
-        return wx.showModal({
-          title: '提示',
-          showCancel: false,
-          content: '请先授权小程序获取位置信息',
-          success(res) {
-            wx.openSetting()
-          }
-        })
+        if (err.errMsg == 'getLocation:fail auth deny') {
+          return wx.showModal({
+            title: '提示',
+            showCancel: false,
+            content: '请先授权小程序获取位置信息',
+            success(res) {
+              wx.openSetting()
+            }
+          })
+        } else {
+          wx.showModal({
+            title: '提示',
+            showCancel: false,
+            content: '更新过于频繁',
+          })
+        }
       }
     })
-  },
-  upLocation() {
-
   },
   /**
    * 生命周期函数--监听页面加载
@@ -174,7 +205,7 @@ Page({
    */
   onShow: function () {
     this.getTime()
-    this.getDetail()
+    // this.getDetail()
     this.getLocation()
   },
 

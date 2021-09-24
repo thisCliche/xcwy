@@ -1,4 +1,5 @@
 {
   "usingComponents": {},
-  "navigationBarTitleText":"新闻资讯"
+  "navigationBarTitleText":"新闻资讯",
+  "onReachBottomDistance": 50
 }

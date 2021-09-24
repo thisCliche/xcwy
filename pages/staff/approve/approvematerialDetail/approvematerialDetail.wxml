@@ -1,88 +1,58 @@
 <!--pages/person/renovation/renovationDetail/renovationDetail.wxml-->
 <view class="renovationDetail">
 <view class="status card info">
-  <view>任芳提交的物资申请</view>
-  <view class="statusColor">审批通过</view>
+  <view>{{info.name}}提交的物资申请</view>
+  <view class="statusColor">{{info.status_text}}</view>
 </view>
   <view class="title mt20">
     <image src="/static/images/bg.png" class="titleBg"></image> 物资信息
   </view>
   <view class="card info mt20">
     <view>申请物资</view>
-    <view class="time">科技部大门钥匙后勤部正门钥匙</view>
+    <view class="time">{{info.goods.name}}</view>
   </view>
   <view class="card info mt20">
     <view>说明</view>
-    <view class="time">科技部大门钥匙后勤部正门钥匙</view>
+    <view class="time">{{info.reason}}</view>
   </view>
-  <view class="title mt30">
-    <image src="/static/images/bg.png" class="titleBg"></image> 图片
-  </view>
-  <view class="card mt20 workImg info">
-    <van-row>
-      <van-col custom-class="colStyle" span="6">
-        <image src="{{siteHttp}}/140x140"></image>
-      </van-col>
-      <van-col custom-class="colStyle" span="6">
-        <image src="{{siteHttp}}/140x140"></image>
-      </van-col>
-      <van-col custom-class="colStyle" span="6">
-        <image src="{{siteHttp}}/140x140"></image>
-      </van-col>
-      <van-col custom-class="colStyle" span="6">
-        <image src="{{siteHttp}}/140x140"></image>
-      </van-col>
-      <van-col custom-class="colStyle" span="6">
-        <image src="{{siteHttp}}/140x140"></image>
-      </van-col>
-    </van-row>
-  </view>
+  <block wx:if="{{info.images.length!= 0}}">
+    <view class="title mt30">
+      <image src="/static/images/bg.png" class="titleBg"></image> 图片
+    </view>
+    <view class="card mt20 workImg info">
+      <van-row>
+        <van-col wx:for="{{info.images}}" wx:key="index" custom-class="colStyle" span="6">
+          <image src="{{item.url}}"></image>
+        </van-col>
+      </van-row>
+    </view>
+  </block>
   <view class="steps">
-    <view class="item">
-      <view class="avatar">
-        <image src="/static/images/defaultAvatar.png"></image>
-      </view>
-      <view class="itemR">
-        <view class="itemRT">
-          <view class="itemRTL">
-            <view class="itemRTL1">
-              审核员
-            </view>
-            <view class="itemRTL2">
-              已拒绝
-            </view>
-          </view>
-          <view class="itemRT3">03-15 14:36</view>
-        </view>
-        <item class="itemRB">
-          中高考期间，装修影响考生休息，请择期装修
-        </item>
-      </view>
-    </view>
-    <view class="item">
+    <view class="item" wx:for="{{info.logs}}" wx:key="index">
       <view class="avatar last">
-        <image src="/static/images/defaultAvatar.png"></image>
+        <image src="{{item.member.avatar}}"></image>
       </view>
       <view class="itemR">
         <view class="itemRT">
           <view class="itemRTL">
             <view class="itemRTL1">
-              审核员
+              {{item.member.name}}
             </view>
             <view class="itemRTL2">
-              已拒绝
+              {{item.action_text}}
             </view>
           </view>
-          <view class="itemRT3">03-15 14:36</view>
+          <view class="itemRT3">{{item.add_time}}</view>
         </view>
-        <item class="itemRB">
-          中高考期间，装修影响考生休息，请择期装修
-        </item>
+        <!-- <item class="itemRB">
+        </item> -->
       </view>
     </view>
   </view>
-  <view class="btn1">
-    <van-button bind:click="reject" custom-class="btnStyle" plain color="#F54235" >驳回</van-button>
-    <van-button bind:click="resolve" type="info">同意</van-button>
-  </view>
+  <block wx:if="{{type}}">
+    <view class="btn1">
+      <van-button bind:click="reject" custom-class="btnStyle" plain color="#F54235">驳回</van-button>
+      <van-button bind:click="resolve" type="info">同意</van-button>
+    </view>
+  </block>
 </view>

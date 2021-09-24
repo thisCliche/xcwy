@@ -37,6 +37,7 @@
   align-items: center;
   justify-content: space-between;
   margin: 40rpx 0;
+  padding: 0 20rpx;
 }
 .itemL{
   display: flex;
@@ -45,6 +46,7 @@
 .itemL image{
   height: 70rpx;
   width: 70rpx;
+  border-radius: 50%;
 }
 .itemL .itemName{
   font-size: 30rpx;

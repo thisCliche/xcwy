@@ -24,6 +24,10 @@ function taskType(type) {
       return '保洁卫生'
   }
 }
+function sliceTime(str){
+  return str.slice(0,10)
+}
 module.exports = {
-  taskType: taskType
+  taskType: taskType,
+  sliceTime:sliceTime
 };

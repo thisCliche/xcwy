@@ -1,46 +1,56 @@
 // pages/person/renovation/renovationDetail/renovationDetail.js
-import {detail,done} from '../../../../api/build'
+import {
+  detail,
+  done
+} from '../../../../api/build'
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    info:{},
-    id:'',
+    info: {},
+    id: '',
+    is_leader: false
   },
-  async toDone(){
-    let res = await done({token:wx.getStorageSync('token'),id:this.data.id})
-    if(res.code == 200){
+  async toDone() {
+    let res = await done({
+      token: wx.getStorageSync('token'),
+      id: this.data.id
+    })
+    if (res.code == 200) {
       wx.showToast({
         title: '操作成功',
       })
-      setTimeout(_=>{
+      setTimeout(_ => {
         wx.navigateBack({
           delta: 1,
         })
-      },500)
+      }, 500)
     }
   },
-  async getDetail(id){
-    let res =await detail({id,token:wx.getStorageSync('token')})
+  async getDetail(id) {
+    let res = await detail({
+      id,
+      token: wx.getStorageSync('token')
+    })
     this.setData({
-      info:res.data
+      info: res.data
     })
   },
-  toPay(){
+  toPay() {
     wx.navigateTo({
       url: '/pages/staff/renovation/pay/pay',
     })
   },
-  reject(){
+  reject() {
     wx.navigateTo({
       url: `/pages/staff/renovation/reject/reject?id=${this.data.id}`,
     })
   },
-  resolve(){
+  resolve() {
     wx.navigateTo({
-      url: '/pages/onwner/payment/payPage/payPage',
+      url: `/pages/staff/renovation/pay1/pay1?id=${this.data.id}`,
     })
   },
   /**
@@ -48,9 +58,18 @@ Page({
    */
   onLoad: function (options) {
     this.setData({
-      id:options.id
+      id: options.id
     })
     this.getDetail(options.id)
+    if (wx.getStorageSync('staffInfo').branch_id == 1) {
+      this.setData({
+        is_leader: true
+      })
+    } else {
+      this.setData({
+        is_leader: false
+      })
+    }
   },
 
   /**

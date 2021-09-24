@@ -18,34 +18,34 @@
   <view class="card mt20 attendance">
     <view class="attendanceList">
       <view class="attendanceItem mt20">
-        <view>上班时间 {{info.begin_time2}}</view>
-          <view class="status mt10">{{attendaceInfo.firstStart}} 
+        <view>上班时间 {{info.begin_time1}}</view>
+          <view class="status mt10">{{info.begin_record1}} 
           <!-- <van-tag plain round color="#FFA477">迟到</van-tag> -->
           </view>
       </view>
       <view class="attendanceItem mt20">
-        <view>上班时间 {{info.end_time2}}</view>
-          <view class="status mt10">{{attendaceInfo.firstEnd}} 
+        <view>下班时间 {{info.begin_time2}}</view>
+          <view class="status mt10">{{info.end_record1}} 
           <!-- <van-tag plain round color="#FFA477">迟到</van-tag> -->
           </view>
       </view>
       <block wx:if="{{info.begin_time2 != ''}}">
         <view class="attendanceItem mt20">
-          <view>上班时间 {{info.begin_time2}}</view>
-          <view class="status mt10">{{attendaceInfo.secondStart}} 
+          <view>上班时间 {{info.end_time1}}</view>
+          <view class="status mt10">{{info.begin_record2}} 
           <!-- <van-tag plain round color="#FFA477">迟到</van-tag> -->
           </view>
         </view>
         <view class="attendanceItem mt20">
-          <view>上班时间 {{info.end_time2}}</view>
-          <view class="status mt10">{{attendaceInfo.secondEnd}} 
+          <view>下班时间 {{info.end_time2}}</view>
+          <view class="status mt10">{{info.end_record2}} 
           <!-- <van-tag plain round color="#FFA477">迟到</van-tag> -->
           </view>
         </view>
       </block>
     </view>
-    <view class="btnWrap" bindtap="cheackIn">
-      <view class="attendanceBtn {{isRange?'attendanceBtnEn':'attendanceBtnDe'}}">
+    <view class="btnWrap">
+      <view class="attendanceBtn {{isRange?'attendanceBtnEn':'attendanceBtnDe'}}" bindtap="cheackIn">
         <view class="afterWork" wx:if="{{!isRange}}">外勤打卡</view>
         <view class="afterWork" wx:else>打卡</view>
         <view class="afterTime mt10">{{time}}</view>

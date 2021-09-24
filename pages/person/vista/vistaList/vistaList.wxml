@@ -1,6 +1,6 @@
 <!--pages/person/vista/vistaList/vistaList.wxml-->
 <view class="vistaList">
-  <van-tabs bind:change="changed" active="{{ active }}" color="#FFA477" bind:click="onClick">
+  <van-tabs bind:change="changed" active="{{ active }}" color="#FFA477" bind:click="onClick" sticky>
     <van-tab title="未到访" title-style="{{current == 0?'font-weight:700;':''}}">
       <view class="" wx:if="{{!list.length == 0}}">
         <view class="card item" wx:for="{{list}}" wx:key="index" data-id="{{item.id}}" bindtap="toDetail">

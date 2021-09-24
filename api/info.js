@@ -7,6 +7,13 @@ export function newsList(data) {
     data
   })
 }
+export function visitor(data) {
+  return request({
+    url: 'index/visitor',
+    method: 'get',
+    data
+  })
+}
 export function detail(data) {
   return request({
     url: 'info/detail',
@@ -39,6 +46,13 @@ export function fee_carDetail(data) {
   return request({
     url: 'fee_car/detail',
     method: 'get',
+    data
+  })
+}
+export function pay(data) {
+  return request({
+    url: 'app/pay',
+    method: 'post',
     data
   })
 }

@@ -19,6 +19,7 @@ Component({
    */
   data: {
     deFualtHttp:App.globalData.rootHttp,
+    
   },
 
   /**

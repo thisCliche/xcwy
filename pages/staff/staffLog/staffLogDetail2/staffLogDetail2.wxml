@@ -3,7 +3,7 @@
   <view class="card info item">
     <view class="itemL">
       <view class="img">
-        <image src="/static/images/defaultAvatar.png"></image>
+        <image src="{{info.avatar}}"></image>
       </view>
       <view>
         <view class="name">{{info.name}}的日志</view>
@@ -32,15 +32,15 @@
   </block> -->
   <view class="card mt20 info">
     <view class="cardT">
-      工作内容
+      {{type == '1'?'今日':'本周'}}工作内容
     </view>
     <view class="cardD">
       {{info.content.tasks}}
     </view>
   </view>
-  <view class="card mt20 info">
+  <!-- <view class="card mt20 info">
     <view class="cardT">
-      工作总结
+      {{type == '1'?'今日':'本周'}}工作总结
     </view>
     <view class="cardD">
       {{info.content.summary}}
@@ -48,23 +48,20 @@
   </view>
   <view class="card mt20 info">
     <view class="cardT">
-      下月工作计划
+      {{type == '1'?'明天':'下周'}}工作计划
     </view>
     <view class="cardD">
       {{info.content.plan}}
     </view>
-  </view>
+  </view> -->
   <block wx:if="{{info.images.length != 0}}">
     <view class="title mt30">
     <image src="/static/images/bg.png" class="titleBg"></image> 图片
   </view>
   <view class="card workImg photo mt20">
     <van-row>
-      <van-col custom-class="photoCol" span="6">
-        <image src="{{siteHttp}}/140x140"></image>
-      </van-col>
-      <van-col custom-class="photoCol" span="6">
-        <image src="{{siteHttp}}/140x140"></image>
+      <van-col wx:for="{{info.images}}" wx:key="index" custom-class="photoCol" span="6">
+        <image src="{{item.url}}"></image>
       </van-col>
     </van-row>
   </view>
@@ -77,10 +74,10 @@
       {{info.remark}}
     </view>
   </view>
-  <view class="mt20">已读：{{info.read}}人</view>
-  <view class="pepople">
+  <view class="mt20">已读：{{info.is_read.length}}人</view>
+  <view class="pepople" wx:if="{{info.is_read.length != 0}}">
     <van-row>
-      <van-col custom-class="colStyle" span="6" wx:for="{{info.report_receiver}}" wx:key="index">
+      <van-col custom-class="colStyle" span="6" wx:for="{{info.is_read}}" wx:key="index">
         <view class="card img1">
           <image src="{{item.avatar}}"></image>
           <view class="name van-ellipsis">{{item.name}}</view>
@@ -89,10 +86,20 @@
     </van-row>
   </view>
   <view class="mt20 unread">
-    <view>未读：3人</view>
+    <view>未读：{{info.un_read.length}}人</view>
     <!-- <view class="unreadBtn">提醒阅读</view> -->
   </view>
-  <view class="title mt30">
+  <view class="pepople" wx:if="{{info.un_read.length != 0}}">
+    <van-row>
+      <van-col custom-class="colStyle" span="6" wx:for="{{info.un_read}}" wx:key="index">
+        <view class="card img1">
+          <image src="{{item.avatar}}"></image>
+          <view class="name van-ellipsis">{{item.name}}</view>
+        </view>
+      </van-col>
+    </van-row>
+  </view>
+  <!-- <view class="title mt30">
     <image src="/static/images/bg.png" class="titleBg"></image> 审批意见
   </view>
   <view class="card mt20 info" wx:for="{{info.report_receiver}}" wx:key="index">
@@ -106,10 +113,7 @@
       
     </view>
     <view class="cardD">{{item.comment}}</view>
-  </view>
-  <view class="btn">
-    <van-button bind:click="toApprove" block type="info">月报审批</van-button>
-  </view>
+  </view> -->
   <van-action-sheet round="{{false}}" bind:select="onSelect" show="{{ show }}" actions="{{ actions }}"
     bind:cancel="onCancel" cancel-text="取消" />
 </view>

@@ -13,13 +13,12 @@ Page({
       page:1,
       limit:100
     },
-    list:[{title:`城隍庙文化馆-老城保护中心-信息楼-
-    1011栋-105室（到访地址）`,estimateTime:'到访时间：2021-06-07',des:'到访人数：1人',time:'2021-06-01'},{title:`城隍庙文化馆-老城保护中心-信息楼-
-    1011栋-105室（到访地址）`,estimateTime:'到访时间：2021-06-07',des:'到访人数：1人',time:'2021-06-01'}]
+    count:0,
+    list:[]
   },
   onClick(e){
     this.setData({
-      current:e.detail.name
+      current:e.detail.name,
     })
   },
   async getvisitorList(){
@@ -84,7 +83,13 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
+    // if (this.data.list.length < this.data.count) {
+    //   let page = ++this.data.queryInfo.page
+    //   this.setData({
+    //     ['queryInfo.page']: page
+    //   })
+    //   this.getList(1)
+    // }
   },
 
   /**

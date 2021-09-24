@@ -1,0 +1,45 @@
+<!-- 自定义时间筛选器 -->
+<view hidden="{{!pickerShow}}">
+  <view class="picker-container " animation="{{animationData}}">
+    <view class="btn-box">
+      <view class="pick_btn" bindtap="_pickerHide">取消</view>
+      <view class='pick_btn' style="color: #19f" bindtap="onConfirm">{{config.clear}}</view>
+      <!-- <view class='pick_btn' style="color: #19f" bindtap="_reset">{{config.clear}}</view> -->
+    </view>
+    <view class = 'input_time' hidden="{{!config.isTimeFrame}}">
+      <view class="view_time">
+        <view class = "time_text">开始日期</view>
+        <input type="text" class="disable_time {{isStartEnd == 1 ? 'start_active' : ''}}" placeholder="点击选择开始日期" disabled="true"
+         placeholder-class="disable-time-placeholder" value="{{startValue}}" bindtap="_getStartValue"/>
+      </view>
+      <view class="line-time">
+        <text>—</text>
+      </view>
+      <view class="view_time">
+        <view class = "time_text">结束日期</view>
+        <input type="text" class="disable_time {{isStartEnd == 2 ? 'end_active' : ''}}" placeholder="点击选择结束日期" disabled="true"
+        placeholder-class="disable-time-placeholder" value="{{endValue}}" bindtap="_getEndValue"/>
+      </view>
+    </view>
+    <picker-view class='sensorTypePicker' indicator-style='height: 35px;' bindchange="changeDateTime"
+      value="{{value}}" bindpickstart="handlePickStart" bindpickend="handlePickEndFirst">
+      <picker-view-column style="min-width: 70px;flex-shrink: 0">
+        <view class='picker-item' wx:for="{{years}}" wx:key='*this'>{{item}}年</view>
+      </picker-view-column>
+      <picker-view-column>
+        <view class='picker-item' wx:for="{{months}}" wx:key='*this'>{{item}}月</view>
+      </picker-view-column>
+      <picker-view-column>
+        <view class='picker-item' wx:for="{{days}}" wx:key='*this'>{{item}}日</view>
+      </picker-view-column>
+      <picker-view-column hidden="{{!config.isWeek}}">
+        <view class='picker-item' wx:for="{{weeks}}" wx:key='*this'>{{item}}</view>
+      </picker-view-column>
+    </picker-view>
+    <!-- <view class='determine-list'>
+      <button class="determine-submit-button determine-submit-large" bindtap="onConfirm">确定</button>
+    </view> -->
+  </view>
+  <!-- 遮罩 -->
+  <view class="sensorType-screen" bindtap="hideModal" animation="{{animationOpacity}}"/>
+</view>

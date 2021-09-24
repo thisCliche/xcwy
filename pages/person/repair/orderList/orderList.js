@@ -1,5 +1,7 @@
 // pages/onwner/order/orderList/orderList.js
-import {repairList} from '../../../../api/repair'
+import {
+  repairList
+} from '../../../../api/repair'
 Page({
 
   /**
@@ -8,34 +10,51 @@ Page({
   data: {
     isLoad: false,
     active: 0,
-    current:0,
-    queryInfo:{
-      page:1,
-      limit:10
+    current: 0,
+    queryInfo: {
+      page: 1,
+      limit: 10
     },
-    list:[]
+    count: 0,
+    list: []
   },
   onClick(e) {
     this.setData({
-      current: e.detail.name
+      current: e.detail.name,
+      ['queryInfo.page']: 1
     })
     this.getrepairList()
   },
-  toDetail(e){
+  toDetail(e) {
     wx.navigateTo({
-      url: `/pages/person/repair/orderDetail/orderDetail?id=${e.currentTarget.dataset.id}`,
+      url: `/pages/person/repair/orderDetail1/orderDetail1?id=${e.currentTarget.dataset.id}`,
     })
   },
-  async getrepairList(e){
+  async getrepairList(type = 0) {
     this.setData({
       isLoad: true
     })
     let status = this.data.current
-    let res = await repairList({...this.data.queryInfo,status:++status,token:wx.getStorageSync('token')})
-    this.setData({
-      list: res.data.list,
-      isLoad: false,
+    let res = await repairList({
+      ...this.data.queryInfo,
+      status: ++status,
+      token: wx.getStorageSync('token')
     })
+    if (type == 0) {
+      this.setData({
+        list: res.data.list,
+        count: res.data.count,
+        isLoad: false,
+      })
+    }else{
+      let list = this.data.list.concat(...res.data.list)
+      this.setData({
+        list: list,
+        count: res.data.count,
+        isLoad: false,
+      })
+    }
+
   },
   /**
    * 生命周期函数--监听页面加载
@@ -83,7 +102,13 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
+    if (this.data.list.length < this.data.count) {
+      let page = ++this.data.queryInfo.page
+      this.setData({
+        ['queryInfo.page']: page
+      })
+      this.getList(1)
+    }
   },
 
   /**

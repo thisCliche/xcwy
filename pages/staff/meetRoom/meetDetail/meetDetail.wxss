@@ -40,3 +40,10 @@
 .van-button{
   width: 330rpx !important;
 }
+.isUseTime .van-cell__title{
+  flex: none !important;
+}
+.isUseTime .van-cell__value{
+  flex: 1 !important;
+  text-align: right !important;
+}

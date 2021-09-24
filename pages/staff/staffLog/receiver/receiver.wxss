@@ -41,6 +41,7 @@
 .itemL image{
   height: 70rpx;
   width: 70rpx;
+  border-radius: 50%;
 }
 .itemL .itemName{
   font-size: 30rpx;

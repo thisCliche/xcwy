@@ -1,6 +1,16 @@
 <!--pages/staff/task/selectTask/selectTask.wxml-->
 <view class="selectTask">
-  <view class="card mt20 info" wx:for="{{list}}" wx:key="index">
-    <van-checkbox value="{{ checked }}" bind:change="onChange">{{item.title}}</van-checkbox>
+  <block wx:if="{{list.length!= 0}}">
+    <van-radio-group value="{{ radio }}" bind:change="onChange">
+      <view class="card info" style="margin-top: 20rpx;" wx:for="{{list}}" wx:key="index">
+        <van-radio name="{{item.id}}">{{item.title}}</van-radio>
+      </view>
+    </van-radio-group>
+    <view class="btn" wx:if="{{isBtn}}">
+      <van-button type="info" block bind:click="backUp">确定</van-button>
+    </view>
+  </block>
+  <view class="card info" wx:else>
+    <van-empty description="暂无任务" />
   </view>
 </view>

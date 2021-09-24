@@ -1,8 +1,10 @@
 <!--pages/staff/staffLog/approve/approve.wxml-->
 <view class="approve">
   <view class="card info rate">
-    <view style="margin-right: 20rpx;">工作评分</view>
-    <van-rate value="{{ score }}" color="#ffba00" bind:change="onChange" />
+    <van-cell-group border="{{ false }}">
+    <van-field type="number" label="工作评分" model:value="{{ score }}" placeholder="请输入工作评分" border="{{ false }}" />
+  </van-cell-group>
+    <!-- <van-rate value="{{ score }}" color="#ffba00" bind:change="onChange" /> -->
   </view>
   <view class="card mt20">
     <van-cell-group>

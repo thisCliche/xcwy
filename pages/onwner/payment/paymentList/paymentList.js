@@ -1,5 +1,5 @@
 // pages/onwner/payment/paymentList/paymentList.js
-import {propertyRecord,index} from '../../../../api/fee'
+import {propertyRecord,index,buildDetail} from '../../../../api/fee'
 const filter = require('../../../../utils/router.js');
 Page(filter.loginCheck({
 
@@ -7,7 +7,7 @@ Page(filter.loginCheck({
    * 页面的初始数据
    */
   data: {
-    list: []
+    list: {}
   },
   toDetail(e){
     wx.navigateTo({
@@ -19,6 +19,16 @@ Page(filter.loginCheck({
     // let res = await propertyRecord({token:wx.getStorageSync('token'),page:1,limit:100})
     this.setData({
       list:res.data
+    })
+  },
+  topay(e){
+    wx.navigateTo({
+      url: `/pages/onwner/payment/payPage/payPage?type=${e.currentTarget.dataset.type}&house_id=${this.data.list.house_id}`,
+    })
+  },
+  topay1(e){
+    wx.navigateTo({
+      url: `/pages/person/renovation/renovationPay/renovationPay`,
     })
   },
   /**

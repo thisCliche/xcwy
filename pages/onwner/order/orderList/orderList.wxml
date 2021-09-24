@@ -5,7 +5,7 @@
       <van-loading />
     </view>
   </van-overlay>
-  <van-tabs bind:click="onClick" active="{{ active }}" color="#FFA477">
+  <van-tabs bind:click="onClick" active="{{ active }}" color="#FFA477" sticky> 
     <van-tab title="待审核" title-style="{{current == 0?'font-weight:700;':''}}">
       <view class="card" wx:if="{{!list.length == 0}}">
         <view class="item" wx:for="{{list}}" wx:key="index" data-id="{{item.id}}" bindtap="toDetail">

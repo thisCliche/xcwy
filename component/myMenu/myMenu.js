@@ -30,6 +30,24 @@ Component({
       wx.navigateTo({
         url: e.currentTarget.dataset.page,
       })
+    },
+    toDetail1(e){
+      if(wx.getStorageSync('userInfo')){
+        let type  = JSON.parse(wx.getStorageSync('userInfo')).type
+        if(type == 1){
+          wx.navigateTo({
+            url: '/pages/person/attestation/attestation',
+          })
+        }else{
+          wx.navigateTo({
+            url: e.currentTarget.dataset.page,
+          })
+        }
+      }else{
+        wx.navigateTo({
+          url: e.currentTarget.dataset.page,
+        })
+      }
     }
   }
 })

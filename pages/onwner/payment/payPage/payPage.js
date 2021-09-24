@@ -1,18 +1,180 @@
 // pages/onwner/payment/payPage/payPage.js
+import {
+  waterDetail,
+  propertyDetail,
+  electricDetail,
+  rentDetail,
+  buildDetail,
+  buildOrder
+} from '../../../../api/fee'
+import {
+  pay
+} from '../../../../api/info'
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    upInfo: {},
+    info: {},
+    typeName: '',
   },
-
+  async getDetial1(type) {
+    let res = await waterDetail({
+      house_id: this.data.upInfo.house_id,
+      token: wx.getStorageSync('token')
+    })
+    this.setData({
+      info: res.data
+    })
+  },
+  async getDetial2(type) {
+    let res = await propertyDetail({
+      house_id: this.data.upInfo.house_id,
+      token: wx.getStorageSync('token')
+    })
+    this.setData({
+      info: res.data
+    })
+  },
+  async getDetial3(type) {
+    let res = await electricDetail({
+      house_id: this.data.upInfo.house_id,
+      token: wx.getStorageSync('token')
+    })
+    this.setData({
+      info: res.data
+    })
+  },
+  async getDetial4(type) {
+    let res = await rentDetail({
+      house_id: this.data.upInfo.house_id,
+      token: wx.getStorageSync('token')
+    })
+    this.setData({
+      info: res.data
+    })
+  },
+  async buildOrder() {
+    // let newTable = this.data.upInfo.type.charAt(0).toUpperCase() + this.data.upInfo.type.slice(1)
+    // this.data.info.fee
+    if (this.data.upInfo.type != 'build') {
+      let res = await buildOrder({
+        token: wx.getStorageSync('token'),
+        house_id: this.data.upInfo.house_id,
+        money: this.data.info.fee,
+        table: this.data.upInfo.type
+      })
+      let result = await pay({
+        token: wx.getStorageSync('token'),
+        table: this.data.upInfo.type,
+        order_no: res.data
+      })
+      wx.requestPayment({
+        timeStamp: result.data.timeStamp + '',
+        nonceStr: result.data.nonceStr,
+        package: result.data.package,
+        signType: 'MD5',
+        paySign: result.data.paySign,
+        success(result) {
+          wx.showToast({
+            title: '支付成功',
+          })
+          setTimeout(_ => {
+            wx.navigateBack({
+              delta: 1,
+            })
+          }, 500)
+        },
+        fail(result) {
+          wx.showToast({
+            title: '支付失败',
+            icon: 'error'
+          })
+          console.log('失败', result)
+        }
+      })
+    }else{
+      let result = await pay({
+        token: wx.getStorageSync('token'),
+        table: this.data.upInfo.type,
+        order_no: this.data.info.order_no
+      })
+      wx.requestPayment({
+        timeStamp: result.data.timeStamp + '',
+        nonceStr: result.data.nonceStr,
+        package: result.data.package,
+        signType: 'MD5',
+        paySign: result.data.paySign,
+        success(result) {
+          wx.showToast({
+            title: '支付成功',
+          })
+          setTimeout(_ => {
+            wx.navigateBack({
+              delta: 1,
+            })
+          }, 500)
+        },
+        fail(result) {
+          wx.showToast({
+            title: '支付失败',
+            icon: 'error'
+          })
+          console.log('失败', result)
+        }
+      })
+    }
+  },
+  async getDetial5(type) {
+    let res = await buildDetail({
+      house_id: this.data.upInfo.house_id,
+      token: wx.getStorageSync('token')
+    })
+    this.setData({
+      info: res.data
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.setData({
+      upInfo: options
+    })
+    switch (options.type) {
+      case 'property':
+        this.setData({
+          typeName: '物业'
+        })
+        this.getDetial2(options.type);
+        break;
+      case 'water':
+        this.setData({
+          typeName: '水'
+        })
+        this.getDetial1(options.type);
+        break;
+      case 'electric':
+        this.setData({
+          typeName: '电'
+        })
+        this.getDetial3(options.type);
+        break;
+      case 'rent':
+        this.setData({
+          typeName: '物业租赁'
+        })
+        this.getDetial4(options.type);
+        break;
+      case 'build':
+        this.setData({
+          typeName: '装修缴'
+        })
+        this.getDetial5(options.type);
+        break;
+    }
   },
 
   /**

@@ -30,6 +30,12 @@
       <van-field model:value="{{ health }}" placeholder="请输入" border="{{ false }}" />
     </van-cell-group>
   </view>
+  <view class="card mt20">
+    <view class="cardD">其他</view>
+    <van-cell-group border="{{ false }}">
+      <van-field model:value="{{ other }}" placeholder="请输入" border="{{ false }}" />
+    </van-cell-group>
+  </view>
   <view class="title mt30">
     <view class="titleL">
       <image src="/static/images/bg.png" class="titleBg"></image> 图片
@@ -40,7 +46,7 @@
   </view>
   <view class="card info mt20">
     <van-cell-group border="{{ false }}">
-      <van-uploader bind:delete="deleteImg" deletable="{{ true }}" file-list="{{ fileList }}" bind:after-read="afterRead" />
+      <van-uploader max-count="9" bind:delete="deleteImg" deletable="{{ true }}" file-list="{{ fileList }}" bind:after-read="afterRead" />
     </van-cell-group>
   </view>
   <view class="btn">

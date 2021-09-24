@@ -23,7 +23,7 @@ Page({
     switch (type) {
       case 1:
         wx.navigateTo({
-          url: `/pages/staff/releaseTask/releaseDaily/releaseDaily?id=${id}&title=${title}`,
+          url: `/pages/staff/releaseTask/releaseDaily/releaseDaily?id=${id}&title=${title}&type=1`,
         })
         break;
       case 2:
@@ -33,12 +33,12 @@ Page({
         break;
       case 3:
         wx.navigateTo({
-          url: `/pages/staff/releaseTask/releaseSafe/releaseSafe?id=${id}&title=${title}&type=3`,
+          url: `/pages/staff/releaseTask/releaseDaily/releaseDaily?id=${id}&title=${title}&type=3`,
         })
         break;
       case 4:
         wx.navigateTo({
-          url: `/pages/staff/releaseTask/releaseSafe/releaseSafe?id=${id}&title=${title}&type=4`,
+          url: `/pages/staff/releaseTask/releaseDaily/releaseDaily?id=${id}&title=${title}&type=4`,
         })
         break;
       default:

@@ -1,5 +1,8 @@
 // pages/staff/staffLog/writeLog/writeLog.js
-import {add} from '../../../../api/report'
+import {
+  add,
+  week
+} from '../../../../api/report'
 let App = getApp()
 Page({
 
@@ -9,23 +12,45 @@ Page({
   data: {
     type: 1,
     typeName: '日报',
-    tasks:'',
-    summary:'',
-    plan:'',
-    remark:'',
-    with_week:false,
+    tasks: '',
+    summary: '',
+    plan: '',
+    remark: '',
+    with_week: false,
     fileList: [],
-    siteHttp:App.globalData.siteHttp,
-    rootHttp:App.globalData.rootHttp,
-    minHeight:{minHeight: 80},
-    selectList: []
+    siteHttp: App.globalData.siteHttp,
+    rootHttp: App.globalData.rootHttp,
+    minHeight: {
+      minHeight: 80
+    },
+    selectList: [],
+    weekList: [],
   },
-  onChange(e){
+  onChange(e) {
+    if (e.detail) {
+      this.getWeekList()
+    } else {
+      this.setData({
+        weekList: []
+      })
+    }
     this.setData({
       with_week: e.detail
     })
   },
-  deletePep(e){
+  async getWeekList() {
+    let res = await week({
+      token: wx.getStorageSync('token'),
+      page: 1,
+      limit: 4,
+      type: 2,
+      status: 1
+    })
+    this.setData({
+      weekList: res.data
+    })
+  },
+  deletePep(e) {
     let selectList = this.data.selectList
     selectList.splice(e.currentTarget.dataset.index, 1)
     this.setData({
@@ -67,40 +92,40 @@ Page({
       },
     });
   },
-  getselect(e){
+  getselect(e) {
     let selectList = this.data.selectList
     let newList = []
-    if(selectList.length !=0){
-      for(let i of e.selectList){
+    if (selectList.length != 0) {
+      for (let i of e.selectList) {
         let isExist = false
-        for(let j of selectList){
-          if(i.id == j.id){
+        for (let j of selectList) {
+          if (i.id == j.id) {
             isExist = true
             break;
           }
         }
-        if(!isExist){
+        if (!isExist) {
           newList.push(i)
         }
       }
       let newSelectList = selectList.concat(...newList)
       this.setData({
-        selectList:newSelectList
+        selectList: newSelectList
       })
-    }else{
+    } else {
       this.setData({
         selectList: e.selectList
       })
     }
   },
-  toSelect(){
+  toSelect() {
     wx.navigateTo({
       url: '/pages/staff/staffLog/receiver/receiver',
     })
   },
   async submit() {
     let uid = []
-    this.data.selectList.map(item=>{
+    this.data.selectList.map(item => {
       uid.push(item.id)
     })
     let form = {
@@ -112,34 +137,38 @@ Page({
       plan: this.data.plan,
       images: JSON.stringify(this.data.fileList),
       remark: this.data.remark,
-      with_week:this.data.with_week
+      with_week: this.data.with_week
     }
-    for (let i in form) {
-      if (form[i] === '') {
-        if(i == 'remark'){
+    if (this.data.with_week) {
 
-        }else{
-          return wx.showToast({
-            title: '请填写完整',
-            icon: 'error'
-          })
+    } else {
+      for (let i in form) {
+        if (form[i] === '') {
+          if (i == 'remark') {
+
+          } else {
+            return wx.showToast({
+              title: '请填写完整',
+              icon: 'error'
+            })
+          }
         }
       }
     }
     let res = await add(form)
-    if(res.code == 200) {
+    if (res.code == 200) {
       wx.showToast({
         title: '提交成功',
       })
-      setTimeout(_=>{
+      setTimeout(_ => {
         wx.navigateBack({
           delta: 1,
         })
-      },500)
-    }else{
+      }, 500)
+    } else {
       wx.showToast({
         title: res.msg,
-        icon:'error'
+        icon: 'error'
       })
     }
   },
@@ -150,21 +179,27 @@ Page({
     this.setData({
       type: options.type,
     })
-    switch(options.type){
+    switch (options.type) {
       case '1':
-        this.setData({typeName:'日报'});
+        this.setData({
+          typeName: '日报'
+        });
         wx.setNavigationBarTitle({
           title: '日报',
         })
         break;
       case '2':
-        this.setData({typeName:'周报'});
+        this.setData({
+          typeName: '周报'
+        });
         wx.setNavigationBarTitle({
           title: '周报',
         })
         break;
       default:
-        this.setData({typeName:'月报'})
+        this.setData({
+          typeName: '月报'
+        })
         wx.setNavigationBarTitle({
           title: '月报',
         })

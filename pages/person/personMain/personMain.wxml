@@ -6,7 +6,7 @@
         <image class="avatar" src="{{deFualtHttp}}/mini/images/avtar.png"></image>
         <view class="name">点击登录</view>
       </view>
-      <view class="topR" wx:if="{{type}}">
+      <view class="topR" wx:if="{{isStaff == '业主'}}">
         <image class="tz" src="{{deFualtHttp}}/mini/images/tz.png"></image>
       </view>
     </view>
@@ -16,7 +16,7 @@
         <view class="name">{{userInfo.name}}</view>
       </view>
       <view class="topR" wx:if="{{isStaff=='业主'}}" bindtap="toTz">
-        <image class="tz" src="{{deFualtHttp}}/mini/images/tz.png"></image>
+        <image class="tz" src="{{deFualtHttp}}/mini/images/tz1.png"></image>
       </view>
     </view>
   </view>

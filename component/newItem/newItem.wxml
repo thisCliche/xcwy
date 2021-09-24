@@ -1,13 +1,13 @@
 <!--component/newItem/newItem.wxml-->
 <view class="item" wx:for="{{newList}}" wx:key="index" bindtap="toDetail" data-id="{{item.id}}">
   <view class="left">
-    <image src="https://via.placeholder.com/122x168" alt="" />
+    <image src="{{item.img}}" alt="" />
     <!-- <image src="{{item.pic_path}}" alt="" /> -->
   </view>
   <view class="right">
     <view class="titleWrap">
       <view class="title van-ellipsis">{{item.title}}</view>
-      <view class="time">{{item.add_time}}</view>
+      <view class="time">{{item.add_time_text}}</view>
     </view>
     <view class="des van-multi-ellipsis--l2">{{item.description}}</view>
   </view>

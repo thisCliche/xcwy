@@ -27,7 +27,8 @@
 .btn{
   margin-top: 80rpx;
   display: flex;
-  justify-content: space-between;
+  /* justify-content: space-between; */
+  justify-content: center;
 }
 .pay{
   background: #feecea !important;

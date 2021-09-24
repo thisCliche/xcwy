@@ -1,5 +1,10 @@
 // pages/staff/approve/leaveApp/leaveApp.js
-import {approve_goodsGoods,approve_goodsAdd} from '../../../../api/approve'
+import {
+  approve_goodsGoods,
+  approve_goodsAdd,
+  approve_goodsgoodsType,
+  approve_goodsgetFlowMember
+} from '../../../../api/approve'
 let app = getApp()
 Page({
 
@@ -7,20 +12,36 @@ Page({
    * 页面的初始数据
    */
   data: {
-    time1:'请选择',
-    time2:'请选择',
-    rootHttp:app.globalData.rootHttp,
-    reason:'',
-    count:null,
-    minheight:{minHeight:80},
-    type:'请选择',
-    hyShow:false,
+    time1: '请选择',
+    time2: '请选择',
+    rootHttp: app.globalData.rootHttp,
+    reason: '',
+    count: null,
+    minheight: {
+      minHeight: 80
+    },
+    type: '请选择',
+    typeName:'请选择',
+    hyShow: false,
+    typeShow: false,
+    type_id:'',
+    goods_id: 0,
     columns: [],
+    typeColumns: [],
     fileList: [],
-    calendarShow1:false,
-    calendarShow2:false,
+    calendarShow1: false,
+    calendarShow2: false,
+    flowMember:[],
   },
   onDisplay(e) {
+    if(e.currentTarget.dataset.type == 'hyShow'){
+      if(this.data.typeName == '请选择'){
+        return wx.showToast({
+          title: '请先选择类型',
+          icon:'error'
+        })
+      }
+    }
     let type = e.currentTarget.dataset.type
     this.setData({
       [type]: true
@@ -49,14 +70,31 @@ Page({
       time2: this.formatDate(event.detail),
     });
   },
+  onpickerConfirmtype(event){
+    const {
+      picker,
+      value,
+      index
+    } = event.detail;
+    this.setData({
+      typeName: value.text,
+      type_id: value.type,
+      typeShow: false
+    })
+    this.getGoods()
+  },
   onpickerConfirm(event) {
-    const { picker, value, index } = event.detail;
+    const {
+      picker,
+      value,
+      index
+    } = event.detail;
     console.log(value)
-      this.setData({
-        type : value.text,
-        goods_id: value.goods_id,
-        hyShow: false
-      })
+    this.setData({
+      type: value.text,
+      goods_id: value.goods_id,
+      hyShow: false
+    })
   },
   deleteImg(event) {
     let fileList = this.data.fileList
@@ -93,8 +131,11 @@ Page({
       },
     });
   },
-  async getGoods(){
-    let res =await approve_goodsGoods({token:wx.getStorageSync('token')})
+  async getGoods() {
+    let res = await approve_goodsGoods({
+      token: wx.getStorageSync('token'),
+      type:this.data.type_id
+    })
     let columns = []
     for (let i in res.data) {
       let item = {
@@ -117,26 +158,26 @@ Page({
     }
     for (let i in form) {
       if (form[i] == '') {
-          return wx.showToast({
-            title: '请填写完整',
-            icon: 'error'
-          })
+        return wx.showToast({
+          title: '请填写完整',
+          icon: 'error'
+        })
       }
     }
     let res = await approve_goodsAdd(form)
-    if(res.code == 200) {
+    if (res.code == 200) {
       wx.showToast({
         title: '提交成功',
       })
-      setTimeout(_=>{
+      setTimeout(_ => {
         wx.navigateBack({
           delta: 1,
         })
-      },500)
-    }else{
+      }, 500)
+    } else {
       wx.showToast({
         title: res.msg,
-        icon:'error'
+        icon: 'error'
       })
     }
   },
@@ -158,7 +199,28 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    this.getGoods()
+    // this.getGoods()
+    let that = this
+    approve_goodsgoodsType().then(res => {
+      let keys = Object.keys(res.data)
+      let values = Object.values(res.data)
+      let typeColumns = []
+      for (let i = 0; i < keys.length; i++) {
+        let item={
+          type: keys[i],
+          text:values[i]
+        }
+        typeColumns.push(item)
+      }
+      that.setData({
+        typeColumns
+      })
+    })
+    approve_goodsgetFlowMember({token:wx.getStorageSync('token')}).then(res=>{
+      that.setData({
+        flowMember: res.data
+      })
+    })
   },
 
   /**

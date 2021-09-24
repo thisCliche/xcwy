@@ -17,9 +17,9 @@
       <view class="desL">申请状态：</view>
       <view class="desL fail">{{item.status_text}}</view>
     </view>
-    <view class="btn" wx:if="{{item.status == 2}}">
-      <van-button catchtap="toPay" size="small" type="info" custom-class="btnStyle">缴纳保证金</van-button>
-    </view>
+    <!-- <view class="btn" wx:if="{{item.status == 2}}">
+      <van-button catchtap="toPay" size="small" data-id="{{item.id}}" type="info" custom-class="btnStyle">缴纳保证金</van-button>
+    </view> -->
   </view>
 
   </block>

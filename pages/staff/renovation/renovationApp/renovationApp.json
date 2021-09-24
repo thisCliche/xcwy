@@ -1,4 +1,5 @@
 {
   "usingComponents": {},
-  "navigationBarTitleText":"装修申请"
+  "navigationBarTitleText":"装修申请",
+  "onReachBottomDistance": 50
 }

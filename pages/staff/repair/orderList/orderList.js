@@ -1,5 +1,7 @@
 // pages/onwner/order/orderList/orderList.js
-import {repairList} from '../../../../api/repair'
+import {
+  repairList
+} from '../../../../api/repair'
 Page({
 
   /**
@@ -9,31 +11,47 @@ Page({
     isLoad: false,
     active: 0,
     current: 0,
-    queryInfo:{
-      page:1,
-      limit:10
+    queryInfo: {
+      page: 1,
+      limit: 10
     },
-    list:[{title:'文化馆',time:'2021-06-01',des:'老城保护中心',charge:'超3小时未接单'},{title:'文化馆',time:'2021-06-01',des:'老城保护中心',charge:'超3小时未接单'}],
+    count: 0,
+    list: [],
   },
-  toDetail(e){
+  toDetail(e) {
     wx.navigateTo({
       url: `/pages/person/repair/orderDetail/orderDetail?id=${e.currentTarget.dataset.id}`,
     })
   },
-  async getList(){
+  async getList(type = 0) {
     this.setData({
       isLoad: true
     })
     let status = this.data.current
-    let res = await repairList({...this.data.queryInfo,status:++status,token:wx.getStorageSync('token')})
-    this.setData({
-      list: res.data.list,
-      isLoad: false,
+    let res = await repairList({
+      ...this.data.queryInfo,
+      status: ++status,
+      token: wx.getStorageSync('token')
     })
+    if (type == 0) {
+      this.setData({
+        list: res.data.list,
+        count: res.data.count,
+        isLoad: false,
+      })
+    } else {
+      let list = this.data.list.concat(...res.data.list)
+      this.setData({
+        list: list,
+        count: res.data.count,
+        isLoad: false,
+      })
+    }
   },
   onClick(e) {
     this.setData({
-      current: e.detail.name
+      current: e.detail.name,
+      ['queryInfo.page']: 1
     })
     this.getList()
   },
@@ -83,7 +101,13 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
+    if (this.data.list.length < this.data.count) {
+      let page = ++this.data.queryInfo.page
+      this.setData({
+        ['queryInfo.page']: page
+      })
+      this.getList(1)
+    }
   },
 
   /**

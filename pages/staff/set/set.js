@@ -1,4 +1,5 @@
 // pages/staff/set/set.js
+import eventBus from '../../../utils/eventBus'
 Page({
 
   /**
@@ -8,16 +9,18 @@ Page({
 
   },
   toDetial(e){
-    console.log(e)
-    console.log(e.currentTarget.dataset.page)
     wx.navigateTo({
       url: e.currentTarget.dataset.page,
     })
   },
   loginOut() {
     wx.clearStorageSync('userInfo')
+    if(wx.getStorageSync('staffInfo')){
+      wx.clearStorageSync('staffInfo')
+    }
     wx.clearStorageSync('token')
     wx.clearStorageSync('refresh_token')
+    eventBus.emit('reload')
     wx.showToast({
       title: '退出成功',
     })

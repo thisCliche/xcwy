@@ -1,0 +1,135 @@
+.picker-item{
+  line-height: 50px;  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 自定义时间 */
+.picker-container {
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  align-items: center;
+
+  width: 100%;
+  overflow: hidden;
+  position: fixed;
+  bottom: -320px;
+  left: 0;
+  /* height: 0; */
+  transition: height 0.5s;
+  z-index: 2000;
+  background: white;
+  /* border-bottom: 1px solid #E8E8E8; */
+}
+.sensorType-screen{
+  width: 100vw;
+  /* height:400rpx; */
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: #333333;
+  opacity: 0;
+  overflow: hidden;
+  z-index: 1999;
+  color: #fff;
+}
+.sensorTypePicker{
+  width: 690rpx;
+  height: 130px;
+  /* padding: 45px 0; */
+}
+.picker-item{
+  line-height: 50px;  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  /* overflow: hidden; */
+}
+.box{
+   padding: 0 10px; 
+}
+
+/* 至 */
+.to{
+  width:100%;
+  display: flex;
+  justify-content: center;align-items: center;
+  color:rgb(138,138,138);
+  font-size: 30rpx;
+  /* font-size:30rpx; */
+}
+
+.btn-box{
+  width: 100%;
+  display: flex;
+  height: 90rpx;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #eee;
+}
+.pick_btn{
+  padding: 7px 15px;
+  color: #666666;
+  /* background-color: #159; */
+}
+
+
+/*输入框中的时间样式*/
+.input_time {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* border-bottom: 1px solid #eee; */
+}
+.view_time {
+  padding: 24rpx 30rpx;
+}
+.time_text {
+  font-size: 24rpx;
+  color: #999;
+}
+.disable_time {
+  font-size: 30rpx;
+  background-color: #F0F2F5;
+  color: #666;
+  margin-top: 20rpx;
+  width: 230rpx;
+  padding: 12rpx 30rpx;
+  border-radius: 6rpx;
+}
+.disable-time-placeholder{
+  color: #999999;
+  font-size: 24rpx;
+}
+.determine-list{
+  margin-top: 24rpx;
+  width: 94%;
+}
+.determine-submit-button{
+  font-size: 30rpx;
+  background: linear-gradient(to bottom,#289CFF,#51CBFF);
+  color: #FFFFFF;
+  margin-bottom: 36rpx;
+}
+.determine-submit-button::after{
+  border: 0;
+}
+.determine-submit-large{
+  height: 72rpx;
+  line-height: 72rpx;
+  width: 100%;
+  border-radius: 12rpx;
+}
+.line-time{
+  margin-top: 40rpx;
+  color: #999999;
+}
+.start_active, .end_active{
+  border:2rpx #289CFF solid;
+}

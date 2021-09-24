@@ -1,4 +1,5 @@
 {
   "usingComponents": {},
-  "navigationBarTitleText":"会议室预约"
+  "navigationBarTitleText":"会议室预约",
+  "onReachBottomDistance": 50
 }

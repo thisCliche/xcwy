@@ -55,6 +55,7 @@ margin-top: 10rpx;
 .pepople image{
   width: 62rpx;
   height: 62rpx;
+  border-radius: 50%;
 }
 .report .itemL{
   display: flex;
@@ -62,6 +63,7 @@ margin-top: 10rpx;
 .report .itemL image{
   width: 70rpx;
   height: 70rpx;
+  border-radius: 50%;
 }
 .report .itemL .itemImg{
   margin-right: 20rpx;

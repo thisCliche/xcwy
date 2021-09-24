@@ -5,6 +5,7 @@
     "pages/person/personInfo/personInfo",
     "pages/person/modifyPhone/modifyPhone",
     "pages/person/modifyNick/modifyNick",
+    "pages/person/modifyIdCard/modifyIdCard",
     "pages/person/meetBook/meetBookList/meetBookList",
     "pages/person/meetBook/meetBookDetail/meetBookDetail",
     "pages/person/renovation/renovationList/renovationList",
@@ -15,6 +16,7 @@
     "pages/person/complaint/complaintDetail/complaintDetail",
     "pages/person/repair/orderList/orderList",
     "pages/person/repair/orderDetail/orderDetail",
+    "pages/person/repair/orderDetail1/orderDetail1",
     "pages/person/vista/vistaList/vistaList",
     "pages/person/vista/vistaDetail/vistaDetail",
     "pages/person/attestation/attestation",
@@ -29,6 +31,7 @@
     "pages/onwner/parking/vehicle/vehicle",
     "pages/onwner/parking/payPage/payPage",
     "pages/onwner/parking/addCar/addCar",
+    "pages/onwner/parking/getcarNo/getcarNo",
     "pages/onwner/complaint/complaint",
     "pages/onwner/repair/repair",
     "pages/onwner/vistResig/vistResigForm/vistResigForm",
@@ -52,12 +55,17 @@
     "pages/staff/taskFeed/taskDetail/taskDetail",
     "pages/staff/releaseTask/releaseTask/releaseTask",
     "pages/staff/releaseTask/releaseDaily/releaseDaily",
+    "pages/staff/releaseTask/releaseDaily1/releaseDaily1",
+    "pages/staff/releaseTask/releaseDaily2/releaseDaily2",
     "pages/staff/releaseTask/releaseSafe/releaseSafe",
+    "pages/staff/releaseTask/releaseSafe1/releaseSafe1",
     "pages/staff/releaseTask/releaseSelect/releaseSelect",
     "pages/staff/renovation/renovationHandle/renovationHandle",
+    "pages/staff/renovation/renovationHandle1/renovationHandle1",
     "pages/staff/renovation/renovationApp/renovationApp",
     "pages/staff/renovation/reject/reject",
     "pages/staff/renovation/pay/pay",
+    "pages/staff/renovation/pay1/pay1",
     "pages/staff/complaint/complaintList/complaintList",
     "pages/staff/complaint/complaintDetail/complaintDetail",
     "pages/staff/repair/orderList/orderList",
@@ -82,11 +90,15 @@
     "pages/staff/approve/materialApp/materialApp",
     "pages/staff/approve/purchaseApp/purchaseApp",
     "pages/staff/approve/outApp/outApp",
+    "pages/staff/approve/reject/reject",
     "pages/staff/attendance/attendanceWrap/attendanceWrap",
     "pages/staff/attendance/attendanceDetail/attendanceDetail",
     "pages/contact/pickProject/pickProject",
+    "pages/contact/pickRepairProject/pickRepairProject",
     "pages/contact/pickTaskProject/pickTaskProject",
-    "pages/staff/task/selectTask/selectTask"
+    "pages/staff/task/selectTask/selectTask",
+    "pages/test/contact",
+    "pages/staff/staffLog/selectLog/selectLog"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -132,15 +144,19 @@
     "van-empty": "@vant/weapp/empty/index",
     "van-loading": "@vant/weapp/loading/index",
     "van-overlay": "@vant/weapp/overlay/index",
-    "van-datetime-picker": "@vant/weapp/datetime-picker/index"
+    "van-datetime-picker": "@vant/weapp/datetime-picker/index",
+    "time-picker": "/component/timeDataPiker/timeDataPiker",
+    "van-index-bar": "@vant/weapp/index-bar/index",
+    "van-index-anchor": "@vant/weapp/index-anchor/index",
+    "van-collapse": "@vant/weapp/collapse/index",
+    "van-collapse-item": "@vant/weapp/collapse-item/index"
   },
   "tabBar": {
     "custom": true,
     "color": "#000000",
     "selectedColor": "#000000",
     "backgroundColor": "#000000",
-    "list": [
-      {
+    "list": [{
         "pagePath": "pages/index/index",
         "text": "首页"
       },

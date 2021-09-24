@@ -2,9 +2,9 @@
 <view class="newsDetail">
   <view class="title">{{info.title}}</view>
   <view class="time">
-    发布时间：{{info.add_time}}
+    发布时间：{{info.add_time_text}}
   </view>
   <view class="content">
-    {{info.content}}
+  <rich-text nodes="{{info.content}}"></rich-text>
   </view>
 </view>

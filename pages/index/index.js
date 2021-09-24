@@ -1,9 +1,11 @@
 let App = getApp()
 import {
-  newsList
+  newsList,
+  visitor
 } from '../../api/info'
 import {
-  myProfile
+  myProfile,
+  getUser
 } from '../../api/login.js'
 import eventBus from '../../utils/eventBus'
 
@@ -13,12 +15,16 @@ Page({
    */
   data: {
     isStaff: '访客',
-    // isStaff: '业主',
-    // isStaff: '员工',
     siteHttp: App.globalData.siteHttp,
     deFualtHttp: App.globalData.rootHttp,
-    banner: 4,
+    height: 0,
+    banner: [],
     menu1: [{
+        name: "社区公告",
+        icon: App.globalData.rootHttp + '/mini/images/menu8.png',
+        page: '/pages/onwner/news/notice/notice'
+      },
+      {
         name: "访客邀请",
         icon: App.globalData.rootHttp + '/mini/images/menu1.png',
         page: '/pages/onwner/vistResig/vistResigInfo/vistResigInfo'
@@ -33,14 +39,15 @@ Page({
         icon: App.globalData.rootHttp + '/mini/images/menu3.png',
         page: '/pages/onwner/complaint/complaint'
       },
-      {
+
+    ],
+    menu2: [{
         name: "停车管理",
         icon: App.globalData.rootHttp + '/mini/images/menu4.png',
         page: '/pages/onwner/parking/vehicle/vehicle'
       },
-    ],
-    menu2: [{
-        name: "物业缴费",
+      {
+        name: "费用缴纳",
         icon: App.globalData.rootHttp + '/mini/images/menu5.png',
         page: '/pages/onwner/payment/paymentList/paymentList'
       },
@@ -54,11 +61,6 @@ Page({
         icon: App.globalData.rootHttp + '/mini/images/menu7.png',
         page: '/pages/onwner/meetingRoom/meetingRoom'
       },
-      {
-        name: "社区公告",
-        icon: App.globalData.rootHttp + '/mini/images/menu8.png',
-        page: '/pages/onwner/news/notice/notice'
-      },
     ],
     menu3: [{
       name: "访客预约",
@@ -67,7 +69,8 @@ Page({
     }, {
       name: "我的预约",
       icon: App.globalData.rootHttp + '/mini/images/menu10.png',
-      page: '/pages/onwner/order/orderList/orderList'
+      page: '/pages/onwner/order/orderList/orderList',
+      info: 0
     }, ],
     newList: [],
     noticeList: [],
@@ -97,20 +100,20 @@ Page({
       }, {
         name: "查看日志",
         icon: App.globalData.rootHttp + '/mini/images/staff/menu5.png',
-        page: '/pages/staff/staffLog/staffList/staffList',
+        page: `/pages/staff/staffLog/staffList/staffList`,
         info: ''
       },
       {
         name: "维修工单",
         icon: App.globalData.rootHttp + '/mini/images/staff/menu6.png',
         page: '/pages/staff/repair/orderList/orderList',
-        info: '7'
+        info: 0
       },
       {
         name: "投诉处理",
         icon: App.globalData.rootHttp + '/mini/images/staff/menu7.png',
         page: '/pages/staff/complaint/complaintList/complaintList',
-        info: '21'
+        info: 0
       },
       {
         name: "装修申请",
@@ -128,25 +131,25 @@ Page({
     staffMenutask1: [{
         name: "日常巡查",
         icon: App.globalData.rootHttp + '/mini/images/staff/menu10.png',
-        page: '/pages/staff/task/selectTask/selectTask?type=1',
+        page: '/pages/staff/releaseTask/releaseDaily1/releaseDaily1',
         info: ''
       },
       {
         name: "安全督查",
         icon: App.globalData.rootHttp + '/mini/images/staff/menu11.png',
-        page: '/pages/staff/task/selectTask/selectTask?type=2',
+        page: '/pages/staff/releaseTask/releaseSafe1/releaseSafe1?type=2',
         info: ''
       },
       {
         name: "管家巡查",
         icon: App.globalData.rootHttp + '/mini/images/staff/menu12.png',
-        page: '/pages/staff/task/selectTask/selectTask?type=3',
+        page: '/pages/staff/releaseTask/releaseDaily2/releaseDaily2?type=3',
         info: ''
       },
       {
         name: "工程巡查",
         icon: App.globalData.rootHttp + '/mini/images/staff/menu13.png',
-        page: '/pages/staff/task/selectTask/selectTask?type=4',
+        page: '/pages/staff/releaseTask/releaseDaily2/releaseDaily2?type=4',
         info: ''
       }, {
         name: "发布任务",
@@ -168,16 +171,16 @@ Page({
         page: '/pages/staff/staffLog/writeLog2/writeLog2?type=1',
         info: ''
       },
-      {
-        name: "周报",
-        icon: App.globalData.rootHttp + '/mini/images/staff/menu18.png',
-        page: '/pages/staff/staffLog/writeLog2/writeLog2?type=2',
-        info: ''
-      },
+      // {
+      //   name: "周报",
+      //   icon: App.globalData.rootHttp + '/mini/images/staff/menu18.png',
+      //   page: '/pages/staff/staffLog/writeLog2/writeLog2?type=2',
+      //   info: ''
+      // },
       {
         name: "月报",
         icon: App.globalData.rootHttp + '/mini/images/staff/menu17.png',
-        page: '/pages/staff/staffLog/writeLog2/writeLog2?type=3',
+        page: '/pages/staff/staffLog/writeLog/writeLog',
         info: ''
       },
     ],
@@ -186,6 +189,10 @@ Page({
     let res = await newsList({
       channel_id: 2,
       limit: 3
+    })
+    res.data.list.forEach(item => {
+      item.img = `${this.data.deFualtHttp}${item.pic_path}`
+      item.add_time_text = item.add_time_text.substr(0, 10)
     })
     this.setData({
       newList: res.data.list
@@ -205,15 +212,42 @@ Page({
       channel_id: 1,
       limit: 4
     })
-    console.log(res)
+    this.setData({
+      banner: res.data.list
+    })
   },
-  async getUserInfo() {
-    let res = await myProfile({
+  async getstaffInfo() {
+    let res = await getUser({
       token: wx.getStorageSync('token')
     })
     this.setData({
+      ['staffMenuMy1[5].info']:res.data.repair_count,
+      ['staffMenuMy1[6].info']:res.data.feedback_count,
+    })
+    wx.setStorageSync('staffInfo', res.data)
+  },
+  async getUserInfo() {
+    if (!wx.getStorageSync('token')) {
+      
+      return this.setData({
+        isStaff: '访客'
+      })
+    }
+    let res = await myProfile({
+      token: wx.getStorageSync('token')
+    })
+    if(res.data.identity == '访客'){
+      let res = await visitor({token:wx.getStorageSync('token')})
+      this.setData({
+        ['menu3[1].info']:res.data.wait_count
+      })
+    }
+    this.setData({
       isStaff: res.data.identity
     })
+    if (res.data.identity == '员工') {
+      this.getstaffInfo()
+    }
   },
   tonotice() {
     wx.navigateTo({
@@ -224,6 +258,10 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    let height = wx.getSystemInfoSync().screenHeight - wx.getSystemInfoSync().safeArea.height
+    this.setData({
+      height,
+    })
     let that = this
     eventBus.on('reload', _ => {
       that.getUserInfo()

@@ -1,4 +1,5 @@
 {
   "usingComponents": {},
-  "navigationBarTitleText":"投诉处理"
+  "navigationBarTitleText":"投诉处理",
+  "onReachBottomDistance": 50
 }

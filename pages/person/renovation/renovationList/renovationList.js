@@ -13,13 +13,13 @@ Page({
       url: `/pages/person/renovation/renovationDetail/renovationDetail?id=${e.currentTarget.dataset.id}`,
     })
   },
-  toPay(){
+  toPay(e){
     wx.navigateTo({
-      url: '/pages/person/renovation/renovationPay/renovationPay',
+      url: `/pages/person/renovation/renovationPay/renovationPay?id=${e.currentTarget.dataset.id}`,
     })
   },
   async getList(){
-    let res = await record({token:wx.getStorageSync('token')})
+    let res = await record({token:wx.getStorageSync('token'),page:1,limit:100})
     this.setData({
       list: res.data.list
     })

@@ -19,7 +19,7 @@
   </view>
   <view class="card mt20">
     <van-cell-group>
-      <van-field required label="访问人数" model:value="{{ renyuan }}" placeholder="请输入" border="{{ false }}" input-align="right"/>
+      <van-field type="number" required label="访问人数" model:value="{{ renyuan }}" placeholder="请输入" border="{{ false }}" input-align="right"/>
     </van-cell-group>
   </view>
   <view class="card mt20">
@@ -29,7 +29,7 @@
     </van-cell-group>
     <van-cell-group inset>
       <van-field required label="联系人" model:value="{{ yyr }}" placeholder="请输入" border="{{ false }}" input-align="right"/>
-      <van-field required label="联系号码" model:value="{{ lxdh }}" placeholder="请输入" border="{{ false }}" input-align="right"/>
+      <van-field type="number" required label="联系号码" model:value="{{ lxdh }}" placeholder="请输入" border="{{ false }}" input-align="right"/>
       <van-field required label="身份证号" model:value="{{ sfzh }}" placeholder="请输入" border="{{ false }}" input-align="right"/>
     </van-cell-group>
   </view>

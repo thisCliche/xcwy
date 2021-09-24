@@ -5,10 +5,11 @@
     <view class="mt20">{{info.name}} {{info.mobile}}</view>
   </view>
   <view class="btn">
-    <!-- <van-button type="info" bind:click="generateLink">复制邀请链接</van-button> -->
     <van-button type="info" block bind:click="generateCode">生成邀请二维码</van-button>
+    <van-button type="info" bind:click="generateLink">复制邀请链接</van-button>
   </view>
-  <view class="img mt20">
-    <image src="{{info.qrcode}}"></image>
+  <view class="img mt20" wx:if="{{isShow}}">
+    <image style="margin-bottom: 20rpx;" src="{{info.qrcode}}"></image>
+    <van-button type="info" block bind:click="saveImg">保存二维码</van-button>
   </view>
 </view>

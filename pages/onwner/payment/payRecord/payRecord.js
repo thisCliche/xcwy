@@ -3,7 +3,9 @@ import {
   waterRecord,
   propertyRecord,
   electricRecord,
-  rentRecord
+  rentRecord,
+  record,
+  buildRecord
 } from '../../../../api/fee'
 Page({
 
@@ -13,64 +15,99 @@ Page({
   data: {
     queryInfo: {
       page: 1,
-      limit: 10
-    }
+      limit: 100
+    },
+    list: []
   },
   toDetail() {
-    wx.navigateTo({
-      url: '/pages/onwner/payment/payPage/payPage',
-    })
+
   },
   async getList1(house_id) {
     let res = await waterRecord({
       ...this.data.queryInfo,
-      token:wx.getStorageSync('token'),
+      token: wx.getStorageSync('token'),
       house_id
     })
-    console.log(res)
+    this.setData({
+      list: res.data.list
+    })
   },
   async getList2(house_id) {
     let res = await propertyRecord({
       ...this.data.queryInfo,
-      token:wx.getStorageSync('token'),
+      token: wx.getStorageSync('token'),
       house_id
     })
-    console.log(res)
+    this.setData({
+      list: res.data.list
+    })
   },
   async getList3(house_id) {
     let res = await electricRecord({
       ...this.data.queryInfo,
-      token:wx.getStorageSync('token'),
+      token: wx.getStorageSync('token'),
       house_id
     })
-    console.log(res)
+    this.setData({
+      list: res.data.list
+    })
   },
   async getList4(house_id) {
     let res = await rentRecord({
       ...this.data.queryInfo,
-      token:wx.getStorageSync('token'),
+      token: wx.getStorageSync('token'),
       house_id
     })
-    console.log(res)
+    this.setData({
+      list: res.data.list
+    })
+  },
+  async getList5(car_no) {
+    let res = await record({
+      ...this.data.queryInfo,
+      token: wx.getStorageSync('token'),
+      car_no
+    })
+    this.setData({
+      list: res.data.list
+    })
+  },
+  async getList6(house_id) {
+    let res = await buildRecord({
+      ...this.data.queryInfo,
+      token: wx.getStorageSync('token'),
+      house_id
+    })
+    this.setData({
+      list: res.data.list
+    })
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     console.log(options)
-    switch (options.type) {
-      case 'property':
-        this.getList2(options.house_id)
-        break;
-      case 'rent':
-        this.getList4(options.house_id)
-        break;
-      case 'water':
-        this.getList1(options.house_id)
-        break;
-      default:
-        this.getList3(options.house_id)
+    if (options.no) {
+      this.getList5(options.no)
+    } else {
+      switch (options.type) {
+        case 'property':
+          this.getList2(options.house_id)
+          break;
+        case 'rent':
+          this.getList4(options.house_id)
+          break;
+        case 'water':
+          this.getList1(options.house_id)
+          break;
+        case 'build':
+          this.getList6(options.house_id)
+          break;
+        default:
+          this.getList3(options.house_id)
+      }
     }
+
   },
 
   /**

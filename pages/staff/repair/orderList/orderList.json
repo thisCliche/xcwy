@@ -1,4 +1,5 @@
 {
   "usingComponents": {},
-  "navigationBarTitleText":"维修工单"
+  "navigationBarTitleText":"维修工单",
+  "onReachBottomDistance": 50
 }

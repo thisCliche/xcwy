@@ -64,3 +64,31 @@ export function rentDetail(data) {
     data
   })
 }
+export function record(data) {
+  return request({
+    url: 'fee_car/record',
+    method: 'get',
+    data
+  })
+}
+export function buildDetail(data) {
+  return request({
+    url: 'fee/buildDetail',
+    method: 'get',
+    data
+  })
+}
+export function buildRecord(data) {
+  return request({
+    url: 'fee/buildRecord',
+    method: 'get',
+    data
+  })
+}
+export function buildOrder(data) {
+  return request({
+    url: 'fee/buildOrder',
+    method: 'post',
+    data
+  })
+}

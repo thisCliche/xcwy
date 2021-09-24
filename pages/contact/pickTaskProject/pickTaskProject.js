@@ -24,16 +24,18 @@ Page({
         list: res.data
       })
     } else {
-      let res = await project({token:wx.getStorageSync('token'),id:1})
+      let res = await project({token:wx.getStorageSync('token')})
       this.setData({
         list: res.data
       })
     }
   },
   toNext(e) {
+    console.log(e)
     if (this.data.list[0].hasOwnProperty('id')) {
       this.setData({
         project_id: e.currentTarget.dataset.item.id,
+        projectName:e.currentTarget.dataset.item.name,
         last: true
       })
       return
@@ -41,7 +43,7 @@ Page({
     this.setData({
       projectName:e.currentTarget.dataset.item.name
     })
-    this.getList(e.currentTarget.dataset.id)
+    this.getList(e.currentTarget.dataset.item.id)
   },
   back() {
     let pages = getCurrentPages()

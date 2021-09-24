@@ -1,1 +1,4 @@
 /* pages/onwner/agreement/agreement.wxss */
+.agreement{
+  padding: 28rpx;
+}

@@ -93,8 +93,14 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    if(options.title != '日常巡查'){
+      wx.setNavigationBarTitle({
+        title: '管家巡检/工程巡检',
+      })
+    }
     this.setData({
       title: options.title,
+      type:this.data.type,
       id: options.id
     })
   },

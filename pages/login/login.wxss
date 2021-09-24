@@ -2,16 +2,31 @@
 .login-main {
   overflow: hidden;
 }
+
 .login-main-title {
   font-size: 36rpx;
   color: #000000;
   text-align: center;
-  
+
+}
+
+.btn1 {
+  width: 500rpx;
+  line-height: 50rpx;
+  height: 80rpx;
+  background: #4790F4;
+  background-blend-mode: normal,
+    normal;
+  font-size: 36rpx;
+  font-weight: normal;
+  color: #fff;
+  margin-top: 40rpx;
+  margin-bottom: 18rpx;
 }
 
 .btn {
-  line-height: 80rpx;
   width: 500rpx;
+  line-height: 50rpx;
   height: 80rpx;
   background: #4790F4;
   background-blend-mode: normal,

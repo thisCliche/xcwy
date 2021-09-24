@@ -21,6 +21,20 @@ export function detail(data) {
     data
   })
 }
+export function week(data) {
+  return request({
+    url: 'report/week',
+    method: 'get',
+    data
+  })
+}
+export function del(data) {
+  return request({
+    url: 'report/del',
+    method: 'post',
+    data
+  })
+}
 export function approve(data) {
   return request({
     url: 'report/approve',

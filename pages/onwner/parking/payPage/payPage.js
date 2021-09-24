@@ -9,13 +9,17 @@ Page({
   data: {
     car_no:'',
     deFualtHttp:app.globalData.rootHttp,
+    info: {}
   },
-  async getList(no){
-    let res = await fee_carRecord({car_no:no,token:wx.getStorageSync('token')})
-    console.log(res)
-  },
+  // async getList(no){
+  //   let res = await fee_carRecord({car_no:no,token:wx.getStorageSync('token')})
+  //   console.log(res)
+  // },
   async getDetail(no){
     let res = await fee_carDetail({car_no:no,token:wx.getStorageSync('token')}) 
+    this.setData({
+      info: res.data
+    })
     console.log(res)
   },
   /**
@@ -25,7 +29,7 @@ Page({
     this.setData({
       car_no:options.no
     })
-    this.getList(options.no)
+    // this.getList(options.no)
     this.getDetail(options.no)
   },
 

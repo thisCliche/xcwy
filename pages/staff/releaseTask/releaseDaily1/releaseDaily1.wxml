@@ -1,0 +1,31 @@
+<!--pages/staff/releaseTask/releaseDaily/releaseDaily.wxml-->
+<view class="releaseDaily">
+  <view class="card">
+    <view class="cardD">督查任务</view>
+    <van-cell-group border="{{ false }}">
+      <van-cell bind:click="toSelect" title="{{title}}" is-link></van-cell>
+    </van-cell-group>
+  </view>
+  <view class="card mt20">
+    <view class="cardD">巡查情况</view>
+    <van-cell-group border="{{ false }}">
+      <van-field type="textarea" autosize="{{minHeight}}" model:value="{{ patrol }}" placeholder="请输入" border="{{ false }}" />
+    </van-cell-group>
+  </view>
+  <view class="title mt30">
+    <view class="titleL">
+      <image src="/static/images/bg.png" class="titleBg"></image> 图片
+    </view>
+    <!-- <view>
+      <van-icon name="add" size="26px" color="#4790F4"/>
+    </view> -->
+  </view>
+  <view class="card info mt20">
+    <van-cell-group border="{{ false }}">
+      <van-uploader max-count="9" bind:delete="deleteImg" deletable="{{ true }}" file-list="{{ fileList }}" bind:after-read="afterRead" />
+    </van-cell-group>
+  </view>
+  <view class="btn">
+    <van-button block type="info" bind:click="submit">提交</van-button>
+  </view>
+</view>

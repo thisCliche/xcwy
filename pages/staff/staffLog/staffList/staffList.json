@@ -1,4 +1,5 @@
 {
   "usingComponents": {},
-  "navigationBarTitleText":"查看日志"
+  "navigationBarTitleText":"查看日志",
+  "onReachBottomDistance": 50
 }

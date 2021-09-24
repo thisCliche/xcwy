@@ -1,6 +1,6 @@
 /* pages/onwner/order/orderList/orderList.wxss */
 .orderList{
-  padding: 0rpx 20rpx;
+  /* padding: 0rpx 20rpx; */
 }
 .card{
   margin: 30rpx 10rpx 10rpx;

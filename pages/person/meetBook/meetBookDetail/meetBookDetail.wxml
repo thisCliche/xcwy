@@ -22,7 +22,7 @@
       <van-cell title="预约人" value="{{info.name}}" border="{{ false }}" />
       <van-cell title="联系电话" value="{{info.mobile}}" border="{{ false }}" />
       <van-cell title="预计人数" value="{{info.count}}人" border="{{ false }}" />
-      <van-cell title="使用时间" value="{{info.begin_time}}{{info.begin_type}}-{{info.end_time}}{{info.end_type}}" border="{{ false }}" />
+      <van-cell class="isUseTime" title="使用时间" value="{{info.begin_time}}{{info.begin_type}}-{{info.end_time}}{{info.end_type}}" border="{{ false }}" />
       <van-cell title="会议室" value="{{info.room.name}}" border="{{ false }}" />
     </van-cell-group>
   </view>

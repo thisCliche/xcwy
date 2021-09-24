@@ -12,6 +12,7 @@ Page({
     list: [],
     branchName: '',
     staffList: [],
+    indexList: [],
   },
   toDetail() {
     wx.navigateTo({
@@ -32,18 +33,39 @@ Page({
     })
     let res = await contact({
       token: wx.getStorageSync('token'),
-      branch_id: e.currentTarget.dataset.branch_id
+    })
+    let indexList = []
+    res.data.forEach(item => {
+      if (item.data.length != 0) {
+        indexList.push(item.letter)
+      }
     })
     this.setData({
-      staffList: res.data
+      staffList: res.data,
+      indexList
     })
+  },
+  toPhone(e) {
+    if (e.currentTarget.dataset.mobile != '') {
+      wx.makePhoneCall({
+        phoneNumber: e.currentTarget.dataset.mobile
+      })
+    }
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     this.getList()
-    // this.staffList()
+    let e = {
+      currentTarget: {
+        dataset: {
+          branch_id: 1,
+          name: "城新物业"
+        }
+      }
+    }
+    this.staffList(e)
   },
 
   /**

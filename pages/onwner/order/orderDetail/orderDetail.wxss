@@ -30,6 +30,7 @@
 .car_no{
   letter-spacing: 30rpx;
   font-size: 40rpx;
+  padding-left: 32rpx;
 }
 .inputContainer {
   position: relative;

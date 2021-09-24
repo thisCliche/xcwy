@@ -15,7 +15,7 @@
             </view>
             <view class="itemLR">
               <view class="itemName">{{item.name}}</view>
-              <view class="itemDes">总经理</view>
+              <view class="itemDes">{{item.position}}</view>
             </view>
           </view>
           <view class="itemR">

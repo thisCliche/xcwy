@@ -8,14 +8,14 @@
   <scroll-view class="scrollCol" >
   <block wx:if="{{list.length != 0}}">
     <view class="card info mt20">
-      <view class="item mt20" wx:for="{{list}}" wx:key="index">
+      <view class="item mt20" wx:for="{{list}}" wx:key="index" data-mobile="{{item.mobile}}" bindtap="toPhone">
         <view class="itemL">
           <view>
             <image src="{{item.avatar}}"> </image>
           </view>
           <view class="itemLR">
             <view class="itemName">{{item.name}}</view>
-            <view class="itemDes">总经理</view>
+            <view class="itemDes">{{item.position}}</view>
           </view>
         </view>
         <view class="itemR">

@@ -24,7 +24,7 @@ Page({
       })
       setTimeout(_=>{
         wx.navigateBack({
-          delta: 1,
+          delta: 2,
         })
       },500)
     }else{

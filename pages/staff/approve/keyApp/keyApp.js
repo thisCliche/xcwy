@@ -1,5 +1,9 @@
 // pages/staff/approve/leaveApp/leaveApp.js
-import {approve_keyAdd,approve_keyKey} from '../../../../api/approve'
+import {
+  approve_keyAdd,
+  approve_keyKey,
+  approve_keygetFlowMember
+} from '../../../../api/approve'
 let app = getApp()
 Page({
 
@@ -7,26 +11,31 @@ Page({
    * 页面的初始数据
    */
   data: {
-    rootHttp:app.globalData.rootHttp,
-    time1:'请选择',
-    time2:'请选择',
-    duration:null,
-    reason:'',
+    rootHttp: app.globalData.rootHttp,
+    time1: '请选择',
+    time2: '请选择',
+    duration: null,
+    reason: '',
     minDate: new Date().getTime(),
-    minheight:{minHeight:80},
-    typeName:'请选择',
-    key_id:'',
+    minheight: {
+      minHeight: 80
+    },
+    typeName: '请选择',
+    key_id: '',
     type: null,
-    hyShow:false,
+    hyShow: false,
     columns: [],
     fileList: [],
-    calendarShow1:false,
-    calendarShow2:false,
-    datetime1:new Date().getTime(),
-    datetime2:new Date().getTime(),
+    calendarShow1: false,
+    calendarShow2: false,
+    datetime1: new Date().getTime(),
+    datetime2: new Date().getTime(),
+    flowMember:[],
   },
-  async getKey(){
-    let res = await approve_keyKey({token:wx.getStorageSync('token')})
+  async getKey() {
+    let res = await approve_keyKey({
+      token: wx.getStorageSync('token')
+    })
     let columns = []
     for (let i in res.data) {
       let item = {
@@ -60,7 +69,7 @@ Page({
     this.setData({
       calendarShow1: false,
       time1: this.formatDate(event.detail),
-      minDate:event.detail
+      minDate: event.detail
     });
   },
   onConfirm2(event) {
@@ -70,12 +79,16 @@ Page({
     });
   },
   onpickerConfirm(event) {
-    const { picker, value, index } = event.detail;
-      this.setData({
-        hyShow: false,
-        typeName: value.text,
-        key_id: value.key_id,
-      })
+    const {
+      picker,
+      value,
+      index
+    } = event.detail;
+    this.setData({
+      hyShow: false,
+      typeName: value.text,
+      key_id: value.key_id,
+    })
   },
   deleteImg(event) {
     let fileList = this.data.fileList
@@ -113,7 +126,7 @@ Page({
     });
   },
   async submit() {
-    
+
     let form = {
       key_id: this.data.key_id,
       token: wx.getStorageSync('token'),
@@ -131,19 +144,19 @@ Page({
       }
     }
     let res = await approve_keyAdd(form)
-    if(res.code == 200) {
+    if (res.code == 200) {
       wx.showToast({
         title: '提交成功',
       })
-      setTimeout(_=>{
+      setTimeout(_ => {
         wx.navigateBack({
           delta: 1,
         })
-      },500)
-    }else{
+      }, 500)
+    } else {
       wx.showToast({
         title: res.msg,
-        icon:'error'
+        icon: 'error'
       })
     }
   },
@@ -165,7 +178,15 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-this.getKey()
+    this.getKey()
+    let that = this
+    approve_keygetFlowMember({
+      token: wx.getStorageSync('token')
+    }).then(res => {
+      that.setData({
+        flowMember: res.data
+      })
+    })
   },
 
   /**

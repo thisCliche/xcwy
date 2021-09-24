@@ -19,7 +19,7 @@ const request = (options) => {
             refresh_token: refresh
           }).then(res => {
             wx.setStorageSync('token', res.data.token)
-            wx.setStorage('refresh_token', res.data.refresh_token)
+            wx.setStorageSync('refresh_token', res.data.refresh_token)
             wx.showModal({
               title: '提示',
               content: '登录已过去，重新登录',
@@ -39,11 +39,6 @@ const request = (options) => {
             })
           })
         }
-        // else if(request.data.msg == 'token不能为空'){
-        //   wx.navigateTo({
-        //     url: '/pages/login/login',
-        //   })
-        // }
         else if (request.data) {
           resolve(request.data)
         } else {

@@ -21,3 +21,11 @@
   bottom: 90rpx;
   left: 55%;
 }
+.idCard .van-cell__title{
+  flex: none !important;
+  /* width: 200rpx !important; */
+}
+.idCard .van-cell__value{
+  flex: 1 !important;
+  text-align: right !important;
+}

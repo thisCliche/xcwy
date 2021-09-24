@@ -1,6 +1,9 @@
 <!--pages/onwner/news/newsList.wxml-->
 <view class="newsList">
-  <scroll-view scroll-y="true" style="height: 300rpx;"  bindscrolltolower="lower">
+  <block wx:if="{{newList.length != 0}}">
     <new-item newList="{{newList}}"></new-item>
-  </scroll-view>
+  </block>
+  <view wx:else>
+    <van-empty description="暂无公告" />
+  </view>
 </view>

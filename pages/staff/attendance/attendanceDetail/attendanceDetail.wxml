@@ -1,6 +1,6 @@
 <!--pages/staff/attendance/attendanceDetail/attendanceDetail.wxml-->
 <view class="attendanceDetail">
-  <view class="card summary">
+  <view class="card summary summary1">
     <view class="summaryT" bindtap="openBox">
       <view>{{year}}年{{month}}月汇总</view>
       <van-icon name="arrow" color="#ABABAB" />
@@ -16,7 +16,7 @@
       </view>
     </view>
   </view>
-  <view class="card summary mt20">
+  <view class="card summary mt20" wx:if="{{!isTwo}}">
     <van-row custom-class="rowStyle">
       <van-col custom-class="colStyle" span="8">日期</van-col>
       <van-col custom-class="colStyle" span="8">上班打卡</van-col>
@@ -26,6 +26,22 @@
       <van-col custom-class="colStyle laterColor" span="8">{{item.date}}</van-col>
       <van-col custom-class="colStyle" span="8">{{item.firstStart}}</van-col>
       <van-col custom-class="colStyle" span="8">{{item.firstEnd}}</van-col>
+    </van-row>
+  </view>
+  <view class="card summary mt20" wx:else>
+    <van-row custom-class="rowStyle">
+      <van-col custom-class="colStyle" span="4">日期</van-col>
+      <van-col custom-class="colStyle" span="5">上班打卡</van-col>
+      <van-col custom-class="colStyle" span="5">下班打卡</van-col>
+      <van-col custom-class="colStyle" span="5">上班打卡</van-col>
+      <van-col custom-class="colStyle" span="5">下班打卡</van-col>
+    </van-row>
+    <van-row custom-class="rowStyle" wx:for="{{info.list}}" wx:key="index">
+      <van-col custom-class="colStyle laterColor" span="4">{{item.date}}</van-col>
+      <van-col custom-class="colStyle" span="5">{{item.firstStart}}</van-col>
+      <van-col custom-class="colStyle" span="5">{{item.firstEnd}}</van-col>
+      <van-col custom-class="colStyle" span="5">{{item.firstStart}}</van-col>
+      <van-col custom-class="colStyle" span="5">{{item.firstEnd}}</van-col>
     </van-row>
   </view>
   <van-popup show="{{ hyShow }}" position="bottom" custom-style="height: 50%;" round >

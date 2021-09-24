@@ -1,6 +1,6 @@
 /* pages/person/vista/vistaList/vistaList.wxss */
 .vistaList{
-  padding: 10rpx;
+  /* padding: 10rpx; */
 }
 .item{
   padding: 28rpx;

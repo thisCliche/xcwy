@@ -15,20 +15,11 @@
     <view class="card">
     </view>
   </view>
-  <view class="card info mt20">
+  <view class="card info mt20" wx:if="{{info.images.length != 0}}">
     <view>投诉图片</view>
     <van-row>
-      <van-col custom-class="complaintImg" span="8">
-        <image src="{{siteHttp}}/180x180"></image>
-      </van-col>
-      <van-col custom-class="complaintImg" span="8">
-        <image src="{{siteHttp}}/180x180"></image>
-      </van-col>
-      <van-col custom-class="complaintImg" span="8">
-        <image src="{{siteHttp}}/180x180"></image>
-      </van-col>
-      <van-col custom-class="complaintImg" span="8">
-        <image src="{{siteHttp}}/180x180"></image>
+      <van-col wx:for="{{info.images}}" custom-class="complaintImg" span="8">
+        <image src="{{item.url}}"></image>
       </van-col>
     </van-row>
   </view>
@@ -40,14 +31,16 @@
       <van-field model:value="{{ reply }}" type="textarea" autosize="{{height}}" placeholder="回复处理结果" border="{{ false }}" />
     </van-cell-group>
     <view class="uploaderWrap">
-      <van-uploader bind:delete="deleteImg" deletable="{{ true }}" file-list="{{ fileList }}" bind:after-read="afterRead" />
+      <van-uploader max-count="9" bind:delete="deleteImg" deletable="{{ true }}" file-list="{{ fileList }}" bind:after-read="afterRead" />
     </view>
   </view>
   <view class="card mt20 image" wx:else>
-    <view class="replyC">{{info.reply}}</view>
-    <view class="uploaderWrap">
-      <van-uploader bind:delete="deleteImg" deletable="{{ true }}" file-list="{{ fileList }}" bind:after-read="afterRead" />
-    </view>
+    <view class="replyC" >{{info.reply}}</view>
+    <van-row wx:if="{{info.reply_images.length != 0}}">
+      <van-col wx:for="{{info.reply_images}}" custom-class="complaintImg" span="8">
+        <image src="{{item.url}}"></image>
+      </van-col>
+    </van-row>
   </view>
   <view class="btn" wx:if="{{info.reply == ''}}">
     <van-button type="info" block bind:click="submit">提交</van-button>

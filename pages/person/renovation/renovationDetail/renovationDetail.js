@@ -9,9 +9,9 @@ Page({
     info:{},
     infoP:{}
   },
-  toPay(){
+  toPay(e){
     wx.navigateTo({
-      url: '/pages/person/renovation/renovationPay/renovationPay',
+      url: `/pages/person/renovation/renovationPay/renovationPay?id=${e.currentTarget.dataset.id}&order_no=${e.currentTarget.dataset.order_no}&mony=${e.currentTarget.dataset.money}`,
     })
   },
   async getDetail(id){

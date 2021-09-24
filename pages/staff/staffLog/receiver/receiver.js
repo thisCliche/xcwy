@@ -12,9 +12,9 @@ Page({
     list: [],
     branchName: '',
     staffList: [],
-    selectList:[],
+    selectList: [],
   },
-  toDetail(){
+  toDetail() {
     wx.navigateTo({
       url: '/pages/staff/staffLog/searchReceiver/searchReceiver',
     })
@@ -33,40 +33,49 @@ Page({
     })
     let res = await contact({
       token: wx.getStorageSync('token'),
-      branch_id: e.currentTarget.dataset.branch_id
+      // branch_id: e.currentTarget.dataset.branch_id
     })
-    res.data.forEach(item=>{
+    res.data.forEach(item => {
       item.select = false
     })
     this.setData({
-      staffList:res.data
+      staffList: res.data
     })
   },
-  onChange(e){
-    let key = `staffList[${e.currentTarget.dataset.index}].select`
+  onChange(e) {
+    console.log(e)
+    let key = `staffList[${e.currentTarget.dataset.index1}].data[${e.currentTarget.dataset.index2}].select`
     this.setData({
       [key]: e.detail
     })
-    let selectList = []
-    this.data.staffList.forEach(item=>{
-      if(item.select){
-        selectList.push(item)
-      }
-    })
-    this.setData({
-      selectList
-    })
+    let item = this.data.staffList[e.currentTarget.dataset.index1].data[e.currentTarget.dataset.index2]
+    let selectList = this.data.selectList
+    if (e.detail) {
+      selectList.push(item)
+      this.setData({
+        selectList
+      })
+    } else {
+      let newselectList = selectList.filter(item=>{
+        return item.id != e.currentTarget.dataset.id
+      })
+      this.setData({
+        selectList:newselectList
+      })
+    }
   },
-  confirm(){
+  confirm() {
     let pages = getCurrentPages()
-    let prevPage = pages[pages.length-2]
+    let prevPage = pages[pages.length - 2]
     let that = this
     wx.navigateBack({
       delta: 1,
-      complete: function(){
-        setTimeout(function(){
-          prevPage.getselect({selectList:that.data.selectList})
-        },500)
+      complete: function () {
+        setTimeout(function () {
+          prevPage.getselect({
+            selectList: that.data.selectList
+          })
+        }, 500)
       }
     })
   },
@@ -75,6 +84,15 @@ Page({
    */
   onLoad: function (options) {
     this.getList()
+    let e = {
+      currentTarget: {
+        dataset: {
+          branch_id: 1,
+          name: "城新物业"
+        }
+      }
+    }
+    this.staffList(e)
   },
 
   /**
@@ -87,8 +105,7 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
-  },
+  onShow: function () {},
 
   /**
    * 生命周期函数--监听页面隐藏

@@ -21,9 +21,9 @@ Page({
     })
     this.getList()
   },
-  toDetail() {
+  toDetail(e) {
     wx.navigateTo({
-      url: '/pages/staff/taskFeed/taskDetail/taskDetail',
+      url: `/pages/staff/taskFeed/taskDetail/taskDetail?id=${e.currentTarget.dataset.id}`,
     })
     
   },

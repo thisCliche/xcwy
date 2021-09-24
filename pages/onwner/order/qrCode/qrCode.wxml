@@ -21,8 +21,8 @@
       <view class="book">预约时间：{{info.date}}</view>
     </view>
   </view>
-  <view class="btn">
+  <view class="btn" wx:if="{{info.status == 2}}">
     <van-button type="info" block bind:click="save">保存到相册</van-button>
   </view>
-  <canvas style="width: 345px; height: 358px;" canvas-id="firstCanvas"></canvas>
+  <canvas style="width: 345px; height: 358px;position: absolute; top: -999px;" canvas-id="mycanvas"></canvas>
 </view>

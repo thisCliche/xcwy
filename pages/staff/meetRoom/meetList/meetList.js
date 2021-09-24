@@ -13,21 +13,33 @@ Page({
       page:1,
       limit:10
     },
+    count:0,
     list:[]
   },
-  async getList(){
+  async getList(type=0){
     this.setData({
       isLoad: true
     })
     let res = await list({...this.data.queryInfo,token:wx.getStorageSync('token'),status:this.data.current})
-    this.setData({
-      list: res.data.list,
-      isLoad: false
-    })
+    if(type == 0){
+      this.setData({
+        list: res.data.list,
+        count: res.data.count,
+        isLoad: false
+      })
+    }else{
+      let list = this.data.list.concat(...res.data.list)
+      this.setData({
+        list: list,
+        count: res.data.count,
+        isLoad: false
+      })
+    }
   },
   onClick(e){
     this.setData({
-      current:e.detail.name
+      current:e.detail.name,
+      ['queryInfo.page']: 1
     })
     this.getList()
   },
@@ -82,7 +94,13 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
+    if (this.data.list.length < this.data.count) {
+      let page = ++this.data.queryInfo.page
+      this.setData({
+        ['queryInfo.page']: page
+      })
+      this.getList(1)
+    }
   },
 
   /**

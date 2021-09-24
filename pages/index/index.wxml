@@ -1,16 +1,16 @@
-<view class="home">
+<view class="home" style="padding: 14rpx 20rpx {{100+height}}rpx;">
   <view class="swiperWrap">
     <swiper indicator-dots autoplay interval="5000" duration="500" indicator-active-color="rgba(255, 255, 255, 1)">
       <block wx:for="{{banner}}" wx:key="*this">
         <swiper-item>
-          <image src="{{siteHttp}}710x376" alt="" />
+          <image src="{{deFualtHttp}}{{item.pic_path}}" alt="" />
         </swiper-item>
       </block>
     </swiper>
   </view>
-  <!-- <my-menu menu1="{{menu1}}" menu2="{{menu2}}"></my-menu> -->
   <block wx:if="{{isStaff == '访客'}}">
     <my-menu menu3="{{menu3}}"></my-menu>
+    <my-menu menu1="{{menu1}}" menu2="{{menu2}}"></my-menu>
     <title-More></title-More>
     <new-item newList="{{newList}}"></new-item>
   </block>
@@ -21,7 +21,7 @@
     <new-item newList="{{newList}}"></new-item>
   </block>
   <block wx:else>
-    <view class="card gg mt20" bindtap="tonotice">
+    <view class="card gg mt20" bindtap="tonotice" wx:if="{{noticeList.length != 0}}">
       <image src="{{deFualtHttp}}/mini/images/staff/gg.png"></image>
       <view class="name">公告</view>
       <view class="cloumn">|</view>

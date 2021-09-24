@@ -6,29 +6,30 @@
     </view>
   </view>
   <view class="contactWrap">
-    <view class="crumbs">
-      <view class="bread">通讯录 </view> 
-      <view wx:if="{{branchName !== ''}}" style="display: flex;"> > <view class="breadA"> {{branchName}}</view></view>
-    </view>
-    <view class="card info mt20">
-      <view class="department" bindtap="staffList" wx:for="{{list}}" wx:key="index" data-branch_id="{{item.id}}" data-name="{{item.name}}">{{item.name}}  <view class="number">（{{item.user_count}}）</view>
-      </view>
-    </view>
-    <view class="card info mt20" wx:if="{{branchName !== ''}}">
-      <view class="item" wx:for="{{staffList}}" wx:key="index">
-        <view class="itemL">
-          <view>
-            <image src="/static/images/defaultAvatar.png"></image>
+    <van-index-bar highlight-color="#4790F4" index-list="{{ indexList }}">
+      <view wx:for="{{staffList}}" wx:key="index">
+        <block wx:if="{{item.data.length !=0}}">
+          <van-index-anchor index="{{item.letter}}" />
+          <view class="item" wx:for="{{item.data}}" wx:key="index" data-mobile="{{item.mobile}}" bindtap="toPhone">
+            <view class="itemL">
+              <view>
+                <image src="{{item.avatar}}"></image>
+              </view>
+              <view class="itemLR">
+                <view class="itemName">{{item.name}}</view>
+                <view class="itemDes">{{item.position}}</view>
+              </view>
+            </view>
+            <view class="itemR">
+              {{item.mobile}}
+            </view>
           </view>
-          <view class="itemLR">
-            <view class="itemName">{{item.name}}</view>
-            <view class="itemDes">总经理</view>
-          </view>
-        </view>
-        <view class="itemR">
-          {{item.mobile}}
-        </view>
+        </block>
       </view>
-    </view>
+
+    </van-index-bar>
+    <!-- <view class="card info mt20" wx:if="{{branchName !== ''}}">
+
+    </view> -->
   </view>
 </view>

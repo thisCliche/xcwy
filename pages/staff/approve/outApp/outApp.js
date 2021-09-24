@@ -1,5 +1,7 @@
 // pages/staff/approve/leaveApp/leaveApp.js
-import {approve_outAdd} from '../../../../api/approve'
+import {
+  approve_outAdd,approve_outgetFlowMember
+} from '../../../../api/approve'
 let app = getApp()
 Page({
 
@@ -7,22 +9,25 @@ Page({
    * 页面的初始数据
    */
   data: {
-    rootHttp:app.globalData.rootHttp,
-    time1:'请选择',
-    time2:'请选择',
-    duration:null,
-    reason:'',
+    rootHttp: app.globalData.rootHttp,
+    time1: '请选择',
+    time2: '请选择',
+    duration: null,
+    reason: '',
     minDate: new Date().getTime(),
-    minheight:{minHeight:80},
-    typeName:'请选择',
+    minheight: {
+      minHeight: 80
+    },
+    typeName: '请选择',
     type: null,
-    hyShow:false,
-    columns: ['事假', '病假','丧假', '婚假'],
+    hyShow: false,
+    columns: ['事假', '病假', '丧假', '婚假'],
     fileList: [],
-    calendarShow1:false,
-    calendarShow2:false,
-    datetime1:new Date().getTime(),
-    datetime2:new Date().getTime(),
+    calendarShow1: false,
+    calendarShow2: false,
+    datetime1: new Date().getTime(),
+    datetime2: new Date().getTime(),
+    flowMember:[],
   },
   onDisplay(e) {
     let type = e.currentTarget.dataset.type
@@ -39,13 +44,15 @@ Page({
   formatDate(date) {
     date = new Date(date);
     const m = (date.getMonth() + 1 + '').padStart(2, '0')
-    return `${date.getFullYear()}-${m}-${date.getDate()}`;
+    const hh = (date.getHours() + '').padStart(2, '0')
+    const mm = (date.getMinutes() + '').padStart(2, '0')
+    return `${date.getFullYear()}-${m}-${date.getDate()} ${hh}:${mm}`;
   },
   onConfirm(event) {
     this.setData({
       calendarShow1: false,
       time1: this.formatDate(event.detail),
-      minDate:event.detail
+      minDate: event.detail
     });
   },
   onConfirm2(event) {
@@ -55,12 +62,16 @@ Page({
     });
   },
   onpickerConfirm(event) {
-    const { picker, value, index } = event.detail;
-      this.setData({
-        typeName : value,
-        hyShow: false,
-        type:++event.detail.index
-      })
+    const {
+      picker,
+      value,
+      index
+    } = event.detail;
+    this.setData({
+      typeName: value,
+      hyShow: false,
+      type: ++event.detail.index
+    })
   },
   deleteImg(event) {
     let fileList = this.data.fileList
@@ -98,9 +109,9 @@ Page({
     });
   },
   async submit() {
-    
+
     let form = {
-      type: this.data.type,
+      // type: this.data.type,
       token: wx.getStorageSync('token'),
       begin_time: this.data.time1,
       end_time: this.data.time2,
@@ -110,26 +121,26 @@ Page({
     }
     for (let i in form) {
       if (form[i] == '') {
-          return wx.showToast({
-            title: '请填写完整',
-            icon: 'error'
-          })
+        return wx.showToast({
+          title: '请填写完整',
+          icon: 'error'
+        })
       }
     }
     let res = await approve_outAdd(form)
-    if(res.code == 200) {
+    if (res.code == 200) {
       wx.showToast({
         title: '提交成功',
       })
-      setTimeout(_=>{
+      setTimeout(_ => {
         wx.navigateBack({
           delta: 1,
         })
-      },500)
-    }else{
+      }, 500)
+    } else {
       wx.showToast({
         title: res.msg,
-        icon:'error'
+        icon: 'error'
       })
     }
   },
@@ -151,7 +162,12 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    let that = this
+    approve_outgetFlowMember({token:wx.getStorageSync('token')}).then(res=>{
+      that.setData({
+        flowMember: res.data
+      })
+    })
   },
 
   /**

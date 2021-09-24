@@ -12,7 +12,7 @@ Page(filter.loginCheck({
     current:0,
     queryInfo:{
       page:1,
-      limit:100
+      limit:10
     },
     list:[{title:'文化馆',time:'2021-06-01',des:'老城保护中心'},{title:'文化馆',time:'2021-06-01',des:'老城保护中心'}]
   },
@@ -28,7 +28,7 @@ Page(filter.loginCheck({
     let status = this.data.current
     let res = await appointmentList({token:wx.getStorageSync('token'),...this.data.queryInfo,status:++status})
     this.setData({
-      list: res.data,
+      list: res.data.list,
       isLoad: false,
     })
   },

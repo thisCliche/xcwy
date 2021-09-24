@@ -14,7 +14,7 @@ Page({
     })
   },
   async getDetail(){
-    let res = await my({token:wx.getStorageSync('token'),page:1,num:50})
+    let res = await my({token:wx.getStorageSync('token'),page:1,num:100})
     this.setData({
       list:res.data
     })

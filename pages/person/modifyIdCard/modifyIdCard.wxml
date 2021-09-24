@@ -1,0 +1,9 @@
+<!--pages/person/modifyNick/modifyNick.wxml-->
+<view class="modifyNick">
+  <view class="card" >
+    <van-field model:value="{{ value }}" placeholder="修改身份证号" border="{{ false }}" />
+  </view>
+  <view class="btn">
+    <van-button bind:click="changed" custom-class="btnStyle" block type="info">修改</van-button>
+  </view>
+</view>

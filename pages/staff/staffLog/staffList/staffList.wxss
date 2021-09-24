@@ -1,54 +1,80 @@
 /* pages/person/vista/vistaList/vistaList.wxss */
-.vistaList{
-  padding: 10rpx;
+.vistaList {
+  /* padding: 10rpx; */
   height: 100%;
 }
-.item{
+
+.item {
   padding: 28rpx;
-  margin:0rpx 10rpx 10rpx;
+  margin: 0rpx 10rpx 10rpx;
 }
-.reportTime{
+
+.reportTime {
   padding: 20rpx 0 20rpx 20rpx;
   color: #ABABAB;
   font-size: 32rpx;
 }
-.des{
+
+.des {
   font-size: 30rpx;
   color: #444;
   margin: 20rpx 0;
 }
-.desWrap{
+
+.desWrap {
   display: flex;
   justify-content: space-between;
 }
-.desWrap .desL{ 
-  font-size: 30rpx;
-  color: #8692AA;
-}
-.desWrap .desR{ 
+
+.desWrap .desL {
   font-size: 30rpx;
   color: #8692AA;
 }
 
-.report .itemL{
+.desWrap .desR {
+  font-size: 30rpx;
+  color: #8692AA;
+}
+
+.report .itemL {
   display: flex;
 }
-.report .itemL image{
+
+.report .itemL image {
   width: 70rpx;
   height: 70rpx;
+  border-radius: 50%;
 }
-.report .itemL .itemImg{
+
+.report .itemL .itemImg {
   margin-right: 20rpx;
 }
-.report .itemL .name{
+
+.report .itemL .name {
   font-size: 28rpx;
   margin-bottom: 8rpx;
 }
-.report .itemL .time{
+
+.report .itemL .time {
   font-size: 24rpx;
   color: #ABABAB;
 }
 
-.unread{
+.unread {
   color: #4790F4;
+}
+
+.youbian {
+  visibility: hidden
+}
+
+.unreadSelect {
+  position: fixed;
+  right: 10rpx;
+  top: 22rpx;
+  color: #B7B7B7;
+  z-index: 9;
+  display: flex;
+  align-items: center;
+  background: #fff;
 }

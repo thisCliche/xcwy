@@ -1,18 +1,25 @@
 // pages/staff/task/taskDetail/taskDetail.js
+import {reportDetail,detail} from '../../../../api/task'
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    info:{},
     list:[1,2,3,4,5,6]
   },
-
+  async getDetail(id){
+    let res = await detail({token:wx.getStorageSync('token'),id})
+    this.setData({
+      info: res.data
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.getDetail(options.id)
   },
 
   /**

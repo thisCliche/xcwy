@@ -1,5 +1,5 @@
 // pages/staff/approve/leaveApp/leaveApp.js
-import {approve_leaveAdd} from '../../../../api/approve'
+import {approve_leaveAdd,approve_leavegetFlowMember} from '../../../../api/approve'
 let app = getApp()
 Page({
 
@@ -23,6 +23,7 @@ Page({
     calendarShow2:false,
     datetime1:new Date().getTime(),
     datetime2:new Date().getTime(),
+    flowMember:[],
   },
   onDisplay(e) {
     let type = e.currentTarget.dataset.type
@@ -39,7 +40,9 @@ Page({
   formatDate(date) {
     date = new Date(date);
     const m = (date.getMonth() + 1 + '').padStart(2, '0')
-    return `${date.getFullYear()}-${m}-${date.getDate()}`;
+    const hh = (date.getHours() + '').padStart(2, '0')
+    const mm = (date.getMinutes() + '').padStart(2, '0')
+    return `${date.getFullYear()}-${m}-${date.getDate()} ${hh}:${mm}`;
   },
   onConfirm(event) {
     this.setData({
@@ -151,7 +154,12 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    let that = this
+    approve_leavegetFlowMember({token:wx.getStorageSync('token')}).then(res=>{
+      that.setData({
+        flowMember: res.data
+      })
+    })
   },
 
   /**

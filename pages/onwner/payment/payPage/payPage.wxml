@@ -1,19 +1,19 @@
 <!--pages/onwner/payment/payPage/payPage.wxml-->
 <view class="payPage">
   <view class="card info">
-    <view class="title"><van-icon size="24" name="bill" color="#4790F4"/> 物业费</view>
+    <view class="title"><van-icon size="24" name="bill" color="#4790F4"/> {{typeName}}费</view>
     <view class="des">
-      城隍庙文化馆-老城保护中心-信息楼-10***105室
+      {{info.project_name}}-{{info.area_name}}-{{info.block_name}}-{{info.house_name}}
     </view>
     <view class="des">
-      王佳佳   187****5236
+      {{info.name}}   {{info.mobile}}
     </view>
   </view>
   <view class="card info mt20">
     <view class="title">欠费金额</view>
-    <view class="money">￥86.00</view>
+    <view class="money">￥{{info.fee}}</view>
   </view>
   <view class="btn">
-    <van-button plain color="#F54235" block>立即缴费</van-button>
+    <van-button bind:click="buildOrder" plain color="#F54235" block>立即缴费</van-button>
   </view>
 </view>

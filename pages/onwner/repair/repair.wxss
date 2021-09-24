@@ -19,3 +19,6 @@
 .van-button{
   width: 90% !important;
 }
+.info{
+  padding: 28rpx;
+}

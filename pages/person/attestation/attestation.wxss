@@ -43,3 +43,7 @@
 .cardT{
   padding: 20rpx 0 0 28rpx;
 }
+.rideo{
+  display: flex;
+  justify-content: space-around;
+}

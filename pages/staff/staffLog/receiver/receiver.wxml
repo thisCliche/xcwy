@@ -6,7 +6,7 @@
     </view>
   </view>
   <view class="contactWrap">
-    <view class="crumbs">
+    <!-- <view class="crumbs">
       <view class="bread">通讯录 </view>
       <view wx:if="{{branchName !== ''}}" style="display: flex;"> > <view class="breadA"> {{branchName}}</view></view>
     </view>
@@ -14,22 +14,27 @@
       <view class="department" bindtap="staffList" wx:for="{{list}}" wx:key="index" data-branch_id="{{item.id}}" data-name="{{item.name}}">
       {{item.name}} <view class="number">（{{item.user_count}}）</view>
       </view>
-    </view>
+    </view> -->
     <view class="card info mt20" wx:if="{{branchName !== ''}}">
-      <view class="item mt20" wx:for="{{staffList}}" wx:key="index">
-        <view class="itemL">
-          <van-checkbox icon-size="18px" custom-class="checkboxStyle" value="{{ item.select }}" bind:change="onChange" data-index="{{index}}"></van-checkbox>
-          <view>
-            <image src="/static/images/defaultAvatar.png"></image>
+      <view class="" wx:for="{{staffList}}" wx:for-index="idx" wx:key="idx">
+        <block wx:if="{{item.data.length!=0}}">
+          <view class="item mt20" wx:for="{{item.data}}" wx:key="index">
+            <view class="itemL">
+              <van-checkbox icon-size="18px" custom-class="checkboxStyle" value="{{ item.select }}"
+                bind:change="onChange" data-index1="{{idx}}" data-index2="{{index}}" data-id="{{item.id}}"></van-checkbox>
+              <view>
+                <image src="{{item.avatar}}"></image>
+              </view>
+              <view class="itemLR">
+                <view class="itemName">{{item.name}}</view>
+                <view class="itemDes">{{item.position}}</view>
+              </view>
+            </view>
+            <view class="itemR">
+              {{item.mobile}}
+            </view>
           </view>
-          <view class="itemLR">
-            <view class="itemName">{{item.name}}</view>
-            <view class="itemDes">总经理</view>
-          </view>
-        </view>
-        <view class="itemR">
-          {{item.mobile}}
-        </view>
+        </block>
       </view>
     </view>
   </view>

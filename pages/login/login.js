@@ -1,8 +1,11 @@
 // pages/login/login.js
 const app = getApp()
 import {
-  sendLogin
+  sendLogin,
+  login,
+  getMobile
 } from '../../api/login.js'
+import eventBus from '../../utils/eventBus'
 Page({
 
   /**
@@ -18,6 +21,37 @@ Page({
     wx.switchTab({
       url: '/pages/index/index',
     })
+  },
+  getPhoneNumber(e) {
+    let that = this
+    if (e.detail.errMsg == 'getPhoneNumber:ok') {
+      wx.login({
+        success(res) {
+          let data = {
+            code: res.code,
+            iv: e.detail.iv,
+            encryptedData: e.detail.encryptedData
+          }
+          if (e.detail.errMsg == "getPhoneNumber:ok") {
+            wx.showLoading({
+              title: '获取中...',
+            })
+            getMobile(data).then(res => {
+              if (that.data.type == '') {
+                wx.switchTab({
+                  url: '/pages/index/index',
+                })
+              } else {
+                wx.navigateBack({
+                  delta: 1
+                })
+              }
+            })
+          }
+        }
+      })
+    }
+
   },
   getUserProfile() {
     let that = this
@@ -45,15 +79,8 @@ Page({
                     wx.setStorageSync('userInfo', JSON.stringify(userInfo))
                     wx.setStorageSync('token', json.data.token)
                     wx.setStorageSync('refresh_token', json.data.refresh_token)
-                    if (that.data.type == '') {
-                      wx.switchTab({
-                        url: '/pages/index/index',
-                      })
-                    } else {
-                      wx.navigateBack({
-                        delta: 1
-                      })
-                    }
+                    eventBus.emit('reload')
+
                   } else {
                     wx.showToast({
                       title: json.msg || "获取登录信息失败",
@@ -83,6 +110,39 @@ Page({
 
 
   },
+  async moniLogin(e) {
+    let that = this
+    let json = await login({
+      account: e.currentTarget.dataset.account
+    })
+    let userInfo = json.data.member_info
+    wx.setStorageSync('userInfo', JSON.stringify(userInfo))
+    wx.setStorageSync('token', json.data.token)
+    wx.setStorageSync('refresh_token', json.data.refresh_token)
+    eventBus.emit('reload')
+    if (that.data.type == '') {
+      wx.switchTab({
+        url: '/pages/index/index',
+      })
+    } else {
+      wx.navigateBack({
+        delta: 1
+      })
+    }
+  },
+  testClick(){
+    wx.checkSession({
+      success (e) {
+        console.log(e,'weiguoqi')
+        //session_key 未过期，并且在本生命周期一直有效
+      },
+      fail (e) {
+        console.log(e,'guoqi')
+        // session_key 已经失效，需要重新执行登录流程
+        wx.login() //重新登录
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -105,7 +165,12 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    wx.login({
+      success(res){
+        console.log(res)
+      },
+      
+    })
   },
 
   /**

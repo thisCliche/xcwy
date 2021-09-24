@@ -3,7 +3,10 @@ import {
   add,
   roomList
 } from '../../../api/meeting'
-import {validPhone} from '../../../utils/util'
+import {
+  validPhone
+} from '../../../utils/util'
+import {myProfile} from '../../../api/login'
 const filter = require('../../../utils/router.js');
 Page(filter.loginCheck({
 
@@ -11,6 +14,13 @@ Page(filter.loginCheck({
    * 页面的初始数据
    */
   data: {
+    isPickerRender: true,
+    isPickerShow: false,
+    pickerConfig: {
+      isTimeFrame: true,
+      clear:'确定',
+      isWeek:true
+    },
     radio: '1',
     calendarShow: false,
     hyShow: false,
@@ -35,7 +45,7 @@ Page(filter.loginCheck({
       end_type: '',
       typTime: '请选择',
       uesTime: '请选择',
-      meetingRoom: '请先选择时间',
+      meetingRoom: '请选择会议室',
       isfull: false,
       room_id: '',
       content: ''
@@ -44,14 +54,14 @@ Page(filter.loginCheck({
       name: '',
       mobile: '',
       count: null,
-      unit:'',
+      unit: '',
       begin_time: '',
       begin_type: '',
       end_time: '',
       end_type: '',
       typTime: '请选择',
       uesTime: '请选择',
-      meetingRoom: '请先选择时间',
+      meetingRoom: '请选择会议室',
       isfull: false,
       room_id: '',
       content: ''
@@ -94,14 +104,20 @@ Page(filter.loginCheck({
   onDisplay(e) {
     let type = e.currentTarget.dataset.type
     if (e.currentTarget.dataset.type == 'hyShow') {
-      if(this.data.radio == 1){
+      if (this.data.radio == 1) {
         if (this.data.form1.isfull) {} else {
-          return
+          return wx.showToast({
+            title: '请先选择时间',
+            icon: 'error'
+          })
         }
       }
-      if(this.data.radio == 2){
+      if (this.data.radio == 2) {
         if (this.data.form2.isfull) {} else {
-          return
+          return wx.showToast({
+            title: '请先选择时间',
+            icon: 'error'
+          })
         }
       }
     }
@@ -118,7 +134,8 @@ Page(filter.loginCheck({
   formatDate(date) {
     date = new Date(date);
     const m = (date.getMonth() + 1 + '').padStart(2, '0')
-    return `${date.getFullYear()}-${m}-${date.getDate()}`;
+    const d = (date.getDate() + '').padStart(2, '0')
+    return `${date.getFullYear()}-${m}-${d}`;
   },
   onConfirm(event) {
     const [start, end] = event.detail;
@@ -129,18 +146,18 @@ Page(filter.loginCheck({
       this.setData({
         ["form1.begin_time"]: this.formatDate(start),
         ["form1.end_time"]: this.formatDate(end),
-        ["form1.uesTime"]: `${this.formatDate(start)} - ${this.formatDate(end)}`,
+        ["form1.uesTime"]: `${this.formatDate(start)} 至 ${this.formatDate(end)}`,
       });
       this.judgeFull()
     } else {
       this.setData({
         ["form2.begin_time"]: this.formatDate(start),
         ["form2.end_time"]: this.formatDate(end),
-        ["form2.uesTime"]: `${this.formatDate(start)} - ${this.formatDate(end)}`,
+        ["form2.uesTime"]: `${this.formatDate(start)} 至 ${this.formatDate(end)}`,
       });
       this.judgeFull2()
     }
-    
+
   },
 
   onpickerConfirm(event) {
@@ -153,7 +170,6 @@ Page(filter.loginCheck({
       hyShow: false
     })
     if (this.data.radio == "1") {
-      console.log(this.data.radio)
       this.setData({
         ["form1.meetingRoom"]: value.text,
         ["form1.room_id"]: value.id,
@@ -188,7 +204,7 @@ Page(filter.loginCheck({
       })
       this.judgeFull2()
     }
-    
+
   },
 
   onradioChange(event) {
@@ -238,73 +254,90 @@ Page(filter.loginCheck({
       columns
     })
   },
-  async submit1(){
-    if(!validPhone(this.data.form1.mobile)){
+  async submit1() {
+    if (!validPhone(this.data.form1.mobile)) {
       return wx.showToast({
         title: '手机号不正确',
-        icon:'error'
+        icon: 'error'
       })
     }
     let form = this.data.form1
     form.type = this.data.radio
-    for(let i in form){
-      if(form[i] == ''){
+    for (let i in form) {
+      if (form[i] == '') {
         return wx.showToast({
           title: '请填写完整',
-          icon:'error'
+          icon: 'error'
         })
       }
     }
-    let res = await add({token:wx.getStorageSync('token'),...form})
-    if(res.code == 200) {
+    let res = await add({
+      token: wx.getStorageSync('token'),
+      ...form
+    })
+    if (res.code == 200) {
       wx.showToast({
         title: '预约成功',
       })
-      setTimeout(_=>{
+      setTimeout(_ => {
         wx.navigateBack({
           delta: 1,
         })
-      },500)
-    }else{
+      }, 500)
+    } else {
       wx.showToast({
         title: res.msg,
-        icon:'error'
+        icon: 'none'
       })
     }
   },
-  async submit2(){
-    if(!validPhone(this.data.form2.mobile)){
+  async submit2() {
+    if (!validPhone(this.data.form2.mobile)) {
       return wx.showToast({
         title: '手机号不正确',
-        icon:'error'
+        icon: 'error'
       })
     }
     let form = this.data.form2
     form.type = this.data.radio
-    for(let i in form){
-      if(form[i] == ''){
+    for (let i in form) {
+      if (form[i] == '') {
         return wx.showToast({
           title: '请填写完整',
-          icon:'error'
+          icon: 'error'
         })
       }
     }
-    let res = await add({token:wx.getStorageSync('token'),...form})
-    if(res.code == 200) {
+    let res = await add({
+      token: wx.getStorageSync('token'),
+      ...form
+    })
+    if (res.code == 200) {
       wx.showToast({
         title: '预约成功',
       })
-      setTimeout(_=>{
+      setTimeout(_ => {
         wx.navigateBack({
           delta: 1,
         })
-      },500)
-    }else{
+      }, 500)
+    } else {
       wx.showToast({
         title: res.msg,
-        icon:'error'
+        icon: 'error'
       })
     }
+  },
+  async getUserinfo(){
+    let res = await myProfile({token:wx.getStorageSync('token')})
+    this.setData(
+      {
+        ['form1.name']:res.data.name,
+        ['form1.mobile']:res.data.mobile,
+        ['form2.name']:res.data.name,
+        ['form2.mobile']:res.data.mobile,
+      }
+    )
   },
   /**
    * 生命周期函数--监听页面加载
@@ -324,7 +357,7 @@ Page(filter.loginCheck({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.getUserinfo()
   },
 
   /**
@@ -360,5 +393,102 @@ Page(filter.loginCheck({
    */
   onShareAppMessage: function () {
 
-  }
+  },
+  searchTime: function (e) {
+    if (e.detail){
+      let data1 = e.detail.startData.split('-')
+      let data2 = e.detail.endData.split('-')
+      var begin_time = ''
+      var begin_type = ''
+      var end_time = ''
+      var end_type = ''
+      for(var i in data1){
+        if (data1[i] == '全天') {
+          begin_time = data1[0] + '-' + data1[1].padStart(2, '0') + '-' + data1[2].padStart(2, '0')
+          begin_type = 3
+          // time = data[0] + '-' + data[1] + '-' + data[2] + 'T00:00:00' + ',' + data[0] + '-' + data[1] + '-' + data[2] + 'T23:59:59';
+          // text = data[0] + '-' + data[1] + '-' + data[2]+ data[i]
+        }
+        if (data1[i] == '上午') {
+          begin_time = data1[0] + '-' + data1[1].padStart(2, '0') + '-' + data1[2].padStart(2, '0')
+          begin_type = 1
+        }
+        if (data1[i] == '下午') {
+          begin_time = data1[0] + '-' + data1[1].padStart(2, '0') + '-' + data1[2].padStart(2, '0')
+          begin_type = 2
+        }
+      }
+      for(var i in data2){
+        if (data2[i] == '全天') {
+          end_time = data2[0] + '-' + data2[1].padStart(2, '0') + '-' + data2[2].padStart(2, '0')
+          end_type = 3
+        }
+        if (data2[i] == '上午') {
+          end_time = data2[0] + '-' + data2[1].padStart(2, '0') + '-' + data2[2].padStart(2, '0')
+          end_type = 3
+        }
+        if (data2[i] == '下午') {
+          end_time = data2[0] + '-' + data2[1].padStart(2, '0') + '-' + data2[2].padStart(2, '0')
+          end_type = 3
+        }
+      }
+      if (this.data.radio == "1") {
+        this.setData({
+          ["form1.begin_type"]: begin_type,
+          ["form1.end_type"]: end_type,
+          ["form1.begin_time"]: begin_time,
+          ["form1.end_time"]: end_time,
+          ["form1.uesTime"]: begin_time + data1[3]  + '至' + end_time + data2[3],
+          isPickerShow: false
+        })
+        this.judgeFull()
+      } else {
+        this.setData({
+          ["form2.begin_type"]: begin_type,
+          ["form2.end_type"]: end_type,
+          ["form2.begin_time"]: begin_time,
+          ["form2.end_time"]: end_time,
+          ["form2.uesTime"]: begin_time+ data1[3] + '至' + end_time + data2[3],
+          isPickerShow: false
+        })
+        this.judgeFull2()
+      }
+    }
+    
+    // this.getDelivery(5, this.data.inputSuccessValue, this.data.createTime);
+
+  },
+
+ 
+
+  // 显示或隐藏时间插件
+  pickerShow: function () {
+    this.setData({
+      isPickerShow: true,
+      isPickerRender: true,
+    });
+  },
+
+  //可送货订单时间插件
+  deliveryPickerShow: function() {
+    this.setData({
+      isDeliveryPickerShow: true,
+      isDeliveryPickerRender: true,
+      resetDeliveryTime: false
+    })
+  },
+  
+  // 清除时间
+  timeReset:function(e){
+    this.setData({
+      createTime: e.detail.timeData
+    })
+    // this.getDelivery(5, this.data.inputSuccessValue, this.data.createTime);
+  },
+  
+  timeDeliveryReset: function(e) {
+    this.setData({
+      resetDeliveryTime: true
+    })
+  },
 }))

@@ -1,10 +1,14 @@
 <!--pages/onwner/repair/repair.wxml-->
 <view class="repair">
-  <view class="card">
+  <!-- <view class="card">
     <van-cell-group>
       <van-cell title="报修项目" bind:click="onDisplay" data-type="hyShow" label="{{xm}}" required border="{{ false }}" is-link  />
       
     </van-cell-group>
+  </view> -->
+  <view class="card info">
+    <view>{{info.project_name}}{{info.area_name}}{{info.block_name}}{{info.house_name}}</view>
+    <view class="mt20">{{info.name}} {{info.mobile}}</view>
   </view>
   <view class="card mt20">
     <van-cell-group>
@@ -15,20 +19,20 @@
   <view class="card mt20">
     <van-cell-group>
       <van-field label="报修人" required model:value="{{ bxr }}" input-align="right" placeholder="请输入" border="{{ false }}" />
-      <van-field label="报修电话" required model:value="{{ bxdh }}" input-align="right" placeholder="请输入" border="{{ false }}" />
+      <van-field label="报修电话" type="number" required model:value="{{ bxdh }}" input-align="right" placeholder="请输入" border="{{ false }}" />
     </van-cell-group>
   </view>
-  <view class="title mt30"><image src="/static/images/bg.png" class="titleBg"></image> 报修内容</view>
+  <!-- <view class="title mt30"><image src="/static/images/bg.png" class="titleBg"></image> 报修内容</view> -->
   <view class="card mt20">
     <van-cell-group>
-      <van-cell title="投诉内容" required border="{{ false }}" />
+      <van-cell title="报修内容" required border="{{ false }}" />
       <van-field model:value="{{ bxnr }}" type="textarea" autosize="{{height}}" placeholder="请输入内容" border="{{ false }}" />
     </van-cell-group>
   </view>
   <view class="title mt30"><image src="/static/images/bg.png" class="titleBg"></image> 报修图片</view>
   <view class="card mt20 image">
     <van-cell-group border="{{ false }}">
-      <van-uploader bind:delete="deleteImg" deletable="{{ true }}" file-list="{{ fileList }}" bind:after-read="afterRead" />
+      <van-uploader max-count="9" bind:delete="deleteImg" deletable="{{ true }}" file-list="{{ fileList }}" bind:after-read="afterRead" />
     </van-cell-group>
   </view>
   <view class="btn">

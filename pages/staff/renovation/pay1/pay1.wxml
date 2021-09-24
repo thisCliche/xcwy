@@ -1,0 +1,28 @@
+<!--pages/person/renovation/renovationPay/renovationPay.wxml-->
+<view class="renovationPay">
+  <view class="card info">
+    <view>装修保证金</view>
+    <view class="money">
+      ￥{{money}}
+    </view>
+  </view>
+  <!-- <view class="mt20 card">
+    <van-cell-group border="{{false}}">
+      <van-cell title="支付方式" value="{{zffs}}" bind:click="onDisplay" data-type="hyShow" border="{{false}}" is-link>
+      </van-cell>
+    </van-cell-group>
+  </view> -->
+  <view class="mt20 card">
+    <van-cell-group border="{{ false }}">
+      <van-field input-align="right" label="保证金" model:value="{{ money }}" placeholder="金额" border="{{ false }}" />
+    </van-cell-group>
+  </view>
+  <view class="btn">
+    <van-button type="info" block bind:click="agree">同意</van-button>
+  </view>
+  <van-popup show="{{ hyShow }}" position="bottom" custom-style="height: 50%;" round data-type="hyShow"
+    bind:close="onClose">
+    <van-picker data-type="hyShow" show-toolbar bind:cancel="onClose" bind:confirm="onpickerConfirm"
+      columns="{{ columns }}" />
+  </van-popup>
+</view>

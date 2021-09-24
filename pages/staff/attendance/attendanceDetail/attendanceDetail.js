@@ -2,6 +2,7 @@
 import {
   statistics
 } from '../../../../api/attendance'
+import { list } from '../../../../api/report'
 Page({
 
   /**
@@ -13,7 +14,8 @@ Page({
     maxDate: new Date().getTime(),
     year: '',
     month: '',
-    info:{}
+    info:{},
+    isTwo:false
   },
   cancel() {
     this.setData({
@@ -30,11 +32,21 @@ Page({
         year
       })
       let res = await statistics({token:wx.getStorageSync('token'),month:`${year}-${month}`})
+      if(Object.keys(res.data.list[0]).length == 5 ){
+        this.setData({
+          isTwo: true
+        })
+      }
       this.setData({
         info:res.data
       })
     }else{
       let res = await statistics({token:wx.getStorageSync('token'),month})
+      if(Object.keys(res.data.list[0]).length == 5 ){
+        this.setData({
+          isTwo: true
+        })
+      }
       this.setData({
         info:res.data
       })

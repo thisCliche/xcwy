@@ -1,15 +1,15 @@
 <!--pages/onwner/parking/vehicle/vehicle.wxml-->
 <view class="vehicle">
   <view wx:if="{{list.length != 0}}">
-    <view class="item card mt20" wx:for="{{list}}" wx:key="index">
+    <view class="item card mt20" wx:for="{{list}}" wx:key="index" bindtap="toPay" data-no="{{item.no}}">
       <view class="left">
         <view class="favicon">
           <image src="{{deFualtHttp}}/mini/images/car.png"></image>
         </view>
         <view>
-          <view class="title">物业费</view>
+          <view class="title">{{item.no}}</view>
           <view class="des" wx:if="{{item.bill == null}}">暂未查询到欠费</view>
-          <view class="des warning" wx:else>{{item.bill}}</view>
+          <view class="des warning" wx:else>待缴费：{{item.bill}}</view>
         </view>
       </view>
       <view class="right" data-no="{{item.no}}" bindtap="toDetail">
@@ -24,5 +24,8 @@
   </view>
   <view class="btns" bindtap="addCar">
     添加车辆
+  </view>
+  <view class="btns" bindtap="addCar1">
+    单次缴费
   </view>
 </view>

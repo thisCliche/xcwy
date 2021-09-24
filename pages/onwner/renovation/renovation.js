@@ -17,7 +17,7 @@ Page(filter.loginCheck({
       minHeight: 80
     },
     info: {},
-    uesTime: '',
+    uesTime: ' ',
     begin_time:'',
     end_time:'',
     reason: ''

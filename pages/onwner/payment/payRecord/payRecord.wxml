@@ -1,13 +1,23 @@
 <!--pages/onwner/payment/paymentList/paymentList.wxml-->
 <view class="payRecord">
-  <view class="item card" bindtap="toDetail">
-    <view class="left">
-      <view class="title"><van-icon size="24" name="bill" color="#4790F4"/> 物业费</view>
-      <view class="des">微信缴费</view>
-      <view class="des">2021-8-13 14:33</view>
+  <block wx:if="{{list.length != 0}}">
+    <view class="item card mt20" wx:for="{{list}}" wx:key="index">
+      <view class="left">
+        <view class="title" wx:if="{{item.car_no}}">
+          <van-icon size="24" name="bill" color="#4790F4" /> {{item.car_no}}
+        </view>
+        <view class="title" wx:else>
+          <van-icon size="24" name="bill" color="#4790F4" /> {{item.pay_type}}
+        </view>
+        <view class="des">{{item.type_text}}</view>
+        <view class="des">{{item.add_time}}</view>
+      </view>
+      <view class="right">
+        - ￥{{item.money}}
+      </view>
     </view>
-    <view class="right">
-      - ￥100.00
-    </view>
+  </block>
+  <view class="card" wx:else>
+    <van-empty description="暂无内容" />
   </view>
 </view>

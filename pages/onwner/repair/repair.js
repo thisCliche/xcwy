@@ -6,14 +6,20 @@ import {
   add
 } from '../../../api/repair'
 import {
+  myProfile
+} from '../../../api/login'
+import {
   validPhone
 } from '../../../utils/util'
+import {
+  getOwner
+} from '../../../api/login'
 Page(filter.loginCheck({
   /**
    * 页面的初始数据
    */
   data: {
-    rootHttp:app.globalData.rootHttp,
+    rootHttp: app.globalData.rootHttp,
     location: '',
     bxr: '',
     bxdh: '',
@@ -26,12 +32,23 @@ Page(filter.loginCheck({
     hyShow: false,
     columns: [],
     fileList: [],
+    userInfo: {},
+    info:{},
   },
   onDisplay(e) {
-    let type = e.currentTarget.dataset.type
+    wx.navigateTo({
+      url: '/pages/contact/pickRepairProject/pickRepairProject',
+    })
+    // let type = e.currentTarget.dataset.type
+    // this.setData({
+    //   [type]: true
+    // });
+  },
+  getlogin(e) {
     this.setData({
-      [type]: true
-    });
+      xm: e.name,
+      project_id: e.id
+    })
   },
   onClose(e) {
     let type = e.currentTarget.dataset.type
@@ -102,6 +119,23 @@ Page(filter.loginCheck({
       columns
     })
   },
+  async getOwnerDetail() {
+    let res = await getOwner({
+      token: wx.getStorageSync('token')
+    })
+    this.setData({
+      info: res.data
+    })
+  },
+  async getUserinfo() {
+    let res = await myProfile({
+      token: wx.getStorageSync('token')
+    })
+    this.setData({
+      bxr: res.data.name,
+      bxdh: res.data.mobile
+    })
+  },
   async sumbmit() {
     if (!validPhone(this.data.bxdh)) {
       wx.showToast({
@@ -110,7 +144,7 @@ Page(filter.loginCheck({
       })
     }
     let form = {
-      project_id: this.data.project_id,
+      // project_id: this.data.project_id,
       token: wx.getStorageSync('token'),
       address: this.data.location,
       name: this.data.bxr,
@@ -121,7 +155,7 @@ Page(filter.loginCheck({
     for (let i in form) {
       if (form[i] == '') {
         if (i == 'attachment') {
-          
+
         } else {
           return wx.showToast({
             title: '请填写完整',
@@ -131,19 +165,19 @@ Page(filter.loginCheck({
       }
     }
     let res = await add(form)
-    if(res.code == 200) {
+    if (res.code == 200) {
       wx.showToast({
         title: '报修成功',
       })
-      setTimeout(_=>{
+      setTimeout(_ => {
         wx.navigateBack({
           delta: 1,
         })
-      },500)
-    }else{
+      }, 500)
+    } else {
       wx.showToast({
         title: res.msg,
-        icon:'error'
+        icon: 'error'
       })
     }
   },
@@ -166,6 +200,11 @@ Page(filter.loginCheck({
    */
   onShow: function () {
     this.getProject()
+    if(this.data.bxr != ''){
+      return
+    }
+    this.getUserinfo()
+    this.getOwnerDetail()
   },
 
   /**

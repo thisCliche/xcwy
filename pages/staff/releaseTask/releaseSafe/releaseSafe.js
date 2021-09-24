@@ -22,6 +22,7 @@ Page({
     security: '',
     health: '',
     images:'',
+    other:'',
   },
   deleteImg(event) {
     let fileList = this.data.fileList
@@ -67,6 +68,7 @@ Page({
       fire_control: this.data.fire_control,
       security: this.data.security,
       health: this.data.health,
+      other: this.data.other,
       images: JSON.stringify(this.data.fileList),
     }
     for (let i in form) {

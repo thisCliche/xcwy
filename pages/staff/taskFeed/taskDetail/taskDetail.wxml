@@ -6,11 +6,11 @@
         巡查类型
       </view>
       <view class="cardTR">
-        05-16 18:36
+        {{info.begin_time}}
       </view>
     </view>
     <view class="cardD">
-      日常巡查
+      {{info.type_text}}
     </view>
   </view>
   <view class="card info mt20">
@@ -18,8 +18,7 @@
       巡查项目
     </view>
     <view class="cardD">
-      文化馆：老城保护中心、老城保护中心
-      城隍庙小区：南区、北区、南区、北区南区
+      {{info.project_id[0]}}
     </view>
   </view>
   <view class="card info mt20">
@@ -27,10 +26,7 @@
       任务标题
     </view>
     <view class="cardD">
-      1.详细内容xxxx；
-      2详细内容xxxxxxxxxxxxxxxxxx；
-      3.巡查内容，。。。xxxxxxxxxxxxxxxxxx
-      xxxx…mmmmm
+      {{info.title}}
     </view>
   </view>
   <view class="title mt30">
@@ -38,52 +34,38 @@
   </view>
   <view class="pepople">
     <van-row>
-      <van-col custom-class="colStyle" span="6" wx:for="{{list}}" wx:key="index">
+      <van-col custom-class="colStyle" span="6" wx:for="{{info.task_receiver}}" wx:key="index">
         <view class="card img">
-          <image src="/static/images/defaultAvatar.png"></image>
-          <view class="name">张扬</view>
+          <image src="{{item.avatar}}"></image>
+          <view class="name van-ellipsis">{{item.name}}</view>
         </view>
-        <van-icon name="checked" custom-style="position: absolute;top: -10rpx; right: 16rpx;" color="#32cc85" />
+        <van-icon wx:if="{{item.is_done == 'true'}}" name="checked"
+          custom-style="position: absolute;top: -10rpx; right: 16rpx;" color="#32cc85" />
       </van-col>
     </van-row>
   </view>
-  <view class="title mt30">
-    <image src="/static/images/bg.png" class="titleBg"></image> 任务汇报
-  </view>
-  <view class="card mt20 info report">
-    <view class="itemL">
-      <view class="itemImg">
-        <image src="/static/images/defaultAvatar.png"></image>
-      </view>
-      <view>
-        <view class="name">王珂</view>
-        <view class="time">05-16 18:16</view>
-      </view>
+  <block wx:if="{{info.done_receiver.length != 0}}">
+      <view class="title mt30">
+      <image src="/static/images/bg.png" class="titleBg"></image> 任务汇报
     </view>
-    <view class="cardD">
-      1.巡查详情老城保护中心巡查详情老城保护中
-      心巡查详情老城保护中心巡查详情老城保护中
-      心巡查详情老城保护中心巡
-      2.巡查详情老城保护中心巡查详情老城保护中心
-      3.巡查详情老城保护中心巡查详情
-    </view>
-  </view>
-  <view class="card mt20 info report">
-    <view class="itemL">
-      <view class="itemImg">
-        <image src="/static/images/defaultAvatar.png"></image>
+    <view class="card mt20 info report"  wx:for="{{info.done_receiver}}" wx:key="index">
+      <view class="itemL">
+        <view class="itemImg">
+          <image src="{{item.avatar}}"></image>
+        </view>
+        <view>
+          <view class="name">{{item.name}}</view>
+          <view class="time">{{item.update_time}}</view>
+        </view>
       </view>
-      <view>
-        <view class="name">王珂</view>
-        <view class="time">05-16 18:16</view>
+      <view class="cardD">
+        {{item.content.tasks}} <br/>
+        {{item.content.security}} <br/>
+        {{item.content.health}} <br/>
+        {{item.content.fire_control}} <br/>
+        {{item.content.elevator}} <br/>
       </view>
     </view>
-    <view class="cardD">
-      1.巡查详情老城保护中心巡查详情老城保护中
-      心巡查详情老城保护中心巡查详情老城保护中
-      心巡查详情老城保护中心巡
-      2.巡查详情老城保护中心巡查详情老城保护中心
-      3.巡查详情老城保护中心巡查详情
-    </view>
-  </view>
+  </block>
+
 </view>

@@ -10,10 +10,9 @@ Page(filter.loginCheck({
   data: {
     type: true,
     isStaff: '访客',
-    // isStaff: '业主',
-    // isStaff: '员工',
     userInfo:{},
     deFualtHttp:app.globalData.rootHttp,
+    rootHttp:app.globalData.rootHttp,
     menu1:[{
       name:'个人资料',
       icon:app.globalData.rootHttp+'/mini/images/menu11.png',
@@ -69,7 +68,7 @@ Page(filter.loginCheck({
   },
   toDetail(e){
     if(e.currentTarget.dataset.page == '/pages/person/attestation/attestation'){
-      wx.navigateTo({
+      return wx.navigateTo({
         url: `/pages/person/attestation/attestation?id=${this.data.userInfo.identity}`,
       })
     }
@@ -78,6 +77,7 @@ Page(filter.loginCheck({
     })
   },
   async getUserInfo(){
+    if(!wx.getStorageSync('token')) return
     let res = await myProfile({token:wx.getStorageSync('token')})
     this.setData({
       userInfo: res.data,
@@ -109,9 +109,6 @@ Page(filter.loginCheck({
       })
     }
     this.getUserInfo()
-    // this.setData({
-    //   userInfo:JSON.parse(wx.getStorageSync('userInfo'))
-    // })
   },
 
   /**

@@ -10,19 +10,21 @@ Page({
   data: {
     list: [],
     last: false,
+    houseName:'',
     project_id: '',
   },
   async getList(id) {
     if (id) {
       let res = await project({
-        project_id: id
+        project_id: id,
+        token:wx.getStorageSync('token')
       })
 
       this.setData({
         list: res.data
       })
     } else {
-      let res = await project()
+      let res = await project({token:wx.getStorageSync('token')})
       this.setData({
         list: res.data
       })
@@ -32,6 +34,7 @@ Page({
     if (this.data.list[0].hasOwnProperty('house_id')) {
       this.setData({
         project_id: e.currentTarget.dataset.item.house_id,
+        houseName:e.currentTarget.dataset.item.name,
         last: true
       })
       return
@@ -49,7 +52,7 @@ Page({
       delta: 1,
       complete: function(){
         setTimeout(function(){
-          prevPage.getlogin({id:that.data.project_id,name:that.data.projectName})
+          prevPage.getlogin({id:that.data.project_id,name:that.data.projectName+that.data.houseName})
         },500)
       }
     })

@@ -19,15 +19,12 @@
       {{info.content}}
     </view>
   </view>
-  <view class="card mt20">
+  <view class="card mt20" wx:if="{{info.images.length != 0}}">
     <view class="cardT">
       投诉图片
     </view>
     <view class="img">
-      <image src="{{siteHttp}}180x180"></image>
-      <image src="{{siteHttp}}180x180"></image>
-      <image src="{{siteHttp}}180x180"></image>
-      <image src="{{siteHttp}}180x180"></image>
+      <image wx:for="{{info.images}}" src="{{item.url}}"></image>
     </view>
   </view>
   <view class="mt30" wx:if="{{info.reply != ''}}">

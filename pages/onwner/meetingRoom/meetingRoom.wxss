@@ -32,3 +32,11 @@
 .van-button{
   width: 80% !important;
 }
+.isUseTime .van-cell__title{
+  flex: none !important;
+}
+.isUseTime .van-cell__value{
+  flex: 1 !important;
+  text-align: right !important;
+  font-size: 24rpx !important;
+}

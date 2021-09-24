@@ -13,13 +13,13 @@
         data-type="calendarShow" show-confirm="{{ false }}" />
     </van-cell-group>
   </view>
-  <!-- <view class="card mt20">
+  <view class="card mt20">
     <van-cell-group>
-      <van-cell title="来访人员" value="{{ info. }}人" 
+      <van-cell title="来访人员" value="{{ info.people_count }}人" 
         border="{{ false }}">
       </van-cell>
     </van-cell-group>
-  </view> -->
+  </view>
   <view class="card mt20">
     <van-cell-group>
       <van-cell title="登记联系人" border="{{ false }}"/>
@@ -31,7 +31,7 @@
       <van-cell title="身份证号" value="{{info.booking_detail[0].id_card}}" border="{{ false }}"/>
     </van-cell-group>
   </view>
-<block  wx:if="{{info.is_drive != '否'}}">
+<block  wx:if="{{info.is_drive !== '否'}}">
   <view class="mt20">
     <van-cell border="{{ false }}" title="是否驾车">
       <van-switch slot="right-icon" disabled size="18px" checked="{{ checked }}" active-color="#FFA477" inactive-color="#fff"

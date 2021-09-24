@@ -22,13 +22,14 @@
 }
 .img{
   margin-top: 30rpx;
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
+  /* display: flex; */
+  /* justify-content: space-between; */
+  /* flex-wrap: wrap; */
 }
 .img image{
   width: 180rpx;
   height: 180rpx;
   border-radius: 10rpx;
+  margin-right: 20rpx;
   margin-bottom: 20rpx;
 }

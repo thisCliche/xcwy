@@ -25,3 +25,10 @@
   width: 42rpx;
   height: 24rpx;
 }
+.isUseTime .van-cell__title{
+  flex: none !important;
+}
+.isUseTime .van-cell__value{
+  flex: 1 !important;
+  text-align: right !important;
+}

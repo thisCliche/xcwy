@@ -1,8 +1,8 @@
 <!--pages/person/vista/vistaDetail/vistaDetail.wxml-->
 <view class="vistaDetail">
   <view class="card info">
-    <view>城隍庙文化馆-老城保护中心-信息楼-1011栋-105室</view>
-    <view class="mt20">王佳佳 187****5264</view>
+    <view>{{info.project_name}}-{{info.area_name}}-{{info.block_name}}-{{info.name}}</view>
+    <!-- <view class="mt20">王佳佳 187****5264</view> -->
   </view>
   <view class="card mt20">
     <van-cell-group border="{{ false }}">

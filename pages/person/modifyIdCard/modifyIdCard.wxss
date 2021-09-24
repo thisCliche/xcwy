@@ -1,0 +1,10 @@
+/* pages/person/modifyNick/modifyNick.wxss */
+.modifyNick{
+  padding: 40rpx 20rpx;
+}
+.btn{
+  margin-top: 188rpx;
+}
+.btnStyle{
+  width: 90% !important;
+}

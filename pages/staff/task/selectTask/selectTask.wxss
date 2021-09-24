@@ -5,3 +5,9 @@
 .info{
   padding: 28rpx;
 }
+.btn{
+  margin-top: 50rpx;
+}
+.btn .van-button{
+  width: 90% !important;
+}

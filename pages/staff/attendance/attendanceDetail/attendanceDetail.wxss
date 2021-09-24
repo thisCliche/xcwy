@@ -3,6 +3,9 @@
   padding: 20rpx;
 }
 .summary{
+  padding: 8rpx;
+}
+.summary1{
   padding: 28rpx;
 }
 .summaryT{

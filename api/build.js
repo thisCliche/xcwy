@@ -42,3 +42,17 @@ export function done(data) {
     data
   })
 }
+export function agree(data) {
+  return request({
+    url: 'build/agree',
+    method: 'post',
+    data
+  })
+}
+export function pay(data) {
+  return request({
+    url: 'build/pay',
+    method: 'post',
+    data
+  })
+}

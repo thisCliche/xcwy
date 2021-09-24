@@ -15,21 +15,10 @@ Page({
       page: 1,
       limit: 10,
     },
+    count:0,
     list: [],
-    list2: [{
-      title: `日常巡查`,
-      estimateTime: '昨天 星期三',
-      des: '小区安全日常巡查',
-      content: '1.详情内容 1.详情内容 1.详情内容',
-      color: '#CECECE'
-    }, {
-      title: `日常巡查`,
-      estimateTime: '昨天 星期三',
-      des: '小区安全日常巡查',
-      color: '#32CC85'
-    }, ]
   },
-  async getList() {
+  async getList(type=0) {
     this.setData({
       isLoad: true
     })
@@ -38,16 +27,28 @@ Page({
       status: this.data.current,
       token: wx.getStorageSync('token')
     })
-    this.setData({
-      list: res.data.list,
-      isLoad: false
-    })
+    if(type == 0){
+      this.setData({
+        list: res.data.list,
+        count:res.data.count,
+        isLoad: false
+      })
+    }else{
+      let list = this.data.list.concat(...res.datalist)
+      this.setData({
+        list:list,
+        count:res.data.count,
+        isLoad: false
+      })
+    }
+    
   },
   onClick(e) {
     this.setData({
-      current: e.detail.name
+      current: e.detail.name,
+      ['queryInfo.page']: 1
     })
-    this.getList(e.detail.name)
+    this.getList()
   },
   toTaskDetail(e){
     wx.navigateTo({
@@ -58,7 +59,7 @@ Page({
     switch (e.currentTarget.dataset.type) {
       case 1:
         wx.navigateTo({
-          url: `/pages/staff/releaseTask/releaseDaily/releaseDaily?id=${e.currentTarget.dataset.id}&title=${e.currentTarget.dataset.title}`,
+          url: `/pages/staff/releaseTask/releaseDaily/releaseDaily?id=${e.currentTarget.dataset.id}&title=${e.currentTarget.dataset.title}&type=1`,
         })
         break;
       case 2:
@@ -68,12 +69,12 @@ Page({
         break;
       case 3:
         wx.navigateTo({
-          url: `/pages/staff/releaseTask/releaseSafe/releaseSafe?id=${e.currentTarget.dataset.id}&title=${e.currentTarget.dataset.title}&type=3`,
+          url: `/pages/staff/releaseTask/releaseDaily/releaseDaily?id=${e.currentTarget.dataset.id}&title=${e.currentTarget.dataset.title}&type=3`,
         })
         break;
       case 4:
         wx.navigateTo({
-          url: `/pages/staff/releaseTask/releaseSafe/releaseSafe?id=${e.currentTarget.dataset.id}&title=${e.currentTarget.dataset.title}&type=4`,
+          url: `/pages/staff/releaseTask/releaseDaily/releaseDaily?id=${e.currentTarget.dataset.id}&title=${e.currentTarget.dataset.title}&type=4`,
         })
         break;
       default:
@@ -133,7 +134,13 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
+    if (this.data.list.length < this.data.count) {
+      let page = ++this.data.queryInfo.page
+      this.setData({
+        ['queryInfo.page']: page
+      })
+      this.getList(1)
+    }
   },
 
   /**

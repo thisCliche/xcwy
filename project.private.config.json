@@ -13,14 +13,14 @@
     "miniprogram": {
       "list": [
         {
-          "name": "pages/onwner/news/notice/notice",
-          "pathName": "pages/staff/releaseTask/releaseDaily/releaseDaily",
+          "name": "pages/test/contact",
+          "pathName": "pages/staff/staffLog/writeLog/writeLog",
           "query": "",
           "scene": null
         },
         {
           "name": "pages/login/login",
-          "pathName": "/pages/onwner/order/orderList/orderList",
+          "pathName": "/pages/login/login",
           "query": "",
           "scene": null
         }

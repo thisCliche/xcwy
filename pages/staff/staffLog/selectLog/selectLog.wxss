@@ -1,0 +1,17 @@
+/* pages/staff/staffLog/selectLog/selectLog.wxss */
+.btn{
+  background: #fff;
+  padding: 10rpx;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+.selectLog{
+  padding-bottom: 100rpx;
+}
+.img image{
+  width: 140rpx;
+  height: 140rpx;
+  margin-right: 10rpx;
+}

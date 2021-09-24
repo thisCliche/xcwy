@@ -1,0 +1,54 @@
+<!--pages/person/renovation/renovationDetail/renovationDetail.wxml-->
+<view class="renovationDetail">
+  <view class="title">
+    <image src="/static/images/bg.png" class="titleBg"></image> 申请信息
+  </view>
+  <view class="card info mt20">
+    <view>{{info.project_name}}-{{info.area_name}}-{{info.block_name}}-{{info.house_name}}</view>
+    <view class="mt20">{{info.member.name}} {{info.member.mobile}}</view>
+  </view>
+  <view class="card info mt20">
+    <view>装修时间</view>
+    <view class="time">{{info.begin_time}} 至 {{info.end_time}}</view>
+  </view>
+  <view class="card info mt20">
+    <view>装修内容</view>
+    <view class="time">{{info.content}}</view>
+  </view>
+  <view class="card mt20">
+    <van-cell-group border="{{ false }}">
+      <van-cell title-class="titleStyle" title="装修保证金" value="¥{{info.money}}" border="{{ false }}" />
+      <van-cell title-class="titleStyle" title="缴费途径" value="{{info.is_online == 'false'? '线下支付':'线上支付'}}"
+        border="{{ false }}" />
+      <van-cell title-class="titleStyle" title="支付方式" value="{{info.pay_type}}" border="{{ false }}" />
+      <!-- <van-cell title-class="titleStyle" title="订单编号" value="{{}}" border="{{ false }}" /> -->
+    </van-cell-group>
+  </view>
+  <view class="title mt30">
+    <image src="/static/images/bg.png" class="titleBg"></image> 申请状态
+  </view>
+  <view class="steps">
+    <view class="item" wx:for="{{info.logs}}" wx:key="index">
+      <view class="avatar last">
+        <image src="{{item.member.avatar}}"></image>
+      </view>
+      <view class="itemR">
+        <view class="itemRT">
+          <view class="itemRTL">
+            <view class="itemRTL1">
+              {{item.member.name}}
+            </view>
+            <view class="itemRTL2">
+              {{item.action_text}}
+            </view>
+          </view>
+          <view class="itemRT3">{{item.add_time}}</view>
+        </view>
+        <!-- <item class="itemRB">
+          中高考期间，装修影响考生休息，请择期装修
+        </item> -->
+      </view>
+    </view>
+  </view>
+  
+</view>

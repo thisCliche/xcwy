@@ -1,8 +1,26 @@
 <!--pages/login/login.wxml-->
 <view class="login-main">
   <!-- <image src="/icon/logo.png" class="logo"></image> -->
-  <!-- <view class="login-main-title">恋爱婚姻</view> -->
-  <button class="btn" wx:if="{{isLogin}}" style="width:500rpx;line-height: 50rpx;" bindtap="getUserProfile">微信授权登陆</button>
-  <!-- <button class="btn" wx:else open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber" style="width:500rpx;">授权获取手机号</button> -->
+  <button class="btn" wx:if="{{isLogin}}"
+    bindtap="getUserProfile">微信授权登陆</button>
+  <button class="btn1" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber" >授权获取手机号</button>
   <button class="btn-qx" style="width:500rpx;" bindtap="backUp">取消</button>
+  <view class="mt20">
+    <van-button block type="info" bind:click="moniLogin" data-account="15656566666">业主登录</van-button>
+  </view>
+  <view class="mt20">
+    <van-button block type="info" bind:click="moniLogin" data-account="15656555555">游客登录</van-button>
+  </view>
+  <view class="mt20">
+    <van-button block type="info" bind:click="moniLogin" data-account="15656588888">员工登录</van-button>
+  </view>
+  <view class="mt20">
+    <van-button block type="info" bind:click="moniLogin" data-account="15656577777">领导登录</van-button>
+  </view>
+  <view class="mt20">
+    <van-button block type="info" bind:click="moniLogin" data-account="15656599999">管理员登录</van-button>
+  </view>
+  <!-- <view class="mt20">
+    <van-button block type="info" bind:click="testClick" data-account="15656599999">登录状态</van-button>
+  </view> -->
 </view>

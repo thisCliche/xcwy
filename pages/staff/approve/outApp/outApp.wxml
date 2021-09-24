@@ -28,7 +28,7 @@
       <!-- <van-calendar color="#4790F4" show="{{ calendarShow2 }}" bind:close="onClose" bind:confirm="onConfirm2"
         data-type="calendarShow2" show-confirm="{{ false }}" /> -->
 
-      <van-field required type="number" model:value="{{ duration }}" placeholder="请输入" border="{{ false }}" input-align="right"
+      <van-field required model:value="{{ duration }}" placeholder="请输入" border="{{ false }}" input-align="right"
         label="时长（小时）" />
     </van-cell-group>
   </view>
@@ -44,29 +44,20 @@
   </view>
   <view class="card mt20 image">
     <van-cell-group border="{{ false }}">
-      <van-uploader bind:delete="deleteImg" deletable="{{ true }}" file-list="{{ fileList }}" bind:after-read="afterRead" />
+      <van-uploader max-count="9" bind:delete="deleteImg" deletable="{{ true }}" file-list="{{ fileList }}" bind:after-read="afterRead" />
     </van-cell-group>
   </view>
   <view class="title mt30">
     <image src="/static/images/bg.png" class="titleBg"></image> 审批
   </view>
   <view class="steps mt30">
-    <view class="stepItem">
-      <view class="point"></view>
+    <view class="stepItem" wx:for="{{flowMember}}" wx:key="index">
+      <view class="point {{flowMember.length-1 == index?'last':''}}"></view>
       <view class="role">审批人</view>
-      <image src="/static/images/defaultAvatar.png"></image>
+      <image src="{{item.avatar}}"></image>
       <view class="name">
-        <view>杨正</view>
-        <view>办公室主任</view>
-      </view>
-    </view>
-    <view class="stepItem">
-      <view class="point last"></view>
-      <view class="role">审批人</view>
-      <image src="/static/images/defaultAvatar.png"></image>
-      <view class="name">
-        <view>杨正</view>
-        <view>办公室主任</view>
+        <view>{{item.name}}</view>
+        <view>{{item.position}}</view>
       </view>
     </view>
   </view>

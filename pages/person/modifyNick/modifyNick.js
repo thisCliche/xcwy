@@ -13,13 +13,23 @@ Page({
     if(this.data.value == ''){
       wx.showToast({
         title: '不能为空',
-        icon: error
+        icon: 'error'
       })
     }
     changeProfile({token:wx.getStorageSync('token'),field:this.data.field,value:this.data.value}).then(res=>{
       if(res.code == 200){
         wx.showToast({
           title: '修改成功',
+        })
+        setTimeout(_=>{
+          wx.navigateBack({
+            delta: 1,
+          })
+        },500)
+      }else{
+        wx.showToast({
+          title: res.msg,
+          icon: 'error'
         })
       }
     })

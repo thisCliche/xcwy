@@ -5,11 +5,16 @@
       <van-loading />
     </view>
   </van-overlay>
+  <view class="unreadSelect" wx:if="{{isShow}}">
+    <view style="margin-right: 10rpx;">|</view>
+    <van-checkbox value="{{ isRead }}" icon-size="16px" bind:change="onreadChange">未读</van-checkbox>
+  </view>
   <van-tabs sticky active="{{ active }}" color="#FFA477" bind:click="onClick">
-    <van-tab title="日报" title-style="{{current == 0?'font-weight:700;':''}}">
+    <van-tab title="全部" title-style="{{current == 0?'font-weight:700;':''}}">
       <block wx:if="{{list.length != 0}}">
         <scroll-view>
-          <view wx:for="{{list}}" wx:key="index" data-id="{{item.id}}" bindtap="toDetail">
+          <view wx:for="{{list}}" wx:key="index" data-id="{{item.id}}" data-type="{{item.type}}"
+            bindtap="allType">
             <view class="reportTime">{{item.add_time}}</view>
             <view class="card report item">
               <view class="itemL">
@@ -31,10 +36,11 @@
         <van-empty description="暂无内容" />
       </view>
     </van-tab>
-    <van-tab title="周报" title-style="{{current == 1?'font-weight:700;':''}}">
+    <van-tab title="我发出的" title-style="{{current == 1?'font-weight:700;':''}}">
       <block wx:if="{{list.length != 0}}">
         <scroll-view>
-          <view wx:for="{{list}}" wx:key="index" data-id="{{item.id}}" bindtap="toDetail">
+          <view wx:for="{{list}}" wx:key="index" data-id="{{item.id}}" data-type="{{item.type}}"
+            bindtap="allType">
             <view class="reportTime">{{item.add_time}}</view>
             <view class="card report item">
               <view class="itemL">
@@ -56,10 +62,10 @@
         <van-empty description="暂无内容" />
       </view>
     </van-tab>
-    <van-tab title="月报" title-style="{{current == 2?'font-weight:700;':''}}">
+    <van-tab title="日报" title-style="{{current == 2?'font-weight:700;':''}}">
       <block wx:if="{{list.length != 0}}">
         <scroll-view>
-          <view wx:for="{{list}}" wx:key="index" data-id="{{item.id}}" bindtap="toDetail">
+          <view wx:for="{{list}}" wx:key="index" data-id="{{item.id}}" data-type="1" bindtap="toDetail">
             <view class="reportTime">{{item.add_time}}</view>
             <view class="card report item">
               <view class="itemL">
@@ -81,5 +87,58 @@
         <van-empty description="暂无内容" />
       </view>
     </van-tab>
+    <!-- <van-tab title="周报" title-style="{{current == 3?'font-weight:700;':''}}">
+      <block wx:if="{{list.length != 0}}">
+        <scroll-view>
+          <view wx:for="{{list}}" wx:key="index" data-id="{{item.id}}" data-type="2" bindtap="toDetail">
+            <view class="reportTime">{{item.add_time}}</view>
+            <view class="card report item">
+              <view class="itemL">
+                <view class="itemImg">
+                  <image src="{{item.avatar}}"></image>
+                </view>
+                <view>
+                  <view class="name">{{item.name}}</view>
+                  <view class="time">{{item.add_time}}</view>
+                </view>
+              </view>
+              <view class="des">{{item.content.tasks}}</view>
+              <view class="unread">阅读数 {{item.read}}</view>
+            </view>
+          </view>
+        </scroll-view>
+      </block>
+      <view class="card" wx:else>
+        <van-empty description="暂无内容" />
+      </view>
+    </van-tab> -->
+    <van-tab title="月报" title-style="{{current == 3?'font-weight:700;':''}}">
+      <block wx:if="{{list.length != 0}}">
+        <scroll-view>
+          <view wx:for="{{list}}" wx:key="index" data-id="{{item.id}}" data-type="3" bindtap="toDetail1">
+            <view class="reportTime">{{item.add_time}}</view>
+            <view class="card report item">
+              <view class="itemL">
+                <view class="itemImg">
+                  <image src="{{item.avatar}}"></image>
+                </view>
+                <view>
+                  <view class="name">{{item.name}}</view>
+                  <view class="time">{{item.add_time}}</view>
+                </view>
+              </view>
+              <view class="des">{{item.content.tasks}}</view>
+              <view class="unread">阅读数 {{item.read}}</view>
+            </view>
+          </view>
+        </scroll-view>
+      </block>
+      <view class="card" wx:else>
+        <van-empty description="暂无内容" />
+      </view>
+    </van-tab>
+    <view slot="nav-right" class="youbian">
+      youbian
+    </view>
   </van-tabs>
 </view>

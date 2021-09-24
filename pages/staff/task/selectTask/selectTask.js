@@ -9,7 +9,33 @@ Page({
    */
   data: {
     list:[],
-    checked:false,
+    radio:0,
+    isBtn: false
+  },
+  onChange(event) {
+    this.setData({
+      radio: event.detail,
+      isBtn: true,
+    });
+  },
+  backUp(){
+    let pages = getCurrentPages()
+    let prevPage = pages[pages.length-2]
+    let that = this
+    let name = ''
+    this.data.list.forEach(item=>{
+      if(item.id == that.data.radio){
+        name = item.title
+      }
+    })
+    wx.navigateBack({
+      delta: 1,
+      complete: function(){
+        setTimeout(function(){
+          prevPage.getlogin({id:that.data.radio,name})
+        },500)
+      }
+    })
   },
   async taskList(type) {
     let res = await getList({
@@ -20,13 +46,11 @@ Page({
       list: res.data
     })
   },
-  onChange(){
-
-  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+
     // console.log(options.type)
     this.taskList(options.type)
   },

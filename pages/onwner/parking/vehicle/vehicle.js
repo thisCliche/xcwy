@@ -1,5 +1,5 @@
 // pages/onwner/parking/vehicle/vehicle.js
-import {fee_carList} from '../../../../api/info'
+import {fee_carList,fee_carDetail} from '../../../../api/info'
 const filter = require('../../../../utils/router.js');
 const app = getApp()
 Page(filter.loginCheck({
@@ -13,12 +13,22 @@ Page(filter.loginCheck({
   },
   toDetail(e){
     wx.navigateTo({
+      url: `/pages/onwner/payment/payRecord/payRecord?no=${e.currentTarget.dataset.no}`,
+    })
+  },
+  toPay(e){
+    wx.navigateTo({
       url: `/pages/onwner/parking/payPage/payPage?no=${e.currentTarget.dataset.no}`,
     })
   },
   addCar(){
     wx.navigateTo({
       url: '/pages/onwner/parking/addCar/addCar',
+    })
+  },
+  addCar1(){
+    wx.navigateTo({
+      url: '/pages/onwner/parking/getcarNo/getcarNo',
     })
   },
   async getfee_carList(){
@@ -47,6 +57,9 @@ Page(filter.loginCheck({
    */
   onShow: function () {
     this.getfee_carList()
+    // fee_carDetail({token:wx.getStorageSync('token'),car_no:'皖AD22222'}).then(res=>{
+    //   console.log(res)
+    // })
   },
 
   /**

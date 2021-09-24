@@ -18,7 +18,13 @@ Page({
     mobile: '',
     location: '',
     projectList: [],
-    active: 0
+    active: 0,
+    type:1,
+  },
+  onChange(event) {
+    this.setData({
+      type: event.detail,
+    });
   },
   submit() {
     if (this.data.name != '' || this.data.location) {
@@ -27,6 +33,7 @@ Page({
         name: this.data.name,
         mobile: this.data.mobile,
         project_id: this.data.radio1,
+        type: this.data.type,
         house_id: this.data.radio2
       }).then(res => {
         if (res.code != 200) {
@@ -38,11 +45,11 @@ Page({
           wx.showToast({
             title: '提交成功',
           })
-          setTimeout(_=>{
+          setTimeout(_ => {
             wx.navigateBack({
               delta: 1,
             })
-          },500)
+          }, 500)
         }
       })
     } else {
@@ -53,23 +60,38 @@ Page({
     }
   },
   onradioChange(event) {
+    console.log(event)
     let that = this
-    this.data.projectList.forEach(item => {
-      if (item.project_id == event.detail) {
-        that.setData({
-          location: that.data.location + item.name,
-        })
-      }
-    })
-    this.setData({
-      [event.currentTarget.dataset.type]: event.detail,
-      active: ++this.data.active
-    });
-    if (this.data.radio1 != '') {
-      this.getProject({
-        project_id: this.data.radio1
+    if (event.currentTarget.dataset.type == 'radio2') {
+      this.data.projectList.forEach(item => {
+        if (item.house_id == event.detail) {
+          that.setData({
+            location: that.data.location + item.name,
+          })
+        }
+      })
+    } else {
+      this.data.projectList.forEach(item => {
+        if (item.project_id == event.detail) {
+          that.setData({
+            location: that.data.location + item.name,
+          })
+        }
       })
     }
+    setTimeout(_ => {
+      that.setData({
+        [event.currentTarget.dataset.type]: event.detail,
+        active: ++this.data.active
+      });
+      if (that.data.radio1 != '') {
+        that.getProject({
+          project_id: that.data.radio1
+        })
+      }
+    }, 300)
+
+
   },
   async getProject(data) {
     let res = await project(data)
@@ -91,11 +113,11 @@ Page({
       wx.showToast({
         title: '注销成功',
       })
-      setTimeout(_=>{
+      setTimeout(_ => {
         wx.switchTab({
           url: '/pages/index/index',
         })
-      },500)
+      }, 500)
     }
   },
   async getownerInfo() {
@@ -111,11 +133,14 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log(options)
     if (options.id == '业主') {
       this.setData({
         isShow: true
       })
       this.getownerInfo()
+    } else {
+      this.getProject()
     }
   },
 
@@ -130,7 +155,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    this.getProject()
+
   },
 
   /**

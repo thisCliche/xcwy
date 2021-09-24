@@ -17,9 +17,22 @@ Page({
       })
     }
     let res = await search({keyword:this.data.value,token:wx.getStorageSync('token')})
+    if(res.data.length == 0){
+      wx.showToast({
+        title: '搜索结果为空',
+        icon:'none'
+      })
+    }
     this.setData({
       list: res.data
     })
+  },
+  toPhone(e){
+    if(e.currentTarget.dataset.mobile != ''){
+      wx.makePhoneCall({
+        phoneNumber: e.currentTarget.dataset.mobile
+      })
+    }
   },
   onCancel(){
     wx.navigateBack({

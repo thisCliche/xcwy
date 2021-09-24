@@ -6,7 +6,7 @@
   </view>
   <view class="card mt20">
     <van-cell-group>
-      <van-cell required title="装修时间" value="{{ uesTime }}" bind:click="onDisplay" data-type="calendarShow"
+      <van-cell class="isUseTime" required title="装修时间" value="{{ uesTime }}" bind:click="onDisplay" data-type="calendarShow"
         border="{{ false }}">
         <van-icon size="22px" color="#4790F4" slot="right-icon" name="calendar-o" class="custom-icon" />
       </van-cell>

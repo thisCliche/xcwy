@@ -1,25 +1,35 @@
-import {approve} from '../../../../api/report'
+import {
+  approve
+} from '../../../../api/report'
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    score:3,
-    minHeight:{minHeight:200},
-    comment:'',
+    score: null,
+    minHeight: {
+      minHeight: 200
+    },
+    comment: '',
     id: '',
-    list:[1,2,3,4,5,6],
+    list: [1, 2, 3, 4, 5, 6],
   },
-  async submit(e){
+  async submit(e) {
+    if (this.data.score >= 100 || this.data.score < 0) {
+      return wx.showToast({
+        title: '分值0-100',
+        icon: 'error'
+      })
+    }
     let form = {
-      token:wx.getStorageSync('token'),
-      id : this.data.id,
+      token: wx.getStorageSync('token'),
+      id: this.data.id,
       score: this.data.score,
       comment: this.data.comment
     }
-    for(let i in form){
-      if(form[i] == ''){
+    for (let i in form) {
+      if (form[i] == '') {
         return wx.showToast({
           title: '填写完整',
           icon: 'error'
@@ -27,25 +37,25 @@ Page({
       }
     }
     let res = await approve(form)
-    if(res.code == 200) {
+    if (res.code == 200) {
       wx.showToast({
         title: '提交成功',
       })
-      setTimeout(_=>{
+      setTimeout(_ => {
         wx.navigateBack({
           delta: 1,
         })
-      },500)
-    }else{
+      }, 500)
+    } else {
       wx.showToast({
         title: res.msg,
-        icon:'error'
+        icon: 'error'
       })
     }
   },
-  onChange(e){
+  onChange(e) {
     this.setData({
-      score:e.detail
+      score: e.detail
     })
   },
   /**
@@ -53,7 +63,7 @@ Page({
    */
   onLoad: function (options) {
     this.setData({
-      id:options.id
+      id: options.id
     })
   },
 
@@ -61,48 +71,48 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    
+
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    
+
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-    
+
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-    
+
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-    
+
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-    
+
   },
 
   /**
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-    
+
   }
 })

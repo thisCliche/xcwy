@@ -1,4 +1,5 @@
 // pages/person/renovation/renovationDetail/renovationDetail.js
+import {approve_out_detail,approve_out_agree} from '../../../../api/approve'
 let App = getApp()
 Page({
 
@@ -7,6 +8,8 @@ Page({
    */
   data: {
     siteHttp:App.globalData.siteHttp,
+    type:false,
+    info:{},
   },
   toPay(){
     wx.navigateTo({
@@ -15,19 +18,43 @@ Page({
   },
   reject(){
     wx.navigateTo({
-      url: '/pages/staff/renovation/reject/reject',
+      url: `/pages/staff/approve/reject/reject?type=2&id=${this.data.info.id}`,
     })
   },
-  resolve(){
-    wx.navigateTo({
-      url: '/pages/staff/renovation/pay/pay',
+  async resolve(){
+    let res = await approve_out_agree({id:this.data.info.id,token:wx.getStorageSync('token')})
+    if(res.code == 200) {
+      wx.showToast({
+        title: '提交成功',
+      })
+      setTimeout(_=>{
+        wx.navigateBack({
+          delta: 1,
+        })
+      },500)
+    }else{
+      wx.showToast({
+        title: res.msg,
+        icon:'error'
+      })
+    }
+  },
+  async getDetail(id){
+    let res = await approve_out_detail({id,token:wx.getStorageSync('token')})
+    this.setData({
+      info: res.data
     })
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    if(options.type == '1'){
+      this.setData({
+        type: true
+      })
+    }
+    this.getDetail(options.id)
   },
 
   /**
