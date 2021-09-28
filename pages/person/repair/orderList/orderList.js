@@ -38,6 +38,7 @@ Page({
     let res = await repairList({
       ...this.data.queryInfo,
       status: ++status,
+      type:2,
       token: wx.getStorageSync('token')
     })
     if (type == 0) {
@@ -61,6 +62,7 @@ Page({
    */
   onLoad: function (options) {
 
+    this.getrepairList()
   },
 
   /**
@@ -74,7 +76,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    this.getrepairList()
+    
   },
 
   /**

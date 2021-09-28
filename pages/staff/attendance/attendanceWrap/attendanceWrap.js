@@ -138,13 +138,14 @@ Page({
           if (res.msg == '考勤信息不存在') {
             wx.showToast({
               title: '非考勤人员',
-              icon: 'error'
+              icon: 'error',
+              duration:2000
             })
             setTimeout(_ => {
               wx.switchTab({
                 url: '/pages/index/index',
               })
-            }, 500)
+            }, 2000)
           } else if (res.data.status == 2) {
             that.setData({
               show: false,

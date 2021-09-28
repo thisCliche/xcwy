@@ -43,9 +43,9 @@
           </view>
           <view class="itemRT3">03-15 14:36</view>
         </view>
-        <!-- <item class="itemRB">
-          中高考期间，装修影响考生休息，请择期装修
-        </item> -->
+        <item class="itemRB" wx:if="{{item.action == 'reject'}}">
+          {{item.action_text}}
+        </item>
       </view>
     </view>
     

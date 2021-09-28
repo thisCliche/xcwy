@@ -3,7 +3,7 @@
   <view class="card">
     <van-cell-group>
       <van-cell title="投诉主题" required border="{{ false }}" />
-      <van-field model:value="{{ title }}" placeholder="请输入主题" border="{{ false }}" />
+      <van-field model:value="{{ title }}" type="textarea" autosize placeholder="请输入主题" border="{{ false }}" />
     </van-cell-group>
   </view>
   <view class="card mt20">

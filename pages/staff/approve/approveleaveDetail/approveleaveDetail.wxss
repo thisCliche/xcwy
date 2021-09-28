@@ -86,6 +86,9 @@
   color: #28BC8D;
   text-align: center;
 }
+.btn{
+  margin-top: 80rpx;
+}
 .btn1{
   margin-top: 80rpx;
   display: flex;
@@ -121,4 +124,16 @@
 }
 .statusColor{
   color: #28BC8D;
+}
+.color1{
+  color: #4790F4;
+}
+.color2{
+  color: #28BC8D;
+}
+.color3{
+  color: #FF6A4B;
+}
+.color4{
+  color: #ABABAB;
 }

@@ -7,14 +7,21 @@ Page({
    * 页面的初始数据
    */
   data: {
-    siteHttp:App.globalData.siteHttp,
+    rootHttp:App.globalData.rootHttp,
     info:{},
+    userId:0,
+    isRepairer:false,
   },
   async getDetail(id){
     let res = await repairDetail({token:wx.getStorageSync('token'),id})
     this.setData({
       info: res.data
     })
+    if(res.data.repairer.some(item=>item==this.data.userId)){
+      this.setData({
+        isRepairer: true
+      })
+    }
   },
   toDone(){
     wx.navigateTo({
@@ -61,6 +68,10 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    let userId = JSON.parse(wx.getStorageSync('userInfo')).id
+    this.setData({
+      userId
+    })
     this.getDetail(options.id)
   },
 

@@ -7,7 +7,10 @@
   font-size: 30rpx;
 }
 .image{
-  padding: 28rpx;
+  padding: 30rpx 46rpx 10rpx;
+}
+.van-uploader__wrapper{
+  justify-content: space-between;
 }
 .title{
   font-weight: 700;

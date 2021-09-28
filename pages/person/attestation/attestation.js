@@ -19,7 +19,7 @@ Page({
     location: '',
     projectList: [],
     active: 0,
-    type:1,
+    type: 1,
   },
   onChange(event) {
     this.setData({
@@ -45,6 +45,9 @@ Page({
           wx.showToast({
             title: '提交成功',
           })
+          let userInfo = JSON.parse(wx.getStorageSync('userInfo'))
+          userInfo.type = 2
+          wx.setStorageSync('userInfo', JSON.stringify(userInfo))
           setTimeout(_ => {
             wx.navigateBack({
               delta: 1,

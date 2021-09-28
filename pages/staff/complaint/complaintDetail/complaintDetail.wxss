@@ -39,6 +39,14 @@
   width: 180rpx;
   height: 180rpx;
   border-radius: 10rpx;
+  margin-right: 19rpx;
+  margin-left: 19rpx;
+}
+.image{
+  padding: 30rpx 46rpx 10rpx;
+}
+.van-uploader__wrapper{
+  justify-content: space-between;
 }
 .uploaderWrap{
   padding: 0 28rpx;

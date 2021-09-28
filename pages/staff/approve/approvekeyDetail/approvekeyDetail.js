@@ -1,5 +1,5 @@
 // pages/person/renovation/renovationDetail/renovationDetail.js
-import {approve_key_detail,approve_key_agree} from '../../../../api/approve'
+import {approve_key_detail,approve_key_agree,approve_keycancel,approve_keyback,approve_keydone} from '../../../../api/approve'
 
 let App = getApp()
 Page({
@@ -11,6 +11,7 @@ Page({
     siteHttp: App.globalData.siteHttp,
     type:false,
     info: {},
+    id:''
   },
   toPay() {
     wx.navigateTo({
@@ -21,6 +22,24 @@ Page({
     wx.navigateTo({
       url: `/pages/staff/approve/reject/reject?type=5&id=${this.data.info.id}`,
     })
+  },
+  async confirmreturn(){
+    let res = await approve_keyback({id:this.data.id,token:wx.getStorageSync('token')})
+    if(res.code == 200) {
+      wx.showToast({
+        title: '领取成功',
+      })
+      setTimeout(_=>{
+        wx.navigateBack({
+          delta: 1,
+        })
+      },500)
+    }else{
+      wx.showToast({
+        title: res.msg,
+        icon:'error'
+      })
+    }
   },
   async resolve(){
     let res = await approve_key_agree({id:this.data.info.id,token:wx.getStorageSync('token')})
@@ -46,6 +65,42 @@ Page({
       info: res.data
     })
   },
+  async receive(){
+    let res = await approve_keydone({id:this.data.id,token:wx.getStorageSync('token')})
+    if(res.code == 200) {
+      wx.showToast({
+        title: '领取成功',
+      })
+      setTimeout(_=>{
+        wx.navigateBack({
+          delta: 1,
+        })
+      },500)
+    }else{
+      wx.showToast({
+        title: res.msg,
+        icon:'error'
+      })
+    }
+  },
+  async revoke(){
+    let res = await approve_keycancel({id:this.data.id,token:wx.getStorageSync('token')})
+    if(res.code == 200) {
+      wx.showToast({
+        title: '撤销成功',
+      })
+      setTimeout(_=>{
+        wx.navigateBack({
+          delta: 1,
+        })
+      },500)
+    }else{
+      wx.showToast({
+        title: res.msg,
+        icon:'error'
+      })
+    }
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -55,6 +110,14 @@ Page({
         type: true
       })
     }
+    if(options.type == '3'){
+      this.setData({
+        isMe: true
+      })
+    }
+    this.setData({
+      id: options.id
+    })
     this.getDetail(options.id)
   },
 

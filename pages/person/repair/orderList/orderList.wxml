@@ -11,7 +11,7 @@
         <view class="item" wx:for="{{list}}" wx:key="index" data-id="{{item.id}}" bindtap="toDetail">
           <view class="itemTop">
             <view class="itemL">
-              {{item.name}}
+              {{item.area_name}}
             </view>
             <view class="itemR">
               {{item.add_time}}
@@ -36,7 +36,7 @@
         <view class="item" wx:for="{{list}}" wx:key="index" data-id="{{item.id}}" bindtap="toDetail">
           <view class="itemTop">
             <view class="itemL">
-              {{item.name}}
+              {{item.area_name}}
             </view>
             <view class="itemR">
               {{item.add_time}}
@@ -61,7 +61,7 @@
         <view class="item" wx:for="{{list}}" wx:key="index" data-id="{{item.id}}" bindtap="toDetail">
           <view class="itemTop">
             <view class="itemL">
-              {{item.name}}
+              {{item.area_name}}
             </view>
             <view class="itemR">
               {{item.add_time}}
@@ -86,7 +86,7 @@
         <view class="item" wx:for="{{list}}" wx:key="index" data-id="{{item.id}}" bindtap="toDetail">
           <view class="itemTop">
             <view class="itemL">
-              {{item.name}}
+              {{item.area_name}}
             </view>
             <view class="itemR">
               {{item.add_time}}

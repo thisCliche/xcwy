@@ -51,7 +51,8 @@
   height: 180rpx;
   border-radius: 10rpx;
   margin-bottom: 20rpx;
-  margin-left: 20rpx;
+  margin-right: 19rpx;
+  margin-left: 19rpx;
 }
 
 .item{

@@ -57,8 +57,6 @@ Page({
     })
   },
   async buildOrder() {
-    // let newTable = this.data.upInfo.type.charAt(0).toUpperCase() + this.data.upInfo.type.slice(1)
-    // this.data.info.fee
     if (this.data.upInfo.type != 'build') {
       let res = await buildOrder({
         token: wx.getStorageSync('token'),

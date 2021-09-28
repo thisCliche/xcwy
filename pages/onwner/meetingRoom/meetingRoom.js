@@ -6,7 +6,9 @@ import {
 import {
   validPhone
 } from '../../../utils/util'
-import {myProfile} from '../../../api/login'
+import {
+  myProfile
+} from '../../../api/login'
 const filter = require('../../../utils/router.js');
 Page(filter.loginCheck({
 
@@ -14,12 +16,16 @@ Page(filter.loginCheck({
    * 页面的初始数据
    */
   data: {
+    icon: {
+      normal: 'https://img01.yzcdn.cn/vant/user-inactive.png',
+      active: 'https://img01.yzcdn.cn/vant/user-active.png',
+    },
     isPickerRender: true,
     isPickerShow: false,
     pickerConfig: {
       isTimeFrame: true,
-      clear:'确定',
-      isWeek:true
+      clear: '确定',
+      isWeek: true
     },
     radio: '1',
     calendarShow: false,
@@ -105,7 +111,14 @@ Page(filter.loginCheck({
     let type = e.currentTarget.dataset.type
     if (e.currentTarget.dataset.type == 'hyShow') {
       if (this.data.radio == 1) {
-        if (this.data.form1.isfull) {} else {
+        if (this.data.form1.isfull) {
+          if (this.data.columns.length == 0) {
+            return wx.showToast({
+              title: '暂无会议室',
+              icon: 'error'
+            })
+          }
+        } else {
           return wx.showToast({
             title: '请先选择时间',
             icon: 'error'
@@ -113,7 +126,14 @@ Page(filter.loginCheck({
         }
       }
       if (this.data.radio == 2) {
-        if (this.data.form2.isfull) {} else {
+        if (this.data.form2.isfull) {
+          if (this.data.columns.length == 0) {
+            return wx.showToast({
+              title: '暂无会议室',
+              icon: 'error'
+            })
+          }
+        } else {
           return wx.showToast({
             title: '请先选择时间',
             icon: 'error'
@@ -224,7 +244,7 @@ Page(filter.loginCheck({
     for (let i in res.data) {
       let obj = {
         text: res.data[i].name,
-        disabled: res.data[i].status == 0 ? false : true,
+        // disabled: res.data[i].status == 0 ? false : true,
         id: res.data[i].id
       }
       columns.push(obj)
@@ -245,7 +265,7 @@ Page(filter.loginCheck({
     for (let i in res.data) {
       let obj = {
         text: res.data[i].name,
-        disabled: res.data[i].status == 0 ? false : true,
+        // disabled: res.data[i].status == 0 ? false : true,
         id: res.data[i].id
       }
       columns.push(obj)
@@ -328,16 +348,16 @@ Page(filter.loginCheck({
       })
     }
   },
-  async getUserinfo(){
-    let res = await myProfile({token:wx.getStorageSync('token')})
-    this.setData(
-      {
-        ['form1.name']:res.data.name,
-        ['form1.mobile']:res.data.mobile,
-        ['form2.name']:res.data.name,
-        ['form2.mobile']:res.data.mobile,
-      }
-    )
+  async getUserinfo() {
+    let res = await myProfile({
+      token: wx.getStorageSync('token')
+    })
+    this.setData({
+      ['form1.name']: res.data.name,
+      ['form1.mobile']: res.data.mobile,
+      ['form2.name']: res.data.name,
+      ['form2.mobile']: res.data.mobile,
+    })
   },
   /**
    * 生命周期函数--监听页面加载
@@ -395,14 +415,14 @@ Page(filter.loginCheck({
 
   },
   searchTime: function (e) {
-    if (e.detail){
+    if (e.detail) {
       let data1 = e.detail.startData.split('-')
       let data2 = e.detail.endData.split('-')
       var begin_time = ''
       var begin_type = ''
       var end_time = ''
       var end_type = ''
-      for(var i in data1){
+      for (var i in data1) {
         if (data1[i] == '全天') {
           begin_time = data1[0] + '-' + data1[1].padStart(2, '0') + '-' + data1[2].padStart(2, '0')
           begin_type = 3
@@ -418,7 +438,7 @@ Page(filter.loginCheck({
           begin_type = 2
         }
       }
-      for(var i in data2){
+      for (var i in data2) {
         if (data2[i] == '全天') {
           end_time = data2[0] + '-' + data2[1].padStart(2, '0') + '-' + data2[2].padStart(2, '0')
           end_type = 3
@@ -438,7 +458,7 @@ Page(filter.loginCheck({
           ["form1.end_type"]: end_type,
           ["form1.begin_time"]: begin_time,
           ["form1.end_time"]: end_time,
-          ["form1.uesTime"]: begin_time + data1[3]  + '至' + end_time + data2[3],
+          ["form1.uesTime"]: begin_time + data1[3] + '至' + end_time + data2[3],
           isPickerShow: false
         })
         this.judgeFull()
@@ -448,18 +468,18 @@ Page(filter.loginCheck({
           ["form2.end_type"]: end_type,
           ["form2.begin_time"]: begin_time,
           ["form2.end_time"]: end_time,
-          ["form2.uesTime"]: begin_time+ data1[3] + '至' + end_time + data2[3],
+          ["form2.uesTime"]: begin_time + data1[3] + '至' + end_time + data2[3],
           isPickerShow: false
         })
         this.judgeFull2()
       }
     }
-    
+
     // this.getDelivery(5, this.data.inputSuccessValue, this.data.createTime);
 
   },
 
- 
+
 
   // 显示或隐藏时间插件
   pickerShow: function () {
@@ -470,23 +490,23 @@ Page(filter.loginCheck({
   },
 
   //可送货订单时间插件
-  deliveryPickerShow: function() {
+  deliveryPickerShow: function () {
     this.setData({
       isDeliveryPickerShow: true,
       isDeliveryPickerRender: true,
       resetDeliveryTime: false
     })
   },
-  
+
   // 清除时间
-  timeReset:function(e){
+  timeReset: function (e) {
     this.setData({
       createTime: e.detail.timeData
     })
     // this.getDelivery(5, this.data.inputSuccessValue, this.data.createTime);
   },
-  
-  timeDeliveryReset: function(e) {
+
+  timeDeliveryReset: function (e) {
     this.setData({
       resetDeliveryTime: true
     })

@@ -14,16 +14,16 @@ Page(filter.loginCheck({
    */
   data: {
     info: {},
+    codeInfo:{},
     isShow: false,
   },
   async getOwnerDetail() {
     let res = await getOwner({
       token: wx.getStorageSync('token')
     })
-    let res1 = await login({
-      account: 15656588888
-    })
-    console.log(res1)
+    // let res1 = await login({
+    //   account: 15656588888
+    // })
     this.setData({
       info: res.data
     })
@@ -96,7 +96,7 @@ Page(filter.loginCheck({
       token: wx.getStorageSync('token')
     })
     this.setData({
-      info: res.data,
+      codeInfo: res.data,
       isShow: true
     })
   },
@@ -104,7 +104,7 @@ Page(filter.loginCheck({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.getOwnerDetail()
   },
 
   /**
@@ -118,7 +118,7 @@ Page(filter.loginCheck({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    this.getOwnerDetail()
+    
   },
 
   /**

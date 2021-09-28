@@ -1,19 +1,19 @@
 <!--pages/onwner/repair/repair.wxml-->
 <view class="repair">
-  <!-- <view class="card">
+  <view class="card" wx:if="{{isStaff}}">
     <van-cell-group>
       <van-cell title="报修项目" bind:click="onDisplay" data-type="hyShow" label="{{xm}}" required border="{{ false }}" is-link  />
       
     </van-cell-group>
-  </view> -->
-  <view class="card info">
+  </view>
+  <view class="card info" wx:else>
     <view>{{info.project_name}}{{info.area_name}}{{info.block_name}}{{info.house_name}}</view>
     <view class="mt20">{{info.name}} {{info.mobile}}</view>
   </view>
   <view class="card mt20">
     <van-cell-group>
       <van-cell title="详细地址" required border="{{ false }}" />
-      <van-field model:value="{{ location }}" placeholder="请输入详细地址" border="{{ false }}" />
+      <van-field model:value="{{ location }}" type="textarea" autosize placeholder="请输入详细地址" border="{{ false }}" />
     </van-cell-group>
   </view>
   <view class="card mt20">
@@ -32,7 +32,7 @@
   <view class="title mt30"><image src="/static/images/bg.png" class="titleBg"></image> 报修图片</view>
   <view class="card mt20 image">
     <van-cell-group border="{{ false }}">
-      <van-uploader max-count="9" bind:delete="deleteImg" deletable="{{ true }}" file-list="{{ fileList }}" bind:after-read="afterRead" />
+    <van-uploader max-count="9" bind:delete="deleteImg" deletable="{{ true }}" file-list="{{ fileList }}" bind:after-read="afterRead" />
     </van-cell-group>
   </view>
   <view class="btn">

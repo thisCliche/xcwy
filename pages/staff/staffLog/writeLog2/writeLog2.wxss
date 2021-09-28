@@ -53,8 +53,12 @@
   height: 140rpx;
   border-radius: 10rpx;
 }
+
 .photo{
-  padding: 28rpx 28rpx 8rpx ;
+  padding: 30rpx 46rpx 10rpx;
+}
+.van-uploader__wrapper{
+  justify-content: space-between;
 }
 .photoCol{
   margin-top: 20rpx !important;

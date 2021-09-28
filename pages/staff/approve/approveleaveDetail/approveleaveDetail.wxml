@@ -2,7 +2,10 @@
 <view class="renovationDetail">
   <view class="status card info">
     <view>{{info.name}}提交的请假</view>
-    <view class="statusColor">{{info.status_text}}</view>
+    <view class="color2" wx:if="{{info.status == 2}}">{{info.status_text}}</view>
+    <view class="color1" wx:elif="{{info.status == 1}}">{{info.status_text}}</view>
+    <view class="color3" wx:elif="{{info.status == 3}}">{{info.status_text}}</view>
+    <view class="color4" wx:else>{{info.status_text}}</view>
   </view>
   <view class="title mt20">
     <image src="/static/images/bg.png" class="titleBg"></image> 请假信息
@@ -45,11 +48,17 @@
           </view>
           <view class="itemRT3">{{item.add_time}}</view>
         </view>
-        <!-- <item class="itemRB">
-        </item> -->
+        <item class="itemRB" wx:if="{{item.action == 'reject'}}">
+          {{info.reject_reason}}
+        </item>
       </view>
     </view>
   </view>
+  <block wx:if="{{info.status == 1 && isMe}}">
+    <view class="btn">
+      <van-button bind:click="revoke" block type="info">撤销</van-button>
+    </view>
+  </block>
   <block wx:if="{{type}}">
     <view class="btn1">
       <van-button bind:click="reject" custom-class="btnStyle" plain color="#F54235">驳回</van-button>

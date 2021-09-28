@@ -1,5 +1,9 @@
 // pages/onwner/payment/payPage/payPage.js
-import {fee_carRecord,fee_carDetail} from '../../../../api/info'
+import {fee_carRecord,fee_carDetail,pay} from '../../../../api/info'
+import {buildOrder} from '../../../../api/fee'
+import {
+  getOwner
+} from '../../../../api/login'
 const app = getApp()
 Page({
 
@@ -9,12 +13,55 @@ Page({
   data: {
     car_no:'',
     deFualtHttp:app.globalData.rootHttp,
-    info: {}
+    info: {},
+    userInfo:{}
   },
-  // async getList(no){
-  //   let res = await fee_carRecord({car_no:no,token:wx.getStorageSync('token')})
-  //   console.log(res)
-  // },
+  async getOwnerDetail() {
+    let res = await getOwner({
+      token: wx.getStorageSync('token')
+    })
+    this.setData({
+      userInfo: res.data
+    })
+  },
+  async buildOrder() {
+    let res = await buildOrder({
+      token: wx.getStorageSync('token'),
+      // house_id: this.data.info.house_id,
+      money: this.data.info.bill,
+      table: 'car',
+      car_no:this.data.info.car_no
+    })
+    let result = await pay({
+      token: wx.getStorageSync('token'),
+      table: 'car',
+      order_no: res.data
+    })
+    wx.requestPayment({
+      timeStamp: result.data.timeStamp + '',
+      nonceStr: result.data.nonceStr,
+      package: result.data.package,
+      signType: 'MD5',
+      paySign: result.data.paySign,
+      success(result) {
+        wx.showToast({
+          title: '支付成功',
+        })
+        setTimeout(_ => {
+          wx.navigateBack({
+            delta: 1,
+          })
+        }, 500)
+      },
+      fail(result) {
+        wx.showToast({
+          title: '支付失败',
+          icon: 'error'
+        })
+        console.log('失败', result)
+      }
+    })
+  },
   async getDetail(no){
     let res = await fee_carDetail({car_no:no,token:wx.getStorageSync('token')}) 
     this.setData({
@@ -44,7 +91,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.getOwnerDetail()
   },
 
   /**

@@ -35,11 +35,8 @@
       <view>您好，业主
         针对您反馈的问题，我们核查后，确有此事，已
         对此进行处理</view>
-      <view class="img">
-        <image src="{{siteHttp}}180x180"></image>
-        <image src="{{siteHttp}}180x180"></image>
-        <image src="{{siteHttp}}180x180"></image>
-        <image src="{{siteHttp}}180x180"></image>
+      <view class="img" wx:if="{{info.reply_images.length != 0}}">
+        <image wx:for="{{info.reply_images}}" wx:key="index" src="{{item.url}}"></image>
       </view>
     </view>
   </view>

@@ -106,7 +106,7 @@ Page({
       {
         name: "维修工单",
         icon: App.globalData.rootHttp + '/mini/images/staff/menu6.png',
-        page: '/pages/staff/repair/orderList/orderList',
+        page: '/pages/staff/repair/orderList/orderList?type=1',
         info: 0
       },
       {
@@ -128,7 +128,8 @@ Page({
       },
     ],
 
-    staffMenutask1: [{
+    staffMenutask1: [],
+    temporarystaffMenutask1: [{
         name: "日常巡查",
         icon: App.globalData.rootHttp + '/mini/images/staff/menu10.png',
         page: '/pages/staff/releaseTask/releaseDaily1/releaseDaily1',
@@ -164,7 +165,31 @@ Page({
         info: ''
       },
     ],
-
+    temporarystaffMenutask2: [{
+        name: "日常巡查",
+        icon: App.globalData.rootHttp + '/mini/images/staff/menu10.png',
+        page: '/pages/staff/releaseTask/releaseDaily1/releaseDaily1',
+        info: ''
+      },
+      {
+        name: "安全督查",
+        icon: App.globalData.rootHttp + '/mini/images/staff/menu11.png',
+        page: '/pages/staff/releaseTask/releaseSafe1/releaseSafe1?type=2',
+        info: ''
+      },
+      {
+        name: "管家巡查",
+        icon: App.globalData.rootHttp + '/mini/images/staff/menu12.png',
+        page: '/pages/staff/releaseTask/releaseDaily2/releaseDaily2?type=3',
+        info: ''
+      },
+      {
+        name: "工程巡查",
+        icon: App.globalData.rootHttp + '/mini/images/staff/menu13.png',
+        page: '/pages/staff/releaseTask/releaseDaily2/releaseDaily2?type=4',
+        info: ''
+      }
+    ],
     staffMenuwork1: [{
         name: "日报",
         icon: App.globalData.rootHttp + '/mini/images/staff/menu16.png',
@@ -221,14 +246,25 @@ Page({
       token: wx.getStorageSync('token')
     })
     this.setData({
-      ['staffMenuMy1[5].info']:res.data.repair_count,
-      ['staffMenuMy1[6].info']:res.data.feedback_count,
+      ['staffMenuMy1[5].info']: res.data.repair_count,
+      ['staffMenuMy1[6].info']: res.data.feedback_count,
     })
+    let temporarystaffMenutask1 = this.data.temporarystaffMenutask1
+    let temporarystaffMenutask2 = this.data.temporarystaffMenutask2
+    if (res.data.is_leader == 'true' || res.data.is_manager == 'true') {
+      this.setData({
+        staffMenutask1:temporarystaffMenutask1
+      })
+    }else{
+      this.setData({
+        staffMenutask1:temporarystaffMenutask2
+      })
+    }
     wx.setStorageSync('staffInfo', res.data)
   },
   async getUserInfo() {
     if (!wx.getStorageSync('token')) {
-      
+
       return this.setData({
         isStaff: '访客'
       })
@@ -236,10 +272,12 @@ Page({
     let res = await myProfile({
       token: wx.getStorageSync('token')
     })
-    if(res.data.identity == '访客'){
-      let res = await visitor({token:wx.getStorageSync('token')})
+    if (res.data.identity == '访客') {
+      let res = await visitor({
+        token: wx.getStorageSync('token')
+      })
       this.setData({
-        ['menu3[1].info']:res.data.wait_count
+        ['menu3[1].info']: res.data.wait_count
       })
     }
     this.setData({

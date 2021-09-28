@@ -2,7 +2,7 @@
 <view class="login-main">
   <!-- <image src="/icon/logo.png" class="logo"></image> -->
   <button class="btn" wx:if="{{isLogin}}"
-    bindtap="getUserProfile">微信授权登陆</button>
+    bindtap="getUserProfile">微信授权登录</button>
   <button class="btn1" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber" >授权获取手机号</button>
   <button class="btn-qx" style="width:500rpx;" bindtap="backUp">取消</button>
   <view class="mt20">

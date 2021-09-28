@@ -1,5 +1,5 @@
 // pages/person/renovation/renovationDetail/renovationDetail.js
-import {approve_out_detail,approve_out_agree} from '../../../../api/approve'
+import {approve_out_detail,approve_out_agree,approve_outcancel} from '../../../../api/approve'
 let App = getApp()
 Page({
 
@@ -10,6 +10,7 @@ Page({
     siteHttp:App.globalData.siteHttp,
     type:false,
     info:{},
+    id:''
   },
   toPay(){
     wx.navigateTo({
@@ -45,6 +46,24 @@ Page({
       info: res.data
     })
   },
+  async revoke(){
+    let res = await approve_outcancel({id:this.data.id,token:wx.getStorageSync('token')})
+    if(res.code == 200) {
+      wx.showToast({
+        title: '撤销成功',
+      })
+      setTimeout(_=>{
+        wx.navigateBack({
+          delta: 1,
+        })
+      },500)
+    }else{
+      wx.showToast({
+        title: res.msg,
+        icon:'error'
+      })
+    }
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -54,6 +73,14 @@ Page({
         type: true
       })
     }
+    if(options.type == '3'){
+      this.setData({
+        isMe: true
+      })
+    }
+    this.setData({
+      id: options.id
+    })
     this.getDetail(options.id)
   },
 

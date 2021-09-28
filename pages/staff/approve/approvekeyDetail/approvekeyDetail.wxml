@@ -45,11 +45,27 @@
           </view>
           <view class="itemRT3">{{item.add_time}}</view>
         </view>
-        <!-- <item class="itemRB">
-        </item> -->
+        <item class="itemRB" wx:if="{{item.action == 'reject'}}">
+          {{info.reject_reason}}
+        </item>
       </view>
     </view>
   </view>
+  <block wx:if="{{info.status == 1 && isMe}}">
+    <view class="btn">
+      <van-button bind:click="revoke" block type="info">撤销</van-button>
+    </view>
+  </block>
+  <block wx:if="{{info.status == 2 && isMe}}">
+    <view class="btn">
+      <van-button bind:click="receive" block type="info">确认领取</van-button>
+    </view>
+  </block>
+  <block wx:if="{{info.status == 4 && !isMe}}">
+    <view class="btn">
+      <van-button bind:click="confirmreturn" block type="info">确定归还</van-button>
+    </view>
+  </block>
   <block wx:if="{{type}}">
     <view class="btn1">
       <van-button bind:click="reject" custom-class="btnStyle" plain color="#F54235">驳回</van-button>

@@ -30,6 +30,7 @@
   width: 180rpx;
   height: 180rpx;
   border-radius: 10rpx;
-  margin-right: 20rpx;
+  margin-right: 19rpx;
+  margin-left: 19rpx;
   margin-bottom: 20rpx;
 }

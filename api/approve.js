@@ -233,3 +233,45 @@ export function approve_keygetFlowMember(data) {
     data
   })
 }
+export function approve_leavecancel(data) {
+  return request({
+    url: 'approve_leave/cancel',
+    method: 'post',
+    data
+  })
+}
+export function approve_outcancel(data) {
+  return request({
+    url: 'approve_out/cancel',
+    method: 'post',
+    data
+  })
+}
+export function approve_goodscancel(data) {
+  return request({
+    url: 'approve_goods/cancel',
+    method: 'post',
+    data
+  })
+}
+export function approve_keycancel(data) {
+  return request({
+    url: 'approve_key/cancel',
+    method: 'post',
+    data
+  })
+}
+
+export function approve_keyback(data) {
+  return request({
+    url: 'approve_key/back',
+    method: 'post',
+    data
+  })
+}export function approve_keydone(data) {
+  return request({
+    url: 'approve_key/done',
+    method: 'post',
+    data
+  })
+}

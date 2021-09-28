@@ -7,7 +7,10 @@
   font-size: 30rpx;
 }
 .image{
-  padding: 28rpx;
+  padding: 30rpx 46rpx 10rpx;
+}
+.van-uploader__wrapper{
+  justify-content: space-between;
 }
 .title{
   font-weight: 700;
@@ -43,7 +46,7 @@
     height: 116rpx;
     background: rgb(202, 202, 202);
     position: absolute;
-    bottom: -58px;
+    bottom: -114rpx;
     left: 47%;
 }
 .stepItem .last::before{

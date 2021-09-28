@@ -97,7 +97,6 @@
     "pages/contact/pickRepairProject/pickRepairProject",
     "pages/contact/pickTaskProject/pickTaskProject",
     "pages/staff/task/selectTask/selectTask",
-    "pages/test/contact",
     "pages/staff/staffLog/selectLog/selectLog"
   ],
   "window": {

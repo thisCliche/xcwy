@@ -34,6 +34,7 @@ Page(filter.loginCheck({
     fileList: [],
     userInfo: {},
     info:{},
+    isStaff:false,
   },
   onDisplay(e) {
     wx.navigateTo({
@@ -144,7 +145,7 @@ Page(filter.loginCheck({
       })
     }
     let form = {
-      // project_id: this.data.project_id,
+      project_id: this.data.project_id,
       token: wx.getStorageSync('token'),
       address: this.data.location,
       name: this.data.bxr,
@@ -199,6 +200,13 @@ Page(filter.loginCheck({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+
+    let type = JSON.parse(wx.getStorageSync('userInfo')).type
+    if(type == 3){
+      this.setData({
+        isStaff:true
+      })
+    }
     this.getProject()
     if(this.data.bxr != ''){
       return

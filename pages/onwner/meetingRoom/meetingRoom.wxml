@@ -2,8 +2,8 @@
 <view class="meeting">
   <view class="toggle">
     <van-radio-group class="icongroupStyle" value="{{ radio }}" direction="horizontal" bind:change="onradioChange">
-      <van-radio name="1" icon-size="16px" class="radioStyle" icon-class="iconStyle">个人</van-radio>
-      <van-radio name="2" icon-size="16px" icon-class="iconStyle">单位</van-radio>
+      <van-radio name="1" custom-class="radioClass" value="{{ radio }}" use-icon-slot>个人 <image slot="icon" src="{{ radio === '1' ? '../../../static/images/radio-active.png' : '../../../static/images/radio.png' }}" /></van-radio>
+      <van-radio name="2" value="{{ radio }}" use-icon-slot>单位 <image slot="icon" src="{{ radio === '2' ? '../../../static/images/radio-active.png' : '../../../static/images/radio.png' }}" /></van-radio>
     </van-radio-group>
   </view>
   <view class="formWrap">
@@ -82,19 +82,17 @@
   <van-calendar color="#4790F4" show="{{ calendarShow }}" type="range" bind:close="onClose" bind:confirm="onConfirm"
     data-type="calendarShow" show-confirm="{{ false }}" />
 
-  <van-popup show="{{ hyShow }}" position="bottom" custom-style="height: 50%;"  data-type="hyShow"
-    bind:close="onClose">
+  <van-popup show="{{ hyShow }}" position="bottom" custom-style="height: 50%;" data-type="hyShow" bind:close="onClose">
     <van-picker data-type="hyShow" show-toolbar bind:cancel="onClose" bind:confirm="onpickerConfirm"
       columns="{{ columns }}" />
   </van-popup>
 
-  <van-popup show="{{ qjShow }}" position="bottom" custom-style="height: 50%;"  data-type="qjShow"
-    bind:close="onClose">
+  <van-popup show="{{ qjShow }}" position="bottom" custom-style="height: 50%;" data-type="qjShow" bind:close="onClose">
     <van-picker data-type="qjShow" show-toolbar bind:cancel="onClose" bind:confirm="onpickerConfirm1"
       columns="{{ columns1 }}" />
   </van-popup>
   <time-picker pickerShow="{{isPickerShow}}" wx:if="{{isPickerRender}}" config="{{pickerConfig}}"
-     bind:timeData="searchTime"></time-picker>
+    bind:timeData="searchTime"></time-picker>
   <!-- <time-picker pickerShow="{{isPickerShow}}" wx:if="{{isPickerRender}}" config="{{pickerConfig}}"
     bind:timeData="searchTime" bind:timeReset="timeReset"></time-picker> -->
 </view>

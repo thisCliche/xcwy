@@ -33,7 +33,7 @@ Page(filter.loginCheck({
     menu2:[{
       name:'报修记录',
       icon:app.globalData.rootHttp+'/mini/images/menu15.png',
-      page:'/pages/person/repair/orderList/orderList'
+      page:'/pages/person/repair/orderList/orderList?type=2'
     },{
       name:'投诉记录',
       icon:app.globalData.rootHttp+'/mini/images/menu16.png',
@@ -60,6 +60,11 @@ Page(filter.loginCheck({
       icon:app.globalData.rootHttp+'/mini/images/menu21.png',
       page:'/pages/staff/set/set'
     },]
+  },
+  toLogin(){
+    wx.navigateTo({
+      url: '/pages/login/login',
+    })
   },
   toTz(){
     wx.navigateTo({

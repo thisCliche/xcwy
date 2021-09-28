@@ -14,7 +14,7 @@
       "list": [
         {
           "name": "pages/test/contact",
-          "pathName": "pages/staff/staffLog/writeLog/writeLog",
+          "pathName": "pages/person/personMain/personMain",
           "query": "",
           "scene": null
         },

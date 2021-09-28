@@ -35,3 +35,9 @@
 .van-button{
   width: 90% !important;
 }
+.image{
+  padding: 30rpx 46rpx 10rpx;
+}
+.van-uploader__wrapper{
+  justify-content: space-between;
+}

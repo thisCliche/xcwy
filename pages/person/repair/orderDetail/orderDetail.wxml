@@ -13,7 +13,7 @@
       <view class="cellL">
         预警提醒
       </view>
-      <view class="warning">超3小时未接单 <image src="/static/images/warning.png"></image>
+      <view class="warning">超3小时未接单 <image src="{{rootHttp}}/mini/images/warning.png"></image>
       </view>
     </view>
   </view>
@@ -80,7 +80,7 @@
           </view>
           <view class="itemRT3">{{item.add_time}}</view>
         </view>
-        <item class="itemRB">
+        <item class="itemRB" wx:if="{{item.action == 'reject'}}">
           {{item.action_text}}
         </item>
       </view>
@@ -95,7 +95,7 @@
   </view>
 
   <block wx:if="{{info.status == 1}}">
-    <view class="btn">
+    <view class="btn" wx:if="{{isRepairer}}">
       <van-button type="info" block bind:click="agree">接单</van-button>
     </view>
   </block>

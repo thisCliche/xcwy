@@ -40,3 +40,11 @@
   text-align: right !important;
   font-size: 24rpx !important;
 }
+.radioClass{
+  margin-right: 160rpx !important;
+}
+.van-radio image{
+  width: 22px;
+  height: 22px;
+  margin-top: 10rpx;
+}

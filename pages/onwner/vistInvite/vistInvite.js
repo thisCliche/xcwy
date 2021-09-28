@@ -3,9 +3,13 @@ const filter = require('../../../utils/router.js');
 // import {
 //   project,
 // } from '../../../api/repair'
-import {add,project} from '../../../api/booking'
 import {
-  validPhone,validIdenty
+  add,
+  project
+} from '../../../api/booking'
+import {
+  validPhone,
+  validIdenty
 } from '../../../utils/util'
 Page(filter.loginCheck({
   /**
@@ -43,14 +47,14 @@ Page(filter.loginCheck({
     showNewPower: false,
     KeyboardState: false,
   },
-  getlogin:function(e){
+  getlogin: function (e) {
     this.setData({
-      xm:e.name,
-      project_id:e.id
+      xm: e.name,
+      project_id: e.id
     })
     console.log(e)
   },
-  toSelect(){
+  toSelect() {
     wx.navigateTo({
       url: '/pages/contact/pickProject/pickProject',
     })
@@ -62,6 +66,11 @@ Page(filter.loginCheck({
     this.setData({
       checked: detail
     });
+    if(detail == false){
+      this.setData({
+        carnum: []
+      });
+    }
   },
   addInfo() {
     let pepople = this.data.pepople
@@ -131,10 +140,22 @@ Page(filter.loginCheck({
     }
   },
   showPowerBtn() {
-    if(!this.data.checked) return
+    if (!this.data.checked) return
     this.setData({
       showNewPower: true,
       KeyboardState: true
+    })
+  },
+  removeNewpower() {
+    let carnum = this.data.carnum
+    if(this.data.carnum.length == 8){
+      carnum.pop()
+      this.setData({
+        carnum: carnum,
+      })
+    }
+    this.setData({
+      showNewPower: false,
     })
   },
   closeKeyboard() {
@@ -143,7 +164,7 @@ Page(filter.loginCheck({
     })
   },
   openKeyboard() {
-    if(!this.data.checked) return
+    if (!this.data.checked) return
     this.setData({
       KeyboardState: true
     })
@@ -170,7 +191,7 @@ Page(filter.loginCheck({
       columns
     })
   },
-  async submit(){
+  async submit() {
     if (!validPhone(this.data.lxdh)) {
       return wx.showToast({
         title: '手机号不正确',
@@ -195,13 +216,13 @@ Page(filter.loginCheck({
       id_card: this.data.sfzh,
       remark: this.data.bz,
     }
-    if(!form.is_drive){
-      form.car_no = '皖ASDFE2'
-    }
+    // if(!form.is_drive){
+    //   form.car_no = '皖ASDFE2'
+    // }
     for (let i in form) {
       if (form[i] === '') {
-        if (i == 'remark') {
-          
+        if (i == 'remark' || i == 'car_no') {
+
         } else {
           return wx.showToast({
             title: '请填写完整',
@@ -212,19 +233,19 @@ Page(filter.loginCheck({
     }
     form.is_drive = form.is_drive.toString()
     let res = await add(form)
-    if(res.code == 200) {
+    if (res.code == 200) {
       wx.showToast({
         title: '预约成功',
       })
-      setTimeout(_=>{
+      setTimeout(_ => {
         wx.navigateBack({
           delta: 1,
         })
-      },500)
-    }else{
+      }, 500)
+    } else {
       wx.showToast({
         title: res.msg,
-        icon:'error'
+        icon: 'error'
       })
     }
   },

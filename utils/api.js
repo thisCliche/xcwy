@@ -22,7 +22,7 @@ const request = (options) => {
             wx.setStorageSync('refresh_token', res.data.refresh_token)
             wx.showModal({
               title: '提示',
-              content: '登录已过去，重新登录',
+              content: '登录已过期，重新登录',
               showCancel: false,
               success(res) {
                 if (res.confirm) {

@@ -2,7 +2,7 @@
 <view class="personMain">
   <view class="top">
     <view class="topWrap" wx:if="{{!userInfo.avatar}}">
-      <view class="topL">
+      <view class="topL" bindtap="toLogin">
         <image class="avatar" src="{{deFualtHttp}}/mini/images/avtar.png"></image>
         <view class="name">点击登录</view>
       </view>

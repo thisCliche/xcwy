@@ -1,15 +1,23 @@
 <!--pages/onwner/parking/vehicle/vehicle.wxml-->
 <view class="vehicle">
   <view wx:if="{{list.length != 0}}">
-    <view class="item card mt20" wx:for="{{list}}" wx:key="index" bindtap="toPay" data-no="{{item.no}}">
-      <view class="left">
+    <view class="item card mt20" wx:for="{{list}}" wx:key="index">
+      <view class="left" wx:if="{{item.bill == null}}">
         <view class="favicon">
           <image src="{{deFualtHttp}}/mini/images/car.png"></image>
         </view>
         <view>
           <view class="title">{{item.no}}</view>
-          <view class="des" wx:if="{{item.bill == null}}">暂未查询到欠费</view>
-          <view class="des warning" wx:else>待缴费：{{item.bill}}</view>
+          <view class="des">暂未查询到欠费</view>
+        </view>
+      </view>
+      <view class="left" wx:else  bindtap="toPay"  data-no="{{item.no}}">
+        <view class="favicon">
+          <image src="{{deFualtHttp}}/mini/images/car.png"></image>
+        </view>
+        <view>
+          <view class="title">{{item.no}}</view>
+          <view class="des warning">待缴费：{{item.bill}}</view>
         </view>
       </view>
       <view class="right" data-no="{{item.no}}" bindtap="toDetail">
@@ -22,10 +30,11 @@
   <view class="card" wx:else>
     <van-empty description="暂无车辆" />
   </view>
+  <view class="card mt20 singlePayment" bindtap="addCar1">
+    <view class="singleL">单次交费</view>
+    <view class="singleR">60元/辆 <van-icon name="arrow" /></view>
+  </view>
   <view class="btns" bindtap="addCar">
     添加车辆
-  </view>
-  <view class="btns" bindtap="addCar1">
-    单次缴费
   </view>
 </view>

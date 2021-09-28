@@ -47,3 +47,14 @@
   text-align: center;
   margin-top: 96rpx;
 }
+.singlePayment{
+  padding: 60rpx 30rpx;
+  display: flex;
+  justify-content: space-between;
+}
+.singleL{
+  font-size: 36rpx;
+}
+.singleR{
+  font-size: 32rpx;
+}

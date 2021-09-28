@@ -17,6 +17,7 @@
         data-type="calendarShow" show-confirm="{{ false }}" />
     </van-cell-group>
   </view>
+  <view class="title1 mt30"><image src="/static/images/bg.png" class="titleBg"></image> 来访人员</view>
   <view class="card mt20">
     <van-cell-group>
       <van-field type="number" required label="访问人数" model:value="{{ renyuan }}" placeholder="请输入" border="{{ false }}" input-align="right"/>
@@ -40,7 +41,7 @@
         inactive-color="#fff" bind:change="onChange" />
     </van-cell>
   </view>
-  <view class="plate">
+  <view class="plate" wx:if="{{checked}}">
     <view class="carNumber-items">
       <view class="carNumber-items-box" bindtap='openKeyboard'>
         <view class="carNumber-items-province carNumber-items-box-list">{{carnum[0] || ''}}</view>
@@ -63,6 +64,7 @@
         </view>
       </view>
     </view>
+    <view class="removeNewpower" wx:if="{{showNewPower}}" bindtap='removeNewpower'>-燃油车</view>
   </view>
   <view class="card mt30">
     <van-cell-group>

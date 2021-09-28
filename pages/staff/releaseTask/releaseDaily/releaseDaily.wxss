@@ -31,6 +31,12 @@
   height: 140rpx;
   border-radius: 10rpx;
 }
+.image{
+  padding: 30rpx 46rpx 10rpx;
+}
+.van-uploader__wrapper{
+  justify-content: space-between;
+}
 .btn{
   margin-top: 74rpx;
 }

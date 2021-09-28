@@ -80,7 +80,7 @@
           </view>
           <view class="itemRT3">{{item.add_time}}</view>
         </view>
-        <item class="itemRB">
+        <item class="itemRB" wx:if="{{item.action == 'reject'}}">
           {{item.action_text}}
         </item>
       </view>

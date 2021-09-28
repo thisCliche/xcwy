@@ -3,7 +3,8 @@ const app = getApp()
 import {
   sendLogin,
   login,
-  getMobile
+  getMobile,
+  myProfile
 } from '../../api/login.js'
 import eventBus from '../../utils/eventBus'
 Page({
@@ -37,15 +38,22 @@ Page({
               title: '获取中...',
             })
             getMobile(data).then(res => {
-              if (that.data.type == '') {
-                wx.switchTab({
-                  url: '/pages/index/index',
-                })
-              } else {
-                wx.navigateBack({
-                  delta: 1
-                })
-              }
+              myProfile({
+                token: wx.getStorageSync('token')
+              }).then(res => {
+                let userInfo = JSON.parse(wx.getStorageSync('userInfo'))
+                userInfo.type = res.data.type
+                wx.setStorageSync('userInfo', JSON.stringify(userInfo))
+                if (that.data.type == '') {
+                  wx.switchTab({
+                    url: '/pages/index/index',
+                  })
+                } else {
+                  wx.navigateBack({
+                    delta: 1
+                  })
+                }
+              })
             })
           }
         }
@@ -80,7 +88,17 @@ Page({
                     wx.setStorageSync('token', json.data.token)
                     wx.setStorageSync('refresh_token', json.data.refresh_token)
                     eventBus.emit('reload')
-
+                    // if (json.data.member_info.type != 3) {
+                    //   if (that.data.type == '') {
+                    //     wx.switchTab({
+                    //       url: '/pages/index/index',
+                    //     })
+                    //   } else {
+                    //     wx.navigateBack({
+                    //       delta: 1
+                    //     })
+                    //   }
+                    // }
                   } else {
                     wx.showToast({
                       title: json.msg || "获取登录信息失败",
@@ -130,14 +148,14 @@ Page({
       })
     }
   },
-  testClick(){
+  testClick() {
     wx.checkSession({
-      success (e) {
-        console.log(e,'weiguoqi')
+      success(e) {
+        console.log(e, 'weiguoqi')
         //session_key 未过期，并且在本生命周期一直有效
       },
-      fail (e) {
-        console.log(e,'guoqi')
+      fail(e) {
+        console.log(e, 'guoqi')
         // session_key 已经失效，需要重新执行登录流程
         wx.login() //重新登录
       }
@@ -166,10 +184,10 @@ Page({
    */
   onShow: function () {
     wx.login({
-      success(res){
+      success(res) {
         console.log(res)
       },
-      
+
     })
   },
 
