@@ -139,7 +139,7 @@ font-size:14rpx;
 /* 车牌号码 */
 .carNumber-items{
   text-align: center;
-  margin-top: 58rpx;
+  /* margin-top: 58rpx; */
 }
 .carNumber-items-box{
   width: 158rpx;
@@ -175,7 +175,7 @@ font-size:14rpx;
   background-color: #ccc;
 }
 .carNumber-item{
-  width: 76rpx;
+  width: 69rpx;
   height: 90rpx;
   font-size: 36rpx;
   text-align: center;
@@ -202,4 +202,36 @@ font-size:14rpx;
 .carNumberBtn{
   border-radius: 4rpx;
   margin:80rpx 40rpx;
+}
+.showNumber{
+  width: 75rpx;
+  height: 75rpx;
+  border: 4rpx solid #ccc;
+  margin:6rpx;
+  float: left;
+  border-radius: 6rpx;
+  text-align: center;
+  line-height: 75rpx;
+  font-size: 40rpx;
+}
+
+.plateInput{
+  width: 860rpx;
+  height: 83rpx;
+  border: 1rpx solid black;
+  position: absolute;
+  top: 0;
+  left: -200rpx;
+  opacity: 0;
+  color: transparent;
+}
+.plate{
+  display: flex;
+  margin-top: 156rpx;
+}
+.removeNewpower{
+  color: #A8BFF3;
+  font-size: 24rpx;
+  width: 48rpx;
+  margin-top: 17rpx;
 }

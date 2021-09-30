@@ -76,3 +76,7 @@ margin-top: 10rpx;
   font-size: 24rpx;
   color: #ABABAB;
 }
+.photoCol image{
+  width: 140rpx;
+  height: 140rpx;
+}

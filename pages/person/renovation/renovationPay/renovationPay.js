@@ -1,21 +1,32 @@
-// pages/person/renovation/renovationPay/renovationPay.js
-import {pay} from '../../../../api/info'
-const app = getApp()
+// pages/onwner/payment/payPage/payPage.js
+import {
+  waterDetail,
+  propertyDetail,
+  electricDetail,
+  rentDetail,
+  buildDetail,
+  buildOrder
+} from '../../../../api/fee'
+import {
+  pay
+} from '../../../../api/info'
+let app = getApp()
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    radio:'1',
-    id:0,
     rootHttp:app.globalData.rootHttp,
+    upInfo: {},
+    info: {},
+    typeName: '',
+    id:'',
+    mony:'',
     order_no:'',
-    mony:''
-  },
-  async getOrder(id){
-    // let res = await pay({token:wx.getStorageSync('token'),id:Number(id),type:this.data.radio})
-    // console.log(res)
+    des1:'',
+    mobile:'',
+    name:''
   },
   async toPay(){
     let result = await pay({table:'build',order_no:this.data.order_no,token:wx.getStorageSync('token')})
@@ -52,7 +63,10 @@ Page({
     this.setData({
       id: options.id,
       order_no:options.order_no,
-      mony:options.mony
+      mony:options.mony,
+      des1:options.des1,
+      name:options.name,
+      mobile:options.mobile,
     })
   },
 

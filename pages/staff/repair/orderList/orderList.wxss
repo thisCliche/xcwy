@@ -33,3 +33,7 @@
 .info{
   /* padding: 0 20rpx; */
 }
+.warning image{
+  width: 32rpx;
+  height: 28rpx;
+}

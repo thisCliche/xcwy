@@ -2,7 +2,7 @@
 <view class="renovationPay">
   <view class="card info">
     <view>装修保证金</view>
-    <view class="money">
+    <view class="money" wx:if="{{money != null}}">
       ￥{{money}}
     </view>
   </view>
@@ -14,7 +14,7 @@
   </view> -->
   <view class="mt20 card">
     <van-cell-group border="{{ false }}">
-      <van-field input-align="right" label="保证金" model:value="{{ money }}" placeholder="金额" border="{{ false }}" />
+      <van-field input-align="right" label="保证金" bind:input="bindInput" model:value="{{ money }}" placeholder="请输入保证金" border="{{ false }}" />
     </van-cell-group>
   </view>
   <view class="btn">

@@ -30,9 +30,9 @@
       </view>
     </view>
   </block>
-  <van-row>
+  <van-row wx:if="{{images.length!=0}}">
       <van-col custom-class="photoCol" span="6" wx:for="{{images}}" wx:key="index">
-        <image src="{{item.url}}"></image>
+        <image src="{{item}}"></image>
       </van-col>
     </van-row>
   <van-action-sheet round="{{false}}" bind:select="onSelect" show="{{ show }}" actions="{{ actions }}"

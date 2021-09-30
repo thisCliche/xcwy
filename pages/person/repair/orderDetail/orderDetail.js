@@ -14,6 +14,16 @@ Page({
   },
   async getDetail(id){
     let res = await repairDetail({token:wx.getStorageSync('token'),id})
+    if(res.data.attachment.length!=0){
+      for(let i =0;i<res.data.attachment.length;i++){
+        res.data.attachment[i] = this.data.rootHttp +res.data.attachment[i]
+      }
+    }
+    if(res.data.logs?.length==3 ){
+      for(let i =0;i<res.data.logs[2].attachment.length;i++){
+        res.data.logs[2].attachment[i] = this.data.rootHttp +res.data.logs[2].attachment[i]
+      }
+    }
     this.setData({
       info: res.data
     })

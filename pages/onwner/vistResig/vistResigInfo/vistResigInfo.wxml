@@ -8,8 +8,17 @@
     <van-button type="info" block bind:click="generateCode">生成邀请二维码</van-button>
     <van-button type="info" bind:click="generateLink">复制邀请链接</van-button>
   </view>
-  <view class="img mt20" wx:if="{{isShow}}">
-    <image style="margin-bottom: 20rpx;" src="{{codeInfo.qrcode}}"></image>
-    <van-button type="info" block bind:click="saveImg">保存二维码</van-button>
-  </view>
+  <van-popup show="{{ isShow }}" bind:close="onClose">
+    <view class="pupWrap">
+      <view class="img mt20">
+        <image style="margin-bottom: 20rpx;" src="{{codeInfo.qrcode}}"></image>
+        <van-button type="info" block bind:click="saveImg" size="small">保存二维码</van-button>
+      </view>
+
+    </view>
+    
+  </van-popup>
+  <view wx:if="{{ isShow }}" class="colse" bindtap="onClose">
+      <van-icon name="cross" />
+    </view>
 </view>

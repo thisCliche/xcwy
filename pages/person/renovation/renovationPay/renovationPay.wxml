@@ -1,24 +1,25 @@
-<!--pages/person/renovation/renovationPay/renovationPay.wxml-->
-<view class="renovationPay">
-  <view class="toggle">
-    <van-radio-group class="icongroupStyle" model:value="{{ radio }}" direction="horizontal">
-      <van-radio name="1" icon-size="16px" class="radioStyle" icon-class="iconStyle">线上缴费</van-radio>
-      <van-radio name="0" icon-size="16px" icon-class="iconStyle">线下缴费</van-radio>
-    </van-radio-group>
-  </view>
-  <view class="card">
-    <view>装修保证金</view>
-    <view class="money">
-      ￥{{mony}}
+<!--pages/onwner/payment/payPage/payPage.wxml-->
+<view class="payPage">
+  <view class="card info">
+    <view class="title"><van-icon size="24" name="bill" color="#4790F4"/> 装修保证金</view>
+    <view class="des">
+      {{des1}}
     </view>
+    <view class="des">
+      {{name}}   {{mobile}}
+    </view>
+  </view>
+  <view class="card info mt20">
+    <view class="title">缴纳金额</view>
+    <view class="money">￥{{mony}}</view>
   </view>
   <view class="desWrap">
     <view>
       <image src="{{rootHttp}}/mini/images/warning.png"></image>
     </view>
-    <view class="des">保证金用于担保您在装修期间未损坏公共设施，装修完以后，可申请退还保证金，物业审核通过后，即可退还保证金</view>
+    <view class="des1">保证金用于担保您在装修期间未损坏公共设施，装修完以后，可申请退还保证金，物业审核通过后，即可退还保证金</view>
   </view>
   <view class="btn">
-    <van-button bind:click="toPay" type="info" block>维修支付</van-button>
+    <van-button bind:click="toPay" type="info" block>微信支付</van-button>
   </view>
 </view>

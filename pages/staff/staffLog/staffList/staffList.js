@@ -39,6 +39,23 @@ Page({
     })
     this.getList(e.detail.name)
   },
+  onClick1() {
+    this.setData({
+      ['queryInfo.page']: 1
+    })
+    if (this.data.current == 1) {
+      this.setData({
+        isShow: false,
+        
+      })
+    } else {
+      this.setData({
+        isShow: true,
+      })
+    }
+
+    this.getList(this.data.current)
+  },
   onreadChange(event) {
     this.setData({
       isRead: event.detail,
@@ -177,7 +194,7 @@ Page({
         status: 0
       })
     }
-    this.getList()
+    // this.getList()
   },
 
   /**
@@ -191,7 +208,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    
+    this.onClick1()
   },
 
   /**

@@ -32,7 +32,8 @@
     </view>
   </block>
   <view class="card input mt20">
-    <view class="cardT">{{typeName}}工作内容</view>
+    <!-- <view class="cardT">{{typeName}}工作内容</view> -->
+    <van-cell title="{{typeName}}工作内容"required border="{{ false }}"  />
     <van-field type="textarea" autosize="{{minHeight}}" model:value="{{ tasks }}" placeholder="请输入" />
   </view>
   <!-- <view class="card input mt20">

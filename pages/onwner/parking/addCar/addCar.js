@@ -59,6 +59,18 @@ openKeyboard() {
     KeyboardState: true
   })
 },
+removeNewpower() {
+  let carnum = this.data.carnum
+  if(this.data.carnum.length == 8){
+    carnum.pop()
+    this.setData({
+      carnum: carnum,
+    })
+  }
+  this.setData({
+    showNewPower: false,
+  })
+},
 // 提交车牌号码
 async submitNumber() {
   let no = this.data.carnum.join('')

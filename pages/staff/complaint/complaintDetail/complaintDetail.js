@@ -16,6 +16,7 @@ Page({
     reply:"",
     info:{},
     id:'',
+    imgList: [],
   },
   afterRead(event) {
     const { file } = event.detail;
@@ -35,15 +36,28 @@ Page({
   },
   async getDetail(id){
     let res = await detail({id,token:wx.getStorageSync('token')})
+    if(res.data.images.length!=0){
+      for(let i =0;i<res.data.images.length;i++){
+        res.data.images[i] = this.data.rootHttp +res.data.images[i]
+      }
+    }
+    if(res.data.reply_images!==null && res.data.reply_images?.length!=0 ){
+      for(let i =0;i<res.data.reply_images.length;i++){
+        res.data.reply_images[i] = this.data.rootHttp +res.data.reply_images[i]
+      }
+    }
     this.setData({
       info:res.data
     })
   },
   deleteImg(event) {
     let fileList = this.data.fileList
+    let imgList = this.data.imgList
     fileList.splice(event.detail.index, 1)
+    imgList.splice(event.detail.index, 1)
     this.setData({
-      fileList
+      fileList,
+      imgList
     })
   },
   afterRead(event) {
@@ -64,6 +78,8 @@ Page({
         const {
           fileList = []
         } = that.data;
+        let imgList = that.data.imgList
+        imgList.push(img.data)
         fileList.push({
           // ...file,
           url: App.globalData.rootHttp + img.data
@@ -74,13 +90,20 @@ Page({
       },
     });
   },
+  previewImage(e){
+    let urls = this.data.info.images
+    wx.previewImage({
+      current: e.currentTarget.dataset.url, 
+      urls
+    })
+  },
   async submit() {
     
     let form = {
       token: wx.getStorageSync('token'),
       id: this.data.id,
       reply: this.data.reply,
-      reply_images: JSON.stringify(this.data.fileList)
+      reply_images: JSON.stringify(this.data.imgList)
     }
     for (let i in form) {
       if (form[i] == '') {

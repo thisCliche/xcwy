@@ -8,9 +8,9 @@
     <image src="/static/images/bg.png" class="titleBg"></image> 钥匙信息
   </view>
   <view class="card info mt20">
-    <view>申请时间:{{info.begin_time}}</view>
-    <view class="mt20">归还时间:{{info.end_time}}</view>
-    <!-- <view class="mt20">申请钥匙:{{info.status_text}}</view> -->
+    <view>申请时间：{{info.begin_time}}</view>
+    <view class="mt20">归还时间：{{info.end_time}}</view>
+    <view class="mt20">申请钥匙：{{info.house.name}}</view>
   </view>
   <view class="card info mt20">
     <view>说明</view>
@@ -23,7 +23,7 @@
     <view class="card mt20 workImg info">
       <van-row>
         <van-col wx:for="{{info.images}}" wx:key="index" custom-class="colStyle" span="6">
-          <image src="{{item.url}}"></image>
+          <image src="{{item}}"></image>
         </van-col>
       </van-row>
     </view>

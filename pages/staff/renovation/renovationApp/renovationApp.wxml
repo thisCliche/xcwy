@@ -1,5 +1,6 @@
 <!--pages/staff/task/taskList/taskList.wxml-->
 <!--pages/person/vista/vistaList/vistaList.wxml-->
+<wxs src="../../../../utils/filter.wxs" module="filter" />
 <view class="vistaList">
   <van-overlay show="{{ isLoad }}" z-index="99">
     <view class="loading">
@@ -8,43 +9,47 @@
   </van-overlay>
   <van-tabs active="{{ active }}" color="#FFA477" bind:click="onClick" sticky>
     <van-tab title="处理中" title-style="{{current == 0?'font-weight:700;':''}}">
-    <block wx:if="{{list.length != 0}}">
-      <view class="card item task" wx:for="{{list}}" wx:key="index" data-id="{{item.id}}" bindtap="toDetail">
-        <view class="title">
-          <view class="titleL">
-            {{item.project_name}}{{item.house_name}}
+      <block wx:if="{{list.length != 0}}">
+        <view class="card item task" wx:for="{{list}}" wx:key="index" data-id="{{item.id}}" bindtap="toDetail">
+          <view class="title">
+            <view class="titleL">
+              {{item.member.name}}提交的装修申请
+            </view>
+            <view class="titleR">{{item.add_time}}</view>
           </view>
-          <view class="titleR">{{item.add_time}}</view>
+          <view class="des">{{item.project_name}}-{{item.house_name}}</view>
+          <view class="des">装修时间：{{item.begin_time}}-{{item.end_time}}</view>
+          <view class="btn mt30">
+            <view class="btnL">
+              审核状态：
+              <view class="color1" wx:if="{{item.status == 1}}">{{item.status_text}}</view>
+              <view class="color2" wx:elif="{{item.status == 2}}">{{item.status_text}}</view>
+              <view class="color3" wx:else>{{item.status_text}}</view>
+            </view>
+          </view>
         </view>
-        <view class="des">{{item.begin_time}}</view>
-        <view class="des">{{item.end_time}}</view>
-        <view class="btn mt30">
-        <view class="btnL">
-          审核状态：<view class="numbered">{{item.status_text}}</view>
-        </view> 
-        </view>
+      </block>
+      <view class="card" wx:else>
+        <van-empty description="暂无内容" />
       </view>
-    </block>
-    <view class="card" wx:else>
-      <van-empty description="暂无内容" />
-    </view>
     </van-tab>
     <van-tab title="已结束" title-style="{{current == 1?'font-weight:700;':''}}">
       <block wx:if="{{list.length != 0}}">
-      <view class="card item task" wx:for="{{list}}" wx:key="index" data-id="{{item.id}}" bindtap="toDetail1">
-        <view class="title">
-          <view class="titleL">
-            {{item.project_name}}
+        <view class="card item task" wx:for="{{list}}" wx:key="index" data-id="{{item.id}}" bindtap="toDetail1">
+          <view class="title">
+            <view class="titleL">
+              {{item.member.name}}提交的装修申请
+            </view>
+            <view class="titleR">{{item.add_time}}</view>
           </view>
-          <view class="titleR">{{item.add_time}}</view>
+          <view class="des">{{item.project_name}}-{{item.house_name}}</view>
+          <view class="des">装修时间：{{item.begin_time}}-{{item.end_time}}</view>
+          <view class="content">审核状态：{{item.status_text}}</view>
         </view>
-        <view class="des">{{item.house_name}}</view>
-        <view class="content">{{item.status_text}}</view>
+      </block>
+      <view class="card" wx:else>
+        <van-empty description="暂无内容" />
       </view>
-    </block>
-    <view class="card" wx:else>
-      <van-empty description="暂无内容" />
-    </view>
     </van-tab>
   </van-tabs>
 </view>

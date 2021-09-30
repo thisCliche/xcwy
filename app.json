@@ -57,6 +57,7 @@
     "pages/staff/releaseTask/releaseDaily/releaseDaily",
     "pages/staff/releaseTask/releaseDaily1/releaseDaily1",
     "pages/staff/releaseTask/releaseDaily2/releaseDaily2",
+    "pages/staff/releaseTask/releaseDaily3/releaseDaily3",
     "pages/staff/releaseTask/releaseSafe/releaseSafe",
     "pages/staff/releaseTask/releaseSafe1/releaseSafe1",
     "pages/staff/releaseTask/releaseSelect/releaseSelect",
@@ -97,7 +98,8 @@
     "pages/contact/pickRepairProject/pickRepairProject",
     "pages/contact/pickTaskProject/pickTaskProject",
     "pages/staff/task/selectTask/selectTask",
-    "pages/staff/staffLog/selectLog/selectLog"
+    "pages/staff/staffLog/selectLog/selectLog",
+    "pages/staff/repair/repairReply/repairReply"
   ],
   "window": {
     "backgroundTextStyle": "light",

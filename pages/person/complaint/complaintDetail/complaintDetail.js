@@ -9,6 +9,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    rootHttp:App.globalData.rootHttp,
     siteHttp: App.globalData.siteHttp,
     info:{},
   },
@@ -17,6 +18,16 @@ Page({
       id,
       token: wx.getStorageSync('token')
     })
+    if(res.data.images.length!=0){
+      for(let i =0;i<res.data.images.length;i++){
+        res.data.images[i] = this.data.rootHttp +res.data.images[i]
+      }
+    }
+    if(res.data.reply_images!==null && res.data.reply_images?.length!=0 ){
+      for(let i =0;i<res.data.reply_images.length;i++){
+        res.data.reply_images[i] = this.data.rootHttp +res.data.reply_images[i]
+      }
+    }
     this.setData({
       info: res.data
     })

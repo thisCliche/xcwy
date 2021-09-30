@@ -14,6 +14,7 @@ Page({
     list: [1, 2, 3, 4, 5, 6],
     value: 3,
     id: '',
+    rootHttp:App.globalData.rootHttp,
     siteHttp: App.globalData.siteHttp,
     info: {},
     type: '',
@@ -78,6 +79,11 @@ Page({
       id,
       token: wx.getStorageSync('token')
     })
+    if(res.data.images.length!=0){
+      for(let i =0;i<res.data.images.length;i++){
+        res.data.images[i] = this.data.rootHttp +res.data.images[i]
+      }
+    }
     this.setData({
       info: res.data
     })

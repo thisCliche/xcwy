@@ -29,7 +29,8 @@
     </view>
   </block>
   <view class="card input mt20">
-    <view class="cardT">建议和总结</view>
+    <!-- <view class="cardT">建议和总结</view> -->
+    <van-cell title="建议和总结"required border="{{ false }}"  />
     <van-field type="textarea" autosize="{{minHeight}}" model:value="{{ summary }}" placeholder="请输入" />
   </view>
 

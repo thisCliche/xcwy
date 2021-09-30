@@ -25,6 +25,12 @@ Page({
     })
     this.getrepairList()
   },
+  onClick1() {
+    this.setData({
+      ['queryInfo.page']: 1
+    })
+    this.getrepairList()
+  },
   toDetail(e) {
     wx.navigateTo({
       url: `/pages/person/repair/orderDetail1/orderDetail1?id=${e.currentTarget.dataset.id}`,
@@ -62,7 +68,7 @@ Page({
    */
   onLoad: function (options) {
 
-    this.getrepairList()
+    // this.getrepairList()
   },
 
   /**
@@ -76,7 +82,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    
+    this.onClick1()
   },
 
   /**

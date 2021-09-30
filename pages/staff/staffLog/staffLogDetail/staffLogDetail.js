@@ -13,6 +13,7 @@ Page({
     value:3,
     id:'',
     siteHttp:App.globalData.siteHttp,
+    rootHttp:App.globalData.rootHttp,
     info: {},
     actions: [
       { name: '删除', color: '#ee0a24' },

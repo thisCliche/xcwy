@@ -9,7 +9,7 @@ Page({
     columns: ['线下', '微信'],
     hyShow: false,
     zffs:'请选择支付方式',
-    money: 0,
+    money: null,
     id:'',
   },
   onDisplay(e) {
@@ -29,7 +29,17 @@ Page({
     console.log(value)
     this.setData({hyShow: false,zffs:value})
   },
+  bindInput(e){
+    console.log(e)
+  },
   async agree(){
+    let reg = /^[+]{0,1}(\d+)$|^[+]{0,1}(\d+\.\d+)$/
+    if(!reg.test(this.data.money)){
+      return wx.showToast({
+        title: '请输入正数',
+        icon:'error'
+      })
+    }
     let res = await agree({token:wx.getStorageSync('token'),id:this.data.id,money:this.data.money})
     if(res.code == 200) {
       wx.showToast({

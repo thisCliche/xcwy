@@ -1,22 +1,41 @@
 /* pages/onwner/vistResig/vistResigInfo/vistResigInfo.wxss */
-.vistResigInfo{
+.vistResigInfo {
   padding: 30rpx 20rpx;
 }
-.info{
+
+.info {
   padding: 28rpx;
 }
-.btn{
+
+.btn {
   justify-content: space-between;
   display: flex;
-  margin-top: 184rpx; 
+  margin-top: 184rpx;
 }
-.van-button{
+
+.van-button {
   width: 330rpx !important;
 }
-.img{
+
+.img {
   text-align: center;
 }
-.img image{
-  width: 300rpx;
-  height: 300rpx;
+
+.img image {
+  width: 350rpx;
+  height: 350rpx;
+}
+
+.pupWrap {
+  padding: 20rpx 30rpx;
+}
+
+.colse {
+  position: absolute;
+  right: 47%;
+  bottom: 18%;
+  background: #fff;
+  padding: 6rpx 10rpx;
+  border-radius: 43rpx;
+  z-index: 999;
 }

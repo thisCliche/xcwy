@@ -19,10 +19,10 @@
 
 var now = new Date();
 var yearData = now.getFullYear(); //得到年份
-var monthData = now.getMonth();//得到月份
-var monthDataRel = now.getMonth()+1;//得到月份
+var monthData = now.getMonth(); //得到月份
+var monthDataRel = now.getMonth() + 1; //得到月份
 
-var dayData = now.getDate();//得到日期
+var dayData = now.getDate(); //得到日期
 
 Component({
 
@@ -31,7 +31,7 @@ Component({
   properties: {
     pickerShow: {
       type: Boolean,
-      observer: function (val) {   //弹出动画
+      observer: function (val) { //弹出动画
         if (val) {
           let animation = wx.createAnimation({
             duration: 500,
@@ -77,7 +77,7 @@ Component({
     config: {
       type: Object,
       observer(newVal, oldVal, changedPath) {
-       
+
       }
     },
   },
@@ -85,11 +85,14 @@ Component({
 
   data: {
     startValue: '', //开始时间
-    endValue:'', // 结束时间
+    endValue: '', // 结束时间
     timeDataValue: '', // 不选择开始时间结束时间的时间
     isPicking: false,
-    isStartEnd:0,
-    isSrue:true
+    isStartEnd: 0,
+    isSrue: true,
+    currentWheel: [],
+    time1stamp: 0,
+    time2stamp: 0,
   }, // 私有数据，可用于模板渲染
 
   lifetimes: {
@@ -97,21 +100,21 @@ Component({
     attached: function () {
       this._initTimeArray();
     },
-    moved: function () { },
-    detached: function () { },
+    moved: function () {},
+    detached: function () {},
   },
 
   // 生命周期函数，可以为函数，或一个在methods段中定义的方法名
-  attached: function () { }, // 此处attached的声明会被lifetimes字段中的声明覆盖
+  attached: function () {}, // 此处attached的声明会被lifetimes字段中的声明覆盖
   ready: function () {
     this._init();
   },
 
   pageLifetimes: {
     // 组件所在页面的生命周期函数
-    show: function () { },
-    hide: function () { },
-    resize: function () { },
+    show: function () {},
+    hide: function () {},
+    resize: function () {},
   },
 
   methods: {
@@ -153,7 +156,7 @@ Component({
         if (i == 2) {
           day = day + e.detail.value[i]
         }
-        
+
         if (i == 3) {
           if (e.detail.value[i] == 0) {
             week = '全天'
@@ -164,7 +167,7 @@ Component({
           if (e.detail.value[i] == 2) {
             week = '下午'
           }
-          
+
         }
         let days = [];
         for (let i = 1; i <= this.getDays(year, month); i++) {
@@ -180,28 +183,28 @@ Component({
     getDays: function (year, month) {
       let daysInMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
       if (month === 2) {
-        return (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0
-          ? 29
-          : 28;
+        return (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0 ?
+          29 :
+          28;
       } else {
         return daysInMonth[month - 1];
       }
     },
     // 获取默认时间为今日时间
-    _init:function() {
+    _init: function () {
       this.setData({
-        value: [yearData - 1990, monthData, dayData-1],
+        value: [yearData - 1990, monthData, dayData - 1],
       });
     },
     // 初始化时间列表
-    _initTimeArray:function() {
+    _initTimeArray: function () {
       const date = new Date();
       const years = [];
       const months = [];
       const days = [];
       const weeks = ['全天', '上午', '下午'];
-    
-      for (let i = 1990; i <= date.getFullYear()+50; i++) {
+
+      for (let i = 1990; i <= date.getFullYear() + 50; i++) {
         years.push(i)
       }
       for (let i = 1; i <= 12; i++) {
@@ -219,7 +222,7 @@ Component({
       })
     },
     // 重置
-    _reset:function(){
+    _reset: function () {
       this.setData({
         endValue: '',
         startValue: '',
@@ -230,95 +233,143 @@ Component({
           isSrue: false,
         });
       } else {
-        this.triggerEvent('timeReset', { 'timeData': this.data.timeDataValue });
+        this.triggerEvent('timeReset', {
+          'timeData': this.data.timeDataValue
+        });
         this.setData({
           pickerShow: false,
         });
       }
-     
+
     },
     // 点击选择开始时间
-    _getStartValue: function (e){
-      
-      var y = ''
-      var m = ''
-      var d = ''
-      for (let i = 1; i <= this.data.value.length; i++){
-        if (i = 1) {
-          y = this.data.value[i-1]+1990
+    _getStartValue: function (e) {
+      if (this.data.currentWheel.length != 0) {
+        var y = ''
+        var m = ''
+        var d = ''
+        var w = ""
+        for (let i = 1; i <= this.data.currentWheel.length; i++) {
+          if (i = 1) {
+            y = this.data.currentWheel[i - 1]
+          }
+          if (i = 2) {
+            m = this.data.currentWheel[i - 1]
+          }
+          if (i = 3) {
+            d = this.data.currentWheel[i - 1]
+          }
+          if (i = 4) {
+            w = this.data.currentWheel[i - 1]
+          }
         }
-        if (i = 2) {
-          m = this.data.value[i-1]+1
+        this.setData({
+          startValue: y + '-' + m + '-' + d + '-' + w,
+          isStartEnd: 1,
+        })
+      } else {
+        var y = ''
+        var m = ''
+        var d = ''
+        var w = ""
+        for (let i = 1; i <= this.data.value.length; i++) {
+          if (i = 1) {
+            y = this.data.value[i - 1] + 1990
+          }
+          if (i = 2) {
+            m = this.data.value[i - 1] + 1
+          }
+          if (i = 3) {
+            d = this.data.value[i - 1] + 1
+          }
+
         }
-        if (i = 3) {
-          d = this.data.value[i-1]+1
-        }
-        
-      }
-      if(this.data.startValue != ''){
-        return this.setData({
+        this.setData({
+
+          startValue: y + '-' + m + '-' + d + '-' + '全天',
           isStartEnd: 1,
         })
       }
-      this.setData({
-        startValue: y + '-' + m + '-' + d +'-' + '全天',
-        isStartEnd: 1,
-      })
+
     },
     // 点击选择结束时间
-    _getEndValue: function(){
-      
-      var y = ''
-      var m = ''
-      var d = ''
-      for (let i = 1; i <= this.data.value.length; i++) {
-        if (i = 1) {
-          y = this.data.value[i - 1] + 1990
+    _getEndValue: function () {
+      if (this.data.currentWheel.length != 0) {
+        var y = ''
+        var m = ''
+        var d = ''
+        var w = ""
+        for (let i = 1; i <= this.data.currentWheel.length; i++) {
+          if (i = 1) {
+            y = this.data.currentWheel[i - 1]
+          }
+          if (i = 2) {
+            m = this.data.currentWheel[i - 1]
+          }
+          if (i = 3) {
+            d = this.data.currentWheel[i - 1]
+          }
+          if (i = 4) {
+            w = this.data.currentWheel[i - 1]
+          }
         }
-        if (i = 2) {
-          m = this.data.value[i - 1] + 1
-        }
-        if (i = 3) {
-          d = this.data.value[i - 1] + 1
-        }
+        this.setData({
+          endValue: y + '-' + m + '-' + d + '-' + w,
+          isStartEnd: 2,
+        })
+      } else {
+        var y = ''
+        var m = ''
+        var d = ''
+        for (let i = 1; i <= this.data.value.length; i++) {
+          if (i = 1) {
+            y = this.data.value[i - 1] + 1990
+          }
+          if (i = 2) {
+            m = this.data.value[i - 1] + 1
+          }
+          if (i = 3) {
+            d = this.data.value[i - 1] + 1
+          }
 
-      }
-      if(this.data.endValue != ''){
-        return this.setData({
+        }
+        this.setData({
+          endValue: y + '-' + m + '-' + d + '-' + '全天',
           isStartEnd: 2,
         })
       }
-      this.setData({
-        endValue: y + '-' + m + '-' + d +'-' + '全天',
-        isStartEnd: 2,
-      })
-      
+
     },
     // 滑动选择时间
-    _selectionPeriod: function (year, mouth, day, week){
+    _selectionPeriod: function (year, mouth, day, week) {
       // this.setData({
       //   timeDataValue: year + '-' + mouth + '-' + day + '-' + week,
       // })
       if (this.data.config.isTimeFrame) {
-        if (this.data.isStartEnd ==1) {
+        if (this.data.isStartEnd == 1) {
           this.setData({
+            currentWheel: [year, mouth, day, week],
             startValue: year + '-' + mouth + '-' + day + '-' + week,
           })
         } else if (this.data.isStartEnd == 2) {
           this.setData({
-            endValue: year + '-' + mouth + '-' + day+ '-' + week,
+            currentWheel: [year, mouth, day, week],
+            endValue: year + '-' + mouth + '-' + day + '-' + week,
           })
         }
       } else {
         this.setData({
+
           timeDataValue: year + '-' + mouth + '-' + day + '-' + week,
         })
       }
     },
     // 确认
-    onConfirm: function(){
+    onConfirm: function () {
       if (this.data.isSrue) {
-        if (this.data.isPicking) { return }
+        if (this.data.isPicking) {
+          return
+        }
         if (this.data.config.isTimeFrame) {
           if (!this.data.startValue) {
             wx.showToast({
@@ -334,45 +385,48 @@ Component({
             });
             return
           }
-          this.triggerEvent('timeData', { 'startData': this.data.startValue, 'endData': this.data.endValue });
-          // var startList = new Date(this.data.startValue);
-          // var endList = new Date(this.data.endValue);
-          // if (startList.getTime() <= endList.getTime()) {
-          //   // var timeData =
-          //   console.log(1,this.data.timeDataValue)
-
-          //     this.triggerEvent('timeData', { 'startData': this.data.startValue, 'endData': this.data.endValue });
-          //   this.setData({
-          //     pickerShow: false,
-          //   });
-          // } else {
-          //   wx.showToast({
-          //     icon: "none",
-          //     title: "结束时间不能早于开始时间"
-          //   });
-          //   return
-          // }
-        } 
-        else {
+          var startList = this.data.startValue.split('-');
+          var endList = this.data.endValue.split('-');
+          startList.pop()
+          endList.pop()
+          console.log()
+          if (new Date(startList) > new Date(endList)) {
+            return wx.showToast({
+              icon: "none",
+              title: "结束时间不能早于开始时间"
+            });
+          }
+          this.triggerEvent('timeData', {
+            'startData': this.data.startValue,
+            'endData': this.data.endValue
+          });
+        } else {
           if (!this.data.timeDataValue) {
-            this.triggerEvent('timeData', { 'timeData': yearData + '-' + monthDataRel + '-' + dayData + '-' + '全天' });
+            this.triggerEvent('timeData', {
+              'timeData': yearData + '-' + monthDataRel + '-' + dayData + '-' + '全天'
+            });
             this.setData({
               pickerShow: false,
             });
           } else {
-            this.triggerEvent('timeData', { 'timeData': this.data.timeDataValue });
+            this.triggerEvent('timeData', {
+              'timeData': this.data.timeDataValue
+            });
             this.setData({
               pickerShow: false,
             });
           }
         }
       } else {
-        this.triggerEvent('resetConfirm', { 'startData': this.data.startValue, 'endData': this.data.endValue });
+        this.triggerEvent('resetConfirm', {
+          'startData': this.data.startValue,
+          'endData': this.data.endValue
+        });
         this.setData({
           pickerShow: false,
         });
       }
-    
+
     }
   }
 })

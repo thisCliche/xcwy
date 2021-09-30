@@ -9,7 +9,7 @@
   </view>
   <view class="card info mt20 content">
     <view class="cardT">投诉内容</view>
-    <view class="cardD mt20">文化馆工{{info.content}}作人员态度差</view>
+    <view class="cardD mt20">{{info.content}}</view>
   </view>
   <view class="card mt20">
     <view class="card">
@@ -18,8 +18,9 @@
   <view class="card info mt20" wx:if="{{info.images.length != 0}}">
     <view>投诉图片</view>
     <van-row>
-      <van-col wx:for="{{info.images}}" custom-class="complaintImg" span="8">
-        <image src="{{item.url}}"></image>
+      <van-col wx:for="{{info.images}}" wx:key="index" custom-class="complaintImg" span="8">
+        <!-- <image bindtap="previewImage" data-url="{{item}}" src="{{item}}"></image> -->
+        <image data-url="{{item}}" src="{{item}}"></image>
       </van-col>
     </van-row>
   </view>
@@ -38,7 +39,7 @@
     <view class="replyC" >{{info.reply}}</view>
     <van-row wx:if="{{info.reply_images.length != 0}}">
       <van-col wx:for="{{info.reply_images}}" custom-class="complaintImg" span="8">
-        <image src="{{item.url}}"></image>
+        <image src="{{item}}"></image>
       </van-col>
     </van-row>
   </view>

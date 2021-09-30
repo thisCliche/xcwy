@@ -1,7 +1,8 @@
 <!--pages/onwner/parking/addCar/addCar.wxml-->
 <view class="addCar">
   <view class="title">输入车牌号</view>
-  <view class="carNumber-items">
+  <view class="plate">
+    <view class="carNumber-items">
       <view class="carNumber-items-box" bindtap='openKeyboard'>
         <view class="carNumber-items-province carNumber-items-box-list">{{carnum[0] || ''}}</view>
         <view class="carNumber-items-En carNumber-items-box-list">{{carnum[1] || ''}}</view>
@@ -15,7 +16,7 @@
       <!-- 新能源 -->
       <view class="carNumber-item {{showNewPower ? '': 'carNumber-item-newpower'}}">
         <view wx:if="{{!showNewPower}}" bindtap='showPowerBtn'>
-          <view class="carNumber-newpower-add">+</view>
+          <!-- <view class="carNumber-newpower-add">+</view> -->
           <view>新能源</view>
         </view>
         <view wx:if="{{showNewPower}}" bindtap='openKeyboard'>
@@ -23,6 +24,8 @@
         </view>
       </view>
     </view>
+    <view class="removeNewpower" wx:if="{{showNewPower}}" bindtap='removeNewpower'>-燃油车</view>
+  </view>
   <view class="des"><text class="red">*</text>停车缴费仅支持已在物业前台登记的车辆如您未登记，请先前往物业前台办理</view>
   <view class="btn">
     <van-button bind:click="submitNumber" type="info" block>确定</van-button>
@@ -34,19 +37,21 @@
     <!-- 省份简写键盘 -->
     <view class="keyboard-item" hidden="{{carnum[0]}}">
       <view class="keyboard-line" wx:for="{{provinces}}" wx:key="index">
-        <view class="keyboard-btn" wx:for="{{item}}" wx:key="index" data-val="{{itemlist}}" wx:for-item="itemlist" bindtap='bindChoose'>{{itemlist}}</view>
+        <view class="keyboard-btn" wx:for="{{item}}" wx:key="index" data-val="{{itemlist}}" wx:for-item="itemlist"
+          bindtap='bindChoose'>{{itemlist}}</view>
       </view>
       <view class="keyboard-del" bindtap='bindDelChoose'>
-        <van-icon name="delete-o" size="24"/>
+        <van-icon name="delete-o" size="24" />
       </view>
     </view>
     <!-- 车牌号码选择键盘 -->
     <view class="keyboard-item iscarnumber" hidden="{{!carnum[0]}}">
       <view class="keyboard-line" wx:for="{{numbers}}" wx:key="index">
-        <view class="keyboard-btn" wx:for="{{item}}" wx:key="index" data-val="{{itemlist}}" wx:for-item="itemlist" bindtap='bindChoose'>{{itemlist}}</view>
+        <view class="keyboard-btn" wx:for="{{item}}" wx:key="index" data-val="{{itemlist}}" wx:for-item="itemlist"
+          bindtap='bindChoose'>{{itemlist}}</view>
       </view>
       <view class="keyboard-del" bindtap='bindDelChoose'>
-        <van-icon name="delete-o" size="24"/>
+        <van-icon name="delete-o" size="24" />
       </view>
     </view>
   </view>

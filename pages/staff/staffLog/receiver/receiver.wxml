@@ -21,18 +21,22 @@
           <view class="item mt20" wx:for="{{item.data}}" wx:key="index">
             <view class="itemL">
               <van-checkbox icon-size="18px" custom-class="checkboxStyle" value="{{ item.select }}"
-                bind:change="onChange" data-index1="{{idx}}" data-index2="{{index}}" data-id="{{item.id}}"></van-checkbox>
-              <view>
+                bind:change="onChange" data-index1="{{idx}}" data-index2="{{index}}" data-id="{{item.id}}">
+                <view style="display: flex;align-items: center;">
+               <view>
                 <image src="{{item.avatar}}"></image>
               </view>
               <view class="itemLR">
                 <view class="itemName">{{item.name}}</view>
                 <view class="itemDes">{{item.position}}</view>
               </view>
+               </view>
+                </van-checkbox>
+              
             </view>
-            <view class="itemR">
+            <!-- <view class="itemR">
               {{item.mobile}}
-            </view>
+            </view> -->
           </view>
         </block>
       </view>

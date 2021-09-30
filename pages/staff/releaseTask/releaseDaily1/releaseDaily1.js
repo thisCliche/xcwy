@@ -19,7 +19,8 @@ Page({
     rootHttp: app.globalData.rootHttp,
     minHeight: {
       minHeight: 80
-    }
+    },
+    imgList: [],
   },
   toSelect(){
     wx.navigateTo({
@@ -38,7 +39,7 @@ Page({
       id: this.data.id,
       type: this.data.type,
       patrol: this.data.patrol,
-      images: JSON.stringify(this.data.fileList),
+      images: JSON.stringify(this.data.imgList),
     }
     for (let i in form) {
       if (form[i] == '') {
@@ -67,9 +68,12 @@ Page({
   },
   deleteImg(event) {
     let fileList = this.data.fileList
+    let imgList = this.data.imgList
     fileList.splice(event.detail.index, 1)
+    imgList.splice(event.detail.index, 1)
     this.setData({
-      fileList
+      fileList,
+      imgList
     })
   },
   afterRead(event) {
@@ -90,6 +94,8 @@ Page({
         const {
           fileList = []
         } = that.data;
+        let imgList = that.data.imgList
+        imgList.push(img.data)
         fileList.push({
           // ...file,
           url: app.globalData.rootHttp + img.data

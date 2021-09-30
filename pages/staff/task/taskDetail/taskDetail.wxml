@@ -18,10 +18,10 @@
   </view>
   <view class="card info mt20">
     <view class="cardT">
-      任务标题
+      {{info.title}}
     </view>
     <view class="cardD">
-      {{info.title}}
+      {{info.content}}
     </view>
   </view>
   <view class="title mt30">

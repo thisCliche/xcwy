@@ -32,6 +32,7 @@ Page({
     calendarShow1: false,
     calendarShow2: false,
     flowMember:[],
+    imgList: [],
   },
   onDisplay(e) {
     if(e.currentTarget.dataset.type == 'hyShow'){
@@ -98,9 +99,12 @@ Page({
   },
   deleteImg(event) {
     let fileList = this.data.fileList
+    let imgList = this.data.imgList
     fileList.splice(event.detail.index, 1)
+    imgList.splice(event.detail.index, 1)
     this.setData({
-      fileList
+      fileList,
+      imgList
     })
   },
   afterRead(event) {
@@ -121,6 +125,8 @@ Page({
         const {
           fileList = []
         } = that.data;
+        let imgList = that.data.imgList
+        imgList.push(img.data)
         fileList.push({
           // ...file,
           url: app.globalData.rootHttp + img.data
@@ -154,7 +160,7 @@ Page({
       token: wx.getStorageSync('token'),
       count: this.data.count,
       reason: this.data.reason,
-      images: JSON.stringify(this.data.fileList)
+      images: JSON.stringify(this.data.imgList)
     }
     for (let i in form) {
       if (form[i] == '') {

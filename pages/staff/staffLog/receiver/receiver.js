@@ -56,11 +56,11 @@ Page({
         selectList
       })
     } else {
-      let newselectList = selectList.filter(item=>{
+      let newselectList = selectList.filter(item => {
         return item.id != e.currentTarget.dataset.id
       })
       this.setData({
-        selectList:newselectList
+        selectList: newselectList
       })
     }
   },
@@ -83,6 +83,11 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    if (options.source) {
+      wx.setNavigationBarTitle({
+        title: '选择任务接收人',
+      })
+    }
     this.getList()
     let e = {
       currentTarget: {

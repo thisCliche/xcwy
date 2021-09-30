@@ -25,6 +25,7 @@ Page({
     },
     selectList: [],
     weekList: [],
+    imgList: [],
   },
   onChange(e) {
     if (e.detail) {
@@ -59,9 +60,12 @@ Page({
   },
   deleteImg(event) {
     let fileList = this.data.fileList
+    let imgList = this.data.imgList
     fileList.splice(event.detail.index, 1)
+    imgList.splice(event.detail.index, 1)
     this.setData({
-      fileList
+      fileList,
+      imgList
     })
   },
   afterRead(event) {
@@ -82,6 +86,8 @@ Page({
         const {
           fileList = []
         } = that.data;
+        let imgList = that.data.imgList
+        imgList.push(img.data)
         fileList.push({
           // ...file,
           url: App.globalData.rootHttp + img.data
@@ -133,15 +139,16 @@ Page({
       token: wx.getStorageSync('token'),
       uid: uid.toString(),
       tasks: this.data.tasks,
-      summary: this.data.summary,
-      plan: this.data.plan,
-      images: JSON.stringify(this.data.fileList),
-      remark: this.data.remark,
-      with_week: this.data.with_week
+      // summary: this.data.summary,
+      // plan: this.data.plan,
+      images: JSON.stringify(this.data.imgList),
+      // remark: this.data.remark,
+      // with_week: this.data.with_week
     }
     if (this.data.with_week) {
 
     } else {
+      console.log(form)
       for (let i in form) {
         if (form[i] === '') {
           if (i == 'remark') {

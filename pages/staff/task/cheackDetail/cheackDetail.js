@@ -1,5 +1,6 @@
 // pages/staff/task/cheackDetail/cheackDetail.js
 import {reportDetail,del} from '../../../../api/task'
+let App = getApp()
 Page({
 
   /**
@@ -7,6 +8,7 @@ Page({
    */
   data: {
     show:false,
+    rootHttp:App.globalData.rootHttp,
     actions: [
       { name: '删除', color: '#ee0a24' },
     ],
@@ -53,9 +55,15 @@ Page({
   },
   async getDetial(id){
     let res = await reportDetail({token:wx.getStorageSync('token'),id})
+    let images = JSON.parse(res.data.images)
+    if(images.length!=0){
+      for(let i =0;i<images.length;i++){
+        images[i] = this.data.rootHttp +images[i]
+      }
+    }
     this.setData({
       info: res.data,
-      images: JSON.parse(res.data.images)
+      images
     })
   },
   /**

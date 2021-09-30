@@ -28,6 +28,11 @@ Page(filter.loginCheck({
       info: res.data
     })
   },
+  onClose(){
+    this.setData({
+      isShow:false
+    })
+  },
   async generateLink() {
     let res = await invitation({
       token: wx.getStorageSync('token')
@@ -43,6 +48,7 @@ Page(filter.loginCheck({
   },
   saveImg() {
     // 查看是否有 `scope.writePhotosAlbum` 权限
+    
     wx.getSetting({
       success: res => {
         if (!res.authSetting['scope.writePhotosAlbum']) {
@@ -71,7 +77,7 @@ Page(filter.loginCheck({
   saveToAlbum() {
     // 下载图片资源到本地
     wx.downloadFile({
-      url: this.data.info.qrcode,
+      url: this.data.codeInfo.qrcode,
       success: function (res) {
         // 保存图片到相册
         wx.saveImageToPhotosAlbum({

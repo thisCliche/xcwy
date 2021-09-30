@@ -9,7 +9,7 @@ Page({
     minHeight:{ minHeight: 80 },
     list:[1,2,3,4,5,6],
     type: '',
-    columns: ['日常巡查', '安全督查', '管家巡检', '工程巡检', '其他'],
+    columns: ['日常巡查', '安全督查', '管家巡查', '工程巡查', '其他'],
     title: '',
     project_id:'',
     project_name:'请选择',
@@ -22,6 +22,8 @@ Page({
     uid: '',
     lx:'请选择',
     selectList:[],
+    time1stamp:0,
+    time2stamp:0,
   },
   onDisplay(e) {
     let type = e.currentTarget.dataset.type
@@ -42,12 +44,14 @@ Page({
   },
   onConfirm(event) {
     this.setData({
+      time1stamp:event.detail,
       calendarShow1: false,
       begin_time: this.formatDate(event.detail),
     });
   },
   onConfirm2(event) {
     this.setData({
+      time2stamp:event.detail,
       calendarShow2: false,
       end_time: this.formatDate(event.detail),
     });
@@ -71,7 +75,7 @@ Page({
   },
   toSelect(){
     wx.navigateTo({
-      url: '/pages/staff/staffLog/receiver/receiver',
+      url: '/pages/staff/staffLog/receiver/receiver?source=task',
     })
   },
   deletePep(e){
@@ -108,6 +112,12 @@ Page({
     }
   },
   async submit() {
+    if(new Date(this.data.time1stamp)> new Date(this.data.time2stamp)){
+      return wx.showToast({
+        title: '结束时间应小于开始时间',
+        icon:'none'
+      })
+    }
     let uid = []
     this.data.selectList.map(item=>{
       uid.push(item.id)

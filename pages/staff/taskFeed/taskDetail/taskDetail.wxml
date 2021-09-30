@@ -45,10 +45,10 @@
     </van-row>
   </view>
   <block wx:if="{{info.done_receiver.length != 0}}">
-      <view class="title mt30">
+    <view class="title mt30">
       <image src="/static/images/bg.png" class="titleBg"></image> 任务汇报
     </view>
-    <view class="card mt20 info report"  wx:for="{{info.done_receiver}}" wx:key="index">
+    <view class="card mt20 info report" wx:for="{{info.done_receiver}}" wx:key="index">
       <view class="itemL">
         <view class="itemImg">
           <image src="{{item.avatar}}"></image>
@@ -59,11 +59,18 @@
         </view>
       </view>
       <view class="cardD">
-        {{item.content.tasks}} <br/>
-        {{item.content.security}} <br/>
-        {{item.content.health}} <br/>
-        {{item.content.fire_control}} <br/>
-        {{item.content.elevator}} <br/>
+        <view style="margin-bottom: 20rpx;">
+          {{item.content.tasks}} <br />
+        {{item.content.security}} <br />
+        {{item.content.health}} <br />
+        {{item.content.fire_control}} <br />
+        {{item.content.elevator}} <br />
+        </view>
+        <van-row wx:if="{{item.images != '[]'}}">
+          <van-col custom-class="photoCol" span="6" wx:for="{{item.images}}" wx:key="index">
+            <image src="{{item}}"></image>
+          </van-col>
+        </van-row>
       </view>
     </view>
   </block>

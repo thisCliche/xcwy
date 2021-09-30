@@ -1,16 +1,37 @@
 // pages/staff/task/taskDetail/taskDetail.js
-import {reportDetail,detail} from '../../../../api/task'
+import {
+  reportDetail,
+  detail
+} from '../../../../api/task'
+let App = getApp()
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    info:{},
-    list:[1,2,3,4,5,6]
+    info: {},
+    rootHttp: App.globalData.rootHttp,
+    list: [1, 2, 3, 4, 5, 6]
   },
-  async getDetail(id){
-    let res = await detail({token:wx.getStorageSync('token'),id})
+  async getDetail(id) {
+    let res = await detail({
+      token: wx.getStorageSync('token'),
+      id
+    })
+
+    if (res.data.done_receiver.length != 0) {
+      for (let i = 0; i < res.data.done_receiver.length; i++) {
+        if (res.data.done_receiver[i].images != '[]') {
+          let images = JSON.parse(res.data.done_receiver[i].images)
+          for (let j = 0; j < images.length; j++) {
+            images[j] = this.data.rootHttp + images[j]
+          }
+          res.data.done_receiver[i].images = images
+        }
+      }
+    }
+
     this.setData({
       info: res.data
     })

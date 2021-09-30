@@ -61,7 +61,7 @@
   <view class="card workImg photo mt20">
     <van-row>
       <van-col wx:for="{{info.images}}" wx:key="index" custom-class="photoCol" span="6">
-        <image src="{{item.url}}"></image>
+        <image src="{{item}}"></image>
       </van-col>
     </van-row>
   </view>

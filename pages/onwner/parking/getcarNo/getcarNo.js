@@ -56,6 +56,18 @@ closeKeyboard() {
     KeyboardState: false
   })
 },
+removeNewpower() {
+  let carnum = this.data.carnum
+  if(this.data.carnum.length == 8){
+    carnum.pop()
+    this.setData({
+      carnum: carnum,
+    })
+  }
+  this.setData({
+    showNewPower: false,
+  })
+},
 openKeyboard() {
   this.setData({
     KeyboardState: true

@@ -12,7 +12,7 @@ Page(filter.loginCheck({
     current:0,
     queryInfo:{
       page:1,
-      limit:10
+      limit:50
     },
     list:[{title:'文化馆',time:'2021-06-01',des:'老城保护中心'},{title:'文化馆',time:'2021-06-01',des:'老城保护中心'}]
   },

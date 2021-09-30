@@ -1,30 +1,25 @@
-/* pages/person/renovation/renovationPay/renovationPay.wxss */
-.renovationPay{
-  padding: 0 20rpx 0;
+/* pages/onwner/payment/payPage/payPage.wxss */
+.payPage{
+  padding: 26rpx 20rpx;
 }
-.iconStyle{
-  color: transparent;
-  border: 4rpx solid #fff;
-  border-radius: 20rpx;
-  line-height: 12px !important;
+.info{
+  padding: 30rpx;
 }
-.toggle{
-  padding: 42rpx 28rpx;
-  text-align: center;
-  display: flex;
-  justify-content: center;
+.des{
+  margin-top: 38rpx;
 }
-.radioStyle{
-  margin-right: 100rpx;
-}
-.card{
-  padding: 84rpx 104rpx;
-  text-align: center;
-}
-.card .money{
+.money{
   color: #F54235;
-  font-size: 54rpx;
-  margin-top: 64rpx;
+  font-size: 60rpx;
+  text-align: center;
+  padding: 40rpx 0 69rpx;
+}
+.btn{
+  margin-top: 80rpx;
+}
+.van-button{
+  width: 100% !important;
+  /* background: #feecea !important; */
 }
 .desWrap{
   font-size: 24rpx;
@@ -36,12 +31,6 @@
   width: 32rpx;
   height: 28rpx;
 }
-.des{
+.des1{
   margin-left: 10rpx;
-}
-.btn{
-  margin-top: 114rpx;
-}
-.van-button{
-  width: 90% !important;
 }

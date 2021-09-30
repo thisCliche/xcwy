@@ -1,7 +1,7 @@
 <!--pages/staff/releaseTask/releaseDaily/releaseDaily.wxml-->
 <view class="releaseDaily">
   <view class="card">
-    <view class="cardD">督查任务</view>
+    <view class="cardD">{{staksName}}巡查</view>
     <van-cell-group border="{{ false }}">
       <van-cell title="{{title}}" is-link></van-cell>
     </van-cell-group>

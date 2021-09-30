@@ -77,9 +77,14 @@ Page({
           url: `/pages/staff/releaseTask/releaseDaily/releaseDaily?id=${e.currentTarget.dataset.id}&title=${e.currentTarget.dataset.title}&type=4`,
         })
         break;
+        case 5:
+        wx.navigateTo({
+          url: `/pages/staff/releaseTask/releaseDaily/releaseDaily?id=${e.currentTarget.dataset.id}&title=${e.currentTarget.dataset.title}&type=5`,
+        })
+        break;
       default:
         wx.navigateTo({
-          url: `/pages/staff/releaseTask/releaseSafe/releaseSafe?id=${e.currentTarget.dataset.id}&title=${e.currentTarget.dataset.title}&type=5`,
+          url: `/pages/staff/releaseTask/releaseSafe/releaseSafe?id=${e.currentTarget.dataset.id}&title=${e.currentTarget.dataset.title}&type=6`,
         })
     }
   },
@@ -106,6 +111,9 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    this.setData({
+      ['queryInfo.page']:1
+    })
     this.getList()
   },
 

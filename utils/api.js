@@ -46,6 +46,10 @@ const request = (options) => {
         }
       },
       fail(error) {
+        wx.showToast({
+          title: '网络错误',
+          icon:'error'
+        })
         reject(error.data)
       }
     })

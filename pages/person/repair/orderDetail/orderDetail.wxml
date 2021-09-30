@@ -59,41 +59,67 @@
     </view>
     <view class="card mt20">
       <view class="img">
-        <image wx:for="{{info.attachment}}" wx:key="index" src="{{item.url}}"></image>
+        <image wx:for="{{info.attachment}}" wx:key="index" src="{{item}}"></image>
       </view>
     </view>
   </block>
   <view class="steps">
     <view class="item" wx:for="{{info.logs}}" wx:key="index">
-      <view class="avatar last">
-        <image src="{{item.member.avatar}}"></image>
-      </view>
-      <view class="itemR">
-        <view class="itemRT">
-          <view class="itemRTL">
-            <view class="itemRTL1">
-              {{item.member.name}}
-            </view>
-            <!-- <view class="itemRTL2">
-              报修人
-            </view> -->
-          </view>
-          <view class="itemRT3">{{item.add_time}}</view>
+      <block wx:if="{{index != 3}}">
+        <view class="avatar {{index == 2?'last':''}}">
+          <image src=" {{item.member.avatar}}">
+          </image>
         </view>
-        <item class="itemRB" wx:if="{{item.action == 'reject'}}">
-          {{item.action_text}}
-        </item>
-      </view>
+        <view class="itemR">
+          <view class="itemRT">
+            <view class="itemRTL">
+              <view class="itemRTL1">
+                {{item.member.name}}
+              </view>
+              <view class="itemRTL2">
+                {{item.action_text}}
+              </view>
+            </view>
+            <view class="itemRT3">{{item.add_time}}</view>
+          </view>
+          <item class="itemRB" wx:if="{{item.action == 'reject'}}">
+            {{item.action_text}}
+          </item>
+        </view>
+      </block>
     </view>
   </view>
   <view class="card info mt20" wx:if="{{info.logs[2]}}">
     <view class="cardT">维修结论</view>
     <view class="cardD">{{info.logs[2].content}}</view>
     <view class="img" wx:if="{{info.logs[2].attachment.length != 0}}">
-      <image src="{{siteHttp}}180x180"></image>
+      <image wx:for="{{info.logs[2].attachment}}" wx:key="index" src="{{item}}"></image>
     </view>
   </view>
-
+  <view class="steps" wx:if="{{info.logs.length == 4}}">
+    <view class="item">
+      <view class="avatar last">
+        <image src="{{info.logs[3].member.avatar}}">
+        </image>
+      </view>
+      <view class="itemR">
+        <view class="itemRT">
+          <view class="itemRTL">
+            <view class="itemRTL1">
+              {{info.logs[3].member.name}}
+            </view>
+            <view class="itemRTL2 stepStatus">
+              {{info.logs[3].action_text}}
+            </view>
+          </view>
+          <view class="itemRT3">{{info.logs[3].add_time}}</view>
+        </view>
+        <!-- <item class="itemRB" wx:if="{{item.action == 'reject'}}">
+          {{item.action_text}}
+        </item> -->
+      </view>
+    </view>
+  </view>
   <block wx:if="{{info.status == 1}}">
     <view class="btn" wx:if="{{isRepairer}}">
       <van-button type="info" block bind:click="agree">接单</van-button>
@@ -104,9 +130,12 @@
       <van-button type="info" block bind:click="toDone">维修结论</van-button>
     </view>
   </block>
-  <block wx:else>
+  <block wx:elif="{{info.status == 3}}">
     <view class="btn mt20">
       <van-button type="info" block bind:click="confirme">确认完成</van-button>
     </view>
+  </block>
+  <block wx:else>
+    <view></view>
   </block>
 </view>

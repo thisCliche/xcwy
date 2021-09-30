@@ -47,3 +47,12 @@
   font-size: 28rpx;
   margin: 10rpx 0;
 }
+.color1{
+  color: #4790F4;
+}
+.color2{
+  color: #28BC8D;
+}
+.color3{
+  color: #FF6A4B;
+}

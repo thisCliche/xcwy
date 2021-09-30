@@ -24,7 +24,7 @@
       投诉图片
     </view>
     <view class="img">
-      <image wx:for="{{info.images}}" src="{{item.url}}"></image>
+      <image wx:for="{{info.images}}" src="{{item}}"></image>
     </view>
   </view>
   <view class="mt30" wx:if="{{info.reply != ''}}">
@@ -32,11 +32,9 @@
       <image src="/static/images/bg.png" class="titleBg"></image> 物业回复
     </view>
     <view class="card mt20">
-      <view>您好，业主
-        针对您反馈的问题，我们核查后，确有此事，已
-        对此进行处理</view>
+      <view>{{info.reply}}</view>
       <view class="img" wx:if="{{info.reply_images.length != 0}}">
-        <image wx:for="{{info.reply_images}}" wx:key="index" src="{{item.url}}"></image>
+        <image wx:for="{{info.reply_images}}" wx:key="index" src="{{item}}"></image>
       </view>
     </view>
   </view>

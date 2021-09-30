@@ -13,7 +13,9 @@ Page({
   data: {
     rootHttp: app.globalData.rootHttp,
     time1: '请选择',
+    time1stamp:0,
     time2: '请选择',
+    time2stamp:0,
     duration: null,
     reason: '',
     minDate: new Date().getTime(),
@@ -31,6 +33,7 @@ Page({
     datetime1: new Date().getTime(),
     datetime2: new Date().getTime(),
     flowMember:[],
+    imgList: [],
   },
   async getKey() {
     let res = await approve_keyKey({
@@ -50,6 +53,11 @@ Page({
   },
   onDisplay(e) {
     let type = e.currentTarget.dataset.type
+    if (e.currentTarget.dataset.type == 'calendarShow1') {
+      this.setData({
+        datetime1: new Date().getTime()
+      })
+    }
     this.setData({
       [type]: true
     });
@@ -63,10 +71,13 @@ Page({
   formatDate(date) {
     date = new Date(date);
     const m = (date.getMonth() + 1 + '').padStart(2, '0')
-    return `${date.getFullYear()}-${m}-${date.getDate()}`;
+    const hh = (date.getHours() + '').padStart(2, '0')
+    const mm = (date.getMinutes() + '').padStart(2, '0')
+    return `${date.getFullYear()}-${m}-${date.getDate()} ${hh}:${mm}`;
   },
   onConfirm(event) {
     this.setData({
+      time1stamp:event.detail,
       calendarShow1: false,
       time1: this.formatDate(event.detail),
       minDate: event.detail
@@ -75,6 +86,7 @@ Page({
   onConfirm2(event) {
     this.setData({
       calendarShow2: false,
+      time2stamp:event.detail,
       time2: this.formatDate(event.detail),
     });
   },
@@ -92,9 +104,12 @@ Page({
   },
   deleteImg(event) {
     let fileList = this.data.fileList
+    let imgList = this.data.imgList
     fileList.splice(event.detail.index, 1)
+    imgList.splice(event.detail.index, 1)
     this.setData({
-      fileList
+      fileList,
+      imgList
     })
   },
   afterRead(event) {
@@ -119,21 +134,29 @@ Page({
           // ...file,
           url: app.globalData.rootHttp + img.data
         });
+        let imgList = that.data.imgList
+        imgList.push(img.data)
         that.setData({
-          fileList
+          fileList,
+          imgList
         });
       },
     });
   },
   async submit() {
-
+    if(this.data.time1stamp>this.data.time2stamp){
+      return wx.showToast({
+        title: '归还时间应小于申领时间',
+        icon:'none'
+      })
+    }
     let form = {
       key_id: this.data.key_id,
       token: wx.getStorageSync('token'),
       begin_time: this.data.time1,
       end_time: this.data.time2,
       reason: this.data.reason,
-      images: JSON.stringify(this.data.fileList)
+      images: JSON.stringify(this.data.imgList)
     }
     for (let i in form) {
       if (form[i] == '') {

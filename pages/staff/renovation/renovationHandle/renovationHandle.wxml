@@ -57,13 +57,13 @@
     </view>
   </block>
   <block wx:else>
-    <view class="btn" bindtap="toPay" wx:if="{{info.status_text == '待缴纳保证金'}}">
+    <!-- <view class="btn" bindtap="toPay" wx:if="{{info.status_text == '待缴纳保证金'}}">
       <view class="card btnStyle">
         保证金已线下缴纳，请填写订单信息
         <van-icon name="arrow" color="#28BC8D" />
       </view>
-    </view>
-    <view class="btn2" wx:else>
+    </view> -->
+    <view class="btn2" wx:if="{{info.status_text == '已缴纳'}}">
       <van-button custom-class="btnStyle" type="info" bind:click="toDone" block>装修结束，自动退还保证金</van-button>
     </view>
   </block>

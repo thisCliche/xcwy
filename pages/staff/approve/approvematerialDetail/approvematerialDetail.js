@@ -9,6 +9,7 @@ Page({
    */
   data: {
     siteHttp:App.globalData.siteHttp,
+    rootHttp:App.globalData.rootHttp,
     type:false,
     info: {},
     id:''
@@ -43,6 +44,11 @@ Page({
   },
   async getDetail(id){
     let res = await approve_goods_detail({id,token:wx.getStorageSync('token')})
+    if(res.data.images.length!=0){
+      for(let i =0;i<res.data.images.length;i++){
+        res.data.images[i] = this.data.rootHttp +res.data.images[i]
+      }
+    }
     this.setData({
       info: res.data
     })

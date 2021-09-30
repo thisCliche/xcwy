@@ -45,6 +45,28 @@ Page({
         break;
     }
   },
+  onClick1() {
+    this.setData({
+      isLoad: true,
+    })
+    switch (this.data.current) {
+      case 0:
+        this.getList1();
+        break;
+      case 1:
+        this.getList2();
+        break;
+      case 2:
+        this.getList3();
+        break;
+      case 3:
+        this.getList5();
+        break;
+      case 4:
+        this.getList5();
+        break;
+    }
+  },
   async getList1(){
     let res = await approve_leave_list({token:wx.getStorageSync('token'),type:this.data.type})
     this.setData({
@@ -111,7 +133,7 @@ Page({
     this.setData({
       type: options.type
     })
-    this.getList1()
+    // this.getList1()
   },
 
   /**
@@ -125,7 +147,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    
+    this.onClick1()
   },
 
   /**

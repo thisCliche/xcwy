@@ -1,7 +1,7 @@
 <!--pages/staff/releaseTask/releaseDaily/releaseDaily.wxml-->
 <view class="releaseDaily">
   <view class="card">
-    <view class="cardD">日常巡查</view>
+    <view class="cardD">{{typename}}</view>
     <van-cell-group border="{{ false }}">
       <van-cell bind:click="toSelect" title="{{title}}" is-link></van-cell>
     </van-cell-group>

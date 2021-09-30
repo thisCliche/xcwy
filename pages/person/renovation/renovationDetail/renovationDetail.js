@@ -11,7 +11,7 @@ Page({
   },
   toPay(e){
     wx.navigateTo({
-      url: `/pages/person/renovation/renovationPay/renovationPay?id=${e.currentTarget.dataset.id}&order_no=${e.currentTarget.dataset.order_no}&mony=${e.currentTarget.dataset.money}`,
+      url: `/pages/person/renovation/renovationPay/renovationPay?id=${e.currentTarget.dataset.id}&order_no=${e.currentTarget.dataset.order_no}&mony=${e.currentTarget.dataset.money}&des1=${this.data.info.project_name}-${this.data.info.area_name}-${this.data.info.block_name}-${this.data.info.house_name}&name=${this.data.info.member.name}&mobile=${this.data.info.member.mobile}`,
     })
   },
   async getDetail(id){

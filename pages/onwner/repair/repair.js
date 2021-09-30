@@ -33,8 +33,9 @@ Page(filter.loginCheck({
     columns: [],
     fileList: [],
     userInfo: {},
-    info:{},
-    isStaff:false,
+    info: {},
+    isStaff: false,
+    imgList: [],
   },
   onDisplay(e) {
     wx.navigateTo({
@@ -71,9 +72,12 @@ Page(filter.loginCheck({
   },
   deleteImg(event) {
     let fileList = this.data.fileList
+    let imgList = this.data.imgList
     fileList.splice(event.detail.index, 1)
+    imgList.splice(event.detail.index, 1)
     this.setData({
-      fileList
+      fileList,
+      imgList
     })
   },
   afterRead(event) {
@@ -94,12 +98,15 @@ Page(filter.loginCheck({
         const {
           fileList = []
         } = that.data;
+        let imgList = that.data.imgList
+        imgList.push(img.data)
         fileList.push({
           // ...file,
           url: app.globalData.rootHttp + img.data
         });
         that.setData({
-          fileList
+          fileList,
+          imgList
         });
       },
     });
@@ -144,15 +151,27 @@ Page(filter.loginCheck({
         icon: 'error'
       })
     }
-    let form = {
-      project_id: this.data.project_id,
-      token: wx.getStorageSync('token'),
-      address: this.data.location,
-      name: this.data.bxr,
-      mobile: this.data.bxdh,
-      content: this.data.bxnr,
-      attachment: JSON.stringify(this.data.fileList)
+    if (this.data.isStaff) {
+      var form = {
+        project_id: this.data.project_id,
+        token: wx.getStorageSync('token'),
+        address: this.data.location,
+        name: this.data.bxr,
+        mobile: this.data.bxdh,
+        content: this.data.bxnr,
+        attachment: JSON.stringify(this.data.imgList)
+      }
+    } else {
+      var form = {
+        token: wx.getStorageSync('token'),
+        address: this.data.location,
+        name: this.data.bxr,
+        mobile: this.data.bxdh,
+        content: this.data.bxnr,
+        attachment: JSON.stringify(this.data.imgList)
+      }
     }
+
     for (let i in form) {
       if (form[i] == '') {
         if (i == 'attachment') {
@@ -202,13 +221,13 @@ Page(filter.loginCheck({
   onShow: function () {
 
     let type = JSON.parse(wx.getStorageSync('userInfo')).type
-    if(type == 3){
+    if (type == 3) {
       this.setData({
-        isStaff:true
+        isStaff: true
       })
     }
     this.getProject()
-    if(this.data.bxr != ''){
+    if (this.data.bxr != '') {
       return
     }
     this.getUserinfo()
