@@ -14,10 +14,10 @@
     <view class="des">会议室：{{item.room.name}}</view>
     <view class="des">预约时间：{{item.begin_time}} {{item.begin_type}}</view>
     <view class="des">预约状态：{{item.status_text}}</view>
-    <!-- <view class="float">
-      <image wx:if="{{item.pass}}" class="pass" src="https://img.xiaojiayun.top/xcwypass.png"></image>
-      <image wx:else class="fail" src="https://img.xiaojiayun.top/xcwybh.png"></image>
-    </view> -->
+    <view class="float">
+      <image wx:if="{{item.status_text == '审批通过'}}" class="pass" src="{{rootHttp}}/mini/images/xcwypass.png"></image>
+      <image wx:if="{{item.status_text == '审批驳回'}}" class="fail" src="{{rootHttp}}/mini/images/xcwybh.png"></image>
+    </view>
   </view>
   </block>
   <block wx:else>

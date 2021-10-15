@@ -16,6 +16,7 @@ Page(filter.loginCheck({
    * 页面的初始数据
    */
   data: {
+    isLoad: false,
     icon: {
       normal: 'https://img01.yzcdn.cn/vant/user-inactive.png',
       active: 'https://img01.yzcdn.cn/vant/user-active.png',
@@ -233,6 +234,7 @@ Page(filter.loginCheck({
     });
   },
   async roomList() {
+    this.setData({isLoad:true})
     let res = await roomList({
       token: wx.getStorageSync('token'),
       begin_time: this.data.form1.begin_time,
@@ -250,10 +252,12 @@ Page(filter.loginCheck({
       columns.push(obj)
     }
     this.setData({
-      columns
+      columns,
+      isLoad:false
     })
   },
   async roomList2() {
+    this.setData({isLoad:true})
     let res = await roomList({
       token: wx.getStorageSync('token'),
       begin_time: this.data.form2.begin_time,
@@ -271,7 +275,8 @@ Page(filter.loginCheck({
       columns.push(obj)
     }
     this.setData({
-      columns
+      columns,
+      isLoad:false
     })
   },
   async submit1() {
@@ -344,7 +349,7 @@ Page(filter.loginCheck({
     } else {
       wx.showToast({
         title: res.msg,
-        icon: 'error'
+        icon: 'none'
       })
     }
   },

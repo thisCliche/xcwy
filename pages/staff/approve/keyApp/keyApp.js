@@ -4,6 +4,9 @@ import {
   approve_keyKey,
   approve_keygetFlowMember
 } from '../../../../api/approve'
+import {
+  project
+} from '../../../../api/login.js'
 let app = getApp()
 Page({
 
@@ -13,9 +16,9 @@ Page({
   data: {
     rootHttp: app.globalData.rootHttp,
     time1: '请选择',
-    time1stamp:0,
+    time1stamp: 0,
     time2: '请选择',
-    time2stamp:0,
+    time2stamp: 0,
     duration: null,
     reason: '',
     minDate: new Date().getTime(),
@@ -32,7 +35,7 @@ Page({
     calendarShow2: false,
     datetime1: new Date().getTime(),
     datetime2: new Date().getTime(),
-    flowMember:[],
+    flowMember: [],
     imgList: [],
   },
   async getKey() {
@@ -53,14 +56,20 @@ Page({
   },
   onDisplay(e) {
     let type = e.currentTarget.dataset.type
-    if (e.currentTarget.dataset.type == 'calendarShow1') {
-      this.setData({
-        datetime1: new Date().getTime()
+    if (e.currentTarget.dataset.type == 'hyShow') {
+      wx.navigateTo({
+        url: '/pages/contact/pickKeyProject/pickKeyProject',
       })
+    } else {
+      if (e.currentTarget.dataset.type == 'calendarShow1') {
+        this.setData({
+          datetime1: new Date().getTime()
+        })
+      }
+      this.setData({
+        [type]: true
+      });
     }
-    this.setData({
-      [type]: true
-    });
   },
   onClose(e) {
     let type = e.currentTarget.dataset.type
@@ -77,7 +86,7 @@ Page({
   },
   onConfirm(event) {
     this.setData({
-      time1stamp:event.detail,
+      time1stamp: event.detail,
       calendarShow1: false,
       time1: this.formatDate(event.detail),
       minDate: event.detail
@@ -86,7 +95,7 @@ Page({
   onConfirm2(event) {
     this.setData({
       calendarShow2: false,
-      time2stamp:event.detail,
+      time2stamp: event.detail,
       time2: this.formatDate(event.detail),
     });
   },
@@ -100,6 +109,12 @@ Page({
       hyShow: false,
       typeName: value.text,
       key_id: value.key_id,
+    })
+  },
+  getlogin(e){
+    this.setData({
+      key_id:e.id,
+      typeName:e.name
     })
   },
   deleteImg(event) {
@@ -144,10 +159,10 @@ Page({
     });
   },
   async submit() {
-    if(this.data.time1stamp>this.data.time2stamp){
+    if (this.data.time1stamp > this.data.time2stamp) {
       return wx.showToast({
         title: '归还时间应小于申领时间',
-        icon:'none'
+        icon: 'none'
       })
     }
     let form = {
@@ -203,6 +218,11 @@ Page({
   onShow: function () {
     this.getKey()
     let that = this
+    project({
+      token: wx.getStorageSync('token')
+    }).then(res => {
+      console.log(res)
+    })
     approve_keygetFlowMember({
       token: wx.getStorageSync('token')
     }).then(res => {

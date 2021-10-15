@@ -22,6 +22,15 @@ Page({
     })
     let status = this.data.current
     let res = await list({...this.data.queryInfo,token:wx.getStorageSync('token'),status:++status})
+    if(res.code != 200){
+      this.setData({
+        isLoad:false,
+      })
+      return wx.showToast({
+        title: '网络错误',
+        icon:'none'
+      })
+    }
     if(type == 0){
       this.setData({
         list: res.data.list,

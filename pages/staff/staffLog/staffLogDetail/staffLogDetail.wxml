@@ -10,7 +10,7 @@
         <view class="time">{{info.add_time}}</view>
       </view>
     </view>
-    <view class="itemR" bindtap="openBox">
+    <view class="itemR" bindtap="openBox" wx:if="{{isHidden}}">
       <van-icon name="ellipsis" size="24px" />
     </view>
   </view>
@@ -56,15 +56,15 @@
   </view> -->
   <block wx:if="{{info.images.length != 0}}">
     <view class="title mt30">
-    <image src="/static/images/bg.png" class="titleBg"></image> 图片
-  </view>
-  <view class="card workImg photo mt20">
-    <van-row>
-      <van-col wx:for="{{info.images}}" custom-class="photoCol" span="6">
-        <image src="rootHttp{{item.url}}"></image>
-      </van-col>
-    </van-row>
-  </view>
+      <image src="/static/images/bg.png" class="titleBg"></image> 图片
+    </view>
+    <view class="card workImg photo mt20">
+      <van-row>
+        <van-col wx:for="{{info.images}}" custom-class="photoCol" span="6">
+          <image src="{{item}}"></image>
+        </van-col>
+      </van-row>
+    </view>
   </block>
   <view class="card mt20 info" wx:if="{{info.remark != ''}}">
     <view class="cardT">
@@ -103,21 +103,26 @@
     <image src="/static/images/bg.png" class="titleBg"></image> 审批意见
   </view>
   <view class="card mt20 info" wx:for="{{info.report_receiver}}" wx:key="index">
-    <view class="opinoinTime">
+
+    <view class="opinionT">
+      <view style="display: flex;">
+        <image src="{{item.avatar}}"></image>
+        <view class="name">{{item.name}}</view>
+        <!-- <van-rate readonly value="{{item.score}}" color="#ffba00" bind:change="onChange" /> -->
+        <view class="score" wx:if="{{item.score == 0}}">未审批</view>
+        <view class="score" wx:else>{{item.score}}分</view>
+      </view>
+      <view class="opinoinTime">
         {{item.update_time}}
       </view>
-    <view class="opinionT">
-      <image src="{{item.avatar}}"></image>
-      <view class="name">{{item.name}}</view>
-      <!-- <van-rate readonly value="{{item.score}}" color="#ffba00" bind:change="onChange" /> -->
-      <view class="score" wx:if="{{item.score == 0}}">未审批</view>
-      <view class="score" wx:else>{{item.score}}</view>
     </view>
     <view class="cardD">{{item.comment}}</view>
   </view>
-  <view class="btn" wx:if="{{isShow}}">
-    <van-button bind:click="toApprove" block type="info">月报审批</van-button>
-  </view>
+  <block wx:if="{{isShow}}">
+    <view class="btn" wx:if="{{isRead}}">
+      <van-button bind:click="toApprove" block type="info">月报审批</van-button>
+    </view>
+  </block>
   <van-action-sheet round="{{false}}" bind:select="onSelect" show="{{ show }}" actions="{{ actions }}"
     bind:cancel="onCancel" cancel-text="取消" />
 </view>

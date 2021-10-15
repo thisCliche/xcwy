@@ -50,6 +50,13 @@ export function approve_keyKey(data) {
     data
   })
 }
+export function approve_keyHouse(data) {
+  return request({
+    url: 'approve_key/house',
+    method: 'get',
+    data
+  })
+}
 export function approve_keyAdd(data) {
   return request({
     url: 'approve_key/add',

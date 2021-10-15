@@ -1,0 +1,59 @@
+<!--pages/person/attestation/attestation.wxml-->
+<view class="attestation">
+  <view class="type" wx:if="{{isShow}}">
+    <view class="card info">
+      <view>{{info.project_name}}{{info.area_name}}{{info.block_name}}{{info.house_name}}</view>
+      <view class="mt20">{{info.name}} {{info.mobile}}</view>
+    </view>
+    <view class="btn">
+      <van-button bind:click="logoutBtn" block type="info">注销</van-button>
+    </view>
+  </view>
+  <view class="type1" wx:else>
+    <view class="card info" wx:if="{{active==0}}">
+      <view>选择项目</view>
+      <!-- <view class="houseDes">文化馆旧城保护中心</view> -->
+      <view class="radioWrap">
+        <van-radio-group class="icongroupStyle" model:value="{{ radio1 }}" bind:change="onradioChange"
+          data-type="radio1">
+          <van-radio color="#444" wx:for="{{projectList}}" wx:key="index" name="{{item.project_id}}" icon-size="16px"
+            custom-class="radioStyle">{{item.name}}</van-radio>
+        </van-radio-group>
+        <!-- custom-class="radioStyle" icon-class="iconStyle" label-class="labelStyle" -->
+      </view>
+    </view>
+    <view class="card info" wx:elif="{{active==1}}">
+      <view>选择房屋</view>
+      <view class="radioWrap">
+        <van-radio-group class="icongroupStyle" model:value="{{ radio2 }}" bind:change="onradioChange"
+          data-type="radio2">
+          <van-radio color="#444" wx:for="{{projectList}}" wx:key="index" name="{{item.house_id}}" icon-size="16px"
+            custom-class="radioStyle">{{item.name}}</van-radio>
+        </van-radio-group>
+      </view>
+    </view>
+    <view class="last" wx:else>
+      <view class="card info">
+        <view class="cardT">联系地址</view>
+        <van-cell-group border="{{false}}">
+          <van-cell title="{{ location }}" border="{{false}}"></van-cell>
+        </van-cell-group>
+      </view>
+      <view class="card info mt20">
+        <van-cell-group border="{{false}}">
+          <van-field border="{{false}}" model:value="{{ name }}" label="真实姓名" placeholder="请输入" input-align="right" />
+          <van-field border="{{false}}" model:value="{{ mobile }}" label="手机号" placeholder="请输入" input-align="right" />
+        </van-cell-group>
+      </view>
+      <view class="card info mt20" style="padding: 28rpx;">
+        <van-radio-group class="rideo" value="{{ type }}" bind:change="onChange" direction="horizontal">
+          <van-radio style="margin-right: 60rpx;" icon-size="18px" name="{{1}}">业主</van-radio>
+          <van-radio icon-size="18px" name="{{2}}">租户</van-radio>
+        </van-radio-group>
+      </view>
+      <view class="btn">
+        <van-button bind:click="submit" block type="info">提交</van-button>
+      </view>
+    </view>
+  </view>
+</view>

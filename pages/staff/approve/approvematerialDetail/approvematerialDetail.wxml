@@ -15,6 +15,10 @@
     <view>说明</view>
     <view class="time">{{info.reason}}</view>
   </view>
+  <view class="card info mt20 space">
+    <view>申请数量</view>
+    <view class="time1">{{info.count}}</view>
+  </view>
   <block wx:if="{{info.images.length!= 0}}">
     <view class="title mt30">
       <image src="/static/images/bg.png" class="titleBg"></image> 图片

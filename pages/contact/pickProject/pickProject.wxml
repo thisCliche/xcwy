@@ -1,12 +1,41 @@
 <!--pages/contact/pickProject/pickProject.wxml-->
 <view class="pickProject">
-  <view class="card info">
-    <view class="item" wx:for="{{list}}" data-item="{{item}}" data-id="{{item.project_id}}" wx:key="index" bindtap="toNext">
-      <van-icon name="checked" color="#4790F4" wx:if="{{project_id == item.house_id}}"/>
-      <van-icon name="circle" color="#444" wx:else/>
-      <view class="name">{{item.name}}</view>
+  <block wx:if="{{grad==1}}">
+    <view class="card info">
+      <view class="item" wx:for="{{list}}" data-item="{{item}}" data-id="{{item.id}}" wx:key="index" bindtap="toProject">
+        <van-icon name="checked" color="#4790F4" wx:if="{{project_name == item.name}}" />
+        <van-icon name="circle" color="#444" wx:else />
+        <view class="name">{{item.name}}</view>
+      </view>
     </view>
-  </view>
+  </block>
+  <block wx:if="{{grad==2}}">
+    <view class="card info">
+      <view class="item" wx:for="{{list2}}" data-item="{{item}}" data-id="{{item.id}}" wx:key="index" bindtap="toArea">
+        <van-icon name="checked" color="#4790F4" wx:if="{{area_name == item.name}}" />
+        <van-icon name="circle" color="#444" wx:else />
+        <view class="name">{{item.name}}</view>
+      </view>
+    </view>
+  </block>
+  <block wx:if="{{grad==3}}">
+    <view class="card info">
+      <view class="item" wx:for="{{list3}}" data-item="{{item}}" data-id="{{item.id}}" wx:key="index" bindtap="toBlock">
+        <van-icon name="checked" color="#4790F4" wx:if="{{block_name == item.name}}" />
+        <van-icon name="circle" color="#444" wx:else />
+        <view class="name">{{item.name}}</view>
+      </view>
+    </view>
+  </block>
+  <block wx:if="{{grad==4}}">
+    <view class="card info">
+      <view class="item" wx:for="{{list4}}" data-item="{{item}}" data-id="{{item.id}}" wx:key="index" bindtap="toUnit">
+        <van-icon name="checked" color="#4790F4" wx:if="{{unit_name == item.name}}" />
+        <van-icon name="circle" color="#444" wx:else />
+        <view class="name">{{item.name}}</view>
+      </view>
+    </view>
+  </block>
   <view class="btn" wx:if="{{last}}">
     <van-button block type="info" bind:click="back">确定</van-button>
   </view>

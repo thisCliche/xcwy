@@ -42,6 +42,7 @@
 }
 .itemRTL1{
   font-size: 32rpx;
+  color: #4790F4;
 }
 .itemRTL2{
   font-size: 28rpx;

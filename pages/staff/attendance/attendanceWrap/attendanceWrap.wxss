@@ -66,8 +66,8 @@
   animation: bs1 linear 2s 0s infinite;
 }
 .attendanceBtnDe{
-  background: #9e9e9e;
-  border: 8rpx solid #d4d4d4;
+  background: #bfbf00;
+  border: 8rpx solid #dddd97;
   animation: bs linear 2s 0s infinite;
 }
 .afterWork{
@@ -79,23 +79,23 @@
 }
 .attendanceBtnDes{
   font-size: 30rpx;
-  color: #8692AA;
+  color: #4790F4;
 }
 .attendanceBtnUp{
-  color: #4790F4;
+  color: #bfbf00;
   font-size: 30rpx;
 }
 @keyframes bs {
   0% {
-    box-shadow: 2rpx 2rpx 20rpx 2rpx #9e9e9e;
+    box-shadow: 2rpx 2rpx 20rpx 2rpx #dddd97;
   }
 
   50% {
-    box-shadow: 2rpx 2rpx 10rpx 2rpx #d4d4d4;
+    box-shadow: 2rpx 2rpx 10rpx 2rpx #e7e7a5;
   }
 
   100% {
-    box-shadow: 2rpx 2rpx 20rpx 2rpx #9e9e9e;
+    box-shadow: 2rpx 2rpx 20rpx 2rpx #dddd97;
   }
 }
 @keyframes bs1 {

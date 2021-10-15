@@ -4,16 +4,18 @@
     <view class="item card mt20" wx:for="{{list}}" wx:key="index">
       <view class="left">
         <view class="title" wx:if="{{item.car_no}}">
-          <van-icon size="24" name="bill" color="#4790F4" /> {{item.car_no}}
+          <image class="icon" src="/static/images/img1.png"></image>
+         <text>{{item.car_no}}</text>
         </view>
         <view class="title" wx:else>
-          <van-icon size="24" name="bill" color="#4790F4" /> {{item.pay_type}}
+          <image class="icon" src="/static/images/img1.png"></image>
+         <text>{{typeName}}</text>
         </view>
         <view class="des">{{item.type_text}}</view>
         <view class="des">{{item.add_time}}</view>
       </view>
       <view class="right">
-        - ￥{{item.money}}
+        -￥{{item.money}}
       </view>
     </view>
   </block>

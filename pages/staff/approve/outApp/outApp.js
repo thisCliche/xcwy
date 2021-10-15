@@ -126,7 +126,7 @@ Page({
   async submit() {
     if(this.data.time1stamp>this.data.time2stamp){
       return wx.showToast({
-        title: '结束时间应小于开始时间',
+        title: '结束时间不能小于开始时间',
         icon:'none'
       })
     }

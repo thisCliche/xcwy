@@ -17,6 +17,9 @@
   display: flex;
   justify-content: space-between;
 }
+.itemL{
+  flex: 1;
+}
 .itemR{
   color: #ABABAB;
   font-size: 30rpx;
@@ -25,6 +28,7 @@
   margin-top: 20rpx;
   display: flex;
   justify-content: space-between;
+  font-size: 28rpx;
 }
 .desR{
   color: #FF6060;

@@ -15,7 +15,8 @@
         <image class="avatar" src="{{userInfo.avatar}}"></image>
         <view class="name">{{userInfo.name}}</view>
       </view>
-      <view class="topR" wx:if="{{isStaff=='业主'}}" bindtap="toTz">
+      <!-- wx:if="{{isStaff=='业主'}}" -->
+      <view class="topR"  bindtap="toTz">
         <image class="tz" src="{{deFualtHttp}}/mini/images/tz1.png"></image>
       </view>
     </view>

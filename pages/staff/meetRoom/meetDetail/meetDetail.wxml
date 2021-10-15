@@ -31,7 +31,7 @@
       <van-cell title="申请理由" label="{{info.content}}" border="{{ false }}" />
     </van-cell-group>
   </view>
-  <view class="btn">
+  <view class="btn" wx:if="{{info.status == 1}}">
     <van-button custom-class="btnStyle" plain color="#F54235" bind:click="reject">拒绝</van-button>
     <van-button type="info" bind:click="agree">同意</van-button>
   </view>

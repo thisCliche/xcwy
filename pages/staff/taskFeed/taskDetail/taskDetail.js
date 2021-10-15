@@ -23,7 +23,7 @@ Page({
     if (res.data.done_receiver.length != 0) {
       for (let i = 0; i < res.data.done_receiver.length; i++) {
         if (res.data.done_receiver[i].images != '[]') {
-          let images = JSON.parse(res.data.done_receiver[i].images)
+          let images = res.data.done_receiver[i].images
           for (let j = 0; j < images.length; j++) {
             images[j] = this.data.rootHttp + images[j]
           }

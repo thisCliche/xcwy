@@ -10,16 +10,20 @@
       <block wx:if="{{list.length != 0}}">
         <view class="card item" wx:for="{{list}}" wx:key="index" data-id="{{item.id}}" bindtap="toDetail">
           <view class="title">
-            <view class="titleL">
-              {{item.name}}
+            <view class="titleL" wx:if="{{item.type == 2}}">
+              单位预约
+            </view>
+            <view class="titleL" wx:else>
+              个人预约
             </view>
             <view class="titleR">
               {{item.add_time}}
             </view>
           </view>
-          <!-- <view class="des">{{item.status_text}}</view> -->
-          <view class="des">{{item.begin_time}}</view>
-          <view class="des">{{item.status_text}}</view>
+          <view class="des" wx:if="{{item.type == 2}}">预约单位：{{item.unit}}</view>
+          <view class="des" wx:else>预约人：{{item.name}}</view>
+          <view class="des">会议室：{{item.room.name}}</view>
+          <view class="des">预约时间：{{item.begin_time}}{{item.begin_type}} - {{item.end_time}}{{item.end_type}}</view>
         </view>
       </block>
       <view class="card" wx:else>
@@ -30,16 +34,20 @@
       <block wx:if="{{list.length != 0}}">
         <view class="card item" wx:for="{{list}}" wx:key="index" data-id="{{item.id}}" bindtap="toDetail">
           <view class="title">
-            <view class="titleL">
-              {{item.name}}
+            <view class="titleL" wx:if="{{item.type == 2}}">
+              单位预约
+            </view>
+            <view class="titleL" wx:else>
+              个人预约
             </view>
             <view class="titleR">
               {{item.add_time}}
             </view>
           </view>
-          <!-- <view class="des">{{item.des}}</view> -->
-          <view class="des">{{item.begin_time}}</view>
-          <view class="des">{{item.status_text}}</view>
+          <view class="des" wx:if="{{item.type == 2}}">预约单位：{{item.unit}}</view>
+          <view class="des" wx:else>预约人：{{item.name}}</view>
+          <view class="des">会议室：{{item.room.name}}</view>
+          <view class="des">预约时间：{{item.begin_time}}{{item.begin_type}} - {{item.end_time}}{{item.end_type}}</view>
         </view>
       </block>
       <view class="card" wx:else>

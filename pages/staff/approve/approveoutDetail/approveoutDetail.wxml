@@ -1,9 +1,9 @@
 <!--pages/person/renovation/renovationDetail/renovationDetail.wxml-->
 <view class="renovationDetail">
-<view class="status card info">
-  <view>{{info.name}}提交的外出</view>
-  <view class="statusColor">{{info.status_text}}</view>
-</view>
+  <view class="status card info">
+    <view>{{info.name}}提交的外出</view>
+    <view class="statusColor">{{info.status_text}}</view>
+  </view>
   <view class="title mt20">
     <image src="/static/images/bg.png" class="titleBg"></image> 外出信息
   </view>
@@ -18,15 +18,15 @@
   </view>
   <block wx:if="{{info.images.length!= 0}}">
     <view class="title mt30">
-    <image src="/static/images/bg.png" class="titleBg"></image> 图片
-  </view>
-  <view class="card mt20 workImg info">
-    <van-row>
-     <van-col wx:for="{{info.images}}" wx:key="index" custom-class="colStyle" span="6">
-        <image src="{{item}}"></image>
-      </van-col>
-    </van-row>
-  </view>
+      <image src="/static/images/bg.png" class="titleBg"></image> 图片
+    </view>
+    <view class="card mt20 workImg info">
+      <van-row>
+        <van-col wx:for="{{info.images}}" wx:key="index" custom-class="colStyle" span="6">
+          <image src="{{item}}"></image>
+        </van-col>
+      </van-row>
+    </view>
   </block>
   <view class="steps">
     <view class="item" wx:for="{{info.logs}}" wx:key="index">

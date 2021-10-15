@@ -1,12 +1,13 @@
 <!--pages/person/complaint/complaintList/complaintList.wxml-->
 <view class="complaintList">
   <block wx:if="{{list.length != 0}}">
-    <view class="card item mt20" data-id="{{item.id}}" wx:for="{{list}}" wx:key="index" bindtap="toDetail">
+    <!-- bindtap="toDetail" -->
+    <view class="card item mt20" data-id="{{item.id}}" wx:for="{{list}}" wx:key="index" >
     <view class="title">{{item.title}}</view>
-    <view class="time">{{item.add_time}}</view>
-    <view class="float" wx:if="{{item.reply != ''}}">
+    <view class="time" wx:if="{{item.add_time}}">{{item.add_time}}</view>
+    <!-- <view class="float" wx:if="{{item.reply != ''}}">
       <image src="/static/images/yhf.png"></image>
-    </view>
+    </view> -->
   </view>
   </block>
   <view class="card" wx:else>

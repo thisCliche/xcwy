@@ -55,7 +55,7 @@ Page({
   },
   async getDetial(id){
     let res = await reportDetail({token:wx.getStorageSync('token'),id})
-    let images = JSON.parse(res.data.images)
+    let images = res.data.images
     if(images.length!=0){
       for(let i =0;i<images.length;i++){
         images[i] = this.data.rootHttp +images[i]

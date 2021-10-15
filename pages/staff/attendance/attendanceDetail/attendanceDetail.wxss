@@ -34,6 +34,23 @@
 .laterColor{
   color: #FFA477;
 }
+.color1{
+  color: #c22245;
+}
+.lack{
+  color: #c22245;
+  border:1rpx solid #c22245;
+  border-radius: 80rpx;
+    font-size: 22rpx;
+    padding: 0 4rpx;
+}
+.goOut{
+  color: #12aa0c;
+  border:1rpx solid #12aa0c;
+  border-radius: 80rpx;
+    font-size: 22rpx;
+    padding: 0 4rpx;
+}
 .colStyle{
   text-align: center;
   font-size: 28rpx;

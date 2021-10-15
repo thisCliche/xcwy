@@ -1,0 +1,91 @@
+<!--pages/staff/staffLog/writeLog/writeLog.wxml-->
+<view class="writeLog">
+  <view class="card info question" wx:if="{{type == 3}}">
+    <view>是否用周报生成月报?</view>
+    <van-checkbox icon-size="18px" value="{{ with_week }}" bind:change="onChange"></van-checkbox>
+  </view>
+  <block wx:if="{{weekList.length != 0}}">
+    <view wx:for="{{weekList}}" wx:key="index">
+      <view class="reportTime">
+        {{item.add_time}}
+      </view>
+      <view class="card info">
+        <view class="cardT">
+          工作内容
+        </view>
+        <view class="cardD">
+          {{item.content.tasks}}
+        </view>
+        <view class="cardT">
+          工作总结
+        </view>
+        <view class="cardD">
+          {{item.content.summary}}
+        </view>
+        <view class="cardT">
+          工作计划
+        </view>
+        <view class="cardD">
+          {{item.content.plan}}
+        </view>
+      </view>
+    </view>
+  </block>
+  <view class="card input mt20">
+    <!-- <view class="cardT">{{typeName}}工作内容</view> -->
+    <van-cell title="{{typeName}}工作内容"required border="{{ false }}"  />
+    <van-field type="textarea" autosize="{{minHeight}}" model:value="{{ tasks }}" placeholder="请输入" />
+  </view>
+  <!-- <view class="card input mt20">
+    <view class="cardT">{{typeName}}工作总结</view>
+    <van-field type="textarea" autosize="{{minHeight}}" model:value="{{ summary }}" placeholder="请输入" />
+  </view>
+  <view class="card input mt20">
+    <view class="cardT">{{typeName}}工作计划</view>
+    <van-field type="textarea" autosize="{{minHeight}}" model:value="{{ plan }}" placeholder="请输入" />
+  </view> -->
+  <view class="title mt30">
+    <image src="/static/images/bg.png" class="titleBg"></image> 图片
+  </view>
+  <view class="card workImg photo mt20">
+    <van-cell-group border="{{ false }}">
+      <van-uploader max-count="9" bind:delete="deleteImg" deletable="{{ true }}" file-list="{{ fileList }}"
+        bind:after-read="afterRead" />
+    </van-cell-group>
+    <!-- <van-row>
+      <van-col custom-class="photoCol" span="6">
+        <image src="{{siteHttp}}/140x140"></image>
+      </van-col>
+      <van-col custom-class="photoCol" span="6">
+        <image src="{{siteHttp}}/140x140"></image>
+      </van-col>
+    </van-row> -->
+  </view>
+  <!-- <view class="card input mt20">
+    <view class="cardT">备注</view>
+    <van-field type="textarea" autosize="{{minHeight}}" model:value="{{ remark }}" placeholder="请输入" />
+  </view> -->
+  <view class="title title1 mt30">
+    <view class="titleL">
+      <image src="/static/images/bg.png" class="titleBg"></image> 抄送
+    </view>
+    <view bindtap="toSelect">
+      <van-icon name="add" size="26px" color="#4790F4" />
+    </view>
+  </view>
+  <view class="pepople" wx:if="{{selectList.length != 0}}">
+    <van-row>
+      <van-col custom-class="colStyle" span="6" wx:for="{{selectList}}" wx:key="index">
+        <view class="card img">
+          <image src="{{item.avatar}}"></image>
+          <view class="name van-ellipsis">{{item.name}}</view>
+        </view>
+        <van-icon bindtap="deletePep" data-index="{{index}}" name="clear"
+          custom-style="position: absolute;top: -10rpx; right: 16rpx;" color="#8c8c8c" />
+      </van-col>
+    </van-row>
+  </view>
+  <view class="btn">
+    <van-button block type="info" bind:click="submit">提交</van-button>
+  </view>
+</view>

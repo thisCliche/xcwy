@@ -35,6 +35,13 @@ export function del(data) {
     data
   })
 }
+export function edit(data) {
+  return request({
+    url: 'report/edit',
+    method: 'post',
+    data
+  })
+}
 export function approve(data) {
   return request({
     url: 'report/approve',

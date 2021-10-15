@@ -69,6 +69,12 @@ Page({
         table: this.data.upInfo.type,
         order_no: res.data
       })
+      if(res.code != 200){
+        return wx.showToast({
+          title: res.msg,
+          icon: 'none'
+        })
+      }
       wx.requestPayment({
         timeStamp: result.data.timeStamp + '',
         nonceStr: result.data.nonceStr,

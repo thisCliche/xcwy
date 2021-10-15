@@ -114,7 +114,7 @@ Page({
   async submit() {
     if(new Date(this.data.time1stamp)> new Date(this.data.time2stamp)){
       return wx.showToast({
-        title: '结束时间应小于开始时间',
+        title: '结束时间不能小于开始时间',
         icon:'none'
       })
     }

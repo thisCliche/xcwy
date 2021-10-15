@@ -138,6 +138,7 @@ Component({
     },
     // 监控滑动
     changeDateTime: function (e) {
+      
       this._calculation(e);
     },
     // 重新计算天数

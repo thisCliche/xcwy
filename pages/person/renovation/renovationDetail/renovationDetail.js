@@ -7,12 +7,17 @@ Page({
    */
   data: {
     info:{},
+    id:0,
     infoP:{}
   },
   toPay(e){
     wx.navigateTo({
-      url: `/pages/person/renovation/renovationPay/renovationPay?id=${e.currentTarget.dataset.id}&order_no=${e.currentTarget.dataset.order_no}&mony=${e.currentTarget.dataset.money}&des1=${this.data.info.project_name}-${this.data.info.area_name}-${this.data.info.block_name}-${this.data.info.house_name}&name=${this.data.info.member.name}&mobile=${this.data.info.member.mobile}`,
+      url: `/pages/onwner/payment/payPage/payPage?type=build&house_id=${this.data.info.project_id}`,
+      // 
     })
+    // wx.navigateTo({
+    //   url: `/pages/person/renovation/renovationPay/renovationPay?id=${e.currentTarget.dataset.id}&order_no=${e.currentTarget.dataset.order_no}&mony=${e.currentTarget.dataset.money}&des1=${this.data.info.project_name}-${this.data.info.area_name}-${this.data.info.block_name}-${this.data.info.house_name}&name=${this.data.info.member.name}&mobile=${this.data.info.member.mobile}`,
+    // })
   },
   async getDetail(id){
     let res = await detail({token:wx.getStorageSync('token'),id})
@@ -33,6 +38,9 @@ Page({
    */
   onLoad: function (options) {
     this.getDetail(options.id)
+    this.setData({
+      id:options.id
+    })
   },
 
   /**
@@ -46,7 +54,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    // this.getOwnerDetail()
+    this.getDetail(this.data.id)
   },
 
   /**

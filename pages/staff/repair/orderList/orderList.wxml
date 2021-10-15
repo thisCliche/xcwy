@@ -11,15 +11,15 @@
         <view class="card info mt20 item" wx:for="{{list}}" wx:key="index" data-id="{{item.id}}" bindtap="toDetail">
           <view class="itemTop">
             <view class="itemL">
-              {{item.house_name}}
+              {{item.project_name}}{{item.area_name}}{{item.block_name}}{{item.house_name}}
             </view>
             <view class="itemR">
               {{item.add_time}}
             </view>
           </view>
           <view class="des">
-            <view class="desL">
-              {{item.project_name}}
+            <view class="desL van-multi-ellipsis--l2">
+              {{item.content}}
             </view>
             <view class="desR" wx:if="{{item.time_out == 1}}">
               <view class="warning">超3小时未接单 <image src="{{rootHttp}}/mini/images/warning.png"></image>
@@ -37,20 +37,22 @@
         <view class="card info mt20 item" wx:for="{{list}}" wx:key="index" data-id="{{item.id}}" bindtap="toDetail">
           <view class="itemTop">
             <view class="itemL">
-              {{item.house_name}}
+              {{item.project_name}}{{item.area_name}}{{item.block_name}}{{item.house_name}}
             </view>
             <view class="itemR">
               {{item.add_time}}
             </view>
           </view>
           <view class="des">
-            <view class="desL">
-              {{item.project_name}}
+            <view class="desL van-multi-ellipsis--l2">
+              {{item.content}}
             </view>
-            <!-- <view class="desR">
-              {{item.charge}}
-            </view> -->
+            <view class="desR" wx:if="{{item.time_out == 1}}">
+              <view class="warning">超3小时未接单 <image src="{{rootHttp}}/mini/images/warning.png"></image>
+              </view>
+            </view>
           </view>
+          <!-- <view class="des">负责人</view> -->
         </view>
       </block>
       <view class="card" wx:else>
@@ -62,19 +64,20 @@
         <view class="card info mt20 item" wx:for="{{list}}" wx:key="index" data-id="{{item.id}}" bindtap="toDetail">
           <view class="itemTop">
             <view class="itemL">
-              {{item.house_name}}
+              {{item.project_name}}{{item.area_name}}{{item.block_name}}{{item.house_name}}
             </view>
             <view class="itemR">
               {{item.add_time}}
             </view>
           </view>
           <view class="des">
-            <view class="desL">
-              {{item.project_name}}
+            <view class="desL van-multi-ellipsis--l2">
+              {{item.content}}
             </view>
-            <!-- <view class="desR">
-              {{item.charge}}
-            </view> -->
+            <view class="desR" wx:if="{{item.time_out == 1}}">
+              <view class="warning">超3小时未接单 <image src="{{rootHttp}}/mini/images/warning.png"></image>
+              </view>
+            </view>
           </view>
         </view>
       </block>
@@ -87,19 +90,20 @@
         <view class="card info mt20 item" wx:for="{{list}}" wx:key="index" data-id="{{item.id}}" bindtap="toDetail">
           <view class="itemTop">
             <view class="itemL">
-              {{item.house_name}}
+              {{item.project_name}}{{item.area_name}}{{item.block_name}}{{item.house_name}}
             </view>
             <view class="itemR">
               {{item.add_time}}
             </view>
           </view>
           <view class="des">
-            <view class="desL">
-              {{item.project_name}}
+            <view class="desL van-multi-ellipsis--l2">
+              {{item.content}}
             </view>
-            <!-- <view class="desR">
-              {{item.charge}}
-            </view> -->
+            <view class="desR" wx:if="{{item.time_out == 1}}">
+              <view class="warning">超3小时未接单 <image src="{{rootHttp}}/mini/images/warning.png"></image>
+              </view>
+            </view>
           </view>
         </view>
       </block>

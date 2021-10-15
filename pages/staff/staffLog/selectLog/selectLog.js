@@ -1,5 +1,8 @@
 // pages/staff/staffLog/selectLog/selectLog.js
-import {list} from '../../../../api/report'
+import {
+  list
+} from '../../../../api/report'
+let App = getApp()
 Page({
 
   /**
@@ -7,7 +10,8 @@ Page({
    */
   data: {
     activeNames: [0],
-    select:true,
+    select: true,
+    rootHttp: App.globalData.rootHttp,
     logList: [],
   },
   onChange(event) {
@@ -15,22 +19,44 @@ Page({
       activeNames: event.detail,
     });
   },
-  onSelect(event){
+  onSelect(event) {
     this.setData({
-      [`logList[${event.currentTarget.dataset.idx}].select`]:!event.currentTarget.dataset.type,
+      [`logList[${event.currentTarget.dataset.idx}].select`]: !event.currentTarget.dataset.type,
     });
   },
-  async getlist(){
-    let res = await list({token:wx.getStorageSync('token'),page:1,limit:31,type:1,status:2})
-    res.data.list.forEach(item=>{
+  async getlist() {
+    let that = this
+    let res = await list({
+      token: wx.getStorageSync('token'),
+      page: 1,
+      limit: 31,
+      type: 1,
+      status: 2
+    })
+    res.data.list.forEach(item => {
       item.select = false
     })
+    let logList = res.data.list
+    if (logList.length != 0) {
+      for (let i = 0; i < logList.length; i++) {
+        if (logList[i].images.length != 0) {
+          for (let j = 0; j < logList[i].images.length; j++) {
+            try{
+              logList[i].images[j] = that.data.rootHttp + logList[i].images[j]
+            }catch(e){
+              console.log(i,j)
+            }
+          }
+        }
+      }
+    }
+
     this.setData({
-      logList: res.data.list
+      logList: logList
     })
   },
-  submit(){
-    let logList = this.data.logList.filter(item=>{
+  submit() {
+    let logList = this.data.logList.filter(item => {
       return item.select
     })
     let pages = getCurrentPages()

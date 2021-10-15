@@ -1,5 +1,7 @@
 // pages/onwner/news/newsDetail/newsDetail.js
-import {detail} from '../../../../api/info'
+import {
+  detail
+} from '../../../../api/info'
 Page({
 
   /**
@@ -8,10 +10,14 @@ Page({
   data: {
     info: {},
   },
-  async getDetail(id){
-    let res= await detail({id})
+  async getDetail(id) {
+    let res = await detail({
+      id
+    })
+    let jsonDa = JSON.stringify(res.data).replace(/<img/gi, "<img class='richImg'style='width:auto!important;height:auto!important;max-height:100%;width:100%;'");
+    let newResData = JSON.parse(jsonDa);
     this.setData({
-      info: res.data
+      info: newResData
     })
   },
   /**

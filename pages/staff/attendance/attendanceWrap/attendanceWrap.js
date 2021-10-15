@@ -24,26 +24,6 @@ Page({
       url: '/pages/staff/attendance/attendanceDetail/attendanceDetail',
     })
   },
-  // async getDetail() {
-  //   let data = new Date()
-  //   let that = this
-  //   let month = (data.getMonth() + 1 + '').padStart(2, '0')
-  //   let day = (data.getDate() + '').padStart(2, '0')
-  //   let year = data.getFullYear()
-  //   let res = await statistics({
-  //     token: wx.getStorageSync('token'),
-  //     month: `${year}-${month}`
-  //   })
-  //   console.log(res)
-  //   for (let i in res.data.list) {
-  //     console.log(i)
-  //     if (i == day) {
-  //       that.setData({
-  //         attendaceInfo: res.data.list[i]
-  //       })
-  //     }
-  //   }
-  // },
   getTime() {
     let that = this
     setInterval(() => {
@@ -122,68 +102,62 @@ Page({
     this.setData({
       show: true
     })
-    wx.getLocation({
-      type: 'wgs84',
-      success(info) {
-        that.setData({
-          isJurisdiction: true
-        })
-        check({
-          token: wx.getStorageSync('token'),
-          // lng: '117.168658',
-          // lat: '31.87393'
-          lng: info.longitude,
-          lat: info.latitude
-        }).then(res => {
-          if (res.msg == '考勤信息不存在') {
-            wx.showToast({
-              title: '非考勤人员',
-              icon: 'error',
-              duration:2000
+    const _locationChangeFn = function (info) {
+      console.log('location change', info)
+      that.setData({
+        isJurisdiction: true
+      })
+      check({
+        token: wx.getStorageSync('token'),
+        lng: info.longitude,
+        lat: info.latitude
+      }).then(res => {
+        if (res.msg == '考勤信息不存在') {
+          wx.showToast({
+            title: '考勤信息不存在',
+            icon: 'error',
+            duration: 2000
+          })
+          setTimeout(_ => {
+            wx.switchTab({
+              url: '/pages/index/index',
             })
-            setTimeout(_ => {
-              wx.switchTab({
-                url: '/pages/index/index',
-              })
-            }, 2000)
-          } else if (res.data.status == 2) {
-            that.setData({
-              show: false,
-              info: res.data,
-              locationInfo: info,
-              isRange: false
-            })
-          } else {
-            that.setData({
-              show: false,
-              locationInfo: info,
-              info: res.data,
-              isRange: true
-            })
-          }
+          }, 2000)
+        } else if (res.data.status == 2) {
+          that.setData({
+            show: false,
+            info: res.data,
+            locationInfo: info,
+            isRange: false
+          })
+        } else {
+          that.setData({
+            show: false,
+            locationInfo: info,
+            info: res.data,
+            isRange: true
+          })
+        }
 
-        })
+      })
+    }
+    wx.startLocationUpdate({
+      success: (res) => {
+        console.log('startLocationUpdate',res)
+        wx.onLocationChange(_locationChangeFn)
       },
-      fail(err) {
+      fail: (err) => {
         that.setData({
           show: false,
         })
-        if (err.errMsg == 'getLocation:fail auth deny') {
-          return wx.showModal({
-            title: '提示',
-            showCancel: false,
-            content: '请先授权小程序获取位置信息',
-            success(res) {
-              wx.openSetting()
-            }
-          })
-        } else {
-          wx.showModal({
-            title: '提示',
-            showCancel: false,
-            content: '更新过于频繁',
-          })
-        }
+        return wx.showModal({
+          title: '提示',
+          showCancel: false,
+          content: '请先授权小程序获取位置信息',
+          success(res) {
+            wx.openSetting()
+          }
+        })
       }
     })
   },
@@ -191,7 +165,14 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    // wx.startLocationUpdate({
+    //   success: (res) => {
+    //     console.log(res,'startLoactionUpdata')
+    //   },
+    //   fail: (err) => {
+    //     console.log(err)
+    //   }
+    // })
   },
 
   /**
@@ -206,7 +187,6 @@ Page({
    */
   onShow: function () {
     this.getTime()
-    // this.getDetail()
     this.getLocation()
   },
 
@@ -214,14 +194,20 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-
+    wx.stopLocationUpdate({
+      success: (res) => {
+        console.log("onUnload stopLocationUpdate success", res)
+      },
+      fail: (err) => {
+        console.log("onUnload stopLocationUpdate fail", err)
+      }
+    })
   },
 
   /**

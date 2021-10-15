@@ -10,7 +10,7 @@
         <view class="time">{{info.add_time}}</view>
       </view>
     </view>
-    <view class="itemR" bindtap="openBox">
+    <view class="itemR" bindtap="openBox" wx:if="{{isHidden}}">
       <van-icon name="ellipsis" size="24px" />
     </view>
   </view>

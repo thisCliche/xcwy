@@ -8,6 +8,7 @@
 }
 .title{
   font-size: 36rpx;
+    
 }
 .des{
   font-size: 32rpx;
@@ -32,4 +33,9 @@
 }
 .red{
   color: #F54235;
+}
+.icon{
+  width: 42rpx;
+  height: 42rpx;
+  margin: 0 20rpx;
 }

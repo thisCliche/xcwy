@@ -15,7 +15,7 @@
     <view>装修内容</view>
     <view class="time">{{info.content}}</view>
   </view>
-  <view class="card mt20">
+  <view class="card mt20" wx:if="{{info.money != '0.00'}}">
     <van-cell-group border="{{ false }}">
       <van-cell title-class="titleStyle" title="装修保证金" value="¥{{info.money}}" border="{{ false }}" />
       <van-cell title-class="titleStyle" title="缴费途径" value="{{info.is_online == 'false'? '线下支付':'线上支付'}}"
@@ -29,7 +29,7 @@
   </view>
   <view class="steps">
     <view class="item" wx:for="{{info.logs}}" wx:key="index">
-      <view class="avatar last">
+      <view class="avatar {{info.logs.length-1 == index? 'last':''}}">
         <image src="{{item.member.avatar}}"></image>
       </view>
       <view class="itemR">
@@ -56,14 +56,14 @@
       <van-button bind:click="resolve" type="info">同意</van-button>
     </view>
   </block>
-  <block wx:else>
+  <block wx:if="{{info.status_text == '已缴纳'}}">
     <!-- <view class="btn" bindtap="toPay" wx:if="{{info.status_text == '待缴纳保证金'}}">
       <view class="card btnStyle">
         保证金已线下缴纳，请填写订单信息
         <van-icon name="arrow" color="#28BC8D" />
       </view>
     </view> -->
-    <view class="btn2" wx:if="{{info.status_text == '已缴纳'}}">
+    <view class="btn2" wx:if="{{is_leader}}">
       <van-button custom-class="btnStyle" type="info" bind:click="toDone" block>装修结束，自动退还保证金</van-button>
     </view>
   </block>

@@ -29,7 +29,7 @@
   </view>
   <view class="steps">
     <view class="item" wx:for="{{info.logs}}" wx:key="index">
-      <view class="avatar last">
+      <view class="avatar {{info.logs.length-1 == index? 'last':''}}">
         <image src="{{item.member.avatar}}"></image>
       </view>
       <view class="itemR">

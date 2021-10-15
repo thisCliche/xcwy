@@ -27,6 +27,11 @@ Page({
           delta: 1,
         })
       }, 500)
+    }else{
+      wx.showToast({
+        title: res.msg,
+        icon:'none'
+      })
     }
   },
   async getDetail(id) {
@@ -34,6 +39,15 @@ Page({
       id,
       token: wx.getStorageSync('token')
     })
+    if (JSON.parse(wx.getStorageSync('userInfo')).id == res.data.flow_member) {
+      this.setData({
+        is_leader: true
+      })
+    } else {
+      this.setData({
+        is_leader: false
+      })
+    }
     this.setData({
       info: res.data
     })
@@ -61,15 +75,7 @@ Page({
       id: options.id
     })
     this.getDetail(options.id)
-    if (wx.getStorageSync('staffInfo').branch_id == 1) {
-      this.setData({
-        is_leader: true
-      })
-    } else {
-      this.setData({
-        is_leader: false
-      })
-    }
+    
   },
 
   /**

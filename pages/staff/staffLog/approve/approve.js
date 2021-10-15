@@ -16,7 +16,7 @@ Page({
     list: [1, 2, 3, 4, 5, 6],
   },
   async submit(e) {
-    if (this.data.score >= 100 || this.data.score < 0) {
+    if (this.data.score > 100 || this.data.score < 0) {
       return wx.showToast({
         title: '分值0-100',
         icon: 'error'

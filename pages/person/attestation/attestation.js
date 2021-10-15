@@ -1,30 +1,56 @@
-// pages/person/attestation/attestation.js
+// pages/contact/pickProject/pickProject.js
 import {
   project,
-  owner,
+  house,
   getOwner,
+  owner,
   logout
 } from '../../../api/login'
+import {
+  approve_keyHouse
+} from '../../../api/approve.js'
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    radio1: '',
+    list: [],
+    list1: {},
+    list2: [],
+    list3: [],
+    list4: [],
+    grad: 1,
+    selectL: 1,
+    last: false,
     isShow: false,
-    radio2: '',
+    houseName: '',
+    project_name: '',
+    area_name: '',
+    block_name: '',
+    unit_name: '',
+    isSelect:true,
     name: '',
     mobile: '',
     location: '',
     projectList: [],
     active: 0,
     type: 1,
+    info:{},
+    house_id: 0,
+    house_name: '',
+    project_id:0,
   },
   onChange(event) {
     this.setData({
       type: event.detail,
     });
+  },
+  toHouse(e) {
+    this.setData({
+      house_id: e.currentTarget.dataset.item.id,
+      house_name: e.currentTarget.dataset.item.name,
+    })
   },
   submit() {
     if (this.data.name != '' || this.data.location) {
@@ -32,9 +58,9 @@ Page({
         token: wx.getStorageSync('token'),
         name: this.data.name,
         mobile: this.data.mobile,
-        project_id: this.data.radio1,
+        project_id: this.data.project_id,
         type: this.data.type,
-        house_id: this.data.radio2
+        house_id: this.data.house_id
       }).then(res => {
         if (res.code != 200) {
           wx.showToast({
@@ -62,45 +88,133 @@ Page({
       })
     }
   },
-  onradioChange(event) {
-    console.log(event)
-    let that = this
-    if (event.currentTarget.dataset.type == 'radio2') {
-      this.data.projectList.forEach(item => {
-        if (item.house_id == event.detail) {
-          that.setData({
-            location: that.data.location + item.name,
-          })
-        }
+  async getList(id) {
+    if (id) {
+      let res = await project({
+        project_id: id,
+        token: wx.getStorageSync('token')
+      })
+
+      this.setData({
+        list: res.data
       })
     } else {
-      this.data.projectList.forEach(item => {
-        if (item.project_id == event.detail) {
-          that.setData({
-            location: that.data.location + item.name,
-          })
-        }
+      let res = await project({
+        token: wx.getStorageSync('token')
+      })
+      this.setData({
+        list: res.data
       })
     }
-    setTimeout(_ => {
-      that.setData({
-        [event.currentTarget.dataset.type]: event.detail,
-        active: ++this.data.active
-      });
-      if (that.data.radio1 != '') {
-        that.getProject({
-          project_id: that.data.radio1
+  },
+  toUnit(e){
+    this.setData({
+      unit_name: e.currentTarget.dataset.item.name,
+      last: true
+    })
+  },
+  toBlock(e){
+    if(this.data.list1[3]){
+      this.setData({
+        block_name: e.currentTarget.dataset.item.name,
+        list4: this.data.list1[3],
+        grad:4,
+        last: false
+      })
+    }else{
+      this.setData({
+        block_name: e.currentTarget.dataset.item.name,
+        last: true
+      })
+    }
+  },
+  toArea(e){
+    if(this.data.list1[2]){
+      this.setData({
+        area_name: e.currentTarget.dataset.item.name,
+        list3: this.data.list1[2],
+        grad:3,
+        last: false
+      })
+    }else{
+      this.setData({
+        area_name: e.currentTarget.dataset.item.name,
+        last: true
+      })
+    }
+  },
+  toProject(e) {
+    if (e.currentTarget.dataset.item.hasOwnProperty('child') && e.currentTarget.dataset.item.child.length != 0) {
+      if (e.currentTarget.dataset.item.child[1]) {
+        this.setData({
+          project_name: e.currentTarget.dataset.item.name,
+          project_id: e.currentTarget.dataset.item.id,
+          list1:e.currentTarget.dataset.item.child,
+          list2: e.currentTarget.dataset.item.child[1],
+          grad:2,
+          last: false
         })
       }
-    }, 300)
-
-
+    } else {
+      this.setData({
+        project_name: e.currentTarget.dataset.item.name,
+        project_id: e.currentTarget.dataset.item.id,
+        last: true
+      })
+    }
+    // if (this.data.list[0].hasOwnProperty('child')) {
+    //   this.setData({
+    //     project_id: e.currentTarget.dataset.item.house_id,
+    //     houseName:e.currentTarget.dataset.item.name,
+    //     last: true
+    //   })
+    //   return
+    // }
+    // this.setData({
+    //   projectName:e.currentTarget.dataset.item.name
+    // })
+    // this.getList(e.currentTarget.dataset.id)
   },
-  async getProject(data) {
-    let res = await project(data)
+  back2(){
     this.setData({
-      projectList: res.data
+      isSelect: false,
+      location: this.data.project_name+ this.data.area_name+ this.data.block_name+ this.data.unit_name+this.data.house_name,
+      // house_id:this.data.id,
+      // project_id:this.data.project_id,
     })
+  },
+  async back() {
+    let res = await house({token:wx.getStorageSync('token'),project_name:this.data.project_name,area_name:this.data.area_name,block_name:this.data.block_name,unit_name:this.data.unit_name,})
+    if (res.code != 200) {
+      return wx.showToast({
+        title: res.msg,
+        icon: 'none'
+      })
+    } else if (res.data.length == 0) {
+      return wx.showToast({
+        title: '数据为空',
+        icon: 'none'
+      })
+    } else {
+      this.setData({
+        selectL: 2,
+        list: res.data
+      })
+    }
+    // let pages = getCurrentPages()
+    // let prevPage = pages[pages.length - 2]
+    // let that = this
+    // wx.navigateBack({
+    //   delta: 1,
+    //   complete: function () {
+    //     setTimeout(function () {
+    //       prevPage.getlogin({
+    //         id: res.data[0].id,
+    //         name: that.data.project_name+res.data[0].name,
+    //       })
+    //     }, 500)
+    //   }
+    // })
   },
   async logoutBtn() {
     let res = await logout({
@@ -136,14 +250,13 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(options)
     if (options.id == '业主') {
       this.setData({
         isShow: true
       })
       this.getownerInfo()
     } else {
-      this.getProject()
+      // this.getProject()
     }
   },
 
@@ -158,7 +271,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.getList()
   },
 
   /**

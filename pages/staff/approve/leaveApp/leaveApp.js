@@ -53,7 +53,7 @@ Page({
     const m = (date.getMonth() + 1 + '').padStart(2, '0')
     const hh = (date.getHours() + '').padStart(2, '0')
     const mm = (date.getMinutes() + '').padStart(2, '0')
-    return `${date.getFullYear()}-${m}-${date.getDate()} ${hh}:${mm}`;
+    return `${date.getFullYear()}-${m}-${date.getDate()}`;
   },
   onConfirm(event) {
     this.setData({
@@ -121,7 +121,12 @@ Page({
     });
   },
   async submit() {
-
+    if(new Date(this.data.time1)> new Date(this.data.time2)){
+      return wx.showToast({
+        title: '结束时间不能小于开始时间',
+        icon:'none'
+      })
+    }
     let form = {
       type: this.data.type,
       token: wx.getStorageSync('token'),

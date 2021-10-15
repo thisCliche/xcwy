@@ -1,5 +1,8 @@
 // pages/staff/task/cheackDetail/cheackDetail.js
-import {detail,del} from '../../../../api/report'
+import {
+  detail,
+  del
+} from '../../../../api/report'
 let App = getApp()
 Page({
 
@@ -7,68 +10,120 @@ Page({
    * 页面的初始数据
    */
   data: {
-    show:false,
-    isShow:false,
-    list:[1,2,3,4,5,6],
-    value:3,
-    id:'',
-    siteHttp:App.globalData.siteHttp,
-    rootHttp:App.globalData.rootHttp,
+    show: false,
+    isShow: false,
+    isRead: false,
+    isHidden: false,
+    list: [1, 2, 3, 4, 5, 6],
+    value: 3,
+    id: '',
+    siteHttp: App.globalData.siteHttp,
+    rootHttp: App.globalData.rootHttp,
     info: {},
-    actions: [
-      { name: '删除', color: '#ee0a24' },
-    ],
+    actions: [{
+      name: '编辑'
+    },{
+      name: '删除',
+      color: '#ee0a24'
+    }, ],
   },
-  toApprove(){
+  toApprove() {
     wx.navigateTo({
       url: `/pages/staff/staffLog/approve/approve?id=${this.data.id}`,
     })
   },
-  openBox(){
+  openBox() {
     this.setData({
-      show:true
+      show: true
     })
   },
   async onSelect(event) {
     let dt = new Date()
-    const y= dt.getFullYear()
+    const y = dt.getFullYear()
     const m = (dt.getMonth() + 1 + '').padStart(2, '0')
     const d = (dt.getDate() + '').padStart(2, '0')
-    let dateNumber =  `${y}-${m}-${d}`
-    this.setData({
-      show:true
-    })
-    if(this.data.info.add_time.slice(0,10) == dateNumber){
-      let res = await del({token:wx.getStorageSync('token'),id:this.data.id})
-      if(res.code == 200) {
-        wx.showToast({
-          title: '删除成功',
+    let dateNumber = `${y}-${m}-${d}`
+    if (event.detail.name == '删除') {
+      this.setData({
+        show: true
+      })
+      if (this.data.info.add_time.slice(0, 10) == dateNumber) {
+        let res = await del({
+          token: wx.getStorageSync('token'),
+          id: this.data.id
         })
-        setTimeout(_=>{
-          wx.navigateBack({
-            delta: 1,
+        if (res.code == 200) {
+          wx.showToast({
+            title: '删除成功',
           })
-        },500)
-      }else{
+          setTimeout(_ => {
+            wx.navigateBack({
+              delta: 1,
+            })
+          }, 500)
+        } else {
+          wx.showToast({
+            title: res.msg,
+            icon: 'error'
+          })
+        }
+      } else {
         wx.showToast({
-          title: res.msg,
-          icon:'error'
+          title: '仅可删除当天日志',
+          icon: 'none'
         })
       }
-    }else{
-      wx.showToast({
-        title: '仅可删除当天日志',
-        icon: 'none'
-      })
+    } else {
+      if (this.data.info.add_time.slice(0, 10) == dateNumber) {
+        this.setData({
+          show: false
+        })
+        wx.navigateTo({
+          url: `/pages/staff/staffLog/editwriteLog/editwriteLog?id=${this.data.id}`,
+        })
+      } else {
+        wx.showToast({
+          title: '仅可编辑当天日志',
+          icon: 'none'
+        })
+        this.setData({
+          show: false
+        })
+      }
     }
   },
-  onCancel(){
+  onCancel() {
     this.setData({
-      show:false
+      show: false
     })
   },
-  async getList(id){
-    let res = await detail({id,token:wx.getStorageSync('token')})
+  async getList(id) {
+    let res = await detail({
+      id,
+      token: wx.getStorageSync('token')
+    })
+    let userInfo = JSON.parse(wx.getStorageSync('userInfo'))
+    res.data.report_receiver.map(item => {
+      if (item.member_id == userInfo.id) {
+        this.setData({
+          isShow: true
+        })
+        if (item.comment == '') {
+          this.setData({
+            isRead: true
+          })
+        } else {
+          this.setData({
+            isRead: false
+          })
+        }
+      }
+    })
+    if (userInfo.id == res.data.member_id) {
+      this.setData({
+        isHidden: true
+      })
+    }
     this.setData({
       info: res.data
     })
@@ -77,11 +132,10 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(options)
     this.setData({
       id: options.id
     })
-    this.getList(options.id)
+
   },
 
   /**
@@ -95,15 +149,9 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    if(wx.getStorageSync('staffInfo').is_leader == 'false'){
-      this.setData({
-        isShow: false
-      })
-    }else{
-      this.setData({
-        isShow: true
-      })
-    }
+    this.getList(this.data.id)
+
+
   },
 
   /**

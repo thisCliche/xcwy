@@ -12,21 +12,22 @@
       <van-cell required title="开始时间" value="{{ time1 }}" bind:click="onDisplay" data-type="calendarShow1"
         border="{{ false }}" is-link>
       </van-cell>
-      <van-popup show="{{ calendarShow1 }}" position="bottom" custom-style="height: 50%;" round>
-        <van-datetime-picker type="datetime" data-type="calendarShow1" value="{{ datetime1 }}" bind:cancel="onClose" bind:confirm="onConfirm" />
-      </van-popup>
 
-      <!-- <van-calendar color="#4790F4" show="{{ calendarShow1 }}" bind:close="onClose" bind:confirm="onConfirm"
-        data-type="calendarShow1" show-confirm="{{ false }}" /> -->
+      <!-- <van-popup show="{{ calendarShow1 }}" position="bottom" custom-style="height: 50%;" round>
+        <van-datetime-picker type="datetime" data-type="calendarShow1" value="{{ datetime1 }}" bind:cancel="onClose" bind:confirm="onConfirm" />
+      </van-popup> -->
+
+      <van-calendar color="#4790F4" show="{{ calendarShow1 }}" bind:close="onClose" bind:confirm="onConfirm"
+        data-type="calendarShow1" show-confirm="{{ false }}" />
       <van-cell required title="结束时间" value="{{ time2 }}" bind:click="onDisplay" data-type="calendarShow2"
         border="{{ false }}" is-link>
       </van-cell>
-      <van-popup show="{{ calendarShow2 }}" position="bottom" custom-style="height: 50%;" round >
+      <!-- <van-popup show="{{ calendarShow2 }}" position="bottom" custom-style="height: 50%;" round >
         <van-datetime-picker type="datetime" data-type="calendarShow2" value="{{ datetime2 }}" bind:cancel="onClose" bind:confirm="onConfirm2" min-date="{{ minDate }}"/>
-      </van-popup>
+      </van-popup> -->
 
-      <!-- <van-calendar color="#4790F4" show="{{ calendarShow2 }}" bind:close="onClose" bind:confirm="onConfirm2"
-        data-type="calendarShow2" show-confirm="{{ false }}" /> -->
+      <van-calendar color="#4790F4" show="{{ calendarShow2 }}" bind:close="onClose" bind:confirm="onConfirm2"
+        data-type="calendarShow2" show-confirm="{{ false }}" />
 
       <van-field required model:value="{{ duration }}" placeholder="请输入" border="{{ false }}" input-align="right"
         label="时长（小时）" />

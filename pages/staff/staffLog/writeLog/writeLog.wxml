@@ -19,7 +19,7 @@
             <block wx:for="{{selectlogList}}" wx:key="index">
               <block wx:if="{{item.images.length!= 0}}">
                 <van-col span="6" wx:for="{{item.images}}" wx:key="index">
-                  <image src="{{item.url}}"></image>
+                  <image src="{{item}}"></image>
                 </van-col>
               </block>
             </block>

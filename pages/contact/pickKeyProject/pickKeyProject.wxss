@@ -1,0 +1,19 @@
+/* pages/contact/pickProject/pickProject.wxss */
+.pickProject{
+  padding: 30rpx 20rpx;
+}
+.info{
+  padding: 28rpx;
+}
+.item{
+  display: flex;
+  align-items: center;
+  margin: 20rpx 0;
+}
+.name{
+  margin-left: 20rpx;
+  color: #444;
+}
+.btn{
+  margin-top: 50rpx;
+}

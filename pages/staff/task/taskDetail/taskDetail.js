@@ -8,10 +8,21 @@ Page({
   data: {
     id:'',
     list:[1,2,3,4,5,6],
-    info:{}
+    info:{},
+    isHidden:false,
   },
   async getDetail(id){
     let res = await detail({token:wx.getStorageSync('token'),id})
+    let that = this
+    res.data.task_receiver.forEach(item=>{
+      if(item.member_id == res.data.member_id){
+        if(item.is_done == 'true'){
+          that.setData({
+            isHidden: true
+          })
+        }
+      }
+    })
     this.setData({
       info: res.data
     })

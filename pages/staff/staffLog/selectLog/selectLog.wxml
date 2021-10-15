@@ -9,7 +9,7 @@
       </view>
       <view>{{item.content.tasks}}</view>
       <view class="img">
-        <image wx:for="{{item.images}}" wx:key="index" src="{{item.url}}"></image>
+        <image wx:for="{{item.images}}" wx:key="index" src="{{item}}"></image>
       </view>
     </van-collapse-item>
   </van-collapse>

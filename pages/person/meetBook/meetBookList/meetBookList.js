@@ -1,11 +1,13 @@
 // pages/person/meetBook/meetBook.js
 import {record} from '../../../../api/meeting'
+let App = getApp()
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    rootHttp:App.globalData.rootHttp,
     list:[{name:'',pass:true},{name:'',pass:false}]
     // list:[]
   },

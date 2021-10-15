@@ -56,6 +56,13 @@ export function project(data) {
     data
   })
 }
+export function house(data) {
+  return request({
+    url: 'member/house',
+    method: 'get',
+    data
+  })
+}
 export function owner(data) {
   return request({
     url: 'member/owner',

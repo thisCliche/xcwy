@@ -1,0 +1,49 @@
+/* pages/person/attestation/attestation.wxss */
+.attestation{
+  padding: 30rpx 20rpx;
+}
+.info{
+  padding: 28rpx;
+}
+.btn{
+  margin-top: 152rpx;
+}
+.van-button{
+  width: 90% !important;
+}
+.iconStyle{
+  color: transparent;
+  border: 6rpx solid #fff;
+  border-radius: 20rpx;
+  line-height: 12px !important;
+  box-shadow: 2rpx 2rpx 10rpx 2rpx rgb(226, 226, 226);
+}
+.radioStyle{
+  margin-top: 28rpx !important;
+  padding-left: 10rpx !important;
+}
+.labelStyle{
+  color: #ABABAB !important;
+}
+.houseDes{
+  margin: 18rpx 38rpx;
+}
+.type1 .card{
+  padding-bottom: 50rpx;
+}
+.type1 .last .card{
+  padding: 0rpx;
+}
+.btn{
+  margin-top: 108rpx;
+}
+.van-button{
+  width: 90% !important;
+}
+.cardT{
+  padding: 20rpx 0 0 28rpx;
+}
+.rideo{
+  display: flex;
+  justify-content: space-around;
+}

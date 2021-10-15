@@ -78,7 +78,7 @@ async submitNumber() {
   if(res.code != 200){
     wx.showToast({
       title: res.msg,
-      icon:'error'
+      icon:'none'
     })
   }else{
     wx.showToast({

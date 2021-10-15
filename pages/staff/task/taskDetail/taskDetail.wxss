@@ -17,8 +17,11 @@ color: #5f5f5f;
 font-size: 30rpx;
 margin-top: 10rpx;
 }
+.popWrap{
+  min-height: 172rpx;
+}
 .colStyle{
-  margin-top: 10rpx;
+  /* margin-top: 10rpx; */
   position: relative;
 }
 .img{

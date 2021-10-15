@@ -29,7 +29,7 @@ margin-top: 10rpx;
   margin-top: 20rpx;
 }
 .colStyle{
-  margin-top: 10rpx;
+  margin-top: 30rpx;
   position: relative;
 }
 .img{

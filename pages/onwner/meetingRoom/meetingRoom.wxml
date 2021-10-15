@@ -1,5 +1,10 @@
 <!--pages/onwner/meetingRoom/meetingRoom.wxml-->
 <view class="meeting">
+  <van-overlay show="{{ isLoad }}" z-index="99">
+    <view class="loading">
+      <van-loading />
+    </view>
+  </van-overlay>
   <view class="toggle">
     <van-radio-group class="icongroupStyle" value="{{ radio }}" direction="horizontal" bind:change="onradioChange">
       <van-radio name="1" custom-class="radioClass" value="{{ radio }}" use-icon-slot>个人 <image slot="icon" src="{{ radio === '1' ? '../../../static/images/radio-active.png' : '../../../static/images/radio.png' }}" /></van-radio>

@@ -13,7 +13,7 @@ Page(filter.loginCheck({
   },
   toDetail(e){
     wx.navigateTo({
-      url: `/pages/onwner/payment/payRecord/payRecord?no=${e.currentTarget.dataset.no}`,
+      url: `/pages/onwner/payment/payRecord2/payRecord2?no=${e.currentTarget.dataset.no}`,
     })
   },
   toPay(e){

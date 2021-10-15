@@ -104,7 +104,7 @@
 }
 .opinionT{
   display: flex;
-  align-items: center;
+  /* align-items: center; */
 }
 .opinionT image{
   width: 70rpx;

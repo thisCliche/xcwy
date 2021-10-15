@@ -17,6 +17,10 @@
   color: #ABABAB;
   margin-top: 30rpx;
 }
+.card .time1{
+  font-size: 32rpx;
+  color: #ABABAB;
+}
 .titleStyle{
   font-size: 32rpx !important;
 }
@@ -121,4 +125,8 @@
 }
 .statusColor{
   color: #28BC8D;
+}
+.space{
+  display: flex;
+  justify-content: space-between;
 }

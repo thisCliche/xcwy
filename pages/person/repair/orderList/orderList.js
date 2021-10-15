@@ -41,25 +41,36 @@ Page({
       isLoad: true
     })
     let status = this.data.current
-    let res = await repairList({
-      ...this.data.queryInfo,
-      status: ++status,
-      type:2,
-      token: wx.getStorageSync('token')
-    })
-    if (type == 0) {
+    try {
+      let res = await repairList({
+        ...this.data.queryInfo,
+        status: ++status,
+        type: 2,
+        token: wx.getStorageSync('token')
+      })
+      if (type == 0) {
+        this.setData({
+          list: res.data.list,
+          count: res.data.count,
+          isLoad: false,
+        })
+      } else {
+        let list = this.data.list.concat(...res.data.list)
+        this.setData({
+          list: list,
+          count: res.data.count,
+          isLoad: false,
+        })
+      }
+
+    } catch (e) {
       this.setData({
-        list: res.data.list,
-        count: res.data.count,
         isLoad: false,
       })
-    }else{
-      let list = this.data.list.concat(...res.data.list)
-      this.setData({
-        list: list,
-        count: res.data.count,
-        isLoad: false,
+      wx.showToast({
+        title: '意外错误',
       })
+      console.log(e)
     }
 
   },

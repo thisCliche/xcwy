@@ -1,5 +1,5 @@
-<!--pages/person/attestation/attestation.wxml-->
-<view class="attestation">
+<!--pages/contact/pickProject/pickProject.wxml-->
+<view class="pickProject">
   <view class="type" wx:if="{{isShow}}">
     <view class="card info">
       <view>{{info.project_name}}{{info.area_name}}{{info.block_name}}{{info.house_name}}</view>
@@ -9,28 +9,70 @@
       <van-button bind:click="logoutBtn" block type="info">注销</van-button>
     </view>
   </view>
-  <view class="type1" wx:else>
-    <view class="card info" wx:if="{{active==0}}">
-      <view>选择项目</view>
-      <!-- <view class="houseDes">文化馆旧城保护中心</view> -->
-      <view class="radioWrap">
-        <van-radio-group class="icongroupStyle" model:value="{{ radio1 }}" bind:change="onradioChange"
-          data-type="radio1">
-          <van-radio color="#444" wx:for="{{projectList}}" wx:key="index" name="{{item.project_id}}" icon-size="16px"
-            custom-class="radioStyle">{{item.name}}</van-radio>
-        </van-radio-group>
-        <!-- custom-class="radioStyle" icon-class="iconStyle" label-class="labelStyle" -->
-      </view>
-    </view>
-    <view class="card info" wx:elif="{{active==1}}">
-      <view>选择房屋</view>
-      <view class="radioWrap">
-        <van-radio-group class="icongroupStyle" model:value="{{ radio2 }}" bind:change="onradioChange"
-          data-type="radio2">
-          <van-radio color="#444" wx:for="{{projectList}}" wx:key="index" name="{{item.house_id}}" icon-size="16px"
-            custom-class="radioStyle">{{item.name}}</van-radio>
-        </van-radio-group>
-      </view>
+  <block wx:else>
+    <view wx:if="{{isSelect}}">
+      <block wx:if="{{selectL == 1}}">
+        <block wx:if="{{grad==1}}">
+          <view class="card info">
+            <view>选择项目</view>
+            <view class="item" wx:for="{{list}}" data-item="{{item}}" data-id="{{item.id}}" wx:key="index"
+              bindtap="toProject">
+              <van-icon name="checked" color="#4790F4" wx:if="{{project_name == item.name}}" />
+              <van-icon name="circle" color="#444" wx:else />
+              <view class="name">{{item.name}}</view>
+            </view>
+          </view>
+        </block>
+        <block wx:if="{{grad==2}}">
+          <view class="card info">
+            <view>选择区域</view>
+            <view class="item" wx:for="{{list2}}" data-item="{{item}}" data-id="{{item.id}}" wx:key="index"
+              bindtap="toArea">
+              <van-icon name="checked" color="#4790F4" wx:if="{{area_name == item.name}}" />
+              <van-icon name="circle" color="#444" wx:else />
+              <view class="name">{{item.name}}</view>
+            </view>
+          </view>
+        </block>
+        <block wx:if="{{grad==3}}">
+          <view class="card info">
+            <view>选择楼栋</view>
+            <view class="item" wx:for="{{list3}}" data-item="{{item}}" data-id="{{item.id}}" wx:key="index"
+              bindtap="toBlock">
+              <van-icon name="checked" color="#4790F4" wx:if="{{block_name == item.name}}" />
+              <van-icon name="circle" color="#444" wx:else />
+              <view class="name">{{item.name}}</view>
+            </view>
+          </view>
+        </block>
+        <block wx:if="{{grad==4}}">
+          <view class="card info">
+            <view>选择单元</view>
+            <view class="item" wx:for="{{list4}}" data-item="{{item}}" data-id="{{item.id}}" wx:key="index"
+              bindtap="toUnit">
+              <van-icon name="checked" color="#4790F4" wx:if="{{unit_name == item.name}}" />
+              <van-icon name="circle" color="#444" wx:else />
+              <view class="name">{{item.name}}</view>
+            </view>
+          </view>
+        </block>
+        <view class="btn" wx:if="{{last}}">
+          <van-button block type="info" bind:click="back">确定</van-button>
+        </view>
+      </block>
+      <block wx:else>
+        <view class="card info">
+          <view class="item" wx:for="{{list}}" data-item="{{item}}" data-id="{{item.id}}" wx:key="index"
+            bindtap="toHouse">
+            <van-icon name="checked" color="#4790F4" wx:if="{{house_id == item.id}}" />
+            <van-icon name="circle" color="#444" wx:else />
+            <view class="name">{{item.name}}</view>
+          </view>
+        </view>
+        <view class="btn">
+          <van-button block type="info" bind:click="back2">确定</van-button>
+        </view>
+      </block>
     </view>
     <view class="last" wx:else>
       <view class="card info">
@@ -55,5 +97,5 @@
         <van-button bind:click="submit" block type="info">提交</van-button>
       </view>
     </view>
-  </view>
+  </block>
 </view>

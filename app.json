@@ -27,6 +27,7 @@
     "pages/onwner/renovation/renovation",
     "pages/onwner/payment/paymentList/paymentList",
     "pages/onwner/payment/payRecord/payRecord",
+    "pages/onwner/payment/payRecord2/payRecord2",
     "pages/onwner/payment/payPage/payPage",
     "pages/onwner/parking/vehicle/vehicle",
     "pages/onwner/parking/payPage/payPage",
@@ -78,6 +79,8 @@
     "pages/staff/staffLog/searchReceiver/searchReceiver",
     "pages/staff/staffLog/writeLog/writeLog",
     "pages/staff/staffLog/writeLog2/writeLog2",
+    "pages/staff/staffLog/editwriteLog2/editwriteLog2",
+    "pages/staff/staffLog/editwriteLog1/editwriteLog",
     "pages/staff/approve/approveWrap/approveWrap",
     "pages/staff/approve/approveList/approveList",
     "pages/staff/approve/approveListed/approveListed",
@@ -95,6 +98,7 @@
     "pages/staff/attendance/attendanceWrap/attendanceWrap",
     "pages/staff/attendance/attendanceDetail/attendanceDetail",
     "pages/contact/pickProject/pickProject",
+    "pages/contact/pickKeyProject/pickKeyProject",
     "pages/contact/pickRepairProject/pickRepairProject",
     "pages/contact/pickTaskProject/pickTaskProject",
     "pages/staff/task/selectTask/selectTask",
@@ -107,6 +111,7 @@
     "navigationBarTitleText": "城新物业",
     "navigationBarTextStyle": "white"
   },
+  "requiredBackgroundModes": ["location"],
   "permission": {
     "scope.userLocation": {
       "desc": "你的位置信息将用于小程序打卡"
