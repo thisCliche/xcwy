@@ -10,8 +10,14 @@
 .selectLog{
   padding-bottom: 100rpx;
 }
+.all{
+  padding: 20rpx 34rpx;
+}
 .img image{
   width: 140rpx;
   height: 140rpx;
   margin-right: 10rpx;
+}
+.van-checkbox{
+  padding: 10rpx;
 }

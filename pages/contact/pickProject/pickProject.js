@@ -18,12 +18,14 @@ Page({
     list3: [],
     list4: [],
     grad: 1,
+    selectL: 1,
     last: false,
     houseName: '',
     project_name: '',
     area_name: '',
     block_name: '',
     unit_name: '',
+    isDisabled: true,
   },
   async getList(id) {
     if (id) {
@@ -44,6 +46,13 @@ Page({
       })
     }
   },
+  toHouse(e) {
+    this.setData({
+      house_id: e.currentTarget.dataset.item.id,
+      house_name: e.currentTarget.dataset.item.name,
+      isDisabled:false,
+    })
+  },
   toUnit(e){
     this.setData({
       unit_name: e.currentTarget.dataset.item.name,
@@ -51,11 +60,16 @@ Page({
     })
   },
   toBlock(e){
+    let that = this
     if(this.data.list1[3]){
+      setTimeout(() => {
+        that.setData({
+          grad:4,
+        })
+      }, 350);
       this.setData({
         block_name: e.currentTarget.dataset.item.name,
         list4: this.data.list1[3],
-        grad:4,
         last: false
       })
     }else{
@@ -66,11 +80,16 @@ Page({
     }
   },
   toArea(e){
+    let that = this
     if(this.data.list1[2]){
+      setTimeout(() => {
+        that.setData({
+          grad:3,
+        })
+      }, 350);
       this.setData({
         area_name: e.currentTarget.dataset.item.name,
         list3: this.data.list1[2],
-        grad:3,
         last: false
       })
     }else{
@@ -81,13 +100,18 @@ Page({
     }
   },
   toProject(e) {
+    let that = this
     if (e.currentTarget.dataset.item.hasOwnProperty('child') && e.currentTarget.dataset.item.child.length != 0) {
       if (e.currentTarget.dataset.item.child[1]) {
+        setTimeout(() => {
+          that.setData({
+            grad:2,
+          })
+        }, 350);
         this.setData({
           project_name: e.currentTarget.dataset.item.name,
           list1:e.currentTarget.dataset.item.child,
           list2: e.currentTarget.dataset.item.child[1],
-          grad:2,
           last: false
         })
       }
@@ -97,22 +121,29 @@ Page({
         last: true
       })
     }
-    // if (this.data.list[0].hasOwnProperty('child')) {
-    //   this.setData({
-    //     project_id: e.currentTarget.dataset.item.house_id,
-    //     houseName:e.currentTarget.dataset.item.name,
-    //     last: true
-    //   })
-    //   return
-    // }
-    // this.setData({
-    //   projectName:e.currentTarget.dataset.item.name
-    // })
-    // this.getList(e.currentTarget.dataset.id)
   },
   async back() {
     let res = await house({token:wx.getStorageSync('token'),project_name:this.data.project_name,area_name:this.data.area_name,block_name:this.data.block_name,unit_name:this.data.unit_name,})
-    console.log(res)
+    if (res.code != 200) {
+      return wx.showToast({
+        title: res.msg,
+        icon: 'none'
+      })
+    } else if (res.data.length == 0) {
+      return wx.showToast({
+        title: '数据为空',
+        icon: 'none'
+      })
+    } else {
+      this.setData({
+        selectL: 2,
+        list: res.data
+      })
+    }
+    
+  },
+  async back2() {
+    
     let pages = getCurrentPages()
     let prevPage = pages[pages.length - 2]
     let that = this
@@ -121,8 +152,8 @@ Page({
       complete: function () {
         setTimeout(function () {
           prevPage.getlogin({
-            id: res.data[0].id,
-            name: that.data.project_name+res.data[0].name,
+            id: that.data.house_id,
+            name: that.data.project_name+that.data.area_name+that.data.block_name+that.data.unit_name+ that.data.house_name,
           })
         }, 500)
       }

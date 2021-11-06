@@ -1,16 +1,19 @@
 <!--pages/onwner/payment/payPage/payPage.wxml-->
 <view class="payPage">
   <view class="card info">
-    <view class="title"><van-icon size="24" name="bill" color="#4790F4"/> {{typeName}}费</view>
+  
+    <view class="title" wx:if="{{typeName== '装修缴'}}"><image class="icon" src="/static/images/{{url}}.png"></image> 装修保证金</view>
+    <view class="title" wx:else><image class="icon" src="/static/images/{{url}}.png"></image> {{typeName}}费</view>
     <view class="des">
-      {{info.project_name}}-{{info.area_name}}-{{info.block_name}}-{{info.house_name}}
+      {{info.project_name}}{{info.area_name}}{{info.block_name}}{{info.unit_name}}{{info.house_name}}
     </view>
     <view class="des">
       {{info.name}}   {{info.mobile}}
     </view>
   </view>
   <view class="card info mt20">
-    <view class="title">欠费金额</view>
+    <view class="title" wx:if="{{typeName== '装修缴'}}">装修保证金</view>
+    <view class="title" wx:else>欠费金额</view>
     <view class="money">￥{{info.fee}}</view>
   </view>
   <view class="btn">

@@ -9,6 +9,17 @@
   font-size: 40rpx;
   margin-left: 40rpx;
 }
+.palte{
+  padding: 30rpx;
+  display: flex;
+  align-items: center;
+    justify-content: center;
+}
+.palte image{
+  padding: 0 20rpx;
+  width: 66rpx;
+  height: 56rpx;
+}
 .des{
   padding: 0 50rpx;
   text-align: center;

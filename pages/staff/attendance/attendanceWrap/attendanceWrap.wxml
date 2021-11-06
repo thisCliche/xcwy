@@ -20,26 +20,26 @@
       <view class="attendanceItem mt20">
         <view>上班时间 {{info.begin_time1}}</view>
           <view class="status mt10">{{info.begin_record1}} 
-          <!-- <van-tag plain round color="#FFA477">迟到</van-tag> -->
+            <van-tag plain round color="#FFA477" wx:if="{{info.begin_record1statu}}">{{info.begin_record1statu}}</van-tag>
           </view>
       </view>
       <view class="attendanceItem mt20">
         <view>下班时间 {{info.end_time1}}</view>
           <view class="status mt10">{{info.end_record1}} 
-          <!-- <van-tag plain round color="#FFA477">迟到</van-tag> -->
+            <van-tag plain round color="#FFA477" wx:if="{{info.end_record1statu}}">{{info.end_record1statu}}</van-tag>
           </view>
       </view>
       <block wx:if="{{info.begin_time2 != ''}}">
         <view class="attendanceItem mt20">
           <view>上班时间 {{info.begin_time2}}</view>
           <view class="status mt10">{{info.begin_record2}} 
-          <!-- <van-tag plain round color="#FFA477">迟到</van-tag> -->
+            <van-tag plain round color="#FFA477" wx:if="{{info.begin_record2statu}}">{{info.begin_record2statu}}</van-tag>
           </view>
         </view>
         <view class="attendanceItem mt20">
           <view>下班时间 {{info.end_time2}}</view>
           <view class="status mt10">{{info.end_record2}} 
-          <!-- <van-tag plain round color="#FFA477">迟到</van-tag> -->
+          <van-tag plain round color="#FFA477" wx:if="{{info.end_record2statu}}">{{info.end_record2statu}}</van-tag>
           </view>
         </view>
       </block>
@@ -47,7 +47,10 @@
     <view class="btnWrap">
       <view class="attendanceBtn {{isRange?'attendanceBtnEn':'attendanceBtnDe'}}" bindtap="cheackIn">
         <view class="afterWork" wx:if="{{!isRange}}">外勤打卡</view>
-        <view class="afterWork" wx:else>打卡</view>
+        <block wx:else>
+          <view class="afterWork" wx:if="{{info.type ==1}}">上班打卡</view>
+          <view class="afterWork" wx:else>下班打卡</view>
+        </block>
         <view class="afterTime mt10">{{time}}</view>
       </view>
       <view class="attendanceBtnDes mt30" wx:if="{{isRange}}">已进入考勤范围</view>

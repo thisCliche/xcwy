@@ -12,6 +12,7 @@
 }
 .name{
   margin-left: 20rpx;
+  font-size: 34rpx;
   color: #444;
 }
 .btn{

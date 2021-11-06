@@ -2,7 +2,7 @@
 <view class="vehicle">
   <view wx:if="{{list.length != 0}}">
     <view class="item card mt20" wx:for="{{list}}" wx:key="index">
-      <view class="left" wx:if="{{item.bill == 0}}">
+      <view class="left" wx:if="{{item.bill == 0}}" bindtap="toPay"  data-no="{{item.no}}">
         <view class="favicon">
           <image src="{{deFualtHttp}}/mini/images/car.png"></image>
         </view>
@@ -31,7 +31,7 @@
     <van-empty description="暂无车辆" />
   </view>
   <view class="card mt20 singlePayment" bindtap="addCar1">
-    <view class="singleL">单次交费</view>
+    <view class="singleL">单次缴费</view>
     <view class="singleR"><van-icon name="arrow" /></view>
   </view>
   <view class="btns" bindtap="addCar">

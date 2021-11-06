@@ -1,5 +1,10 @@
 <!--pages/onwner/payment/paymentList/paymentList.wxml-->
 <view class="paymentList">
+  <van-overlay show="{{ isLoad }}" z-index="99">
+    <view class="loading">
+      <van-loading />
+    </view>
+  </van-overlay>
   <view class="item card">
     <view class="left" wx:if="{{list.property_paid == 'true'}}">
       <view class="title">
@@ -24,14 +29,14 @@
   <view class="item card mt20">
     <view class="left" wx:if="{{list.electric_paid == 'true'}}">
       <view class="title">
-        <image class="icon" src="/static/images/img1.png"></image>
+        <image class="icon" src="/static/images/img2.png"></image>
          <text>电费</text> 
       </view>
       <view class="des">暂未查询到欠费</view>
     </view>
     <view class="left" wx:else bindtap="topay" data-type="electric">
       <view class="title">
-        <image class="icon" src="/static/images/img1.png"></image>
+        <image class="icon" src="/static/images/img2.png"></image>
          <text>电费</text> 
       </view>
       <view class="des red">需缴费</view>
@@ -45,14 +50,14 @@
   <view class="item card mt20">
     <view class="left" wx:if="{{list.water_paid == 'true'}}">
       <view class="title">
-        <image class="icon" src="/static/images/img1.png"></image>
+        <image class="icon" src="/static/images/img3.png"></image>
          <text>水费</text>
       </view>
       <view class="des">暂未查询到欠费</view>
     </view>
     <view class="left" wx:else bindtap="topay" data-type="water">
       <view class="title">
-        <image class="icon" src="/static/images/img1.png"></image>
+        <image class="icon" src="/static/images/img3.png"></image>
          <text>水费</text>
       </view>
       <view class="des red">需缴费</view>
@@ -66,14 +71,14 @@
   <view class="item card mt20">
     <view class="left" wx:if="{{list.rent_paid == 'true'}}">
       <view class="title">
-        <image class="icon" src="/static/images/img1.png"></image>
+        <image class="icon" src="/static/images/img4.png"></image>
          <text>租赁费</text>
       </view>
       <view class="des">暂未查询到欠费</view>
     </view>
     <view class="left" wx:else bindtap="topay" data-type="rent">
       <view class="title">
-        <image class="icon" src="/static/images/img1.png"></image>
+        <image class="icon" src="/static/images/img4.png"></image>
          <text>租赁费</text>
       </view>
       <view class="des red">需缴费</view>
@@ -85,17 +90,17 @@
     </view>
   </view>
   <view class="item card mt20">
-    <view class="left" wx:if="{{list.build != ''}}" bindtap="topay" data-type="build">
+    <view class="left" wx:if="{{list.build != ''}}" bindtap="tolist" data-type="build">
       <view class="title">
-        <image class="icon" src="/static/images/img1.png"></image>
-         <text>装修缴费</text> 
+        <image class="icon" src="/static/images/img5.png"></image>
+         <text>装修保证金</text> 
       </view>
       <view class="des red">需缴费</view>
     </view>
     <view class="left" wx:else>
       <view class="title">
-        <image class="icon" src="/static/images/img1.png"></image>
-         <text>装修缴费</text> 
+        <image class="icon" src="/static/images/img5.png"></image>
+         <text>装修保证金</text> 
       </view>
       <view class="des">暂未查询到欠费</view>
     </view>

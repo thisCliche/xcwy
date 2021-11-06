@@ -11,6 +11,14 @@ Page({
     info:{},
     userId:0,
     isRepairer:false,
+    isLeader:false,
+  },
+  previewImage(e){
+    let urls = e.currentTarget.dataset.list
+    wx.previewImage({
+      current: e.currentTarget.dataset.url, 
+      urls
+    })
   },
   async getDetail(id){
     let res = await repairDetail({token:wx.getStorageSync('token'),id})
@@ -19,7 +27,7 @@ Page({
         res.data.attachment[i] = this.data.rootHttp +res.data.attachment[i]
       }
     }
-    if(res.data.logs?.length==3 ){
+    if(res.data.logs?.length==3 || res.data.logs?.length==4){
       for(let i =0;i<res.data.logs[2].attachment.length;i++){
         res.data.logs[2].attachment[i] = this.data.rootHttp +res.data.logs[2].attachment[i]
       }
@@ -30,6 +38,11 @@ Page({
     if(res.data.repairer.some(item=>item==this.data.userId)){
       this.setData({
         isRepairer: true
+      })
+    }
+    if(res.data.flow_member == this.data.userId){
+      this.setData({
+        isLeader: true
       })
     }
   },

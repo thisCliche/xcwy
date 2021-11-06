@@ -1,5 +1,10 @@
 <!--pages/staff/approve/leaveApp/leaveApp.wxml-->
 <view class="leaveApp">
+  <van-overlay show="{{ isLoad }}" z-index="99">
+    <view class="loading">
+      <van-loading />
+    </view>
+  </van-overlay>
   <view class="miniTitle">请填写申请时间</view>
   <view class="card mt20">
     <van-cell-group>
@@ -7,7 +12,7 @@
         border="{{ false }}" is-link>
       </van-cell>
       <van-popup show="{{ calendarShow1 }}" position="bottom" custom-style="height: 50%;" round>
-        <van-datetime-picker type="datetime" data-type="calendarShow1" value="{{ datetime1 }}" bind:cancel="onClose" bind:confirm="onConfirm" />
+        <van-datetime-picker type="datetime" data-type="calendarShow1" value="{{ datetime1 }}" bind:cancel="onClose" min-date="{{ minDate }}" bind:confirm="onConfirm" />
       </van-popup>
       <van-cell required title="归还时间" value="{{ time2 }}" bind:click="onDisplay" data-type="calendarShow2"
         border="{{ false }}" is-link>
@@ -56,7 +61,7 @@
     </view>
   </view>
   <view class="btn">
-    <van-button type="info" block bindtap="submit">提交</van-button>
+    <van-button type="info" block bindtap="submit" data-com="com">提交</van-button>
   </view>
   <van-popup show="{{ hyShow }}" position="bottom" custom-style="height: 50%;" round data-type="hyShow"
     bind:close="onClose">

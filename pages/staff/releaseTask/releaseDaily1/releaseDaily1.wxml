@@ -1,5 +1,10 @@
 <!--pages/staff/releaseTask/releaseDaily/releaseDaily.wxml-->
 <view class="releaseDaily">
+  <van-overlay show="{{ isLoad }}" z-index="99">
+    <view class="loading">
+      <van-loading />
+    </view>
+  </van-overlay>
   <view class="card">
     <view class="cardD">日常巡查</view>
     <van-cell-group border="{{ false }}">
@@ -26,6 +31,6 @@
     </van-cell-group>
   </view>
   <view class="btn">
-    <van-button block type="info" bind:click="submit">提交</van-button>
+    <van-button block type="info" bind:click="submit" data-com="com">提交</van-button>
   </view>
 </view>

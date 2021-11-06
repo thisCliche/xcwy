@@ -10,6 +10,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    isLoad:false, 
     type: 1,
     typeName: '日报',
     tasks: '',
@@ -162,6 +163,10 @@ Page({
         }
       }
     }
+    let that = this;
+    this.setData({
+      isLoad:true
+    })
     let res = await add(form)
     if (res.code == 200) {
       wx.showToast({
@@ -173,6 +178,9 @@ Page({
         })
       }, 500)
     } else {
+      that.setData({
+        isLoad:false
+      })
       wx.showToast({
         title: res.msg,
         icon: 'error'

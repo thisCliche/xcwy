@@ -1,6 +1,6 @@
 /* pages/person/vista/vistaList/vistaList.wxss */
 .vistaList{
-  padding: 10rpx;
+  /* padding: 10rpx; */
 }
 .color1{
   color: #4790F4;

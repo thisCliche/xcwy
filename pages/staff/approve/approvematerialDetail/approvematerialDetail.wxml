@@ -26,7 +26,7 @@
     <view class="card mt20 workImg info">
       <van-row>
         <van-col wx:for="{{info.images}}" wx:key="index" custom-class="colStyle" span="6">
-          <image src="{{item}}"></image>
+          <image bindtap="previewImage" data-url="{{item}}" src="{{item}}" data-list="{{info.images}}"></image>
         </van-col>
       </van-row>
     </view>
@@ -54,7 +54,7 @@
       </view>
     </view>
   </view>
-  <block wx:if="{{info.status == 1 && isMe}}">
+  <block wx:if="{{info.status == 1 && isMe && info.logs.length == 1}}">
     <view class="btn">
       <van-button bind:click="revoke" block type="info">撤销</van-button>
     </view>

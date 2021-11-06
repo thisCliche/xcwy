@@ -24,7 +24,7 @@
       投诉图片
     </view>
     <view class="img">
-      <image wx:for="{{info.images}}" src="{{item}}"></image>
+      <image wx:for="{{info.images}}" wx:key="*this" bindtap="previewImage" data-url="{{item}}" src="{{item}}" data-list="{{info.images}}"></image>
     </view>
   </view>
   <view class="mt30" wx:if="{{info.reply != ''}}">
@@ -34,7 +34,7 @@
     <view class="card mt20">
       <view>{{info.reply}}</view>
       <view class="img" wx:if="{{info.reply_images.length != 0}}">
-        <image wx:for="{{info.reply_images}}" wx:key="index" src="{{item}}"></image>
+        <image wx:for="{{info.reply_images}}" wx:key="*this" bindtap="previewImage" data-url="{{item}}" src="{{item}}" data-list="{{info.reply_images}}"></image>
       </view>
     </view>
   </view>

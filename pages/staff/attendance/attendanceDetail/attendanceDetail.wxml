@@ -14,6 +14,10 @@
         <view class="summaryNum">{{info.earlyCount}}</view>
         <view class="summaryUnit">早退（次）</view>
       </view>
+      <view class="summaryBItem mt20">
+        <view class="summaryNum">{{info.missCount}}</view>
+        <view class="summaryUnit">缺卡（次）</view>
+      </view>
     </view>
   </view>
   <view class="card summary mt20" wx:if="{{!isTwo}}">
@@ -24,15 +28,17 @@
     </van-row>
     <van-row custom-class="rowStyle" wx:for="{{info.list}}" wx:key="index">
       <van-col custom-class="colStyle laterColor" span="8">{{item.date}}</van-col>
-      <van-col custom-class="colStyle color1" wx:if="{{item.firstStartStatus == 2 ||item.firstStartStatus == 3}}" span="5">{{item.firstStart}}</van-col>
-      <van-col custom-class="colStyle" wx:elif="{{item.firstStart == '--'}}" span="5">{{item.firstStart}} <text class="lack">缺</text> </van-col>
-      <van-col custom-class="colStyle" wx:elif="{{item.firstStartStatus == 4}}" span="5">{{item.firstStart}} <text class="goOut">外</text> </van-col>
-      <van-col custom-class="colStyle" wx:else span="5">{{item.firstStart}}</van-col>
+      <van-col custom-class="colStyle color1" wx:if="{{item.firstStartStatus == 2 ||item.firstStartStatus == 3}}" span="8">{{item.firstStart}}</van-col>
+      <van-col custom-class="colStyle" wx:elif="{{item.firstStart == '--'}}" span="8">{{item.firstStart}} <text class="lack">缺</text> </van-col>
+      <van-col custom-class="colStyle" wx:elif="{{item.firstStartStatus == 4&&item.firstStartType == 0}}" span="8">{{item.firstStart}} <text class="goOut">外</text> </van-col>
+      <van-col custom-class="colStyle color1" wx:elif="{{item.firstStartStatus == 4&&item.firstStartType == 1}}" span="8">{{item.firstStart}} <text class="goOut">外</text> </van-col>
+      <van-col custom-class="colStyle" wx:else span="8">{{item.firstStart}}</van-col>
 
-      <van-col custom-class="colStyle color1" wx:if="{{item.firstEndStatus == 2 ||item.firstEndStatus == 3}}" span="5">{{item.firstEnd}}</van-col>
-      <van-col custom-class="colStyle" wx:elif="{{item.firstEnd == '--'}}" span="5">{{item.firstEnd}} <text class="lack">缺</text> </van-col>
-      <van-col custom-class="colStyle" wx:elif="{{item.firstEndStatus == 4}}" span="5">{{item.firstEnd}} <text class="goOut">外</text> </van-col>
-      <van-col custom-class="colStyle" wx:else span="5">{{item.firstEnd}}</van-col>
+      <van-col custom-class="colStyle color1" wx:if="{{item.firstEndStatus == 2 ||item.firstEndStatus == 3}}" span="8">{{item.firstEnd}}</van-col>
+      <van-col custom-class="colStyle" wx:elif="{{item.firstEnd == '--'}}" span="8">{{item.firstEnd}} <text class="lack">缺</text> </van-col>
+      <van-col custom-class="colStyle" wx:elif="{{item.firstEndStatus == 4&&item.firstEndType == 0}}" span="8">{{item.firstEnd}} <text class="goOut">外</text> </van-col>
+      <van-col custom-class="colStyle color1" wx:elif="{{item.firstEndStatus == 4&&item.firstEndType == 1}}" span="8">{{item.firstEnd}} <text class="goOut">外</text> </van-col>
+      <van-col custom-class="colStyle" wx:else span="8">{{item.firstEnd}}</van-col>
     </van-row>
   </view>
   <view class="card summary mt20" wx:else>
@@ -47,22 +53,26 @@
       <van-col custom-class="colStyle laterColor" span="4">{{item.date}}</van-col>
       <van-col custom-class="colStyle color1" wx:if="{{item.firstStartStatus == 2 ||item.firstStartStatus == 3}}" span="5">{{item.firstStart}}</van-col>
       <van-col custom-class="colStyle" wx:elif="{{item.firstStart == '--'}}" span="5">{{item.firstStart}} <text class="lack">缺</text> </van-col>
-      <van-col custom-class="colStyle" wx:elif="{{item.firstStartStatus == 4}}" span="5">{{item.firstStart}} <text class="goOut">外</text> </van-col>
+      <van-col custom-class="colStyle" wx:elif="{{item.firstStartStatus == 4&&item.firstStartType == 0}}" span="5">{{item.firstStart}} <text class="goOut">外</text> </van-col>
+      <van-col custom-class="colStyle color1" wx:elif="{{item.firstStartStatus == 4&&item.firstStartType == 1}}" span="5">{{item.firstStart}} <text class="goOut">外</text> </van-col>
       <van-col custom-class="colStyle" wx:else span="5">{{item.firstStart}}</van-col>
 
       <van-col custom-class="colStyle color1" wx:if="{{item.firstEndStatus == 2 ||item.firstEndStatus == 3}}" span="5">{{item.firstEnd}}</van-col>
       <van-col custom-class="colStyle" wx:elif="{{item.firstEnd == '--'}}" span="5">{{item.firstEnd}} <text class="lack">缺</text> </van-col>
-      <van-col custom-class="colStyle" wx:elif="{{item.firstEndStatus == 4}}" span="5">{{item.firstEnd}} <text class="goOut">外</text> </van-col>
+      <van-col custom-class="colStyle" wx:elif="{{item.firstEndStatus == 4&&item.firstEndType == 0}}" span="5">{{item.firstEnd}} <text class="goOut">外</text> </van-col>
+      <van-col custom-class="colStyle color1" wx:elif="{{item.firstEndStatus == 4&&item.firstEndType == 1}}" span="5">{{item.firstEnd}} <text class="goOut">外</text> </van-col>
       <van-col custom-class="colStyle" wx:else span="5">{{item.firstEnd}}</van-col>
 
       <van-col custom-class="colStyle color1" wx:if="{{item.secondStartStatus == 2 ||item.secondStartStatus == 3}}" span="5">{{item.secondStart}}</van-col>
       <van-col custom-class="colStyle" wx:elif="{{item.secondStart == '--'}}" span="5">{{item.secondStart}} <text class="lack">缺</text> </van-col>
-      <van-col custom-class="colStyle" wx:elif="{{item.secondStartStatus == 4}}" span="5">{{item.secondStart}} <text class="goOut">外</text> </van-col>
+      <van-col custom-class="colStyle" wx:elif="{{item.secondStartStatus == 4&&item.secondStartType == 0}}" span="5">{{item.secondStart}} <text class="goOut">外</text> </van-col>
+      <van-col custom-class="colStyle color1" wx:elif="{{item.secondStartStatus == 4&&item.secondStartType == 1}}" span="5">{{item.secondStart}} <text class="goOut">外</text> </van-col>
       <van-col custom-class="colStyle" wx:else span="5">{{item.secondStart}}</van-col>
 
       <van-col custom-class="colStyle color1" wx:if="{{item.secondEndStatus == 2 ||item.secondEndStatus == 3}}" span="5">{{item.secondEnd}}</van-col>
       <van-col custom-class="colStyle" wx:elif="{{item.secondEnd == '--'}}" span="5">{{item.secondEnd}} <text class="lack">缺</text> </van-col>
-      <van-col custom-class="colStyle" wx:elif="{{item.secondEndStatus == 4}}" span="5">{{item.secondEnd}} <text class="goOut">外</text> </van-col>
+      <van-col custom-class="colStyle" wx:elif="{{item.secondEndStatus == 4&&item.secondEndType == 0}}" span="5">{{item.secondEnd}} <text class="goOut">外</text> </van-col>
+      <van-col custom-class="colStyle color1" wx:elif="{{item.secondEndStatus == 4&&item.secondEndType == 1}}" span="5">{{item.secondEnd}} <text class="goOut">外</text> </van-col>
       <van-col custom-class="colStyle" wx:else span="5">{{item.secondEnd}}</van-col>
     </van-row>
   </view>

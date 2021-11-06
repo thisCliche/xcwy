@@ -1,22 +1,25 @@
 // pages/onwner/vistResig/vistResig.js
-import {appointmentDetail} from '../../../../api/booking'
+import {
+  appointmentDetail
+} from '../../../../api/booking'
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    id:'',
-    time:'2021-7-06',
-    renyuan:'3',
-    calendarShow:false,
+    id: '',
+    time: '2021-7-06',
+    renyuan: '3',
+    calendarShow: false,
     checked: true,
-    pepople:[{
-      yyr:'',
-      lxdh:'',
-      sfzh:''
+    pepople: [{
+      yyr: '',
+      lxdh: '',
+      sfzh: ''
     }],
-    bz:'',
+    status: '',
+    bz: '',
     // 省份简写
     provinces: [
       ['京', '沪', '粤', '津', '冀', '晋', '蒙', '辽', '吉', '黑'],
@@ -34,22 +37,28 @@ Page({
     carnum: [],
     showNewPower: false,
     KeyboardState: false,
-    info:{}
+    info: {}
   },
-  toDetail(){
+  toDetail() {
     wx.navigateTo({
       url: `/pages/onwner/order/qrCode/qrCode?id=${this.data.id}`,
     })
   },
-  onChange({ detail }) {
+  onChange({
+    detail
+  }) {
     // 需要手动对 checked 状态进行更新
-    this.setData({ checked: detail });
+    this.setData({
+      checked: detail
+    });
   },
-  addInfo(){
+  addInfo() {
     let pepople = this.data.pepople
-    pepople.push({yyr:'',
-    lxdh:'',
-    sfzh:''})
+    pepople.push({
+      yyr: '',
+      lxdh: '',
+      sfzh: ''
+    })
     this.setData({
       pepople,
     })
@@ -78,59 +87,84 @@ Page({
     });
   },
   // 选中点击设置
-bindChoose(e) {
-  if (!this.data.carnum[6] || this.data.showNewPower) {
-    var arr = [];
-    arr[0] = e.target.dataset.val;
-    this.data.carnum = this.data.carnum.concat(arr)
+  bindChoose(e) {
+    if (!this.data.carnum[6] || this.data.showNewPower) {
+      var arr = [];
+      arr[0] = e.target.dataset.val;
+      this.data.carnum = this.data.carnum.concat(arr)
+      this.setData({
+        carnum: this.data.carnum
+      })
+    }
+  },
+  bindDelChoose() {
+    if (this.data.carnum.length != 0) {
+      this.data.carnum.splice(this.data.carnum.length - 1, 1);
+      this.setData({
+        carnum: this.data.carnum
+      })
+    }
+  },
+  showPowerBtn() {
     this.setData({
-      carnum: this.data.carnum
+      showNewPower: true,
+      KeyboardState: true
     })
-  }
-},
-bindDelChoose() {
-  if (this.data.carnum.length != 0) {
-    this.data.carnum.splice(this.data.carnum.length - 1, 1);
+  },
+  closeKeyboard() {
     this.setData({
-      carnum: this.data.carnum
+      KeyboardState: false
     })
-  }
-},
-showPowerBtn() {
-  this.setData({
-    showNewPower: true,
-    KeyboardState: true
-  })
-},
-closeKeyboard() {
-  this.setData({
-    KeyboardState: false
-  })
-},
-openKeyboard() {
-  this.setData({
-    KeyboardState: true
-  })
-},
-// 提交车牌号码
-submitNumber() {
-  if (this.data.carnum[6]) {
-    // 跳转到tabbar页面
-  }
-},
-async getDetail(id){
-  let res = await appointmentDetail({id,token:wx.getStorageSync('token')})
-  this.setData({
-    info:res.data
-  })
-},
+  },
+  openKeyboard() {
+    this.setData({
+      KeyboardState: true
+    })
+  },
+  // 提交车牌号码
+  submitNumber() {
+    if (this.data.carnum[6]) {
+      // 跳转到tabbar页面
+    }
+  },
+  async getDetail(id) {
+    let res = await appointmentDetail({
+      id,
+      token: wx.getStorageSync('token')
+    })
+    switch (res.data.status) {
+      case 1:
+        this.setData({
+          status: '待审核'
+        });
+        break;
+      case 2:
+        this.setData({
+          status: '待使用'
+        });
+        break;
+      case 3:
+        this.setData({
+          status: '已使用'
+        });
+        break;
+      case 4:
+        this.setData({
+          status: '已失效'
+        });
+        break;
+    }
+    this.setData({
+      info: res.data,
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     this.getDetail(options.id)
     this.setData({
-      id:options.id
+      id: options.id
     })
   },
 

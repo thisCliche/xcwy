@@ -1,13 +1,45 @@
 // pages/person/personInfo/personInfo.js
 const filter = require('../../../utils/router.js');
-import {myProfile} from '../../../api/login.js'
+import {myProfile,changeProfile} from '../../../api/login.js'
+const app = getApp()
 Page(filter.loginCheck({
 
   /**
    * 页面的初始数据
    */
   data: {
+    isLoad:false, 
+    rootHttp:app.globalData.rootHttp,
     userInfo:{}
+  },
+  changeAva(){
+    let that = this
+    wx.chooseImage({
+      success (res) {
+        const tempFilePaths = res.tempFilePaths
+        that.setData({
+          isLoad:true
+        })
+        wx.uploadFile({
+          url: that.data.rootHttp + '/api.php/app/upload', //仅为示例，非真实的接口地址
+          filePath: tempFilePaths[0],
+          name: 'file',
+          header: {
+            "Authorization": "Basic enhrajp6eGtqNjY4OA=="
+          },
+          success (res){
+            let img = JSON.parse(res.data)
+            changeProfile({token:wx.getStorageSync('token'),field:'avatar',value:that.data.rootHttp+img.data}).then(result=>{
+              that.setData({
+                isLoad:false
+              })
+              that.getUserInfo()
+              console.log(result)
+            })
+          }
+        })
+      }
+    })
   },
   toDetial(e){
     wx.navigateTo({
@@ -16,6 +48,9 @@ Page(filter.loginCheck({
   },
   async getUserInfo(){
     let res = await myProfile({token:wx.getStorageSync('token')})
+    if(res.data.id_card == ""){
+      res.data.id_card = ' '
+    }
     this.setData({
       userInfo: res.data
     })

@@ -10,6 +10,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    isLoad:false, 
     id: '',
     type: 1,
     title: '',
@@ -23,6 +24,12 @@ Page({
     },
     imgList: [],
   },
+  toSelect(){
+    wx.navigateTo({
+      url: `/pages/staff/task/selectTask/selectTask?type=${this.data.type}`,
+    })
+  },
+  
   async submit() {
     let form = {
       token: wx.getStorageSync('token'),
@@ -39,6 +46,10 @@ Page({
         })
       }
     }
+    let that = this;
+    this.setData({
+      isLoad:true
+    })
     let res = await report(form)
     if (res.code == 200) {
       wx.showToast({
@@ -50,6 +61,9 @@ Page({
         })
       }, 500)
     } else {
+      that.setData({
+        isLoad:false
+      })
       wx.showToast({
         title: res.msg,
         icon: 'error'
@@ -96,11 +110,16 @@ Page({
       },
     });
   },
+  getlogin(e){
+    this.setData({
+      id:e.id,
+      title:e.name
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(options)
     if(options.type == '1'){
       wx.setNavigationBarTitle({
         title: '日常巡查',

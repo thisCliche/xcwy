@@ -2,7 +2,9 @@
 import {
   statistics
 } from '../../../../api/attendance'
-import { list } from '../../../../api/report'
+import {
+  list
+} from '../../../../api/report'
 Page({
 
   /**
@@ -14,8 +16,8 @@ Page({
     maxDate: new Date().getTime(),
     year: '',
     month: '',
-    info:{},
-    isTwo:false
+    info: {},
+    isTwo: false
   },
   cancel() {
     this.setData({
@@ -31,38 +33,55 @@ Page({
         month,
         year
       })
-      let res = await statistics({token:wx.getStorageSync('token'),month:`${year}-${month}`})
-      if(Object.keys(res.data.list[0]).length == 5 ){
-        this.setData({
-          isTwo: true
+      try {
+        let res = await statistics({
+          token: wx.getStorageSync('token'),
+          month: `${year}-${month}`
         })
+        if (Object.keys(res.data.list[0]).length == 5) {
+          this.setData({
+            isTwo: true
+          })
+        }
+        this.setData({
+          info: res.data
+        })
+      } catch (e) {
+        console.log(e, 'error')
       }
-      this.setData({
-        info:res.data
+
+    } else {
+      let res = await statistics({
+        token: wx.getStorageSync('token'),
+        month
       })
-    }else{
-      let res = await statistics({token:wx.getStorageSync('token'),month})
-      if(Object.keys(res.data.list[0]).length == 5 ){
+      console.log(`${month}数据`, res.data)
+      if (Object.keys(res.data.list[0]).length == 5) {
         this.setData({
           isTwo: true
         })
       }
       this.setData({
-        info:res.data
+        info: res.data
       })
     }
   },
   onInput(event) {
+    let that = this
     let data = new Date(event.detail)
     let month = (data.getMonth() + 1 + '').padStart(2, '0')
     let year = data.getFullYear()
-    this.getDetail(`${year}-${month}`)
-    this.setData({
-      month,
-      year,
-      currentDate: event.detail,
-      hyShow: false
-    });
+    setTimeout(_ => {
+      console.log('传送的日期',`${year}-${month}`)
+      that.getDetail(`${year}-${month}`)
+      that.setData({
+        month,
+        year,
+        currentDate: event.detail,
+        hyShow: false
+      });
+    }, 500)
+
   },
   openBox() {
     this.setData({

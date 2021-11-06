@@ -1,6 +1,10 @@
 <!--pages/staff/approve/leaveApp/leaveApp.wxml-->
 <view class="leaveApp">
-
+  <van-overlay show="{{ isLoad }}" z-index="99">
+    <view class="loading">
+      <van-loading />
+    </view>
+  </van-overlay>
   <view class="card mt20 info">
     <van-cell-group>
       <van-cell required title="申请采购" border="{{ false }}"></van-cell>
@@ -51,7 +55,7 @@
     </view>
   </view>
   <view class="btn">
-    <van-button type="info" block bind:click="submit">提交</van-button>
+    <van-button type="info" block bind:click="submit" data-com="com">提交</van-button>
   </view>
   <van-popup show="{{ hyShow }}" position="bottom" custom-style="height: 50%;" round data-type="hyShow"
     bind:close="onClose">

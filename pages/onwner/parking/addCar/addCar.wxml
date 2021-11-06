@@ -1,5 +1,10 @@
 <!--pages/onwner/parking/addCar/addCar.wxml-->
 <view class="addCar">
+  <van-overlay show="{{ isLoad }}" z-index="99">
+    <view class="loading">
+      <van-loading />
+    </view>
+  </van-overlay>
   <view class="title">输入车牌号</view>
   <view class="plate">
     <view class="carNumber-items">
@@ -17,7 +22,7 @@
       <view class="carNumber-item {{showNewPower ? '': 'carNumber-item-newpower'}}">
         <view wx:if="{{!showNewPower}}" bindtap='showPowerBtn'>
           <!-- <view class="carNumber-newpower-add">+</view> -->
-          <view>新能源</view>
+          <view>+新能源</view>
         </view>
         <view wx:if="{{showNewPower}}" bindtap='openKeyboard'>
           {{carnum[7]}}
@@ -28,7 +33,7 @@
   </view>
   <view class="des"><text class="red">*</text>停车缴费仅支持已在物业前台登记的车辆如您未登记，请先前往物业前台办理</view>
   <view class="btn">
-    <van-button bind:click="submitNumber" type="info" block>确定</van-button>
+    <van-button bind:click="submitNumber" type="info" block data-com="com">确定</van-button>
   </view>
   <view class="keyboard" hidden='{{!KeyboardState}}'>
     <view class="keyboardClose">

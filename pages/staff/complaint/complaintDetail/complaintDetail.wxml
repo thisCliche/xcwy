@@ -1,5 +1,10 @@
 <!--pages/onwner/complaint/complaint.wxml-->
 <view class="complaint">
+  <van-overlay show="{{ isLoad }}" z-index="99">
+    <view class="loading">
+      <van-loading />
+    </view>
+  </van-overlay>
   <view class="title mt20">
     <image src="/static/images/bg.png" class="titleBg"></image> 投诉信息
   </view>
@@ -19,8 +24,8 @@
     <view>投诉图片</view>
     <van-row>
       <van-col wx:for="{{info.images}}" wx:key="index" custom-class="complaintImg" span="8">
-        <!-- <image bindtap="previewImage" data-url="{{item}}" src="{{item}}"></image> -->
-        <image data-url="{{item}}" src="{{item}}"></image>
+        <image bindtap="previewImage" data-url="{{item}}" src="{{item}}" data-list="{{info.images}}"></image>
+        <!-- <image data-url="{{item}}" src="{{item}}"></image> -->
       </van-col>
     </van-row>
   </view>
@@ -39,11 +44,11 @@
     <view class="replyC" >{{info.reply}}</view>
     <van-row wx:if="{{info.reply_images.length != 0}}">
       <van-col wx:for="{{info.reply_images}}" custom-class="complaintImg" span="8">
-        <image src="{{item}}"></image>
+        <image bindtap="previewImage" data-url="{{item}}" src="{{item}}" data-list="{{info.reply_images}}"></image>
       </van-col>
     </van-row>
   </view>
   <view class="btn" wx:if="{{info.reply == ''}}">
-    <van-button type="info" block bind:click="submit">提交</van-button>
+    <van-button type="info" block bind:click="submit" data-com="com">提交</van-button>
   </view>
 </view>

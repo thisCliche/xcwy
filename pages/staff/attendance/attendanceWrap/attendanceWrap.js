@@ -16,6 +16,7 @@ Page({
     time: '',
     show: false,
     info: {},
+    dakaStatus: '',
     locationInfo: {},
     attendaceInfo: {}
   },
@@ -73,11 +74,40 @@ Page({
       lng: '117.168658',
       lat: '31.87393'
     }).then(res => {
+      if (res.data.begin_record1 != '未打卡') {
+        res.data.begin_record1statu = res.data.begin_record1.slice(8)
+        res.data.begin_record1 = res.data.begin_record1.slice(0, 8)
+        that.setData({
+          ['info.begin_record1statu']: res.data.begin_record1statu,
+        })
+      }
+      if (res.data.begin_record2 != '未打卡') {
+        res.data.begin_record2statu = res.data.begin_record2.slice(8)
+        res.data.begin_record2 = res.data.begin_record2.slice(0, 8)
+        that.setData({
+          ['info.begin_record2statu']: res.data.begin_record2statu,
+        })
+      }
+      if (res.data.end_record1 != '未打卡') {
+        res.data.end_record1statu = res.data.end_record1.slice(8)
+        res.data.end_record1 = res.data.end_record1.slice(0, 8)
+        that.setData({
+          ['info.end_record1statu']: res.data.end_record1statu,
+        })
+      }
+      if (res.data.end_record2 != '未打卡') {
+        res.data.end_record2statu = res.data.end_record2.slice(8)
+        res.data.end_record2 = res.data.end_record2.slice(0, 8)
+        that.setData({
+          ['info.end_record2statu']: res.data.end_record2statu,
+        })
+      }
       that.setData({
         ['info.begin_record1']: res.data.begin_record1,
         ['info.begin_record2']: res.data.begin_record2,
         ['info.end_record1']: res.data.end_record1,
         ['info.end_record2']: res.data.end_record2,
+        ['info.type']:res.data.type,
       })
     })
   },
@@ -103,7 +133,6 @@ Page({
       show: true
     })
     const _locationChangeFn = function (info) {
-      console.log('location change', info)
       that.setData({
         isJurisdiction: true
       })
@@ -111,6 +140,8 @@ Page({
         token: wx.getStorageSync('token'),
         lng: info.longitude,
         lat: info.latitude
+        //   lng: '117.168658',
+        // lat: '31.87393'
       }).then(res => {
         if (res.msg == '考勤信息不存在') {
           wx.showToast({
@@ -124,6 +155,39 @@ Page({
             })
           }, 2000)
         } else if (res.data.status == 2) {
+          if (res.data.begin_record1 != '未打卡') {
+            that.setData({
+              dakaStatus: '上班打卡'
+            })
+          } else if (res.data.end_record1 != '未打卡') {
+            that.setData({
+              dakaStatus: '下班打卡'
+            })
+          } else if (res.data.begin_record2 != '未打卡') {
+            that.setData({
+              dakaStatus: '上班打卡'
+            })
+          } else {
+            that.setData({
+              dakaStatus: '下班打卡'
+            })
+          }
+          if (res.data.begin_record1 != '未打卡') {
+            res.data.begin_record1statu = res.data.begin_record1.slice(8)
+            res.data.begin_record1 = res.data.begin_record1.slice(0, 8)
+          }
+          if (res.data.begin_record2 != '未打卡') {
+            res.data.begin_record2statu = res.data.begin_record2.slice(8)
+            res.data.begin_record2 = res.data.begin_record2.slice(0, 8)
+          }
+          if (res.data.end_record1 != '未打卡') {
+            res.data.end_record1statu = res.data.end_record1.slice(8)
+            res.data.end_record1 = res.data.end_record1.slice(0, 8)
+          }
+          if (res.data.end_record2 != '未打卡') {
+            res.data.end_record2statu = res.data.end_record2.slice(8)
+            res.data.end_record2 = res.data.end_record2.slice(0, 8)
+          }
           that.setData({
             show: false,
             info: res.data,
@@ -131,6 +195,40 @@ Page({
             isRange: false
           })
         } else {
+          if (res.data.begin_record1 != '未打卡') {
+            that.setData({
+              dakaStatus: '上班打卡'
+            })
+          } else if (res.data.end_record1 != '未打卡') {
+            that.setData({
+              dakaStatus: '下班打卡'
+            })
+          } else if (res.data.begin_record2 != '未打卡') {
+            that.setData({
+              dakaStatus: '上班打卡'
+            })
+          } else {
+            that.setData({
+              dakaStatus: '下班打卡'
+            })
+          }
+          if (res.data.begin_record1 != '未打卡') {
+            res.data.begin_record1statu = res.data.begin_record1.slice(8)
+            res.data.begin_record1 = res.data.begin_record1.slice(0, 8)
+          }
+          if (res.data.begin_record2 != '未打卡') {
+            res.data.begin_record2statu = res.data.begin_record2.slice(8)
+            res.data.begin_record2 = res.data.begin_record2.slice(0, 8)
+          }
+          if (res.data.end_record1 != '未打卡') {
+            // console.log(res.data.end_record1.slice(8), '截取字符串')
+            res.data.end_record1statu = res.data.end_record1.slice(8)
+            res.data.end_record1 = res.data.end_record1.slice(0, 8)
+          }
+          if (res.data.end_record2 != '未打卡') {
+            res.data.end_record2statu = res.data.end_record2.slice(8)
+            res.data.end_record2 = res.data.end_record2.slice(0, 8)
+          }
           that.setData({
             show: false,
             locationInfo: info,
@@ -143,7 +241,7 @@ Page({
     }
     wx.startLocationUpdate({
       success: (res) => {
-        console.log('startLocationUpdate',res)
+        // console.log('startLocationUpdate', res)
         wx.onLocationChange(_locationChangeFn)
       },
       fail: (err) => {
@@ -193,8 +291,7 @@ Page({
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
-  },
+  onHide: function () {},
 
   /**
    * 生命周期函数--监听页面卸载
@@ -202,10 +299,10 @@ Page({
   onUnload: function () {
     wx.stopLocationUpdate({
       success: (res) => {
-        console.log("onUnload stopLocationUpdate success", res)
+        // console.log("onUnload stopLocationUpdate success", res)
       },
       fail: (err) => {
-        console.log("onUnload stopLocationUpdate fail", err)
+        // console.log("onUnload stopLocationUpdate fail", err)
       }
     })
   },

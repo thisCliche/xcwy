@@ -49,3 +49,10 @@ export function approve(data) {
     data
   })
 }
+export function dailyReport(data) {
+  return request({
+    url: 'report/dailyReport',
+    method: 'get',
+    data
+  })
+}

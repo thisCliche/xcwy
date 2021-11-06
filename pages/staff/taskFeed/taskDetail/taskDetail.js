@@ -14,6 +14,14 @@ Page({
     rootHttp: App.globalData.rootHttp,
     list: [1, 2, 3, 4, 5, 6]
   },
+  previewImage(e){
+    console.log(e)
+    let urls = e.currentTarget.dataset.list
+    wx.previewImage({
+      current: e.currentTarget.dataset.url, 
+      urls
+    })
+  },
   async getDetail(id) {
     let res = await detail({
       token: wx.getStorageSync('token'),

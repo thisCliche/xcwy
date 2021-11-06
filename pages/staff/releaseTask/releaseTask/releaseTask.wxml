@@ -1,7 +1,7 @@
 <!--pages/staff/releaseTask/releaseTask/releaseTask.wxml-->
 <view class="releaseTask">
   <view class="card info">
-    <view class="cardT">巡查类型</view>
+    <view class="cardT">任务类型</view>
     <van-cell title="{{lx}}" bind:click="onDisplay" data-type="hyShow"  border="{{false}}" is-link></van-cell>
   </view>
   <view class="card info mt20">
@@ -12,11 +12,11 @@
   />
   </view>
   <view class="card info mt20">
-    <view class="cardT">巡查项目</view>
+    <view class="cardT">执行项目</view>
     <van-cell title="{{project_name}}" border="{{false}}" is-link bind:click="toPick"></van-cell>
   </view>
   <view class="card info mt20">
-    <view class="cardT">巡查内容</view>
+    <view class="cardT">任务内容</view>
     <van-field
     type="textarea"
     autosize="{{minHeight}}"
@@ -36,7 +36,7 @@
   </view>
   <view class="title mt30">
     <view class="titleL">
-      <image src="/static/images/bg.png" class="titleBg"></image> 巡查人员
+      <image src="/static/images/bg.png" class="titleBg"></image> 指派人员
     </view>
     <view>
       <van-icon bindtap="toSelect" name="add" size="26px" color="#4790F4"/>

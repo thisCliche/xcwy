@@ -43,7 +43,7 @@
         <van-icon style="margin-right:6rpx;" name="warning-o" color="#ee0a24" />使用期间请保持公共物品好，如有损坏，需自行承担
       </view>
       <view class="btn">
-        <van-button bind:click="submit1" type="info" block>提交</van-button>
+        <van-button bind:click="submit1" type="info" block data-com="com">提交</van-button>
       </view>
     </view>
     <view class="form2" wx:else>
@@ -80,7 +80,7 @@
       </view>
       <view class="btn">
 
-        <van-button type="info" bind:click="submit2" block>提交</van-button>
+        <van-button type="info" bind:click="submit2" block data-com="com">提交</van-button>
       </view>
     </view>
   </view>

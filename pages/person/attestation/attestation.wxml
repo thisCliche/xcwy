@@ -1,8 +1,13 @@
 <!--pages/contact/pickProject/pickProject.wxml-->
 <view class="pickProject">
+  <van-overlay show="{{ isLoad }}" z-index="99">
+    <view class="loading">
+      <van-loading />
+    </view>
+  </van-overlay>
   <view class="type" wx:if="{{isShow}}">
     <view class="card info">
-      <view>{{info.project_name}}{{info.area_name}}{{info.block_name}}{{info.house_name}}</view>
+      <view>{{info.project_name}}{{info.area_name}}{{info.block_name}}{{info.unit_name}}{{info.house_name}}</view>
       <view class="mt20">{{info.name}} {{info.mobile}}</view>
     </view>
     <view class="btn">
@@ -70,7 +75,7 @@
           </view>
         </view>
         <view class="btn">
-          <van-button block type="info" bind:click="back2">确定</van-button>
+          <van-button block type="info" bind:click="back2" disabled="{{isDisabled}}">确定</van-button>
         </view>
       </block>
     </view>
@@ -84,7 +89,7 @@
       <view class="card info mt20">
         <van-cell-group border="{{false}}">
           <van-field border="{{false}}" model:value="{{ name }}" label="真实姓名" placeholder="请输入" input-align="right" />
-          <van-field border="{{false}}" model:value="{{ mobile }}" label="手机号" placeholder="请输入" input-align="right" />
+          <van-field border="{{false}}" model:value="{{ mobile }}" type="number" label="手机号" placeholder="请输入" input-align="right" />
         </van-cell-group>
       </view>
       <view class="card info mt20" style="padding: 28rpx;">
@@ -94,7 +99,7 @@
         </van-radio-group>
       </view>
       <view class="btn">
-        <van-button bind:click="submit" block type="info">提交</van-button>
+        <van-button bind:click="submit" block type="info" data-com="com">提交</van-button>
       </view>
     </view>
   </block>

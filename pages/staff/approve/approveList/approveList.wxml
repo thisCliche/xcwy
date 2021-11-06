@@ -18,9 +18,9 @@
             <view class="des">请假类型：{{item.type_text}}</view>
             <view class="des">开始时间：{{item.begin_time}}</view>
             <view class="des">结束时间：{{item.end_time}}</view>
-            <view class="status color2" wx:if="{{item.status == 2}}">{{item.status_text}}</view>
-            <view class="status color1" wx:elif="{{item.status == 1}}">{{item.status_text}}</view>
-            <view class="status color3" wx:elif="{{item.status == 3}}">{{item.status_text}}</view>
+            <view class="status color2" wx:if="{{item.status == 2}}">{{item.flow_members.name}}{{item.status_text}}</view>
+            <view class="status color1" wx:elif="{{item.status == 1}}">{{item.flow_members.name}}{{item.status_text}}</view>
+            <view class="status color3" wx:elif="{{item.status == 3}}">{{item.flow_members.name}}{{item.status_text}}</view>
             <view class="status color4" wx:else>{{item.status_text}}</view>
           </view>
         </view>
@@ -41,9 +41,9 @@
             <view class="des">外出时间：{{item.duration}}小时</view>
             <view class="des">开始时间：{{item.begin_time}}</view>
             <view class="des">结束时间：{{item.end_time}}</view>
-            <view class="status color2" wx:if="{{item.status == 2}}">{{item.status_text}}</view>
-            <view class="status color1" wx:elif="{{item.status == 1}}">{{item.status_text}}</view>
-            <view class="status color3" wx:elif="{{item.status == 3}}">{{item.status_text}}</view>
+            <view class="status color2" wx:if="{{item.status == 2}}">{{item.flow_members.name}}{{item.status_text}}</view>
+            <view class="status color1" wx:elif="{{item.status == 1}}">{{item.flow_members.name}}{{item.status_text}}</view>
+            <view class="status color3" wx:elif="{{item.status == 3}}">{{item.flow_members.name}}{{item.status_text}}</view>
             <view class="status color4" wx:else>{{item.status_text}}</view>
           </view>
         </view>
@@ -63,8 +63,8 @@
             </view>
             <view class="des">申请物资：{{item.goods.name}}</view>
             <view class="status color2" wx:if="{{item.status == 2}}">{{item.status_text}}</view>
-            <view class="status color1" wx:elif="{{item.status == 1}}">{{item.status_text}}</view>
-            <view class="status color3" wx:elif="{{item.status == 3}}">{{item.status_text}}</view>
+            <view class="status color1" wx:elif="{{item.status == 1}}">{{item.flow_members.name}}{{item.status_text}}</view>
+            <view class="status color3" wx:elif="{{item.status == 3}}">{{item.flow_members.name}}{{item.status_text}}</view>
             <view class="status color4" wx:else>{{item.status_text}}</view>
           </view>
         </view>
@@ -102,8 +102,8 @@
             <view class="des">申领时间：{{item.begin_time}}</view>
             <view class="des">归还时间：{{item.end_time}}</view>
             <view class="status color2" wx:if="{{item.status == 2}}">{{item.status_text}}</view>
-            <view class="status color1" wx:elif="{{item.status == 1}}">{{item.status_text}}</view>
-            <view class="status color3" wx:elif="{{item.status == 3}}">{{item.status_text}}</view>
+            <view class="status color1" wx:elif="{{item.status == 1}}">{{item.flow_members.name}}{{item.status_text}}</view>
+            <view class="status color3" wx:elif="{{item.status == 3}}">{{item.flow_members.name}}{{item.status_text}}</view>
             <view class="status color4" wx:else>{{item.status_text}}</view>
           </view>
         </view>

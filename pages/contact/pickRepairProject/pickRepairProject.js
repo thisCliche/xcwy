@@ -22,11 +22,13 @@ Page({
     last: false,
     houseName: '',
     project_name: '',
+    project_id: '',
     area_name: '',
     block_name: '',
     unit_name: '',
     house_id: 0,
-    house_name: ''
+    house_name: '',
+    isDisabled: true,
   },
   async getList(id) {
     if (id) {
@@ -51,6 +53,7 @@ Page({
     this.setData({
       house_id: e.currentTarget.dataset.item.id,
       house_name: e.currentTarget.dataset.item.name,
+      isDisabled:false,
     })
   },
   toUnit(e){
@@ -90,22 +93,27 @@ Page({
     }
   },
   toProject(e) {
-    if (e.currentTarget.dataset.item.hasOwnProperty('child') && e.currentTarget.dataset.item.child.length != 0) {
-      if (e.currentTarget.dataset.item.child[1]) {
-        this.setData({
-          project_name: e.currentTarget.dataset.item.name,
-          list1:e.currentTarget.dataset.item.child,
-          list2: e.currentTarget.dataset.item.child[1],
-          grad:2,
-          last: false
-        })
-      }
-    } else {
-      this.setData({
+       this.setData({
         project_name: e.currentTarget.dataset.item.name,
+        project_id:e.currentTarget.dataset.item.id,
         last: true
       })
-    }
+    // if (e.currentTarget.dataset.item.hasOwnProperty('child') && e.currentTarget.dataset.item.child.length != 0) {
+    //   if (e.currentTarget.dataset.item.child[1]) {
+    //     this.setData({
+    //       project_name: e.currentTarget.dataset.item.name,
+    //       list1:e.currentTarget.dataset.item.child,
+    //       list2: e.currentTarget.dataset.item.child[1],
+    //       grad:2,
+    //       last: false
+    //     })
+    //   }
+    // } else {
+    //   this.setData({
+    //     project_name: e.currentTarget.dataset.item.name,
+    //     last: true
+    //   })
+    // }
     // if (this.data.list[0].hasOwnProperty('child')) {
     //   this.setData({
     //     project_id: e.currentTarget.dataset.item.house_id,
@@ -114,43 +122,44 @@ Page({
     //   })
     //   return
     // }
+
     // this.setData({
     //   projectName:e.currentTarget.dataset.item.name
     // })
     // this.getList(e.currentTarget.dataset.id)
   },
   async back() {
-    let res = await house({token:wx.getStorageSync('token'),project_name:this.data.project_name,area_name:this.data.area_name,block_name:this.data.block_name,unit_name:this.data.unit_name,})
-    if (res.code != 200) {
-      return wx.showToast({
-        title: res.msg,
-        icon: 'none'
-      })
-    } else if (res.data.length == 0) {
-      return wx.showToast({
-        title: '数据为空',
-        icon: 'none'
-      })
-    } else {
-      this.setData({
-        selectL: 2,
-        list: res.data
-      })
-    }
-    // let pages = getCurrentPages()
-    // let prevPage = pages[pages.length - 2]
-    // let that = this
-    // wx.navigateBack({
-    //   delta: 1,
-    //   complete: function () {
-    //     setTimeout(function () {
-    //       prevPage.getlogin({
-    //         id: res.data[0].id,
-    //         name: that.data.project_name+res.data[0].name,
-    //       })
-    //     }, 500)
-    //   }
-    // })
+    // let res = await house({token:wx.getStorageSync('token'),project_name:this.data.project_name,area_name:this.data.area_name,block_name:this.data.block_name,unit_name:this.data.unit_name,})
+    // if (res.code != 200) {
+    //   return wx.showToast({
+    //     title: res.msg,
+    //     icon: 'none'
+    //   })
+    // } else if (res.data.length == 0) {
+    //   return wx.showToast({
+    //     title: '数据为空',
+    //     icon: 'none'
+    //   })
+    // } else {
+    //   this.setData({
+    //     selectL: 2,
+    //     list: res.data
+    //   })
+    // }
+    let pages = getCurrentPages()
+    let prevPage = pages[pages.length - 2]
+    let that = this
+    wx.navigateBack({
+      delta: 1,
+      complete: function () {
+        setTimeout(function () {
+          prevPage.getlogin({
+            id: that.data.project_id,
+            name: that.data.project_name,
+          })
+        }, 500)
+      }
+    })
   },
   back2() {
     let pages = getCurrentPages()

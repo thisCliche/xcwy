@@ -13,6 +13,13 @@ Page({
     siteHttp: App.globalData.siteHttp,
     info:{},
   },
+  previewImage(e){
+    let urls = e.currentTarget.dataset.list
+    wx.previewImage({
+      current: e.currentTarget.dataset.url, 
+      urls
+    })
+  },
   async getDetail(id) {
     let res = await detail({
       id,

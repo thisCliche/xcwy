@@ -14,6 +14,13 @@ Page({
     info: {},
     id:'',
   },
+  previewImage(e){
+    let urls = e.currentTarget.dataset.list
+    wx.previewImage({
+      current: e.currentTarget.dataset.url, 
+      urls
+    })
+  },
   toPay(){
     wx.navigateTo({
       url: '/pages/person/renovation/renovationPay/renovationPay',

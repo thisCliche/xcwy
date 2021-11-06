@@ -2,6 +2,25 @@
 .title{
   font-weight: 700;
 }
+.fbr{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.fbr image{
+  width: 72rpx;
+  height: 72rpx;
+  border-radius: 50%;
+  margin-right: 18rpx;
+}
+.fbrL{
+  display: flex;
+  align-items: center;
+}
+.fbrR{
+  color: #5f5f5f;
+  font-size: 24rpx;
+}
 .titleBg{
   width: 42rpx;
   height: 24rpx;
@@ -18,11 +37,18 @@ font-size: 30rpx;
 margin-top: 10rpx;
 }
 .popWrap{
-  min-height: 172rpx;
+  height: 190rpx !important;
+  position: relative;
+}
+.popWrap .text{
+  width: 32rpx;
+  position: absolute;
+  right: 16rpx;
+  top: -16rpx;
 }
 .colStyle{
   /* margin-top: 10rpx; */
-  position: relative;
+  /* position: relative; */
 }
 .img{
   width: 120rpx;

@@ -2,13 +2,7 @@
 <view class="payPage">
   <view class="card info">
     <view class="title"><image src="{{deFualtHttp}}/mini/images/car.png"></image> {{car_no}}</view>
-    <!-- <view class="des">
-      城隍庙文化馆-老城保护中心-信息楼-10***105室
-    </view>
-    <view class="des">
-      王佳佳   187****5236
-    </view> -->
-    <view class="des">{{userInfo.project_name}}{{userInfo.area_name}}{{userInfo.block_name}}{{userInfo.house_name}}</view>
+    <view class="des">{{userInfo.project_name}}{{userInfo.area_name}}{{userInfo.block_name}}{{userInfo.unit_name}}{{userInfo.house_name}}</view>
     <view class="des">{{userInfo.name}} {{userInfo.mobile}}</view>
   </view>
   <view class="card info mt20">
@@ -16,7 +10,7 @@
     <view class="money">￥{{info.bill}}</view>
   </view>
   <view class="btn">
-    <van-button custom-class="btnStyle" plain color="#F54235" bind:click="buildOrder">立即缴费</van-button>
-    <!-- <van-button type="info" color="#F54235" >删除</van-button> -->
+    <van-button disabled="{{info.bill == 0}}" custom-class="btnStyle" plain color="#F54235" bind:click="buildOrder">立即缴费</van-button>
+    <van-button type="info" color="#F54235" bind:click="delCar">删除</van-button>
   </view>
 </view>

@@ -296,6 +296,10 @@ Page(filter.loginCheck({
         })
       }
     }
+    let that = this;
+    this.setData({
+      isLoad:true
+    })
     let res = await add({
       token: wx.getStorageSync('token'),
       ...form
@@ -310,6 +314,9 @@ Page(filter.loginCheck({
         })
       }, 500)
     } else {
+      that.setData({
+        isLoad:false
+      })
       wx.showToast({
         title: res.msg,
         icon: 'none'
@@ -333,6 +340,10 @@ Page(filter.loginCheck({
         })
       }
     }
+    let that = this;
+    this.setData({
+      isLoad:true
+    })
     let res = await add({
       token: wx.getStorageSync('token'),
       ...form
@@ -347,6 +358,9 @@ Page(filter.loginCheck({
         })
       }, 500)
     } else {
+      that.setData({
+        isLoad:false
+      })
       wx.showToast({
         title: res.msg,
         icon: 'none'
@@ -450,11 +464,11 @@ Page(filter.loginCheck({
         }
         if (data2[i] == '上午') {
           end_time = data2[0] + '-' + data2[1].padStart(2, '0') + '-' + data2[2].padStart(2, '0')
-          end_type = 3
+          end_type = 1
         }
         if (data2[i] == '下午') {
           end_time = data2[0] + '-' + data2[1].padStart(2, '0') + '-' + data2[2].padStart(2, '0')
-          end_type = 3
+          end_type = 2
         }
       }
       if (this.data.radio == "1") {

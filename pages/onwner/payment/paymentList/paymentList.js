@@ -7,6 +7,7 @@ Page(filter.loginCheck({
    * 页面的初始数据
    */
   data: {
+    isLoad: true,
     list: {}
   },
   toDetail(e){
@@ -18,12 +19,18 @@ Page(filter.loginCheck({
     let res = await index({token:wx.getStorageSync('token')})
     // let res = await propertyRecord({token:wx.getStorageSync('token'),page:1,limit:100})
     this.setData({
-      list:res.data
+      list:res.data,
+      isLoad: false,
     })
   },
   topay(e){
     wx.navigateTo({
       url: `/pages/onwner/payment/payPage/payPage?type=${e.currentTarget.dataset.type}&house_id=${this.data.list.house_id}`,
+    })
+  },
+  tolist(){
+    wx.navigateTo({
+      url: `/pages/person/renovation/renovationList/renovationList`,
     })
   },
   topay1(e){

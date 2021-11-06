@@ -11,19 +11,14 @@
         <view class="item" wx:for="{{list}}" wx:key="index" data-id="{{item.id}}" bindtap="toDetail">
           <view class="itemTop">
             <view class="itemL">
-              {{item.area_name}}
+              {{item.project_name}}{{item.area_name}}{{item.block_name}}{{item.unit_name}}{{item.house_name}}{{item.address}}
             </view>
             <view class="itemR">
               {{item.add_time}}
             </view>
           </view>
-          <view class="des">
-            <view class="desL">
-              {{item.address}}
-            </view>
-            <view class="desR">
-              {{item.charge}}
-            </view>
+          <view class="des van-multi-ellipsis--l2">
+            {{item.content}}
           </view>
         </view>
       </view>
@@ -36,20 +31,16 @@
         <view class="item" wx:for="{{list}}" wx:key="index" data-id="{{item.id}}" bindtap="toDetail">
           <view class="itemTop">
             <view class="itemL">
-              {{item.area_name}}
+              {{item.project_name}}{{item.area_name}}{{item.block_name}}{{item.unit_name}}{{item.house_name}}{{item.address}}
             </view>
             <view class="itemR">
               {{item.add_time}}
             </view>
           </view>
-          <view class="des">
-            <view class="desL">
-              {{item.address}}
-            </view>
-            <view class="desR">
-              {{item.charge}}
-            </view>
+          <view class="des van-multi-ellipsis--l2">
+            {{item.content}}
           </view>
+          <view class="des">维修人：{{item.logs[0].member.name}}</view>
         </view>
       </view>
       <view class="card" wx:else>
@@ -61,20 +52,16 @@
         <view class="item" wx:for="{{list}}" wx:key="index" data-id="{{item.id}}" bindtap="toDetail">
           <view class="itemTop">
             <view class="itemL">
-              {{item.area_name}}
+              {{item.project_name}}{{item.area_name}}{{item.block_name}}{{item.unit_name}}{{item.house_name}}{{item.address}}
             </view>
             <view class="itemR">
               {{item.add_time}}
             </view>
           </view>
-          <view class="des">
-            <view class="desL">
-              {{item.address}}
-            </view>
-            <view class="desR">
-              {{item.charge}}
-            </view>
+          <view class="des van-multi-ellipsis--l2">
+            {{item.content}}
           </view>
+          <view class="des">维修人：{{item.logs[0].member.name}}</view>
         </view>
       </view>
       <view class="card" wx:else>
@@ -86,20 +73,16 @@
         <view class="item" wx:for="{{list}}" wx:key="index" data-id="{{item.id}}" bindtap="toDetail">
           <view class="itemTop">
             <view class="itemL">
-              {{item.area_name}}
+              {{item.project_name}}{{item.area_name}}{{item.block_name}}{{item.unit_name}}{{item.house_name}}{{item.address}}
             </view>
             <view class="itemR">
               {{item.add_time}}
             </view>
           </view>
-          <view class="des">
-            <view class="desL">
-              {{item.address}}
-            </view>
-            <view class="desR">
-              {{item.charge}}
-            </view>
+          <view class="des van-multi-ellipsis--l2">
+            {{item.content}}
           </view>
+          <view class="des">维修人：{{item.logs[0].member.name}}</view>
         </view>
       </view>
       <view class="card" wx:else>

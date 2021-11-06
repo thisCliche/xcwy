@@ -1,6 +1,7 @@
 /* pages/login/login.wxss */
 .login-main {
   overflow: hidden;
+  padding-top: 200rpx;
 }
 
 .login-main-title {
@@ -21,7 +22,7 @@
   font-weight: normal;
   color: #fff;
   margin-top: 40rpx;
-  margin-bottom: 18rpx;
+  margin-bottom: 40rpx;
 }
 
 .btn {

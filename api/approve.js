@@ -282,3 +282,10 @@ export function approve_keyback(data) {
     data
   })
 }
+export function leaveType(data) {
+  return request({
+    url: 'approve_leave/leaveType',
+    method: 'get',
+    data
+  })
+}

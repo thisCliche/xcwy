@@ -10,6 +10,8 @@ Page(filter.loginCheck({
     isLoad: false,
     active: 0,
     current:0,
+    num1:0,
+    num2:0,
     queryInfo:{
       page:1,
       limit:50
@@ -30,8 +32,11 @@ Page(filter.loginCheck({
     this.setData({
       list: res.data.list,
       isLoad: false,
+      num1:res.data.audit_count,
+      num2:res.data.wait_count,
     })
   },
+
   onClick(e) {
     this.setData({
       current: e.detail.name

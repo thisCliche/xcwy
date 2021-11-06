@@ -7,6 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    isLoad:false, 
     title:'',
     rootHttp:App.globalData.rootHttp,
     siteHttp:App.globalData.siteHttp,
@@ -91,7 +92,7 @@ Page({
     });
   },
   previewImage(e){
-    let urls = this.data.info.images
+    let urls = e.currentTarget.dataset.list
     wx.previewImage({
       current: e.currentTarget.dataset.url, 
       urls
@@ -113,6 +114,10 @@ Page({
           })
       }
     }
+    let that = this;
+    this.setData({
+      isLoad:true
+    })
     let res = await reply(form)
     if(res.code == 200) {
       wx.showToast({
@@ -124,6 +129,9 @@ Page({
         })
       },500)
     }else{
+      that.setData({
+        isLoad:false
+      })
       wx.showToast({
         title: res.msg,
         icon:'error'

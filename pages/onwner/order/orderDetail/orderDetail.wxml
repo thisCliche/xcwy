@@ -1,8 +1,12 @@
 <!--pages/onwner/vistResig/vistResig.wxml-->
 <view class="vistResig">
-  <view class="card info">
+  <view class="card mt20 titleWrap">
+    <view class="title11">状态</view>
+    <view class="value11">{{status}}</view>
+  </view>
+  <view class="card info mt20">
     <view>预约项目</view>
-    <view class="mt20 des">{{info.project_name}}-{{info.area_name}}</view>
+    <view class="mt20 des">{{info.project_name}}{{info.area_name}}{{info.unit_name}}{{info.block_name}}{{info.name}}</view>
   </view>
   <view class="card mt20">
     <van-cell-group>
@@ -71,7 +75,7 @@
       </view>
     </view>
   </view>
-  <view class="btn">
+  <view class="btn" wx:if="{{info.status != 1}}">
     <van-button type="info" block bind:click="toDetail">查看二维码</van-button>
   </view>
 </view>

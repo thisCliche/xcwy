@@ -28,9 +28,19 @@ margin-top: 10rpx;
 .pepople{
   margin-top: 20rpx;
 }
-.colStyle{
-  margin-top: 30rpx;
+.popWrap{
+  height: 190rpx !important;
   position: relative;
+}
+.popWrap .text{
+  width: 32rpx;
+  position: absolute;
+  right: 16rpx;
+  top: -16rpx;
+}
+.colStyle{
+  /* margin-top: 30rpx; */
+  /* position: relative; */
 }
 .img{
   width: 120rpx;

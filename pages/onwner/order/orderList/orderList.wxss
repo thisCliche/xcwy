@@ -15,6 +15,7 @@
 }
 .itemTop{
   display: flex;
+  margin-bottom: 20rpx;
   justify-content: space-between;
 }
 .itemR{
@@ -22,5 +23,9 @@
   font-size: 30rpx;
 }
 .des{
+  color: #333;
+  font-size: 30rpx;
   margin-top: 10rpx;
+  display: flex;
+  justify-content: space-between;
 }

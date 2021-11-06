@@ -29,7 +29,7 @@ Page({
       }else{
         wx.showToast({
           title: res.msg,
-          icon: 'error'
+          icon: 'none'
         })
       }
     })
@@ -39,7 +39,8 @@ Page({
    */
   onLoad: function (options) {
     this.setData({
-      field:options.field
+      field:options.field,
+      value:options.id_card
     })
   },
 

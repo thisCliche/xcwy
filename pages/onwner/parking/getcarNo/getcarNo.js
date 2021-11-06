@@ -1,11 +1,16 @@
 // pages/onwner/parking/addCar/addCar.js
 import {fee_carAdd,fee_carDetail} from '../../../../api/info'
+import {getPrice} from '../../../../api/fee'
+const app = getApp()
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    isShow:false,
+    car_no:'皖AD2222',
+    deFualtHttp:app.globalData.rootHttp,
     // 省份简写
     provinces: [
       ['京', '沪', '粤', '津', '冀', '晋', '蒙', '辽', '吉', '黑'],
@@ -74,32 +79,50 @@ openKeyboard() {
   })
 },
 toPay(e){
+
   wx.navigateTo({
     url: `/pages/onwner/parking/payPage/payPage?no=${this.data.carnum.join('')}`,
   })
 },
 // 提交车牌号码
 async submitNumber() {
+  // wx.navigateTo({
+  //   url: `/pages/onwner/parking/payPage1/payPage1?no=${this.data.carnum.join('')}`,
+  // })
   let no = this.data.carnum.join('')
-  let res = await fee_carDetail({token:wx.getStorageSync('token'),car_no:no})
+  console.log(no)
+  let res = await getPrice({Plate:no,token:wx.getStorageSync('token')})
   if(res.code != 200){
     wx.showToast({
       title: res.msg,
-      icon:'error'
+      icon:'none'
     })
   }else{
+    let data = JSON.parse(res.data)
+    console.log(data)
     if(res.data == null){
       wx.showToast({
         title: '暂无数据',
         icon:'error'
       })
     }else{
-      this.setData({
-        info: res.data,
-        bill: res.data.bill
-      })
+      if(res.data.Amout == 0 || res.data == '{"Status":0,"ErrorMsg":"车场未开通"}'){
+        wx.showToast({
+          title: '暂无缴费信息',
+          icon:"error"
+        })
+      }else{
+        wx.navigateTo({
+          url: `/pages/onwner/parking/payPage/payPage?no=${this.data.carnum.join('')}`,
+        })
+      }
+      // this.setData({
+      //   isShow:true,
+      //   info: res.data,
+      //   bill: res.data.bill
+      // })
+      
     }
-    console.log(res)
   }
   
 },

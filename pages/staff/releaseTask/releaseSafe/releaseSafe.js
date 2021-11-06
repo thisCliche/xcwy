@@ -9,21 +9,35 @@ Page({
    * 页面的初始数据
    */
   data: {
-    value:'',
-    siteHttp:app.globalData.siteHttp,
+    isLoad: false,
+    value: '',
+    siteHttp: app.globalData.siteHttp,
     rootHttp: app.globalData.rootHttp,
     fileList: [],
-    minHeight:{minHeight: 80},
-    title:'',
+    minHeight: {
+      minHeight: 80
+    },
+    title: '',
     id: '',
     type: '',
-    elevator:'',
+    elevator: '',
     fire_control: '',
     security: '',
     health: '',
-    images:'',
-    other:'',
+    images: '',
+    other: '',
     imgList: [],
+  },
+  getlogin(e) {
+    this.setData({
+      id: e.id,
+      title: e.name
+    })
+  },
+  toSelect() {
+    wx.navigateTo({
+      url: '/pages/staff/task/selectTask/selectTask?type=2',
+    })
   },
   deleteImg(event) {
     let fileList = this.data.fileList
@@ -77,14 +91,25 @@ Page({
       other: this.data.other,
       images: JSON.stringify(this.data.imgList),
     }
-    for (let i in form) {
-      if (form[i] == '') {
-        return wx.showToast({
-          title: '请填写完整',
-          icon: 'error'
-        })
-      }
+    let form1 = {
+      elevator: this.data.elevator,
+      fire_control: this.data.fire_control,
+      security: this.data.security,
+      health: this.data.health,
+      other: this.data.other,
     }
+    let values = Object.values(form1)
+    const someAdult = values.some(item => item != '');
+    if (!someAdult) {
+      return wx.showToast({
+        title: '至少填一项',
+        icon: 'error'
+      })
+    }
+    let that = this;
+    this.setData({
+      isLoad:true
+    })
     let res = await report(form)
     if (res.code == 200) {
       wx.showToast({
@@ -96,6 +121,9 @@ Page({
         })
       }, 500)
     } else {
+      that.setData({
+        isLoad:false
+      })
       wx.showToast({
         title: res.msg,
         icon: 'error'

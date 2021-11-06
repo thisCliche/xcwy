@@ -18,13 +18,20 @@ Page({
         res.data.attachment[i] = this.data.rootHttp +res.data.attachment[i]
       }
     }
-    if(res.data.logs?.length==3 ){
+    if(res.data.logs?.length==3  || res.data.logs?.length==4){
       for(let i =0;i<res.data.logs[2].attachment.length;i++){
         res.data.logs[2].attachment[i] = this.data.rootHttp +res.data.logs[2].attachment[i]
       }
     }
     this.setData({
       info: res.data
+    })
+  },
+  previewImage(e){
+    let urls = e.currentTarget.dataset.list
+    wx.previewImage({
+      current: e.currentTarget.dataset.url, 
+      urls
     })
   },
   toDone(){

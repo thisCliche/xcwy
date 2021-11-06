@@ -92,3 +92,10 @@ export function buildOrder(data) {
     data
   })
 }
+export function getPrice(data) {
+  return request({
+    url: 'fee_car/getPrice',
+    method: 'get',
+    data
+  })
+}

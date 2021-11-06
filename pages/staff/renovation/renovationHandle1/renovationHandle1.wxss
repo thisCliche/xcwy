@@ -104,3 +104,14 @@
 .btn2 .van-button{
   width: 90% !important;
 }
+.isUseTime .van-cell__title{
+  flex: none !important;
+}
+.isUseTime .van-cell__value{
+  flex: 1 !important;
+  text-align: right !important;
+}
+/* .itemRB1{
+  font-size: 26rpx;
+  color: #4790F4;
+} */

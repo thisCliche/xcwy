@@ -1,15 +1,20 @@
 <!--pages/person/personInfo/personInfo.wxml-->
 <view class="personInfo">
-  <view class="avatar">
+  <van-overlay show="{{ isLoad }}" z-index="99">
+    <view class="loading">
+      <van-loading />
+    </view>
+  </van-overlay>
+  <view class="avatar" bindtap="changeAva">
     <image class="avatarImg" src="{{userInfo.avatar}}"></image>
-    <!-- <image class="avatarCan" src="https://h5.ahzxkj.net:9002/mini/images/canmer.png"></image> -->
+    <image class="avatarCan" src="{{rootHttp}}/mini/images/canmer.png"></image>
   </view>
   <view class="card">
     <van-cell-group inset>
-      <van-cell border="{{false}}"title="昵称" value="{{userInfo.nickname}}"/>
-      <van-cell data-page="/pages/person/modifyNick/modifyNick?field=name" bind:click="toDetial"  border="{{false}}" title="姓名" value="{{userInfo.name}}"  is-link/>
+      <van-cell class="idCard" border="{{false}}"title="昵称" value="{{userInfo.nickname}}"/>
+      <van-cell class="idCard" data-page="/pages/person/modifyNick/modifyNick?field=name" bind:click="toDetial"  border="{{false}}" title="姓名" value="{{userInfo.name}}"  is-link/>
       <van-cell data-page="/pages/person/modifyPhone/modifyPhone" border="{{false}}" title="手机号" value="{{userInfo.mobile}}" />
-      <van-cell class="idCard" data-page="/pages/person/modifyIdCard/modifyIdCard?field=id_card" bind:click="toDetial" border="{{false}}" title="身份证号" value="{{userInfo.id_card}}" />
+      <van-cell wx:if="{{userInfo.identity == '业主' || userInfo.identity=='访客'}}" class="idCard" data-page="/pages/person/modifyIdCard/modifyIdCard?field=id_card&id_card={{userInfo.id_card}}" bind:click="toDetial" border="{{false}}" title="身份证号" value="{{userInfo.id_card}}" is-link/>
       <van-cell border="{{false}}" title="身份" value="{{userInfo.identity}}"/>
     </van-cell-group>
   </view>

@@ -1,5 +1,10 @@
 <!--pages/onwner/repair/repair.wxml-->
 <view class="repair">
+  <van-overlay show="{{ isLoad }}" z-index="99">
+    <view class="loading">
+      <van-loading />
+    </view>
+  </van-overlay>
   <view class="card" wx:if="{{isStaff}}">
     <van-cell-group>
       <van-cell title="报修项目" bind:click="onDisplay" data-type="hyShow" label="{{xm}}" required border="{{ false }}" is-link  />
@@ -7,10 +12,10 @@
     </van-cell-group>
   </view>
   <view class="card info" wx:else>
-    <view>{{info.project_name}}{{info.area_name}}{{info.block_name}}{{info.house_name}}</view>
+    <view>{{info.project_name}}{{info.area_name}}{{info.block_name}}{{info.unit_name}}{{info.house_name}}</view>
     <view class="mt20">{{info.name}} {{info.mobile}}</view>
   </view>
-  <view class="card mt20">
+  <view class="card mt20" wx:if="{{isStaff}}">
     <van-cell-group>
       <van-cell title="详细地址" required border="{{ false }}" />
       <van-field model:value="{{ location }}" type="textarea" autosize placeholder="请输入详细地址" border="{{ false }}" />
@@ -36,7 +41,7 @@
     </van-cell-group>
   </view>
   <view class="btn">
-    <van-button bind:click="sumbmit" type="info" block>提交</van-button>
+    <van-button bind:click="sumbmit" type="info" block data-com="com">提交</van-button>
   </view>
   <van-popup show="{{ hyShow }}" position="bottom" custom-style="height: 50%;" round data-type="hyShow"
     bind:close="onClose">

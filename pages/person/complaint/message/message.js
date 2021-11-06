@@ -1,22 +1,47 @@
 // pages/person/complaint/complaintList/complaintList.js
-import {messageMy} from '../../../../api/Feedback'
+import {
+  messageMy,read
+} from '../../../../api/Feedback'
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    list:[]
+    list: []
   },
-  toDetail(e){
-    wx.navigateTo({
-      url: `/pages/person/complaint/complaintDetail/complaintDetail?id=${e.currentTarget.dataset.id}`,
+  // toDetail(e){
+
+  // },
+  async todeDetail(e) {
+    let res = await read({id:e.currentTarget.dataset.msid})
+    if (e.currentTarget.dataset.table == 'build') {
+      wx.navigateTo({
+        url: `/pages/person/renovation/renovationDetail/renovationDetail?id=${e.currentTarget.dataset.id}`,
+      })
+    } else if (e.currentTarget.dataset.table == 'meeting') {
+      wx.navigateTo({
+        url: `/pages/person/meetBook/meetBookDetail/meetBookDetail?id=${e.currentTarget.dataset.id}`,
+      })
+    } else if (e.currentTarget.dataset.table == 'repair') {
+      wx.navigateTo({
+        url: `/pages/person/repair/orderDetail1/orderDetail1?id=${e.currentTarget.dataset.id}`,
+      })
+    } else if (e.currentTarget.dataset.table == 'feedback') {
+      wx.navigateTo({
+        url: `/pages/person/complaint/complaintDetail/complaintDetail?id=${e.currentTarget.dataset.id}`,
+      })
+    }
+
+  },
+  async getDetail() {
+    let res = await messageMy({
+      token: wx.getStorageSync('token'),
+      page: 1,
+      num: 50
     })
-  },
-  async getDetail(){
-    let res = await messageMy({token:wx.getStorageSync('token'),page:1,num:50})
     this.setData({
-      list:res.data
+      list: res.data
     })
   },
   /**

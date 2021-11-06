@@ -1,7 +1,8 @@
 // pages/staff/approve/leaveApp/leaveApp.js
 import {
   approve_leaveAdd,
-  approve_leavegetFlowMember
+  approve_leavegetFlowMember,
+  leaveType
 } from '../../../../api/approve'
 let app = getApp()
 Page({
@@ -10,8 +11,11 @@ Page({
    * 页面的初始数据
    */
   data: {
+    isLoad:false,
     rootHttp: app.globalData.rootHttp,
     time1: '请选择',
+    time1stamp:0,
+    time2stamp:0,
     time2: '请选择',
     duration: null,
     reason: '',
@@ -31,6 +35,7 @@ Page({
     flowMember: [],
     imgList: [],
   },
+
   onDisplay(e) {
     let type = e.currentTarget.dataset.type
     if (e.currentTarget.dataset.type == 'calendarShow1') {
@@ -51,14 +56,16 @@ Page({
   formatDate(date) {
     date = new Date(date);
     const m = (date.getMonth() + 1 + '').padStart(2, '0')
+    const d = (date.getDate() + '').padStart(2, '0')
     const hh = (date.getHours() + '').padStart(2, '0')
     const mm = (date.getMinutes() + '').padStart(2, '0')
-    return `${date.getFullYear()}-${m}-${date.getDate()}`;
+    return `${date.getFullYear()}-${m}-${d} ${hh}:${mm}`;
   },
   onConfirm(event) {
     this.setData({
       calendarShow1: false,
       time1: this.formatDate(event.detail),
+      time1stamp:event.detail,
       minDate: event.detail
     });
   },
@@ -66,6 +73,7 @@ Page({
     this.setData({
       calendarShow2: false,
       time2: this.formatDate(event.detail),
+      time2stamp:event.detail,
     });
   },
   onpickerConfirm(event) {
@@ -121,10 +129,10 @@ Page({
     });
   },
   async submit() {
-    if(new Date(this.data.time1)> new Date(this.data.time2)){
+    if (new Date(this.data.time1) > new Date(this.data.time2)) {
       return wx.showToast({
         title: '结束时间不能小于开始时间',
-        icon:'none'
+        icon: 'none'
       })
     }
     let form = {
@@ -144,6 +152,10 @@ Page({
         })
       }
     }
+    let that = this;
+    this.setData({
+      isLoad:true
+    })
     let res = await approve_leaveAdd(form)
     if (res.code == 200) {
       wx.showToast({
@@ -155,17 +167,67 @@ Page({
         })
       }, 500)
     } else {
+      that.setData({
+        isLoad:false
+      })
       wx.showToast({
         title: res.msg,
-        icon: 'error'
+        icon: 'none'
       })
     }
+  },
+  computingTime() {
+    let that = this
+    setTimeout(() => {
+      let time1 = this.data.time1stamp
+      let time2 = this.data.time2stamp
+      console.log(time1,time2)
+      if (time1 != 0 && time2 != 0) {
+        if (new Date(time1) > new Date(time2)) {
+          return wx.showToast({
+            title: '结束时间不能小于开始时间',
+            icon: 'none'
+          })
+        } else {
+          let date = (new Date(time2).getTime() - new Date(time1).getTime()) / (1000 * 60 * 60 * 24); /*不用考虑闰年否*/
+          that.getFlow(Math.ceil(date))
+          // that.setData({
+          //   duration:date
+          // })
+        }
+      }
+    }, 100);
+   
+
+  },
+  async getFlow(date){
+    let res = await approve_leavegetFlowMember({
+      token: wx.getStorageSync('token'),
+      day:date,
+    })
+    this.setData({
+      flowMember: res.data
+    })
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    let that = this
+    leaveType({token:wx.getStorageSync('token')}).then(res=>{
+      that.setData({
+        columns:Object.values(res.data)
+      })
+    })
+    this.getFlow(1)
+    app.watch(this, {
+      time1: function (newVal) {
+        that.computingTime()
+      },
+      time2: function (newVal) {
+        that.computingTime()
+      },
+    })
   },
 
   /**
@@ -179,14 +241,8 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    let that = this
-    approve_leavegetFlowMember({
-      token: wx.getStorageSync('token')
-    }).then(res => {
-      that.setData({
-        flowMember: res.data
-      })
-    })
+    
+    
   },
 
   /**

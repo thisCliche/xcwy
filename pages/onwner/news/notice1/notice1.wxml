@@ -1,0 +1,9 @@
+<!--pages/onwner/news/newsList.wxml-->
+<view class="newsList">
+  <block wx:if="{{newList.length != 0}}">
+    <new-item newList="{{newList}}"></new-item>
+  </block>
+  <view wx:else>
+    <van-empty description="暂无公告" />
+  </view>
+</view>

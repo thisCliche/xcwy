@@ -225,7 +225,7 @@ Page({
   },
   async getnotice() {
     let res = await newsList({
-      channel_id: 5,
+      channel_id: 6,
       limit: 1
     })
     this.setData({
@@ -245,19 +245,27 @@ Page({
     let res = await getUser({
       token: wx.getStorageSync('token')
     })
+    let page = this.data.staffMenuMy1[2].page + '?num=' + res.data.approve_count
+
     this.setData({
+      ['staffMenuMy1[2].info']: res.data.approve_count,
+      ['staffMenuMy1[2].page']: page,
+      ['staffMenuMy1[3].info']: res.data.task_count,
+      ['staffMenuMy1[4].info']: res.data.report_count,
       ['staffMenuMy1[5].info']: res.data.repair_count,
       ['staffMenuMy1[6].info']: res.data.feedback_count,
+      ['staffMenuMy1[7].info']: res.data.build_count,
+      ['staffMenuMy1[8].info']: res.data.meeting_count,
     })
     let temporarystaffMenutask1 = this.data.temporarystaffMenutask1
     let temporarystaffMenutask2 = this.data.temporarystaffMenutask2
     if (res.data.is_leader == 'true' || res.data.is_manager == 'true') {
       this.setData({
-        staffMenutask1:temporarystaffMenutask1
+        staffMenutask1: temporarystaffMenutask1
       })
-    }else{
+    } else {
       this.setData({
-        staffMenutask1:temporarystaffMenutask2
+        staffMenutask1: temporarystaffMenutask2
       })
     }
     wx.setStorageSync('staffInfo', res.data)
@@ -289,7 +297,7 @@ Page({
   },
   tonotice() {
     wx.navigateTo({
-      url: '/pages/onwner/news/notice/notice',
+      url: '/pages/onwner/news/notice1/notice1',
     })
   },
   /**

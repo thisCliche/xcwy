@@ -12,6 +12,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    isLoad:false, 
     time1: '请选择',
     time2: '请选择',
     rootHttp: app.globalData.rootHttp,
@@ -83,6 +84,11 @@ Page({
       typeShow: false
     })
     this.getGoods()
+    if(value.text == '固定资产'){
+this.getFlow(2)
+    }else{
+      this.getFlow(1)
+    }
   },
   onpickerConfirm(event) {
     const {
@@ -170,6 +176,10 @@ Page({
         })
       }
     }
+    let that = this;
+    this.setData({
+      isLoad:true
+    })
     let res = await approve_goodsAdd(form)
     if (res.code == 200) {
       wx.showToast({
@@ -181,11 +191,23 @@ Page({
         })
       }, 500)
     } else {
+      that.setData({
+        isLoad:false
+      })
       wx.showToast({
         title: res.msg,
         icon: 'error'
       })
     }
+  },
+  async getFlow(type){
+    let res = await approve_goodsgetFlowMember({
+      token: wx.getStorageSync('token'),
+      type,
+    })
+    this.setData({
+      flowMember: res.data
+    })
   },
   /**
    * 生命周期函数--监听页面加载
@@ -222,11 +244,7 @@ Page({
         typeColumns
       })
     })
-    approve_goodsgetFlowMember({token:wx.getStorageSync('token')}).then(res=>{
-      that.setData({
-        flowMember: res.data
-      })
-    })
+    this.getFlow(1)
   },
 
   /**

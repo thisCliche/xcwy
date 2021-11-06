@@ -61,7 +61,8 @@
     <view class="card workImg photo mt20">
       <van-row>
         <van-col wx:for="{{info.images}}" custom-class="photoCol" span="6">
-          <image src="{{item}}"></image>
+          <!-- <image src="{{item}}"></image> -->
+          <image bindtap="previewImage" data-url="{{item}}" src="{{item}}" data-list="{{info.images}}"></image>
         </van-col>
       </van-row>
     </view>
@@ -109,7 +110,7 @@
         <image src="{{item.avatar}}"></image>
         <view class="name">{{item.name}}</view>
         <!-- <van-rate readonly value="{{item.score}}" color="#ffba00" bind:change="onChange" /> -->
-        <view class="score" wx:if="{{item.score == 0}}">未审批</view>
+        <view class="score" wx:if="{{item.comment == ''}}">未审批</view>
         <view class="score" wx:else>{{item.score}}分</view>
       </view>
       <view class="opinoinTime">

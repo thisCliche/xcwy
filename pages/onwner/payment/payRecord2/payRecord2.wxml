@@ -5,7 +5,7 @@
       <view class="left">
         <view class="title">
           <image class="icon" src="/static/images/img1.png"></image>
-         <text>{{type_text}}</text>
+         <text>{{item.type_text}}</text>
         </view>
         <view class="des">{{item.car_no}}</view>
         <view class="des">{{item.add_time}}</view>

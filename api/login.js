@@ -21,6 +21,13 @@ export function myProfile(data) {
     data
   })
 }
+export function unreadCount(data) {
+  return request({
+    url: 'message/unreadCount',
+    method: 'get',
+    data
+  })
+}
 export function getMobile(data) {
   return request({
     url: 'third/getMobile',
@@ -88,6 +95,13 @@ export function login(data) {
   return request({
     url: 'member/login',
     method: 'get',
+    data
+  })
+}
+export function testPost(data) {
+  return request({
+    url: 'third/miniProgram',
+    method: 'post',
     data
   })
 }

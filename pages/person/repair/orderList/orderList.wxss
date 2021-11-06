@@ -16,6 +16,8 @@
 .itemTop{
   display: flex;
   justify-content: space-between;
+}.itemL{
+  flex: 1;
 }
 .itemR{
   color: #ABABAB;
@@ -23,8 +25,10 @@
 }
 .des{
   margin-top: 20rpx;
-  display: flex;
-  justify-content: space-between;
+  /* display: flex;
+  justify-content: space-between; */
+  font-size: 28rpx;
+  color: #8c8c8c;
 }
 .desR{
   color: #8692AA;

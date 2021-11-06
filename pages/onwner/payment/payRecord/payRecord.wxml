@@ -8,7 +8,7 @@
          <text>{{item.car_no}}</text>
         </view>
         <view class="title" wx:else>
-          <image class="icon" src="/static/images/img1.png"></image>
+          <image class="icon" src="/static/images/{{url}}.png"></image>
          <text>{{typeName}}</text>
         </view>
         <view class="des">{{item.type_text}}</view>

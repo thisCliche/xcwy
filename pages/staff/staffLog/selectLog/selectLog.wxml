@@ -1,10 +1,16 @@
 <!--pages/staff/staffLog/selectLog/selectLog.wxml-->
 <wxs src="../../../../utils/filter.wxs" module="filter" />
 <view class="selectLog">
+
+  <view class="all">
+    <van-checkbox icon-size="18px" value="{{all}}" bind:change="toAll">全选</van-checkbox>
+  </view>
   <van-collapse value="{{ activeNames }}" catch:change="onChange">
+
     <van-collapse-item name="{{index}}" value="日志" wx:for="{{logList}}" wx:key="index">
       <view slot="title">
-        <van-checkbox icon-size="18px" value="{{ item.select }}" data-id="{{item.id}}" data-idx="{{index}}" data-type="{{item.select}}" catch:tap="onSelect">
+        <van-checkbox icon-size="18px" value="{{ item.select }}" data-id="{{item.id}}" data-idx="{{index}}"
+          data-type="{{item.select}}" catch:tap="onSelect">
           {{filter.sliceTime(item.add_time)}}</van-checkbox>
       </view>
       <view>{{item.content.tasks}}</view>

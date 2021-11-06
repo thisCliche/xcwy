@@ -3,7 +3,7 @@
   <view class="card info">
     <view class="cardT">
       <view class="cardTL">
-        巡查类型
+        任务类型
       </view>
       <view class="cardTR">
         {{info.begin_time}}
@@ -15,7 +15,7 @@
   </view>
   <view class="card info mt20">
     <view class="cardT">
-      巡查项目
+      执行项目
     </view>
     <view class="cardD">
       {{info.project_id[0]}}
@@ -23,24 +23,27 @@
   </view>
   <view class="card info mt20">
     <view class="cardT">
-      任务标题 {{info.title}}
+      标题 {{info.title}}
     </view>
     <view class="cardD">
       {{info.content}}
     </view>
   </view>
   <view class="title mt30">
-    <image src="/static/images/bg.png" class="titleBg"></image> 负责巡查人员
+    <image src="/static/images/bg.png" class="titleBg"></image> 指派人员
   </view>
   <view class="pepople">
     <van-row>
       <van-col custom-class="colStyle" span="6" wx:for="{{info.task_receiver}}" wx:key="index">
-        <view class="card img">
-          <image src="{{item.avatar}}"></image>
-          <view class="name van-ellipsis">{{item.name}}</view>
+        <view class="popWrap">
+          <view class="card img">
+            <image src="{{item.avatar}}"></image>
+            <view class="name van-ellipsis">{{item.name}}</view>
+          </view>
+          <view class="text">
+            <van-icon wx:if="{{item.is_done == 'true'}}" name="checked" color="#32cc85" />
+          </view>
         </view>
-        <van-icon wx:if="{{item.is_done == 'true'}}" name="checked"
-          custom-style="position: absolute;top: -10rpx; right: 16rpx;" color="#32cc85" />
       </van-col>
     </van-row>
   </view>
@@ -61,14 +64,14 @@
       <view class="cardD">
         <view style="margin-bottom: 20rpx;">
           {{item.content.tasks}} <br />
-        {{item.content.security}} <br />
-        {{item.content.health}} <br />
-        {{item.content.fire_control}} <br />
-        {{item.content.elevator}} <br />
+          {{item.content.security}} <br />
+          {{item.content.health}} <br />
+          {{item.content.fire_control}} <br />
+          {{item.content.elevator}} <br />
         </view>
         <van-row wx:if="{{item.images != '[]'}}">
-          <van-col custom-class="photoCol" span="6" wx:for="{{item.images}}" wx:key="index">
-            <image src="{{item}}"></image>
+          <van-col custom-class="photoCol" span="6" wx:for="{{item.images}}" wx:for-item="itemUrl" wx:key="index">
+            <image bindtap="previewImage" data-url="{{itemUrl}}" src="{{itemUrl}}" data-list="{{item.images}}"></image>
           </van-col>
         </van-row>
       </view>

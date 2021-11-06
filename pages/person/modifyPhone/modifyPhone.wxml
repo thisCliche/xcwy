@@ -19,6 +19,6 @@
     </van-row>
   </view>
   <view class="btn">
-    <van-button bind:click="submit" custom-class="btnStyle" block type="info">提交</van-button>
+    <van-button bind:click="submit" custom-class="btnStyle" block type="info" data-com="com">提交</van-button>
   </view>
 </view>

@@ -1,7 +1,7 @@
 <!--pages/person/vista/vistaDetail/vistaDetail.wxml-->
 <view class="vistaDetail">
   <view class="card info">
-    <view>{{info.project_name}}-{{info.area_name}}-{{info.block_name}}-{{info.name}}</view>
+    <view>{{info.project_name}}{{info.area_name}}{{info.block_name}}{{info.unit_name}}{{info.name}}</view>
     <!-- <view class="mt20">王佳佳 187****5264</view> -->
   </view>
   <view class="card mt20">

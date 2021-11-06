@@ -1,5 +1,8 @@
 // pages/onwner/agreement/agreement.js
-import {newsList} from '../../../api/info'
+import {
+  newsList,
+  detail
+} from '../../../api/info'
 Page({
 
   /**
@@ -14,13 +17,20 @@ Page({
    */
   onLoad: function (options) {
     let that = this
-    newsList({channel_id:options.field}).then(res=>{
+    newsList({
+      channel_id: options.field
+    }).then(res => {
+      detail({
+        id: res.data.list[0].id
+      }).then(result => {
+        that.setData({
+          info: result.data
+        })
+      })
       wx.setNavigationBarTitle({
         title: res.data.list[0].title,
       })
-      that.setData({
-        info:res.data.list[0]
-      })
+
     })
   },
 

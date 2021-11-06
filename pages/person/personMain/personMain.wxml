@@ -17,13 +17,18 @@
       </view>
       <!-- wx:if="{{isStaff=='业主'}}" -->
       <view class="topR"  bindtap="toTz">
-        <image class="tz" src="{{deFualtHttp}}/mini/images/tz1.png"></image>
+        <image wx:if="{{hasNotice}}" class="tz" src="{{deFualtHttp}}/mini/images/tz.png"></image>
+        <image wx:else class="tz" src="{{deFualtHttp}}/mini/images/tz1.png"></image>
       </view>
     </view>
   </view>
   <view class="menuWrap">
     <view class="type1" wx:if="{{isStaff=='访客'}}">
       <view class="menu1 card">
+        <view class="item" data-page="{{menu1[0].page}}" bindtap="toDetail">
+          <image src="{{menu1[0].icon}}"></image>
+          <view class="name">{{menu1[0].name}}</view>
+        </view>
         <view class="item" data-page="{{menu1[2].page}}" bindtap="toDetail">
           <image src="{{menu1[2].icon}}"></image>
           <view class="name">{{menu1[2].name}}</view>
@@ -48,7 +53,7 @@
         </view>
       </view>
       <view class="card mt20 menu2" wx:for="{{menu2}}" wx:key="index">
-        <van-cell bind:click="toDetail" data-page="{{item.page}}" title="{{item.name}}" title-class="titleStyle"
+        <van-cell border="{{ false }}" bind:click="toDetail" data-page="{{item.page}}" title="{{item.name}}" title-class="titleStyle"
           is-link>
           <image class="listImg" slot="icon" src="{{item.icon}}" />
         </van-cell>
@@ -56,7 +61,7 @@
     </view>
     <view class="type2" wx:else>
       <view class="card mt20 menu2" wx:for="{{menu3}}" wx:key="index">
-        <van-cell bind:click="toDetail" data-page="{{item.page}}" title="{{item.name}}" title-class="titleStyle"
+        <van-cell border="{{ false }}" bind:click="toDetail" data-page="{{item.page}}" title="{{item.name}}" title-class="titleStyle"
           is-link>
           <image class="listImg" slot="icon" src="{{item.icon}}" />
         </van-cell>

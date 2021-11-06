@@ -18,6 +18,7 @@ Page({
       limit: 100
     },
     typeName:'',
+    url:'',
     list: []
   },
   toDetail() {
@@ -94,31 +95,36 @@ Page({
       switch (options.type) {
         case 'property':
           this.setData({
-            typeName:'物业费'
+            typeName:'物业费',
+            url:'img1',
           })
           this.getList2(options.house_id)
           break;
         case 'rent':
           this.setData({
-            typeName:'租赁费'
+            typeName:'租赁费',
+            url:'img4',
           })
           this.getList4(options.house_id)
           break;
         case 'water':
           this.setData({
-            typeName:'水费'
+            typeName:'水费',
+            url:'img3',
           })
           this.getList1(options.house_id)
           break;
         case 'build':
           this.setData({
-            typeName:'装修缴费'
+            typeName:'装修缴费',
+            url:'img5',
           })
           this.getList6(options.house_id)
           break;
         default:
           this.setData({
-            typeName:'电费'
+            typeName:'电费',
+            url:'img2',
           })
           this.getList3(options.house_id)
       }

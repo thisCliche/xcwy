@@ -1,5 +1,5 @@
 // pages/onwner/payment/payPage/payPage.js
-import {fee_carRecord,fee_carDetail,pay} from '../../../../api/info'
+import {fee_carRecord,fee_carDetail,pay,fee_carDel} from '../../../../api/info'
 import {buildOrder} from '../../../../api/fee'
 import {
   getOwner
@@ -16,6 +16,24 @@ Page({
     info: {},
     userInfo:{}
   },
+  async delCar(){
+    let res = await fee_carDel({token: wx.getStorageSync('token'),no:this.data.car_no})
+    if (res.code == 200) {
+      wx.showToast({
+        title: '删除成功',
+      })
+      setTimeout(_ => {
+        wx.navigateBack({
+          delta: 1,
+        })
+      }, 500)
+    } else {
+      wx.showToast({
+        title: res.msg,
+        icon: 'error'
+      })
+    }
+  },
   async getOwnerDetail() {
     let res = await getOwner({
       token: wx.getStorageSync('token')
@@ -28,6 +46,7 @@ Page({
     let res = await buildOrder({
       token: wx.getStorageSync('token'),
       // house_id: this.data.info.house_id,
+      type:1,
       money: this.data.info.bill,
       table: 'car',
       car_no:this.data.info.car_no

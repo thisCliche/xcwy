@@ -1,4 +1,4 @@
 <!--pages/onwner/agreement/agreement.wxml-->
 <view class="agreement">
-  <rich-text nodes="{{info.description}}"></rich-text>
+  <rich-text nodes="{{info.content}}"></rich-text>
 </view>

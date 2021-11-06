@@ -4,7 +4,7 @@
     <image src="/static/images/bg.png" class="titleBg"></image> 申请信息
   </view>
   <view class="card info mt20">
-    <view>{{info.project_name}}-{{info.area_name}}-{{info.block_name}}-{{info.house_name}}</view>
+    <view>{{info.project_name}}{{info.area_name}}{{info.block_name}}{{info.unit_name}}{{info.house_name}}</view>
     <view class="mt20">{{info.member.name}} {{info.member.mobile}}</view>
   </view>
   <view class="card info mt20">
@@ -16,13 +16,21 @@
     <view class="time">{{info.content}}</view>
   </view>
   <view class="card mt20" wx:if="{{info.money != '0.00'}}">
-    <van-cell-group border="{{ false }}">
-      <van-cell title-class="titleStyle" title="装修保证金" value="¥{{info.money}}" border="{{ false }}" />
-      <van-cell title-class="titleStyle" title="缴费途径" value="{{info.is_online == 'false'? '线下支付':'线上支付'}}"
-        border="{{ false }}" />
-      <van-cell title-class="titleStyle" title="支付方式" value="{{info.pay_type}}" border="{{ false }}" />
-      <!-- <van-cell title-class="titleStyle" title="订单编号" value="{{}}" border="{{ false }}" /> -->
-    </van-cell-group>
+    <block wx:if="{{info.status_text == '待缴纳保证金'}}">
+      <van-cell-group border="{{ false }}">
+        <van-cell title-class="titleStyle" title="装修保证金" value="¥{{info.money}}" border="{{ false }}" />
+      </van-cell-group>
+    </block>
+    <block wx:else>
+      <van-cell-group border="{{ false }}">
+        <van-cell title-class="titleStyle" title="装修保证金" value="¥{{info.money}}" border="{{ false }}" />
+        <!-- <van-cell title-class="titleStyle" title="缴费途径" value="{{info.is_online == 'false'? '线下支付':'线上支付'}}"
+        border="{{ false }}" /> -->
+        <van-cell class="isUseTime" title-class="titleStyle" title="支付信息" value="{{info.pay_type}} {{info.order_no}}" border="{{ false }}" />
+        <!-- <van-cell title-class="titleStyle" title="订单编号" value="{{}}" border="{{ false }}" /> -->
+      </van-cell-group>
+    </block>
+
   </view>
   <view class="title mt30">
     <image src="/static/images/bg.png" class="titleBg"></image> 申请状态
@@ -45,7 +53,13 @@
           <view class="itemRT3">{{item.add_time}}</view>
         </view>
         <item class="itemRB" wx:if="{{item.action == 'reject'}}">
-          {{item.action_text}}
+          {{info.reject_reason}}
+        </item>
+        <item class="itemRB" wx:elif="{{item.action == 'agree'}}">
+          {{info.reject_reason}}
+        </item>
+        <item class="itemRB itemRB1" wx:elif="{{item.action == 'done'}}">
+          已退还保证金：¥{{info.money}}
         </item>
       </view>
     </view>
@@ -56,6 +70,7 @@
       <van-button bind:click="resolve" type="info">同意</van-button>
     </view>
   </block>
+  <!-- <van-button bind:click="resolve" type="info">同意</van-button> -->
   <block wx:if="{{info.status_text == '已缴纳'}}">
     <!-- <view class="btn" bindtap="toPay" wx:if="{{info.status_text == '待缴纳保证金'}}">
       <view class="card btnStyle">

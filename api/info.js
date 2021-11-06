@@ -7,6 +7,13 @@ export function newsList(data) {
     data
   })
 }
+export function fee_carDel(data) {
+  return request({
+    url: 'fee_car/del',
+    method: 'post',
+    data
+  })
+}
 export function visitor(data) {
   return request({
     url: 'index/visitor',

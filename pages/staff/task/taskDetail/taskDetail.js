@@ -13,9 +13,11 @@ Page({
   },
   async getDetail(id){
     let res = await detail({token:wx.getStorageSync('token'),id})
+    let userId = JSON.parse(wx.getStorageSync('userInfo')).id
+    console.log(userId)
     let that = this
     res.data.task_receiver.forEach(item=>{
-      if(item.member_id == res.data.member_id){
+      if(item.member_id == userId){
         if(item.is_done == 'true'){
           that.setData({
             isHidden: true
@@ -54,7 +56,7 @@ Page({
         break;
       default:
         wx.navigateTo({
-          url: `/pages/staff/releaseTask/releaseSafe/releaseSafe?id=${id}&title=${title}&type=5`,
+          url: `/pages/staff/releaseTask/releaseDaily/releaseDaily?id=${id}&title=${title}&type=5`,
         })
     }    
   },
@@ -62,11 +64,10 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(options)
     this.setData({
-      getDetail: options.id
+      id: options.id
     })
-    this.getDetail(options.id)
+    
   },
 
   /**
@@ -80,7 +81,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.getDetail(this.data.id)
   },
 
   /**

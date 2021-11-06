@@ -70,6 +70,7 @@ Page(filter.loginCheck({
       file
     } = event.detail;
     let that = this
+    console.log(file)
     wx.uploadFile({
       url: that.data.rootHttp + '/api.php/app/upload',
       filePath: file.url,

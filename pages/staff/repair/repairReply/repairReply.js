@@ -7,6 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    isLoad:false, 
     siteHttp: app.globalData.siteHttp,
     rootHttp: app.globalData.rootHttp,
     height:{minHeight: 80},
@@ -30,6 +31,10 @@ Page({
         })
       }
     }
+    let that = this;
+    this.setData({
+      isLoad:true
+    })
     let res = await done(form)
     if (res.code == 200) {
       wx.showToast({
@@ -41,6 +46,9 @@ Page({
         })
       }, 500)
     } else {
+      that.setData({
+        isLoad:false
+      })
       wx.showToast({
         title: res.msg,
         icon: 'error'

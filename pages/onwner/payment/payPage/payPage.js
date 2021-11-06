@@ -18,6 +18,7 @@ Page({
   data: {
     upInfo: {},
     info: {},
+    url:'',
     typeName: '',
   },
   async getDetial1(type) {
@@ -69,7 +70,7 @@ Page({
         table: this.data.upInfo.type,
         order_no: res.data
       })
-      if(res.code != 200){
+      if (res.code != 200) {
         return wx.showToast({
           title: res.msg,
           icon: 'none'
@@ -99,36 +100,44 @@ Page({
           console.log('失败', result)
         }
       })
-    }else{
-      let result = await pay({
-        token: wx.getStorageSync('token'),
-        table: this.data.upInfo.type,
-        order_no: this.data.info.order_no
-      })
-      wx.requestPayment({
-        timeStamp: result.data.timeStamp + '',
-        nonceStr: result.data.nonceStr,
-        package: result.data.package,
-        signType: 'MD5',
-        paySign: result.data.paySign,
-        success(result) {
-          wx.showToast({
-            title: '支付成功',
-          })
-          setTimeout(_ => {
-            wx.navigateBack({
-              delta: 1,
+    } else {
+      try {
+        let result = await pay({
+          token: wx.getStorageSync('token'),
+          table: this.data.upInfo.type,
+          order_no: this.data.info.order_no
+        })
+        wx.requestPayment({
+          timeStamp: result.data.timeStamp + '',
+          nonceStr: result.data.nonceStr,
+          package: result.data.package,
+          signType: 'MD5',
+          paySign: result.data.paySign,
+          success(result) {
+            wx.showToast({
+              title: '支付成功',
             })
-          }, 500)
-        },
-        fail(result) {
-          wx.showToast({
-            title: '支付失败',
-            icon: 'error'
-          })
-          console.log('失败', result)
-        }
-      })
+            setTimeout(_ => {
+              wx.navigateBack({
+                delta: 1,
+              })
+            }, 500)
+          },
+          fail(result) {
+            wx.showToast({
+              title: '支付失败',
+              icon: 'error'
+            })
+            console.log('失败', result)
+          }
+        })
+      } catch (e) {
+        wx.showToast({
+          title: '网络错误，请重试',
+          icon:'none'
+        })
+      }
+
     }
   },
   async getDetial5(type) {
@@ -150,31 +159,36 @@ Page({
     switch (options.type) {
       case 'property':
         this.setData({
-          typeName: '物业'
+          typeName: '物业',
+          url:'img1'
         })
         this.getDetial2(options.type);
         break;
       case 'water':
         this.setData({
-          typeName: '水'
+          typeName: '水',
+          url:'img3'
         })
         this.getDetial1(options.type);
         break;
       case 'electric':
         this.setData({
-          typeName: '电'
+          typeName: '电',
+          url:'img2'
         })
         this.getDetial3(options.type);
         break;
       case 'rent':
         this.setData({
-          typeName: '物业租赁'
+          typeName: '物业租赁',
+          url:'img4'
         })
         this.getDetial4(options.type);
         break;
       case 'build':
         this.setData({
-          typeName: '装修缴'
+          typeName: '装修缴',
+          url:'img5'
         })
         this.getDetial5(options.type);
         break;

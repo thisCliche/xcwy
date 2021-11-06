@@ -1,13 +1,14 @@
 // pages/person/person.js
 const filter = require('../../../utils/router.js');
 const app = getApp()
-import {myProfile} from '../../../api/login.js'
+import {myProfile,unreadCount} from '../../../api/login.js'
 Page(filter.loginCheck({
 
   /**
    * 页面的初始数据
    */
   data: {
+    hasNotice:false,
     type: true,
     isStaff: '访客',
     userInfo:{},
@@ -67,10 +68,21 @@ Page(filter.loginCheck({
     })
   },
   toTz(){
-    wx.navigateTo({
-      url: '/pages/person/complaint/message/message',
-    })
+    if(this.data.isStaff == '业主'){
+      wx.navigateTo({
+        url: '/pages/person/complaint/message/message',
+      })
+    }else{
+      wx.navigateTo({
+        url: '/pages/person/complaint/messageStaff/messageStaff',
+      })
+    }
   },
+  getPhoneNum(){
+    wx.navigateTo({
+      url: '/pages/login/login?form=per',
+    })
+  },  
   toDetail(e){
     if(e.currentTarget.dataset.page == '/pages/person/attestation/attestation'){
       return wx.navigateTo({
@@ -83,6 +95,17 @@ Page(filter.loginCheck({
   },
   async getUserInfo(){
     if(!wx.getStorageSync('token')) return
+    let res1 = await unreadCount({token:wx.getStorageSync('token')})
+    let that = this
+    if(res1.data.count == 0){
+      that.setData({
+        hasNotice:false
+      })
+    }else{
+      that.setData({
+        hasNotice:true
+      })
+    }
     let res = await myProfile({token:wx.getStorageSync('token')})
     this.setData({
       userInfo: res.data,

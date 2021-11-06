@@ -18,9 +18,9 @@
   <view class="card mt20">
     <van-cell-group border="{{ false }}">
       <van-cell title-class="titleStyle" title="装修保证金" value="¥{{info.money}}" border="{{ false }}" />
-      <van-cell title-class="titleStyle" title="缴费途径" value="{{info.is_online == 'false'? '线下支付':'线上支付'}}"
-        border="{{ false }}" />
-      <van-cell title-class="titleStyle" title="支付方式" value="{{info.pay_type}}" border="{{ false }}" />
+      <!-- <van-cell title-class="titleStyle" title="缴费途径" value="{{info.is_online == 'false'? '线下支付':'线上支付'}}"
+        border="{{ false }}" /> -->
+      <van-cell class="isUseTime" title-class="titleStyle" title="支付信息" value="{{info.pay_type}}  {{info.order_no}}" border="{{ false }}" />
       <!-- <van-cell title-class="titleStyle" title="订单编号" value="{{}}" border="{{ false }}" /> -->
     </van-cell-group>
   </view>
@@ -45,7 +45,13 @@
           <view class="itemRT3">{{item.add_time}}</view>
         </view>
         <item class="itemRB" wx:if="{{item.action == 'reject'}}">
-          {{item.action_text}}
+          {{info.reject_reason}}
+        </item>
+        <item class="itemRB" wx:elif="{{item.action == 'agree'}}">
+          {{info.reject_reason}}
+        </item>
+        <item class="itemRB itemRB1" wx:elif="{{item.action == 'done'}}">
+          已退还保证金：¥{{info.money}}
         </item>
       </view>
     </view>

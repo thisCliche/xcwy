@@ -21,3 +21,12 @@
   width: 100% !important;
   background: #feecea !important;
 }
+.icon{
+  width: 42rpx;
+  height: 42rpx;
+  margin: 0 10rpx;
+}
+.title{
+  display: flex;
+  align-items: center;
+}

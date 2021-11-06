@@ -17,6 +17,13 @@ Page({
     images: [],
     id: ''
   },
+  previewImage(e){
+    let urls = e.currentTarget.dataset.list
+    wx.previewImage({
+      current: e.currentTarget.dataset.url, 
+      urls
+    })
+  },
   toDetail(){
     wx.navigateTo({
       url: `/pages/staff/task/taskDetail/taskDetail?id=${this.data.id}`,

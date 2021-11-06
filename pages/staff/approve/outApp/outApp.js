@@ -1,6 +1,7 @@
 // pages/staff/approve/leaveApp/leaveApp.js
 import {
-  approve_outAdd,approve_outgetFlowMember
+  approve_outAdd,
+  approve_outgetFlowMember
 } from '../../../../api/approve'
 let app = getApp()
 Page({
@@ -9,11 +10,12 @@ Page({
    * 页面的初始数据
    */
   data: {
+    isLoad: false,
     rootHttp: app.globalData.rootHttp,
     time1: '请选择',
     time2: '请选择',
-    time1stamp:0,
-    time2stamp:0,
+    time1stamp: 0,
+    time2stamp: 0,
     duration: null,
     reason: '',
     minDate: new Date().getTime(),
@@ -29,7 +31,7 @@ Page({
     calendarShow2: false,
     datetime1: new Date().getTime(),
     datetime2: new Date().getTime(),
-    flowMember:[],
+    flowMember: [],
     imgList: [],
   },
   onDisplay(e) {
@@ -58,7 +60,7 @@ Page({
   },
   onConfirm(event) {
     this.setData({
-      time1stamp:event.detail,
+      time1stamp: event.detail,
       calendarShow1: false,
       time1: this.formatDate(event.detail),
       minDate: event.detail
@@ -66,7 +68,7 @@ Page({
   },
   onConfirm2(event) {
     this.setData({
-      time2stamp:event.detail,
+      time2stamp: event.detail,
       calendarShow2: false,
       time2: this.formatDate(event.detail),
     });
@@ -123,11 +125,34 @@ Page({
       },
     });
   },
+  computingTime() {
+    let that = this
+    setTimeout(() => {
+      let time1 = this.data.time1stamp
+      let time2 = this.data.time2stamp
+      console.log(time1,time2)
+      if (time1 != 0 && time2 != 0) {
+        if (new Date(time1) > new Date(time2)) {
+          return wx.showToast({
+            title: '结束时间不能小于开始时间',
+            icon: 'none'
+          })
+        } else {
+          let date = (new Date(time2).getTime() - new Date(time1).getTime()) / (1000 * 60 * 60 ); /*不用考虑闰年否*/
+          that.setData({
+            duration:Math.ceil(date)
+          })
+        }
+      }
+    }, 100);
+   
+
+  },
   async submit() {
-    if(this.data.time1stamp>this.data.time2stamp){
+    if (this.data.time1stamp > this.data.time2stamp) {
       return wx.showToast({
         title: '结束时间不能小于开始时间',
-        icon:'none'
+        icon: 'none'
       })
     }
     let form = {
@@ -147,6 +172,10 @@ Page({
         })
       }
     }
+    let that = this;
+    this.setData({
+      isLoad: true
+    })
     let res = await approve_outAdd(form)
     if (res.code == 200) {
       wx.showToast({
@@ -158,6 +187,9 @@ Page({
         })
       }, 500)
     } else {
+      that.setData({
+        isLoad: false
+      })
       wx.showToast({
         title: res.msg,
         icon: 'error'
@@ -168,7 +200,15 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    let that = this
+    app.watch(this, {
+      time1stamp: function (newVal) {
+        that.computingTime()
+      },
+      time2stamp: function (newVal) {
+        that.computingTime()
+      },
+    })
   },
 
   /**
@@ -183,7 +223,9 @@ Page({
    */
   onShow: function () {
     let that = this
-    approve_outgetFlowMember({token:wx.getStorageSync('token')}).then(res=>{
+    approve_outgetFlowMember({
+      token: wx.getStorageSync('token')
+    }).then(res => {
       that.setData({
         flowMember: res.data
       })

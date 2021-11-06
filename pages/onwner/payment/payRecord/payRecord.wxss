@@ -9,6 +9,8 @@
 }
 .title{
   font-size: 36rpx;
+  display: flex;
+  align-items: center;
 }
 .icon{
   width: 42rpx;

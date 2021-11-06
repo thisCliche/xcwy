@@ -7,6 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    isLoad:false, 
     rootHttp:app.globalData.rootHttp,
     time1:'请选择',
     time2:'请选择',
@@ -136,6 +137,10 @@ Page({
           })
       }
     }
+    let that = this;
+    this.setData({
+      isLoad:true
+    })
     let res = await approve_buyAdd(form)
     if(res.code == 200) {
       wx.showToast({
@@ -147,6 +152,9 @@ Page({
         })
       },500)
     }else{
+      that.setData({
+        isLoad:false
+      })
       wx.showToast({
         title: res.msg,
         icon:'error'

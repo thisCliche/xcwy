@@ -12,6 +12,7 @@ Page(filter.loginCheck({
    * 页面的初始数据
    */
   data: {
+    isLoad:false,
     calendarShow: false,
     textarea: {
       minHeight: 80
@@ -37,6 +38,10 @@ Page(filter.loginCheck({
         })
       }
     }
+    let that = this;
+    this.setData({
+      isLoad:true
+    })
     let res = await add(form)
     if(res.code == 200) {
       wx.showToast({
@@ -48,6 +53,9 @@ Page(filter.loginCheck({
         })
       },500)
     }else{
+      that.setData({
+        isLoad:false
+      })
       wx.showToast({
         title: res.msg,
         icon:'error'

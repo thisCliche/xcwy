@@ -35,6 +35,13 @@ export function reply(data) {
     data
   })
 }
+export function read(data) {
+  return request({
+    url: 'message/read',
+    method: 'post',
+    data
+  })
+}
 export function messageMy(data) {
   return request({
     url: 'message/my',

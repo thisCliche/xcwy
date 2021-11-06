@@ -1,7 +1,12 @@
 <!--pages/onwner/renovation/renovation.wxml-->
 <view class="renovation">
+  <van-overlay show="{{ isLoad }}" z-index="99">
+    <view class="loading">
+      <van-loading />
+    </view>
+  </van-overlay>
   <view class="card info">
-    <view>{{info.project_name}}{{info.area_name}}{{info.block_name}}{{info.house_name}}</view>
+    <view>{{info.project_name}}{{info.area_name}}{{info.block_name}}{{info.unit_name}}{{info.house_name}}</view>
     <view class="mt20">{{info.name}} {{info.mobile}}</view>
   </view>
   <view class="card mt20">
@@ -22,6 +27,6 @@
     </van-cell-group>
   </view>
   <view class="btn">
-    <van-button type="info" bind:click="submit" block>提交</van-button>
+    <van-button type="info" bind:click="submit" block data-com="com">提交</van-button>
   </view>
 </view>

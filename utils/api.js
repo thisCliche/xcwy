@@ -1,5 +1,5 @@
 const devBaseUrl = 'https://h5.ahzxkj.net:9002/api.php/';
-const probaseUrl = '';
+// const devBaseUrl = 'https://www.hfcxwy.com/api.php/';
 import eventBus from './eventBus'
 // token:wx.getStorageSync('token')
 const request = (options) => {

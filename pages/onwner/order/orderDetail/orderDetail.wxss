@@ -207,3 +207,11 @@ font-size:14rpx;
   border-radius: 4rpx;
   margin:80rpx 40rpx;
 }
+.titleWrap{
+  padding: 28rpx;
+  display: flex;
+  justify-content: space-between;
+}
+.value11{
+  color: #4790F4;
+}

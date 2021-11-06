@@ -1,20 +1,37 @@
 /* pages/person/complaint/complaintList/complaintList.wxss */
-.complaintList{
+.complaintList {
   padding: 20rpx 20rpx;
 }
-.item{
+
+.item {
   padding: 28rpx;
   overflow: hidden;
   position: relative;
 }
-.time{
+
+.time {
   color: #ABABAB;
   margin-top: 20rpx;
 }
-.float{
-  width: 143rpx; 
+
+.float {
+  width: 143rpx;
   height: 134rpx;
   position: absolute;
   right: -11rpx;
-    top: -28rpx;
+  top: -28rpx;
+}
+
+.toDetail {
+  color: #4790F4;
+}
+
+.dian {
+  background: #dc0000;
+  width: 12rpx;
+  height: 12rpx;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 12rpx;
+  margin-bottom: 6rpx;
 }

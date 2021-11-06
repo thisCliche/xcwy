@@ -1,12 +1,11 @@
 <!--pages/staff/approve/leaveApp/leaveApp.wxml-->
 <view class="leaveApp">
+  <van-overlay show="{{ isLoad }}" z-index="99">
+    <view class="loading">
+      <van-loading />
+    </view>
+  </van-overlay>
   <view class="miniTitle">请选择申请时间</view>
-  <!--  <view class="card mt10 info">
-    <van-cell-group>
-      <van-cell required bind:click="onDisplay" data-type="hyShow" title="请假类型" is-link value="{{typeName}}"
-        border="{{ false }}" />
-    </van-cell-group>
-  </view> -->
   <view class="card mt20">
     <van-cell-group>
       <van-cell required title="开始时间" value="{{ time1 }}" bind:click="onDisplay" data-type="calendarShow1"
@@ -28,7 +27,7 @@
       <!-- <van-calendar color="#4790F4" show="{{ calendarShow2 }}" bind:close="onClose" bind:confirm="onConfirm2"
         data-type="calendarShow2" show-confirm="{{ false }}" /> -->
 
-      <van-field required model:value="{{ duration }}" placeholder="请输入" border="{{ false }}" input-align="right"
+      <van-field required model:value="{{ duration }}" disabled placeholder="请输入" border="{{ false }}" input-align="right"
         label="时长（小时）" />
     </van-cell-group>
   </view>
@@ -62,7 +61,7 @@
     </view>
   </view>
   <view class="btn">
-    <van-button type="info" block bindtap="submit">提交</van-button>
+    <van-button type="info" block bindtap="submit" data-com="com">提交</van-button>
   </view>
   <van-popup show="{{ hyShow }}" position="bottom" custom-style="height: 50%;" round data-type="hyShow"
     bind:close="onClose">

@@ -14,7 +14,7 @@
       "list": [
         {
           "name": "pages/test/contact",
-          "pathName": "pages/staff/approve/keyApp/keyApp",
+          "pathName": "pages/onwner/payment/payPage/payPage",
           "query": "",
           "scene": null
         },

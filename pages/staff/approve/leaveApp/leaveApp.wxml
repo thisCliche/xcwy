@@ -1,5 +1,10 @@
 <!--pages/staff/approve/leaveApp/leaveApp.wxml-->
 <view class="leaveApp">
+  <van-overlay show="{{ isLoad }}" z-index="99">
+    <view class="loading">
+      <van-loading />
+    </view>
+  </van-overlay>
   <view class="miniTitle">请选择请假类型</view>
   <view class="card mt10 info">
     <van-cell-group>
@@ -13,24 +18,25 @@
         border="{{ false }}" is-link>
       </van-cell>
 
-      <!-- <van-popup show="{{ calendarShow1 }}" position="bottom" custom-style="height: 50%;" round>
+      <van-popup show="{{ calendarShow1 }}" position="bottom" custom-style="height: 50%;" round>
         <van-datetime-picker type="datetime" data-type="calendarShow1" value="{{ datetime1 }}" bind:cancel="onClose" bind:confirm="onConfirm" />
-      </van-popup> -->
+      </van-popup>
 
-      <van-calendar color="#4790F4" show="{{ calendarShow1 }}" bind:close="onClose" bind:confirm="onConfirm"
-        data-type="calendarShow1" show-confirm="{{ false }}" />
+      <!-- <van-calendar color="#4790F4" show="{{ calendarShow1 }}" bind:close="onClose" bind:confirm="onConfirm"
+        data-type="calendarShow1" show-confirm="{{ false }}" /> -->
       <van-cell required title="结束时间" value="{{ time2 }}" bind:click="onDisplay" data-type="calendarShow2"
         border="{{ false }}" is-link>
       </van-cell>
-      <!-- <van-popup show="{{ calendarShow2 }}" position="bottom" custom-style="height: 50%;" round >
+      <van-popup show="{{ calendarShow2 }}" position="bottom" custom-style="height: 50%;" round >
         <van-datetime-picker type="datetime" data-type="calendarShow2" value="{{ datetime2 }}" bind:cancel="onClose" bind:confirm="onConfirm2" min-date="{{ minDate }}"/>
-      </van-popup> -->
+      </van-popup>
 
-      <van-calendar color="#4790F4" show="{{ calendarShow2 }}" bind:close="onClose" bind:confirm="onConfirm2"
-        data-type="calendarShow2" show-confirm="{{ false }}" />
-
-      <van-field required model:value="{{ duration }}" placeholder="请输入" border="{{ false }}" input-align="right"
-        label="时长（小时）" />
+      <!-- <van-calendar color="#4790F4" show="{{ calendarShow2 }}" bind:close="onClose" bind:confirm="onConfirm2"
+        data-type="calendarShow2" show-confirm="{{ false }}" /> -->
+      <!-- <van-cell required title="时长（天）" value="{{ duration }}" 
+        border="{{ false }}" > </van-cell>-->
+        <van-field required label="时长（天）" type="number" input-align="right" model:value="{{ duration }}" placeholder="时长（天）" border="{{ false }}" />
+      
     </van-cell-group>
   </view>
   <view class="card mt20 info">
@@ -45,7 +51,8 @@
   </view>
   <view class="card mt20 image">
     <van-cell-group border="{{ false }}">
-      <van-uploader max-count="9" bind:delete="deleteImg" deletable="{{ true }}" file-list="{{ fileList }}" bind:after-read="afterRead" />
+      <van-uploader max-count="9" bind:delete="deleteImg" deletable="{{ true }}" file-list="{{ fileList }}"
+        bind:after-read="afterRead" />
     </van-cell-group>
   </view>
   <view class="title mt30">
@@ -63,7 +70,7 @@
     </view>
   </view>
   <view class="btn">
-    <van-button type="info" block bindtap="submit">提交</van-button>
+    <van-button type="info" block bindtap="submit" data-com="com">提交</van-button>
   </view>
   <van-popup show="{{ hyShow }}" position="bottom" custom-style="height: 50%;" round data-type="hyShow"
     bind:close="onClose">

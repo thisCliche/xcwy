@@ -17,8 +17,8 @@
             </view>
             <view class="titleR">{{item.add_time}}</view>
           </view>
-          <view class="des">{{item.project_name}}-{{item.house_name}}</view>
-          <view class="des">装修时间：{{item.begin_time}}-{{item.end_time}}</view>
+          <view class="des">{{item.project_name}}{{item.area_name}}{{item.block_name}}{{item.unit_name}}{{item.house_name}}</view>
+          <view class="des">装修时间：{{item.begin_time}}至{{item.end_time}}</view>
           <view class="btn mt30">
             <view class="btnL">
               审核状态：
@@ -42,8 +42,8 @@
             </view>
             <view class="titleR">{{item.add_time}}</view>
           </view>
-          <view class="des">{{item.project_name}}-{{item.house_name}}</view>
-          <view class="des">装修时间：{{item.begin_time}}-{{item.end_time}}</view>
+          <view class="des">{{item.project_name}}{{item.area_name}}{{item.block_name}}{{item.unit_name}}{{item.house_name}}</view>
+          <view class="des">装修时间：{{item.begin_time}}至{{item.end_time}}</view>
           <view class="content">审核状态：{{item.status_text}}</view>
         </view>
       </block>

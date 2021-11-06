@@ -204,6 +204,7 @@ Page(filter.loginCheck({
         icon: 'error'
       })
     }
+    console.log('提交的车牌号：',this.data.carnum.join(''))
     let form = {
       project_id: this.data.project_id,
       token: wx.getStorageSync('token'),
@@ -245,7 +246,7 @@ Page(filter.loginCheck({
     } else {
       wx.showToast({
         title: res.msg,
-        icon: 'error'
+        icon: 'none'
       })
     }
   },
@@ -267,7 +268,7 @@ Page(filter.loginCheck({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    this.getProject()
+    // this.getProject()
   },
 
   /**

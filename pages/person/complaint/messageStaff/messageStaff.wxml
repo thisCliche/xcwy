@@ -1,0 +1,18 @@
+<!--pages/person/complaint/complaintList/complaintList.wxml-->
+<view class="complaintList">
+  <block wx:if="{{list.length != 0}}">
+    <!-- bindtap="toDetail" -->
+    <view class="card item mt20" data-id="{{item.id}}" wx:for="{{list}}" wx:key="index">
+      <view class="title" data-id="{{item.foreign_id}}" data-msid="{{item.id}}" data-read="{{item.is_read}}"
+        data-table="{{item.table}}" bindtap="todeDetail"><view class="dian" wx:if="{{item.is_read == 'false'}}"></view><text>{{item.title}}，</text><text
+          class="toDetail">点击查看</text></view>
+      <view class="time" wx:if="{{item.add_time}}">{{item.add_time}}</view>
+      <!-- <view class="float" wx:if="{{item.reply != ''}}">
+      <image src="/static/images/yhf.png"></image>
+    </view> -->
+    </view>
+  </block>
+  <view class="card" wx:else>
+    <van-empty description="暂无内容" />
+  </view>
+</view>

@@ -1,6 +1,6 @@
 // pages/staff/staffLog/selectLog/selectLog.js
 import {
-  list
+  dailyReport,
 } from '../../../../api/report'
 let App = getApp()
 Page({
@@ -11,6 +11,7 @@ Page({
   data: {
     activeNames: [0],
     select: true,
+    all: false,
     rootHttp: App.globalData.rootHttp,
     logList: [],
   },
@@ -24,27 +25,48 @@ Page({
       [`logList[${event.currentTarget.dataset.idx}].select`]: !event.currentTarget.dataset.type,
     });
   },
+  toAll(e) {
+    this.setData({
+      all: e.detail
+    })
+    let logList = this.data.logList.length;
+    let that = this
+    if (e.detail) {
+      for(let i=0;i<logList;i++){
+        that.setData({
+          [`logList[${i}].select`]: true,
+        });
+      }
+    } else {
+      for(let i=0;i<logList;i++){
+        that.setData({
+          [`logList[${i}].select`]: false,
+        });
+      }
+    }
+  },
   async getlist() {
     let that = this
-    let res = await list({
+    // dailyReport
+    let res = await dailyReport({
       token: wx.getStorageSync('token'),
       page: 1,
       limit: 31,
-      type: 1,
-      status: 2
+      // type: 1,
+      // status: 2
     })
-    res.data.list.forEach(item => {
+    res.data.forEach(item => {
       item.select = false
     })
-    let logList = res.data.list
+    let logList = res.data
     if (logList.length != 0) {
       for (let i = 0; i < logList.length; i++) {
         if (logList[i].images.length != 0) {
           for (let j = 0; j < logList[i].images.length; j++) {
-            try{
+            try {
               logList[i].images[j] = that.data.rootHttp + logList[i].images[j]
-            }catch(e){
-              console.log(i,j)
+            } catch (e) {
+              console.log(i, j)
             }
           }
         }

@@ -1,9 +1,9 @@
 <!--pages/person/renovation/renovationDetail/renovationDetail.wxml-->
 <view class="renovationDetail">
-<view class="status card info">
-  <view>{{info.name}}提交的钥匙申请</view>
-  <view class="statusColor">{{info.status_text}}</view>
-</view>
+  <view class="status card info">
+    <view>{{info.name}}提交的钥匙申请</view>
+    <view class="statusColor">{{info.status_text}}</view>
+  </view>
   <view class="title mt20">
     <image src="/static/images/bg.png" class="titleBg"></image> 钥匙信息
   </view>
@@ -23,14 +23,14 @@
     <view class="card mt20 workImg info">
       <van-row>
         <van-col wx:for="{{info.images}}" wx:key="index" custom-class="colStyle" span="6">
-          <image src="{{item}}"></image>
+          <image bindtap="previewImage" data-url="{{item}}" src="{{item}}" data-list="{{info.images}}"></image>
         </van-col>
       </van-row>
     </view>
   </block>
   <view class="steps">
     <view class="item" wx:for="{{info.logs}}" wx:key="index">
-      <view class="avatar last">
+      <view class="avatar {{index == info.logs.length-1?'last':''}}">
         <image src="{{item.member.avatar}}"></image>
       </view>
       <view class="itemR">
@@ -51,25 +51,28 @@
       </view>
     </view>
   </view>
-  <block wx:if="{{info.status == 1 && isMe}}">
+  <block wx:if="{{info.status == 1 && isMe && info.logs.length == 1}}">
     <view class="btn">
       <van-button bind:click="revoke" block type="info">撤销</van-button>
     </view>
   </block>
-  <block wx:if="{{info.status == 2 && isMe}}">
+  <block wx:if="{{info.status == 2 && isMe && isPower}}">
     <view class="btn">
       <van-button bind:click="receive" block type="info">确认领取</van-button>
     </view>
   </block>
-  <block wx:if="{{info.status == 4 && !isMe}}">
+  <block wx:if="{{info.status == 4 && !isMe && isPower}}">
     <view class="btn">
       <van-button bind:click="confirmreturn" block type="info">确定归还</van-button>
     </view>
   </block>
-  <block wx:if="{{type}}">
-    <view class="btn1">
-      <van-button bind:click="reject" custom-class="btnStyle" plain color="#F54235">驳回</van-button>
-      <van-button bind:click="resolve" type="info">同意</van-button>
-    </view>
+  <block wx:if="{{info.status==1}}">
+    <block wx:if="{{type}}">
+      <view class="btn1">
+        <van-button bind:click="reject" custom-class="btnStyle" plain color="#F54235">驳回</van-button>
+        <van-button bind:click="resolve" type="info">同意</van-button>
+      </view>
+    </block>
   </block>
+
 </view>

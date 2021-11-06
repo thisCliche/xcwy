@@ -12,7 +12,15 @@ Page({
     rootHttp: App.globalData.rootHttp,
     type:false,
     info: {},
-    id:''
+    id:'',
+    isPower:false,
+  },
+  previewImage(e){
+    let urls = e.currentTarget.dataset.list
+    wx.previewImage({
+      current: e.currentTarget.dataset.url, 
+      urls
+    })
   },
   toPay() {
     wx.navigateTo({
@@ -66,6 +74,11 @@ Page({
       for(let i =0;i<res.data.images.length;i++){
         res.data.images[i] = this.data.rootHttp +res.data.images[i]
       }
+    }
+    if(res.data.flow_member==(JSON.parse(wx.getStorageSync('userInfo'))).id){
+      this.setData({
+        isPower:true
+      })
     }
     this.setData({
       info: res.data

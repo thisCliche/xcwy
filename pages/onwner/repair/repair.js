@@ -19,6 +19,7 @@ Page(filter.loginCheck({
    * 页面的初始数据
    */
   data: {
+    isLoad:false, 
     rootHttp: app.globalData.rootHttp,
     location: '',
     bxr: '',
@@ -164,7 +165,7 @@ Page(filter.loginCheck({
     } else {
       var form = {
         token: wx.getStorageSync('token'),
-        address: this.data.location,
+        // address: this.data.location,
         name: this.data.bxr,
         mobile: this.data.bxdh,
         content: this.data.bxnr,
@@ -184,6 +185,10 @@ Page(filter.loginCheck({
         }
       }
     }
+    let that = this;
+    this.setData({
+      isLoad:true
+    })
     let res = await add(form)
     if (res.code == 200) {
       wx.showToast({
@@ -195,6 +200,9 @@ Page(filter.loginCheck({
         })
       }, 500)
     } else {
+      that.setData({
+        isLoad:false
+      })
       wx.showToast({
         title: res.msg,
         icon: 'error'

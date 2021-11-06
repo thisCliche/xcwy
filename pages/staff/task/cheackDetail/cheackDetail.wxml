@@ -32,7 +32,8 @@
   </block>
   <van-row wx:if="{{images.length!=0}}">
       <van-col custom-class="photoCol" span="6" wx:for="{{images}}" wx:key="index">
-        <image src="{{item}}"></image>
+        <!-- <image src="{{item}}"></image> -->
+        <image bindtap="previewImage" data-url="{{item}}" src="{{item}}" data-list="{{info.images}}"></image>
       </van-col>
     </van-row>
   <van-action-sheet round="{{false}}" bind:select="onSelect" show="{{ show }}" actions="{{ actions }}"

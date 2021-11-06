@@ -9,12 +9,17 @@ import {
 import {
   approve_keyHouse
 } from '../../../api/approve.js'
+import {
+  validPhone,
+  validIdenty
+} from '../../../utils/util'
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    isLoad:false, 
     list: [],
     list1: {},
     list2: [],
@@ -40,6 +45,7 @@ Page({
     house_id: 0,
     house_name: '',
     project_id:0,
+    isDisabled: true,
   },
   onChange(event) {
     this.setData({
@@ -50,10 +56,28 @@ Page({
     this.setData({
       house_id: e.currentTarget.dataset.item.id,
       house_name: e.currentTarget.dataset.item.name,
+      isDisabled:false,
     })
   },
   submit() {
+    if(this.data.name == ''){
+      return wx.showToast({
+        title: '请输入姓名',
+        icon: 'error'
+      })
+    }
+    if (!validPhone(this.data.mobile)) {
+      return wx.showToast({
+        title: '手机号不正确',
+        icon: 'error'
+      })
+    }
+    let that = this;
     if (this.data.name != '' || this.data.location) {
+      
+    this.setData({
+      isLoad:true
+    })
       owner({
         token: wx.getStorageSync('token'),
         name: this.data.name,
@@ -63,6 +87,9 @@ Page({
         house_id: this.data.house_id
       }).then(res => {
         if (res.code != 200) {
+          that.setData({
+            isLoad:false
+          })
           wx.showToast({
             title: '意外错误',
             icon: 'error'
@@ -115,10 +142,15 @@ Page({
   },
   toBlock(e){
     if(this.data.list1[3]){
+      setTimeout(() => {
+        this.setData({
+          grad:4,
+        })
+      }, 350);
       this.setData({
         block_name: e.currentTarget.dataset.item.name,
         list4: this.data.list1[3],
-        grad:4,
+        
         last: false
       })
     }else{
@@ -130,10 +162,15 @@ Page({
   },
   toArea(e){
     if(this.data.list1[2]){
+      setTimeout(() => {
+        this.setData({
+          grad:3,
+        })
+      }, 350);
       this.setData({
         area_name: e.currentTarget.dataset.item.name,
         list3: this.data.list1[2],
-        grad:3,
+        
         last: false
       })
     }else{
@@ -146,12 +183,17 @@ Page({
   toProject(e) {
     if (e.currentTarget.dataset.item.hasOwnProperty('child') && e.currentTarget.dataset.item.child.length != 0) {
       if (e.currentTarget.dataset.item.child[1]) {
+        setTimeout(() => {
+          this.setData({
+            grad:2,
+          })
+        }, 350);
         this.setData({
           project_name: e.currentTarget.dataset.item.name,
           project_id: e.currentTarget.dataset.item.id,
           list1:e.currentTarget.dataset.item.child,
           list2: e.currentTarget.dataset.item.child[1],
-          grad:2,
+          
           last: false
         })
       }
@@ -220,13 +262,15 @@ Page({
     let res = await logout({
       token: wx.getStorageSync('token')
     })
-    console.log(res)
     if (res.code != 200) {
       wx.showToast({
         title: '意外错误',
         icon: 'error'
       })
     } else {
+      let userInfo = JSON.parse(wx.getStorageSync('userInfo'))
+      userInfo.type = 1
+      wx.setStorageSync('userInfo', JSON.stringify(userInfo))
       wx.showToast({
         title: '注销成功',
       })

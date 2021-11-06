@@ -18,17 +18,17 @@
     </view>
   </view>
   <view class="card info mt20">
-    <view class="cardT">报修项目</view>
+    <view class="cardT">报修地址</view>
     <view class="cardD">
-      {{info.project_name}}
+      {{info.project_name}}{{info.area_name}}{{info.block_name}}{{info.unit_name}}{{info.house_name}}{{info.address}}
     </view>
   </view>
-  <view class="card info mt20">
+  <!-- <view class="card info mt20">
     <view class="cardT">详细地址</view>
     <view class="cardD">
       {{info.address}}
     </view>
-  </view>
+  </view> -->
   <view class="card mt20">
     <view class="cell">
       <view class="cellL">
@@ -59,7 +59,8 @@
     </view>
     <view class="card mt20">
       <view class="img">
-        <image wx:for="{{info.attachment}}" wx:key="index" src="{{item}}"></image>
+        <image wx:for="{{info.attachment}}" bindtap="previewImage" data-url="{{item}}" src="{{item}}" data-list="{{info.attachment}}"></image>
+        <!-- <image ></image> -->
       </view>
     </view>
   </block>
@@ -90,7 +91,7 @@
     <view class="cardT">维修结论</view>
     <view class="cardD">{{info.logs[2].content}}</view>
     <view class="img" wx:if="{{info.logs[2].attachment.length != 0}}">
-      <image wx:for="{{info.logs[2].attachment}}" wx:key="index" src="{{item}}"></image>
+      <image wx:for="{{info.logs[2].attachment}}" wx:key="index" src="{{item}}" bindtap="previewImage" data-url="{{item}}" data-list="{{info.logs[2].attachment}}"></image>
     </view>
   </view>
 

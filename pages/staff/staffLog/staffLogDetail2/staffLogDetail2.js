@@ -20,11 +20,16 @@ Page({
     type: '',
     isHidden: false,
     actions: [{
-      name: '编辑'
-    }, {
       name: '删除',
       color: '#ee0a24'
     }, ],
+  },
+  previewImage(e){
+    let urls = e.currentTarget.dataset.list
+    wx.previewImage({
+      current: e.currentTarget.dataset.url, 
+      urls
+    })
   },
   toApprove() {
     wx.navigateTo({

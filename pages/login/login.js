@@ -4,7 +4,7 @@ import {
   sendLogin,
   login,
   getMobile,
-  myProfile
+  myProfile,
 } from '../../api/login.js'
 import eventBus from '../../utils/eventBus'
 Page({
@@ -13,10 +13,13 @@ Page({
    * 页面的初始数据
    */
   data: {
+    overdue: false,
     userinfo: {},
     userPhone: '',
     type: '',
-    isLogin: true
+    form: '',
+    code:'',
+    isLogin: false
   },
   backUp() {
     wx.switchTab({
@@ -26,38 +29,58 @@ Page({
   getPhoneNumber(e) {
     let that = this
     if (e.detail.errMsg == 'getPhoneNumber:ok') {
-      wx.login({
-        success(res) {
-          let data = {
-            code: res.code,
-            iv: e.detail.iv,
-            encryptedData: e.detail.encryptedData
-          }
-          if (e.detail.errMsg == "getPhoneNumber:ok") {
-            wx.showLoading({
-              title: '获取中...',
+      let data = {
+        code: that.data.code,
+        iv: e.detail.iv,
+        encryptedData: e.detail.encryptedData
+      }
+   
+        wx.showLoading({
+          title: '获取中...',
+        })
+        getMobile(data).then(json => {
+          wx.hideLoading()
+          if (json.msg == '未注册账户，请授权登录') {
+            wx.showToast({
+              title: '未注册账户，请授权登录',
+              icon:'none',
+              duration:3000
             })
-            getMobile(data).then(res => {
-              myProfile({
-                token: wx.getStorageSync('token')
-              }).then(res => {
-                let userInfo = JSON.parse(wx.getStorageSync('userInfo'))
-                userInfo.type = res.data.type
-                wx.setStorageSync('userInfo', JSON.stringify(userInfo))
-                if (that.data.type == '') {
-                  wx.switchTab({
-                    url: '/pages/index/index',
-                  })
-                } else {
-                  wx.navigateBack({
-                    delta: 1
-                  })
-                }
+            that.setData({
+              userPhone: json.code,
+              isLogin: true
+            })
+          } else {
+            if (json.data && json.data.token) {
+              let userInfo = json.data.member_info
+              wx.setStorageSync('userInfo', JSON.stringify(userInfo))
+              wx.setStorageSync('token', json.data.token)
+              wx.setStorageSync('refresh_token', json.data.refresh_token)
+              eventBus.emit('reload')
+              // if (json.data.member_info.type != 3) {
+              // }
+              if (that.data.type == '') {
+                wx.switchTab({
+                  url: '/pages/index/index',
+                })
+              } else {
+                wx.navigateBack({
+                  delta: 1
+                })
+              }
+
+            } else {
+              wx.showToast({
+                title: json.msg || "获取登录信息失败",
+                icon: 'none',
+                duration: 2000
               })
-            })
+            }
           }
-        }
-      })
+
+        }).catch(e => {
+          wx.hideLoading()
+        })
     }
 
   },
@@ -77,7 +100,8 @@ Page({
                   code: lres.code,
                   userInfo: res.userInfo,
                   encryptedData: res.encryptedData,
-                  iv: res.iv
+                  iv: res.iv,
+                  mobile:that.data.userPhone.mobile
                 }
                 const code = lres.code
                 sendLogin(data).then(json => {
@@ -89,27 +113,28 @@ Page({
                     wx.setStorageSync('refresh_token', json.data.refresh_token)
                     eventBus.emit('reload')
                     // if (json.data.member_info.type != 3) {
-                    //   if (that.data.type == '') {
-                    //     wx.switchTab({
-                    //       url: '/pages/index/index',
-                    //     })
-                    //   } else {
-                    //     wx.navigateBack({
-                    //       delta: 1
-                    //     })
-                    //   }
                     // }
+                    if (that.data.type == '') {
+                      wx.switchTab({
+                        url: '/pages/index/index',
+                      })
+                    } else {
+                      wx.navigateBack({
+                        delta: 1
+                      })
+                    }
+
                   } else {
                     wx.showToast({
                       title: json.msg || "获取登录信息失败",
-                      icon: 'error',
+                      icon: 'none',
                       duration: 2000
                     })
                   }
                 }).catch(res => {
                   wx.showToast({
                     title: '网络错误，登录失败',
-                    icon: 'error',
+                    icon: 'none',
                     duration: 2000
                   })
                 })
@@ -165,10 +190,30 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    let that = this
+    wx.checkSession({
+      success(e) {
+        that.setData({
+          overdue:false,
+        })
+      },
+      fail(e) {
+        that.setData({
+          overdue:true,
+        })
+      }
+    })
     if (Object.keys(options).length != 0) {
-      this.setData({
-        type: options.type
-      })
+      if (options.type) {
+        this.setData({
+          type: options.type
+        })
+      }
+      if (options.form) {
+        this.setData({
+          form: options.form
+        })
+      }
     }
   },
 
@@ -183,11 +228,13 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    let that = this
     wx.login({
       success(res) {
-        console.log(res)
-      },
-
+        that.setData({
+          code:res.code
+        })
+      }
     })
   },
 

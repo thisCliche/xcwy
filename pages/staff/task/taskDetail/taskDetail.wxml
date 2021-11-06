@@ -1,8 +1,12 @@
 <!--pages/staff/task/taskDetail/taskDetail.wxml-->
 <view class="taskDetail">
-  <view class="card info">
+<view class="card info fbr">
+  <view class="fbrL"><image src="{{info.member.avatar}}"></image><text>{{info.member.name}}发布</text></view>
+  <view class="fbrR"><text>{{info.add_time}}</text></view>
+</view>
+  <view class="card info mt20">
     <view class="cardT">
-      巡查类型
+      任务类型
     </view>
     <view class="cardD">
       {{info.type_text}}
@@ -10,7 +14,7 @@
   </view>
   <view class="card info mt20">
     <view class="cardT">
-      巡查项目
+      执行项目
     </view>
     <view class="cardD">
       <view wx:for="{{info.project_id}}" wx:key="index">{{item}}</view>
@@ -18,14 +22,14 @@
   </view>
   <view class="card info mt20">
     <view class="cardT">
-      任务标题 {{info.title}}
+      标题 {{info.title}}
     </view>
     <view class="cardD">
       {{info.content}}
     </view>
   </view>
   <view class="title mt30">
-    <image src="/static/images/bg.png" class="titleBg"></image> 负责巡查人员
+    <image src="/static/images/bg.png" class="titleBg"></image> 指派人员
   </view>
   <view class="pepople mt20">
     <van-row>
@@ -35,13 +39,14 @@
             <image src="{{item.avatar}}"></image>
             <view class="name van-ellipsis">{{item.name}}</view>
           </view>
-          <van-icon wx:if="{{item.is_done == 'true'}}" name="checked"
-            custom-style="position: absolute;top: -10rpx; right: 16rpx;" color="#32cc85" />
+          <view class="text">
+            <van-icon wx:if="{{item.is_done == 'true'}}" name="checked" color="#32cc85" />
+          </view>
         </view>
       </van-col>
     </van-row>
   </view>
-  <view class="btn" wx:if="{{isHidden}}">
+  <view class="btn" wx:if="{{!isHidden}}">
     <van-button type="info" block bind:click="toReport">立即汇报</van-button>
   </view>
 </view>

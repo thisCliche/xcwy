@@ -52,7 +52,7 @@
         </van-radio-group>
       </view>
       <view class="btn">
-        <van-button bind:click="submit" block type="info">提交</van-button>
+        <van-button bind:click="submit" block type="info" data-com="com">提交</van-button>
       </view>
     </view>
   </view>
